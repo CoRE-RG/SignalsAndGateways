@@ -1,0 +1,3 @@
+package signalsandgateways;
+
+@license(LGPL);
