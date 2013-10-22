@@ -18,6 +18,6 @@
 //
 //
 // @author Till Steinbach
-packet Message
+packet SignalsMessage
 {    
 }
