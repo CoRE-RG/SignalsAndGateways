@@ -11,14 +11,15 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
+
+package signalsandgateways.routing;
 
 //
-// Represents a Message that can transport multiple signals
+// TODO auto-generated module
 //
-//
-// @author Till Steinbach
-packet SignalsMessage
-{    
-    int id;
+moduleinterface IRouting
+{
+    gates:
+    	inout interface[] @labels(SignalsMessage);
 }
