@@ -15,14 +15,14 @@
 
 package signalsandgateways.applications.ethernet;
 
-import  core4inet.applications.base.IApplication;
-
+import core4inet.applications.base.ApplicationBase;
 //
-// TODO auto-generated module
+// TODO auto-generated type
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+simple TTEApplicationBase extends ApplicationBase like IEthernetGatewayApplication
 {
+    @class(TTEApplicationBase);
     gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
+        inout ethRoutingInterface @labels(TransportMessage);
     	inout tteInterface;
 }

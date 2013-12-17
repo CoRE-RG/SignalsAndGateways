@@ -3,7 +3,9 @@
 	<name>SignalsAndGateways</name>
 	<comment></comment>
 	<projects>
-		<project>TTEthernetModel</project>
+		<project>BusModel</project>
+		<project>CoRE4INET</project>
+		<project>inet</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

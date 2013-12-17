@@ -13,16 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+#include "base.h"
 
-import  core4inet.applications.base.IApplication;
+Define_Module(Base);
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
+void Base::initialize()
 {
-    gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+    // TODO - Generated method body
+}
+
+void Base::handleMessage(cMessage *msg)
+{
+    TransportMessage *frame = dynamic_cast<TransportMessage*>(msg);
+    if(msg->arrivedOn("appInterface[0]$i")){
+        send(frame, "appInterface[1]$o");
+    }else if(msg->arrivedOn("appInterface[1]$i")){
+        send(frame, "appInterface[0]$o");
+    }
+    delete frame;
 }

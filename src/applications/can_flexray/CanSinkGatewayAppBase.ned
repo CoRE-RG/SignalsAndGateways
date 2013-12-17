@@ -13,16 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
-
-import  core4inet.applications.base.IApplication;
+package signalsandgateways.applications.can_flexray;
+import busmodel.applications.can.sink.ISinkApplication;
 
 //
 // TODO auto-generated module
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+simple CanSinkGatewayAppBase like ISinkApplication
 {
+   	parameters:
+        @display("i=block/sink");
     gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+        input in @labels(DataFrame);
+        input controllerIn @directIn;
+        output routingOut @labels(TransportFrame);
 }

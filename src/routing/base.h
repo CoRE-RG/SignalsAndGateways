@@ -13,16 +13,23 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+#ifndef __SIGNALSANDGATEWAYS_BASE_H_
+#define __SIGNALSANDGATEWAYS_BASE_H_
 
-import  core4inet.applications.base.IApplication;
+#include <omnetpp.h>
+#include "dataframe_m.h"
+#include "CTFrame.h"
+#include "Incoming.h"
+#include "TransportMessage_m.h"
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
+/**
+ * TODO - Generated class
+ */
+class Base : public cSimpleModule
 {
-    gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
-}
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+#endif

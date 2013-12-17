@@ -21,5 +21,5 @@ package signalsandgateways.routing;
 moduleinterface IRouting
 {
     gates:
-    	inout interface[] @labels(SignalsMessage);
+    	inout appInterface[] @labels(TransportMessage);
 }

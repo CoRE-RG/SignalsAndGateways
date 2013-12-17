@@ -15,14 +15,17 @@
 
 package signalsandgateways.applications.ethernet;
 
-import  core4inet.applications.base.IApplication;
+import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
+module EthernetGatewayHost extends TTEEtherHost
 {
-    gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+	gates:
+        inout ethRoutingInterface @labels(TransportMessage);
+    submodules:
+        gatewayApp: TTEApplicationBase {
+            @display("p=235,99");
+        }
+    connections:
+        ethRoutingInterface <--> gatewayApp.ethRoutingInterface;
+		ethg <--> gatewayApp.tteInterface;
 }

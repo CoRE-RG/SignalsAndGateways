@@ -13,16 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
-
-import  core4inet.applications.base.IApplication;
-
+package signalsandgateways.applications.can_flexray;
+import busmodel.applications.can.source.ISourceApplication;
 //
 // TODO auto-generated module
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+simple CanSourceGatewayAppBase like ISourceApplication
 {
+    parameters:
+        @display("i=block/source");
     gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+        output out @labels(DataFrame);
+        input remoteIn @directIn;
+        input routingIn @labels(TransportFrame);
 }

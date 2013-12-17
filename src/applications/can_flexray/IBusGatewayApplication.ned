@@ -13,16 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
-
-import  core4inet.applications.base.IApplication;
+package signalsandgateways.applications.can_flexray;
 
 //
-// TODO auto-generated module
+// TODO auto-generated type
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+moduleinterface IBusGatewayApplication
 {
     gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+    	inout busInterface;
 }

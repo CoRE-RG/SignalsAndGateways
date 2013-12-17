@@ -13,16 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
-
-import  core4inet.applications.base.IApplication;
+package signalsandgateways.routing;
 
 //
 // TODO auto-generated module
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+simple Base
 {
     gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+    	inout appInterface[] @labels(TransportMessage);
 }

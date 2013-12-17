@@ -11,18 +11,9 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-package signalsandgateways.applications.ethernet;
-
-import  core4inet.applications.base.IApplication;
-
 //
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
+
+packet TransportMessage
 {
-    gates:
-    	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
-}
+
+};
