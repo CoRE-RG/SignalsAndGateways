@@ -36,8 +36,8 @@ module EthernetFlexRayGateway
             @display("p=120,135");
         }
     connections:
-        can.ethRoutingInterface <--> routing.appInterface[0];
-        tte.ethRoutingInterface <--> routing.appInterface[1];
+        can.ethRoutingInterface <--> routing.appInterface++;
+        tte.ethRoutingInterface <--> routing.appInterface++;
         
         can.ethg <--> cang; //can.gate
         tte.ethg <--> ethg;

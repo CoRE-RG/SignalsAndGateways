@@ -27,5 +27,5 @@ module EthernetGatewayHost extends TTEEtherHost
         }
     connections:
         ethRoutingInterface <--> gatewayApp.ethRoutingInterface;
-		ethg <--> gatewayApp.tteInterface;
+		//ethg <--> gatewayApp.tteInterface;
 }

@@ -24,5 +24,5 @@ simple TTEApplicationBase extends ApplicationBase like IEthernetGatewayApplicati
     @class(TTEApplicationBase);
     gates:
         inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+    	//inout tteInterface;
 }

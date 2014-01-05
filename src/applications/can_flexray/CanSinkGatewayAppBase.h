@@ -13,59 +13,59 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_CANSINKGATEWAYAPPBASE_H_
-#define __SIGNALSANDGATEWAYS_CANSINKGATEWAYAPPBASE_H_
-
-#include <omnetpp.h>
-#include <string.h>
-#include "InputBuffer.h"
-#include "candataframe_m.h"
-
-using namespace std;
-/**
- * TODO - Generated class
- */
-class CanSinkGatewayAppBase : public cSimpleModule
-{
-  protected:
-    /**
-     * @brief Initialization of the module.
-     */
-    virtual void initialize();
-
-    /**
-     * @brief Collects incoming message and writes statistics.
-     *
-     * @param msg incoming frame
-     */
-    virtual void handleMessage(cMessage *msg);
-  private:
-      /**
-       * @brief Number of messages currently in the Buffer
-       */
-      int bufferMessageCounter;
-
-      /**
-       * @brief Shows whether the application is working or not.
-       */
-      bool idle;
-
-      /**
-       *
-       */
-      int currentFrameID;
-
-      /**
-       * @brief Requests a frame from buffer.
-       */
-      void requestFrame();
-
-      /**
-       * @brief The sink processes the frame.
-       *
-       * @param workTime represents the time it takes until the sink can process the next frame.
-       */
-      void startWorkOnFrame(float workTime);
-};
-
-#endif
+//#ifndef __SIGNALSANDGATEWAYS_CANSINKGATEWAYAPPBASE_H_
+//#define __SIGNALSANDGATEWAYS_CANSINKGATEWAYAPPBASE_H_
+//
+//#include <omnetpp.h>
+//#include <string.h>
+//#include "InputBuffer.h"
+//#include "candataframe_m.h"
+//
+//using namespace std;
+///**
+// * TODO - Generated class
+// */
+//class CanSinkGatewayAppBase : public cSimpleModule
+//{
+//  protected:
+//    /**
+//     * @brief Initialization of the module.
+//     */
+//    virtual void initialize();
+//
+//    /**
+//     * @brief Collects incoming message and writes statistics.
+//     *
+//     * @param msg incoming frame
+//     */
+//    virtual void handleMessage(cMessage *msg);
+//  private:
+//      /**
+//       * @brief Number of messages currently in the Buffer
+//       */
+//      int bufferMessageCounter;
+//
+//      /**
+//       * @brief Shows whether the application is working or not.
+//       */
+//      bool idle;
+//
+//      /**
+//       *
+//       */
+//      int currentFrameID;
+//
+//      /**
+//       * @brief Requests a frame from buffer.
+//       */
+//      void requestFrame();
+//
+//      /**
+//       * @brief The sink processes the frame.
+//       *
+//       * @param workTime represents the time it takes until the sink can process the next frame.
+//       */
+//      void startWorkOnFrame(float workTime);
+//};
+//
+//#endif

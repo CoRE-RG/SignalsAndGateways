@@ -36,7 +36,7 @@ void TTEApplicationBase::initialize(){
 void TTEApplicationBase::handleMessage(cMessage *msg) {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("tteInterface$i"))
+    if(msg->arrivedOn("ethg$i"))
     {
         TransportMessage *transFrame = new TransportMessage();
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));

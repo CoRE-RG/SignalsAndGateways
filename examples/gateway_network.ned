@@ -50,7 +50,7 @@ network gateway_network
             @display("p=115,158");
         }
 
-        switch1: RTSwitch {
+        rtswitch: RTSwitch {
             parameters:
                 @display("p=189,70");
             gates:
@@ -70,7 +70,7 @@ network gateway_network
         // The example uses a simple star topology
         //
         node1.ethg <--> cable {  delay = 200ns; } <--> gateway1.ethg;
-        gateway1.cang <--> cable {  delay = 100ns; } <--> switch1.ethg[1];
-        gateway2.cang <--> cable {  delay = 50ns; } <--> switch1.ethg[2];
+        gateway1.cang <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
+        gateway2.cang <--> cable {  delay = 50ns; } <--> rtswitch.ethg[2];
         node2.ethg <--> cable {  delay = 50ns; } <--> gateway2.ethg;
 }

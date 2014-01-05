@@ -30,3 +30,4 @@ public:
 };
 
 #endif /* TTEAPPLICATIONBASE_H_ */
+Define_Module(TTEApplicationBase);

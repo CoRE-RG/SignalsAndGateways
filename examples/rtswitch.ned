@@ -37,24 +37,16 @@ module RTSwitch extends TTEEtherSwitch
             parameters:
                 @display("p=240,130");
         }
-        vl_101_ctc: RCIncoming {
-            parameters:
-                @display("p=170,200");
-        }
-        vl_101: RCQueueBuffer {
-            parameters:
-                @display("p=240,200");
-        }
-        vl_102_ctc: TTIncoming {
-            parameters:
-                @display("p=170,270");
-        }
-        vl_102: TTDoubleBuffer {
-            parameters:
-                @display("p=240,270");
-        }
+        //vl_101_ctc: TTIncoming {
+        //    parameters:
+        //        @display("p=170,200");
+        //}
+        //vl_101: TTDoubleBuffer {
+        //    parameters:
+        //        @display("p=240,200");
+        //}
+        
     connections:
         vl_100_ctc.out --> vl_100.in;
-        vl_101_ctc.out --> vl_101.in;
-        vl_102_ctc.out --> vl_102.in;
+        //vl_101_ctc.out --> vl_101.in;
 }

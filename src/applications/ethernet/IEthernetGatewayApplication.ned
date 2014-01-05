@@ -24,5 +24,5 @@ moduleinterface IEthernetGatewayApplication extends IApplication
 {
     gates:
     	inout ethRoutingInterface @labels(TransportMessage);
-    	inout tteInterface;
+    	//inout tteInterface;
 }
