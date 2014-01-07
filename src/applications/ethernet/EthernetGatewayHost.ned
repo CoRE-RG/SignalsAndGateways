@@ -16,16 +16,29 @@
 package signalsandgateways.applications.ethernet;
 
 import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
 
 module EthernetGatewayHost extends TTEEtherHost
 {
-	gates:
+    parameters:
+        int numTTvlink = default(0);
+    gates:
         inout ethRoutingInterface @labels(TransportMessage);
     submodules:
         gatewayApp: TTEApplicationBase {
             @display("p=235,99");
         }
+        TTvlinks[numTTvlink]: TTDoubleBuffer {
+            @display("p=366,37");
+        }
+        TTvlinks_ctc[numTTvlink]: TTIncoming {
+            @display("p=366,99");
+        }
     connections:
         ethRoutingInterface <--> gatewayApp.ethRoutingInterface;
+        for i = 0..numTTvlink-1 {
+            TTvlinks_ctc[i].out-->TTvlinks[i].in;
+        }
 		//ethg <--> gatewayApp.tteInterface;
 }

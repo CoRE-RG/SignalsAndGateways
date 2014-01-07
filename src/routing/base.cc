@@ -25,10 +25,13 @@ void Base::initialize()
 void Base::handleMessage(cMessage *msg)
 {
     TransportMessage *frame = dynamic_cast<TransportMessage*>(msg);
-    if(msg->arrivedOn("appInterface[0]$i")){
-        send(frame, "appInterface[1]$o");
-    }else if(msg->arrivedOn("appInterface[1]$i")){
-        send(frame, "appInterface[0]$o");
+    EV << getFullName()<< ": Message arrival gate: " << msg->getArrivalGate()->getName() << " : Message arrival gate id: " << msg->getArrivalGateId();
+    if(msg->arrivedOn("appInterface$i",0)){
+        send(frame, "appInterface$o",1);
+        EV << getFullName()<< ": Message forwarded to Interface 1";
+    }else if(msg->arrivedOn("appInterface$i",1)){
+        send(frame, "appInterface$o",0);
+        EV << getFullName()<< ": Message forwarded to Interface 0";
     }
-    delete frame;
+    //delete frame;
 }

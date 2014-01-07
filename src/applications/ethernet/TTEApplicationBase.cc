@@ -36,17 +36,19 @@ void TTEApplicationBase::initialize(){
 void TTEApplicationBase::handleMessage(cMessage *msg) {
     ApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("ethg$i"))
+    if(msg->arrivedOn("TTin"))
     {
         TransportMessage *transFrame = new TransportMessage();
+        EV << getFullName()<< ": TransportFrame created!";
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
             send(transFrame, "ethRoutingInterface$o");
+            EV << getFullName()<< ": Message send from EthernetGatewayHost to Base-Modul";
         }
     }else if(msg->arrivedOn("ethRoutingInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
         CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
-        delete transFrame;
+        //delete transFrame;
 
         std::list<CoRE4INET::Buffer*> buffer = buffers[ctFrame->getCtID()];
         for(std::list<CoRE4INET::Buffer*>::iterator buf = buffer.begin();
@@ -54,7 +56,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
             Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(ctFrame->dup(), in->gate("in"));
         }
-        delete ctFrame;
+        //delete ctFrame;
     }
-    delete msg;
+    //delete msg;
 }

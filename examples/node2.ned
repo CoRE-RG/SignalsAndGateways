@@ -26,16 +26,15 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 //
 module Node2 extends TTEEtherHost
 {
+    parameters:
+        int numTTvlink = default(0);
     @display("bgb=479,314");
     submodules:
-        vl_100_ctc: TTIncoming {
-            parameters:
-                @display("p=350,100");
-
+	    TTvlinks[numTTvlink]: TTDoubleBuffer {
+            @display("p=366,37");
         }
-        vl_100: TTDoubleBuffer {
-            parameters:
-                @display("p=440,100");
+        TTvlinks_ctc[numTTvlink]: TTIncoming {
+            @display("p=366,99");
         }
         //vl_102_ctc: TTIncoming {
         //    parameters:
@@ -47,6 +46,8 @@ module Node2 extends TTEEtherHost
         //        @display("p=440,160");
         //}
     connections:
-        vl_100_ctc.out --> vl_100.in;
+        for i = 0..numTTvlink-1 {
+            TTvlinks_ctc[i].out-->TTvlinks[i].in;
+        }
         //vl_102_ctc.out --> vl_102.in;
 }
