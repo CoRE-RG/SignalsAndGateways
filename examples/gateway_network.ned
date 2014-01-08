@@ -71,6 +71,6 @@ network gateway_network
         //
         node1.ethg <--> cable {  delay = 200ns; } <--> gateway1.cang;
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
-        gateway2.cang <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
-        node2.ethg <--> cable {  delay = 50ns; } <--> gateway2.ethg;
+        gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
+        node2.ethg <--> cable {  delay = 50ns; } <--> gateway2.cang;
 }
