@@ -43,7 +43,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
             send(transFrame, "ethRoutingInterface$o");
-            EV << getFullName()<< ": Message send from EthernetGatewayHost to Base-Modul";
+            EV << getFullName()<< ": Message send from gatewayApp to routing";
         }
     }else if(msg->arrivedOn("ethRoutingInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
@@ -56,7 +56,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
             Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
             sendDirect(ctFrame->dup(), in->gate("in"));
         }
-        //delete ctFrame;
+        delete ctFrame;
     }
     //delete msg;
 }
