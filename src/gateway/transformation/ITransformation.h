@@ -13,15 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+#ifndef ITRANSFORMATION_H_
+#define ITRANSFORMATION_H_
 
-import  core4inet.applications.base.IApplication;
+class ITransformation {
+public:
+    //virtual cPacket transform(cMessage msg) = 0;
+};
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
-{
-    gates:
-    	inout ethInterface @labels(TransportMessage);
-}
+#endif /* ITRANSFORMATION_H_ */

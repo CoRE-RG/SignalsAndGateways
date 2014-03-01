@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.gateway;
+package signalsandgateways;
 
-import signalsandgateways.routing.Base;
+import signalsandgateways.gateway.GatewayBase;
 import signalsandgateways.applications.ethernet.EthernetGatewayHost;
 import signalsandgateways.applications.can_flexray.CanGatewayNode;
 
-module EthernetFlexRayGateway
+module CanEthernetGateway
 {
     @display("bgb=243,216");
     gates:
@@ -32,12 +32,12 @@ module EthernetFlexRayGateway
         tte: EthernetGatewayHost {
             @display("p=38,50");
         }
-        routing: Base {
+        gateway: GatewayBase {
             @display("p=120,135");
         }
     connections:
-        can.ethRoutingInterface <--> routing.appInterface++;
-        tte.ethRoutingInterface <--> routing.appInterface++;
+        can.ethInterface <--> gateway.busCon++;//can.busInterface <--> gateway.busCon++;
+        tte.ethInterface <--> gateway.ethCon++;
         
         can.ethg <--> cang; //can.gate
         tte.ethg <--> ethg;

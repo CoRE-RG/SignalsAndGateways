@@ -19,7 +19,7 @@ import busmodel.linklayer.can.CanNodePort;
 import busmodel.buffer.can.InputBuffer;
 import busmodel.buffer.can.OutputBuffer;
 
-module CanGatewayNode
+module CanGatewayNode like IBusGatewayApplication
 {
     parameters:
         bool extcode = default(false);						// Activate if external code shall be used (has to be deactivated in this version)
@@ -47,7 +47,7 @@ module CanGatewayNode
 
     gates:
         inout gate;
-        inout ethRoutingInterface;
+        inout busInterface;
 
     submodules:
         canNodePort: CanNodePort {
@@ -73,7 +73,7 @@ module CanGatewayNode
         canNodePort.upperLayerOut --> bufferIn.in;
         sourceApp.out --> bufferOut.in;
         sinkApp.in <-- bufferIn.out;
-        ethRoutingInterface$o <-- sinkApp.routingOut;
-        ethRoutingInterface$i --> sourceApp.routingIn;
+        busInterface$o <-- sinkApp.routingOut;
+        busInterface$i --> sourceApp.routingIn;
 
 }

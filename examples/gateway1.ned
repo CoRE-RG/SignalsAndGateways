@@ -12,11 +12,11 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import signalsandgateways.gateway.EthernetFlexRayGateway;
+import signalsandgateways.CanEthernetGateway;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
 
-module Gateway1 extends EthernetFlexRayGateway
+module Gateway1 extends CanEthernetGateway
 {
     @display("bgb=479,314");
     submodules:

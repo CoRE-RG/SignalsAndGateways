@@ -16,6 +16,7 @@
 #include "CanSourceGatewayAppBase.h"
 #include "TransportMessage_m.h"
 #include "candataframe_m.h"
+#include "TransportCanDataFrame_m.h"
 
 Define_Module(CanSourceGatewayAppBase);
 
@@ -30,9 +31,10 @@ void CanSourceGatewayAppBase::handleMessage(cMessage *msg) {
     //dataFrameTransmission(df);
     if(msg->arrivedOn("routingIn")){
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
-        //CanDataFrame *dataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
-        //dataFrame->setStartTime(simTime());
-        //send(dataFrame, "out");
+        TransportCanDataFrame *transDataFrame = check_and_cast<TransportCanDataFrame *>(transFrame->decapsulate());
+        CanDataFrame *dataFrame = &(transDataFrame->getCanDataFrame());
+        dataFrame->setStartTime(simTime());
+        send(dataFrame, "out");
     }
 }
 

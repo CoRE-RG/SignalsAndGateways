@@ -13,15 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+#ifndef IROUTING_H_
+#define IROUTING_H_
 
-import  core4inet.applications.base.IApplication;
+class IRouting {
+public:
+    //virtual cPacket transform(cMessage msg) = 0;
+};
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
-{
-    gates:
-    	inout ethInterface @labels(TransportMessage);
-}
+#endif /* IROUTING_H_ */

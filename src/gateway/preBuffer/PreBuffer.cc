@@ -13,25 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "base.h"
+#include "PreBuffer.h"
 
-Define_Module(Base);
+Define_Module(PreBuffer);
 
-void Base::initialize()
+void PreBuffer::initialize()
 {
     // TODO - Generated method body
 }
 
-void Base::handleMessage(cMessage *msg)
+void PreBuffer::handleMessage(cMessage *msg)
 {
-    TransportMessage *frame = dynamic_cast<TransportMessage*>(msg);
-    EV << getFullName()<< ": Message arrival gate: " << msg->getArrivalGate()->getName() << " : Message arrival gate id: " << msg->getArrivalGateId();
-    if(msg->arrivedOn("appInterface$i",0)){
-        send(frame, "appInterface$o",1);
-        EV << getFullName()<< ": Message forwarded to Interface 1";
-    }else if(msg->arrivedOn("appInterface$i",1)){
-        send(frame, "appInterface$o",0);
-        EV << getFullName()<< ": Message forwarded to Interface 0";
-    }
-    //delete frame;
+    // TODO - Generated method body
 }

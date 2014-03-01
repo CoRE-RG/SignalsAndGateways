@@ -24,7 +24,7 @@ module EthernetGatewayHost extends TTEEtherHost
     parameters:
         int numTTvlink = default(0);
     gates:
-        inout ethRoutingInterface @labels(TransportMessage);
+        inout ethInterface @labels(TransportMessage);
     submodules:
         gatewayApp: TTEApplicationBase {
             @display("p=235,99");
@@ -36,7 +36,7 @@ module EthernetGatewayHost extends TTEEtherHost
             @display("p=366,99");
         }
     connections:
-        ethRoutingInterface <--> gatewayApp.ethRoutingInterface;
+        ethInterface <--> gatewayApp.ethInterface;
         for i = 0..numTTvlink-1 {
             TTvlinks_ctc[i].out-->TTvlinks[i].in;
         }

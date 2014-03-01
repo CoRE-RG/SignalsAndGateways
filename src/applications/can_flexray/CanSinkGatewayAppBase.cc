@@ -16,6 +16,7 @@
 #include "CanSinkGatewayAppBase.h"
 #include "TransportMessage_m.h"
 #include "candataframe_m.h"
+#include "TransportCanDataFrame_m.h"
 
 Define_Module(CanSinkGatewayAppBase);
 
@@ -43,8 +44,10 @@ void CanSinkGatewayAppBase::handleMessage(cMessage *msg) {
         //startWorkOnFrame(0); //TODO working time
 
         CanDataFrame *dataFrame = static_cast<CanDataFrame *>(msg);
+        TransportCanDataFrame *transDataFrame = new TransportCanDataFrame();
+        transDataFrame->setCanDataFrame(*dataFrame);
         TransportMessage *transFrame = new TransportMessage();
-        transFrame->encapsulate(dataFrame);
+        transFrame->encapsulate(transDataFrame);
         send(transFrame, "routingOut");
     } else if (msg->isSelfMessage()) {
         InputBuffer *buffer = (InputBuffer*) (getParentModule()->getSubmodule(

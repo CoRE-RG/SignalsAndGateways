@@ -13,13 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.routing;
+#ifndef IPREBUFFER_H_
+#define IPREBUFFER_H_
 
-//
-// TODO auto-generated module
-//
-simple Base
-{
-    gates:
-    	inout appInterface[] @labels(TransportMessage);
-}
+class IPreBuffer {
+public:
+    virtual cPacket transform(cMessage msg) = 0;
+};
+
+#endif /* IPREBUFFER_H_ */

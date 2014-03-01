@@ -13,19 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_BASE_H_
-#define __SIGNALSANDGATEWAYS_BASE_H_
+#ifndef __SIGNALSANDGATEWAYS_TRANSFORMATION_H_
+#define __SIGNALSANDGATEWAYS_TRANSFORMATION_H_
 
 #include <omnetpp.h>
-#include "dataframe_m.h"
-#include "CTFrame.h"
-#include "Incoming.h"
-#include "TransportMessage_m.h"
 
 /**
  * TODO - Generated class
  */
-class Base : public cSimpleModule
+class Transformation : public cSimpleModule, ITransformation
 {
   protected:
     virtual void initialize();

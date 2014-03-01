@@ -17,10 +17,9 @@ cplusplus {{
 #include "candataframe_m.h"
 }}
 packet CanDataFrame;
-
 //
 // TODO generated message class
 //
-packet TransportCanDataFrame extends CanDataFrame {
+packet TransportCanDataFrame {
     CanDataFrame canDataFrame;
 }

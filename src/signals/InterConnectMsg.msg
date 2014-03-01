@@ -13,13 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.routing;
-
 //
-// TODO auto-generated module
+// TODO generated message class
 //
-moduleinterface IRouting
-{
-    gates:
-    	inout appInterface[] @labels(TransportMessage);
+packet InterConnectMsg {
+    int someField;
+    string anotherField;
+    double arrayField1[];
+    double arrayField2[10];
 }

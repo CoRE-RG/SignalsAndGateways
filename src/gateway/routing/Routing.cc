@@ -13,15 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+#include "Routing.h"
 
-import  core4inet.applications.base.IApplication;
+Define_Module(Routing);
 
-//
-// TODO auto-generated module
-//
-moduleinterface IEthernetGatewayApplication extends IApplication
+void Routing::initialize()
 {
-    gates:
-    	inout ethInterface @labels(TransportMessage);
+    // TODO - Generated method body
+}
+
+void Routing::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
 }
