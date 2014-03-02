@@ -11,13 +11,21 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
 
-//
-// Represents a Signal
-//
-//
-// @author Till Steinbach
-packet Signal
-{    
-}
+#ifndef __SIGNALSANDGATEWAYS_GATEWAYSTRATEGY_H_
+#define __SIGNALSANDGATEWAYS_GATEWAYSTRATEGY_H_
+
+#include <omnetpp.h>
+
+/**
+ * TODO - Generated class
+ */
+class GatewayStrategy : public cSimpleModule
+{
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+#endif

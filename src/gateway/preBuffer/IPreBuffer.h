@@ -18,7 +18,7 @@
 
 class IPreBuffer {
 public:
-    virtual cPacket transform(cMessage msg) = 0;
+    //virtual cPacket transform(cMessage msg) = 0;
 };
 
 #endif /* IPREBUFFER_H_ */

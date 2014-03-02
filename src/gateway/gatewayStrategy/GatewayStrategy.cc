@@ -11,14 +11,18 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-//
+// 
 
-//
-// Represents a Message that can transport multiple signals
-//
-//
-// @author Till Steinbach
-packet SignalsMessage
-{    
-    int id;
+#include "GatewayStrategy.h"
+
+Define_Module(GatewayStrategy);
+
+void GatewayStrategy::initialize()
+{
+    // TODO - Generated method body
+}
+
+void GatewayStrategy::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
 }

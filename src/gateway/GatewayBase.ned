@@ -19,6 +19,8 @@ import signalsandgateways.gateway.inOutComming.InOutComming;
 import signalsandgateways.gateway.preBuffer.PreBuffer;
 import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
+import signalsandgateways.gateway.gatewayStrategy.GatewayStrategy;
+import signalsandgateways.gateway.analysis.Analysis;
 
 module GatewayBase
 {
@@ -37,6 +39,12 @@ module GatewayBase
         }
         prebuff: PreBuffer {
             @display("p=29,104");
+        }
+        strategy: GatewayStrategy {
+            @display("p=307,30");
+        }
+        analysis: Analysis {
+            @display("p=307,111");
         }
     connections:
         busCon[0] <--> iocom.appInterface++;

@@ -13,20 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_ROUTING_H_
-#define __SIGNALSANDGATEWAYS_ROUTING_H_
+#include "Analysis.h"
 
-#include <omnetpp.h>
-#include "IRouting.h"
+Define_Module(Analysis);
 
-/**
- * TODO - Generated class
- */
-class Routing : public cSimpleModule, IRouting
+void Analysis::initialize()
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
+    // TODO - Generated method body
+}
 
-#endif
+void Analysis::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
+}

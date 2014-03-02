@@ -17,6 +17,7 @@
 #define __SIGNALSANDGATEWAYS_PREBUFFER_H_
 
 #include <omnetpp.h>
+#include "IPreBuffer.h"
 
 /**
  * TODO - Generated class

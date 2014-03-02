@@ -17,6 +17,7 @@
 #define __SIGNALSANDGATEWAYS_TRANSFORMATION_H_
 
 #include <omnetpp.h>
+#include "ITransformation.h"
 
 /**
  * TODO - Generated class
@@ -26,6 +27,7 @@ class Transformation : public cSimpleModule, ITransformation
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+    virtual cPacket transform(cMessage msg);
 };
 
 #endif

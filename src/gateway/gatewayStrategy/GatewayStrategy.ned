@@ -13,20 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_ROUTING_H_
-#define __SIGNALSANDGATEWAYS_ROUTING_H_
+package signalsandgateways.gateway.gatewayStrategy;
 
-#include <omnetpp.h>
-#include "IRouting.h"
-
-/**
- * TODO - Generated class
- */
-class Routing : public cSimpleModule, IRouting
+//
+// TODO auto-generated module
+//
+simple GatewayStrategy
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+}
