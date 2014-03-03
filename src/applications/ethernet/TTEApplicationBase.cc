@@ -42,10 +42,10 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         EV << getFullName()<< ": TransportFrame created!";
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
-            send(transFrame, "ethRoutingInterface$o");
+            send(transFrame, "ethInterface$o");
             EV << getFullName()<< ": Message send from gatewayApp to routing";
         }
-    }else if(msg->arrivedOn("ethRoutingInterface$i")){
+    }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
         CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
         //delete transFrame;

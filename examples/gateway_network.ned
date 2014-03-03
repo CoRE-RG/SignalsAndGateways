@@ -42,7 +42,7 @@ network gateway_network
             per = 0;
         }
     submodules:
-        node1: Node1 {
+        canbus1: CanBus1 {
             @display("p=39,70");
         }
 
@@ -61,7 +61,7 @@ network gateway_network
             @display("p=275,158");
         }
 
-        node2: Node2 {
+        canbus2: CanBus2 {
             @display("p=365,70");
         }
 
@@ -69,8 +69,6 @@ network gateway_network
         //
         // The example uses a simple star topology
         //
-        node1.ethg <--> cable {  delay = 200ns; } <--> gateway1.cang;
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
         gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
-        node2.ethg <--> cable {  delay = 50ns; } <--> gateway2.cang;
 }

@@ -73,7 +73,7 @@ module CanGatewayNode like IBusGatewayApplication
         canNodePort.upperLayerOut --> bufferIn.in;
         sourceApp.out --> bufferOut.in;
         sinkApp.in <-- bufferIn.out;
-        busInterface$o <-- sinkApp.routingOut;
-        busInterface$i --> sourceApp.routingIn;
+        busInterface$o <-- sinkApp.busInterfaceOut;
+        busInterface$i --> sourceApp.busInterfaceIn;
 
 }

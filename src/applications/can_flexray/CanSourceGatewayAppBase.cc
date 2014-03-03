@@ -29,12 +29,11 @@ void CanSourceGatewayAppBase::initialize() {
 void CanSourceGatewayAppBase::handleMessage(cMessage *msg) {
     //CanDataFrame *df = check_and_cast<CanDataFrame *>(msg);
     //dataFrameTransmission(df);
-    if(msg->arrivedOn("routingIn")){
+    if(msg->arrivedOn("busInterfaceIn")){
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
-        TransportCanDataFrame *transDataFrame = check_and_cast<TransportCanDataFrame *>(transFrame->decapsulate());
-        CanDataFrame *dataFrame = &(transDataFrame->getCanDataFrame());
-        dataFrame->setStartTime(simTime());
-        send(dataFrame, "out");
+        CanDataFrame *transDataFrame = static_cast<CanDataFrame *>(transFrame->decapsulate());
+        transDataFrame->setStartTime(simTime());
+        send(transDataFrame, "out");
     }
 }
 

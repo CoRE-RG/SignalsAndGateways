@@ -25,5 +25,5 @@ simple CanSourceGatewayAppBase like ISourceApplication
     gates:
         output out @labels(DataFrame);
         input remoteIn @directIn;
-        input routingIn @labels(TransportFrame);
+        input busInterfaceIn @labels(TransportFrame);
 }

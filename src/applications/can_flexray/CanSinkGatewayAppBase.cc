@@ -43,12 +43,10 @@ void CanSinkGatewayAppBase::handleMessage(cMessage *msg) {
         //bufferMessageCounter--;
         //startWorkOnFrame(0); //TODO working time
 
-        CanDataFrame *dataFrame = static_cast<CanDataFrame *>(msg);
-        TransportCanDataFrame *transDataFrame = new TransportCanDataFrame();
-        transDataFrame->setCanDataFrame(*dataFrame);
+        CanDataFrame *transDataFrame = static_cast<CanDataFrame *>(msg);
         TransportMessage *transFrame = new TransportMessage();
         transFrame->encapsulate(transDataFrame);
-        send(transFrame, "routingOut");
+        send(transFrame, "busInterfaceOut");
     } else if (msg->isSelfMessage()) {
         InputBuffer *buffer = (InputBuffer*) (getParentModule()->getSubmodule(
                 "bufferIn"));

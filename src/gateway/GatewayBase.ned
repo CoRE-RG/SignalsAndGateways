@@ -32,7 +32,7 @@ module GatewayBase
             @display("p=114,30");
         }
         route: Routing {
-            @display("p=207,104");
+            @display("p=204,104");
         }
         transform: Transformation {
             @display("p=114,179");

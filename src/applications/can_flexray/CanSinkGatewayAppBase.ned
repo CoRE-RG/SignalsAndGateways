@@ -26,5 +26,5 @@ simple CanSinkGatewayAppBase like ISinkApplication
     gates:
         input in @labels(DataFrame);
         input controllerIn @directIn;
-        output routingOut @labels(TransportFrame);
+        output busInterfaceOut @labels(TransportFrame);
 }

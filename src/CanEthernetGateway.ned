@@ -26,7 +26,7 @@ module CanEthernetGateway
         inout ethg;
         inout cang;
     submodules:
-        can: EthernetGatewayHost{//CanGatewayNode {
+        can: CanGatewayNode {
             @display("p=192,50");
         }
         tte: EthernetGatewayHost {
@@ -36,10 +36,10 @@ module CanEthernetGateway
             @display("p=120,135");
         }
     connections:
-        can.ethInterface <--> gateway.busCon++;//can.busInterface <--> gateway.busCon++;
+        can.busInterface <--> gateway.busCon++;//can.busInterface <--> gateway.busCon++;
         tte.ethInterface <--> gateway.ethCon++;
         
-        can.ethg <--> cang; //can.gate
+        can.gate <--> cang; //can.gate
         tte.ethg <--> ethg;
 
     //submodules:
