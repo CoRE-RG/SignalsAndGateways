@@ -7,6 +7,8 @@ import busmodel.nodes.can.CanNode;
 module CanBus2
 {
 	@display("bgb=550,350,white");
+	gates:
+	    inout gatewayConnect;
     submodules:
         bus: CanBus {
             @display("i=abstract/bus");

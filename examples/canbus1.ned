@@ -7,14 +7,17 @@ import busmodel.nodes.can.CanNode;
 module CanBus1
 {
 	@display("bgb=550,350,white");
+	gates:
+	    inout gatewayConnect;
     submodules:
         bus: CanBus {
             @display("i=abstract/bus");
         }
         node[bus.nodecount]: CanNode;
-        
+            
     connections:
         for i=0..(bus.nodecount-1) {
             bus.gate++ <--> node[i].gate;
         }
+        bus.gate++ <--> gatewayConnect;
 }

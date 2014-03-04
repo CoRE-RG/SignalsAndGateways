@@ -69,6 +69,8 @@ network gateway_network
         //
         // The example uses a simple star topology
         //
+        gateway1.cang <--> cable {  delay = 50ns; } <--> canbus1.gatewayConnect;
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
         gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
+        gateway2.cang <--> cable {  delay = 50ns; } <--> canbus2.gatewayConnect;
 }
