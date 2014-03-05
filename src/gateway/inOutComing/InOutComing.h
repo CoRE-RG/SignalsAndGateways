@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_BASE_H_
-#define __SIGNALSANDGATEWAYS_BASE_H_
+#ifndef __INOUTCOMING_H_
+#define __INOUTCOMING_H_
 
 #include <omnetpp.h>
 #include "dataframe_m.h"
@@ -25,7 +25,7 @@
 /**
  * TODO - Generated class
  */
-class InOutComming : public cSimpleModule
+class InOutComing : public cSimpleModule
 {
   protected:
     virtual void initialize();

@@ -27,18 +27,18 @@ module EthernetGatewayHost extends TTEEtherHost
         inout ethInterface @labels(TransportMessage);
     submodules:
         gatewayApp: TTEApplicationBase {
-            @display("p=235,99");
+            @display("p=340,37");
         }
         TTvlinks[numTTvlink]: TTDoubleBuffer {
-            @display("p=366,37");
+            @display("p=517,37");
         }
         TTvlinks_ctc[numTTvlink]: TTIncoming {
-            @display("p=366,99");
+            @display("p=517,154");
         }
     connections:
         ethInterface <--> gatewayApp.ethInterface;
-        for i = 0..numTTvlink-1 {
-            TTvlinks_ctc[i].out-->TTvlinks[i].in;
+        for i=0..numTTvlink-1 {
+            TTvlinks_ctc[i].out --> TTvlinks[i].in;
         }
 		//ethg <--> gatewayApp.tteInterface;
 }

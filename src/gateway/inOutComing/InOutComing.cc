@@ -13,16 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "InOutComming.h"
+#include "InOutComing.h"
 
-Define_Module(InOutComming);
+Define_Module(InOutComing);
 
-void InOutComming::initialize()
+void InOutComing::initialize()
 {
     // TODO - Generated method body
 }
 
-void InOutComming::handleMessage(cMessage *msg)
+void InOutComing::handleMessage(cMessage *msg)
 {
     TransportMessage *frame = dynamic_cast<TransportMessage*>(msg);
     EV << getFullName()<< ": Message arrival gate: " << msg->getArrivalGate()->getName() << " : Message arrival gate id: " << msg->getArrivalGateId();

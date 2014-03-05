@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.gateway.inOutComming;
+package signalsandgateways.gateway.inOutComing;
 import signalsandgateways.gateway.IConnection;
 //
 // TODO auto-generated module
 //
-simple InOutComming like IConnection
+simple InOutComing like IConnection
 {
     gates:
         inout in @label (InterConnectMsg);

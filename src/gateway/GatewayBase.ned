@@ -15,7 +15,7 @@
 
 package signalsandgateways.gateway;
 
-import signalsandgateways.gateway.inOutComming.InOutComming;
+import signalsandgateways.gateway.inOutComing.InOutComing;
 import signalsandgateways.gateway.preBuffer.PreBuffer;
 import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
@@ -28,7 +28,7 @@ module GatewayBase
         inout busCon[];
         inout ethCon[];
     submodules:
-        iocom: InOutComming {
+        iocom: InOutComing {
             @display("p=114,30");
         }
         route: Routing {

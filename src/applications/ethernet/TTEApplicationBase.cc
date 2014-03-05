@@ -50,6 +50,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
         //delete transFrame;
 
+        getParentModule()->getSubmodule("bgOut");
         std::list<CoRE4INET::Buffer*> buffer = buffers[ctFrame->getCtID()];
         for(std::list<CoRE4INET::Buffer*>::iterator buf = buffer.begin();
                                buf!=buffer.end();buf++){
