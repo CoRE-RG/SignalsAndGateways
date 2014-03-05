@@ -16,7 +16,6 @@
 #include "CanSourceGatewayAppBase.h"
 #include "TransportMessage_m.h"
 #include "candataframe_m.h"
-#include "TransportCanDataFrame_m.h"
 
 Define_Module(CanSourceGatewayAppBase);
 
