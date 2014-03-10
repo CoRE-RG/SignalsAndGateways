@@ -30,7 +30,7 @@ void CanSourceGatewayAppBase::handleMessage(cMessage *msg) {
     //dataFrameTransmission(df);
     if(msg->arrivedOn("busInterfaceIn")){
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
-        CanDataFrame *transDataFrame = static_cast<CanDataFrame *>(transFrame->decapsulate());
+        CanDataFrame *transDataFrame = dynamic_cast<CanDataFrame *>(transFrame->decapsulate());
         transDataFrame->setStartTime(simTime());
         send(transDataFrame, "out");
     }

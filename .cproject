@@ -57,6 +57,16 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.498480640" name="/" resourcePath="Archiv">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.1038642561" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2008845462" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.765051259"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1585148225" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1945836591" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1377222969" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1944204094"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.514251345" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.2051221510" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1202811611"/>
+						</toolChain>
+					</folderInfo>
 					<folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.1859971752" name="/" resourcePath="src/applications/can_flexray">
 						<toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.107150791" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>

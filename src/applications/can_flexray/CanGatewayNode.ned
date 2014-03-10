@@ -18,10 +18,12 @@ package signalsandgateways.applications.can_flexray;
 import busmodel.linklayer.can.CanNodePort;
 import busmodel.buffer.can.InputBuffer;
 import busmodel.buffer.can.OutputBuffer;
+import busmodel.applications.can.source.ISourceApplication;
+import busmodel.applications.can.sink.ISinkApplication;
 
 module CanGatewayNode like IBusGatewayApplication
 {
-    parameters:
+	parameters:
         bool extcode = default(false);						// Activate if external code shall be used (has to be deactivated in this version)
         bool payload = default(false);						// Activate if payload shall be enabled
         string version = default("2.0A");					// Version of CAN-Protocol. 2.0A = 11 Bits identifier, 2.0B = 29 Bits identifier
@@ -44,7 +46,6 @@ module CanGatewayNode like IBusGatewayApplication
         string idIncomingFrames = default("0");				// The Incoming Frame ID(s) - String parameter (int) separated with commas
         string node = default("0");							// Name of the node
         @display("i=block/app2;bgb=248,222");
-
     gates:
         inout gate;
         inout busInterface;
@@ -61,12 +62,13 @@ module CanGatewayNode like IBusGatewayApplication
         bufferOut: OutputBuffer {
             @display("p=98,102");
         }
-        sourceApp: CanSourceGatewayAppBase {
+        sourceApp: CanSourceGatewayApp{
             @display("p=98,32");
         }
-        sinkApp: CanSinkGatewayAppBase {
+        sinkApp: CanSinkGatewayApp{
             @display("p=203,32");
         }
+
     connections:
         canNodePort.phygate <--> gate;
         canNodePort.upperLayerIn <-- bufferOut.out;
@@ -75,5 +77,4 @@ module CanGatewayNode like IBusGatewayApplication
         sinkApp.in <-- bufferIn.out;
         busInterface$o <-- sinkApp.busInterfaceOut;
         busInterface$i --> sourceApp.busInterfaceIn;
-
 }

@@ -13,10 +13,10 @@ module CanBus1
         bus: CanBus {
             @display("i=abstract/bus");
         }
-        node[bus.nodecount]: CanNode;
+        node[bus.nodecount-1]: CanNode;
             
     connections:
-        for i=0..(bus.nodecount-1) {
+        for i=0..(bus.nodecount-2) {
             bus.gate++ <--> node[i].gate;
         }
         bus.gate++ <--> gatewayConnect;

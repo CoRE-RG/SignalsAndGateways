@@ -18,8 +18,6 @@
 
 #include <omnetpp.h>
 #include <string.h>
-#include "InputBuffer.h"
-
 
 using namespace std;
 /**
