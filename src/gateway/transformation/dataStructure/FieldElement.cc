@@ -7,7 +7,7 @@
 
 #include <FieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
 FieldElement::FieldElement() {
 

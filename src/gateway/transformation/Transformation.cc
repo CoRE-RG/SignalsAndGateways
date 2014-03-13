@@ -19,7 +19,7 @@ Define_Module(Transformation);
 
 void Transformation::initialize()
 {
-    // TODO - Generated method body
+    this->transformMap = new StaticTransformationIDList();
 }
 
 void Transformation::handleMessage(cMessage *msg)

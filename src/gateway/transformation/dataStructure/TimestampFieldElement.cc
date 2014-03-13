@@ -7,7 +7,7 @@
 
 #include <TimestampFieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
 TimestampFieldElement::TimestampFieldElement() {
     this->setFieldID("TimestampField");

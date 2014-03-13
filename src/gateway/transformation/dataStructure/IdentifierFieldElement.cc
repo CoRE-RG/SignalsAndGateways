@@ -7,7 +7,7 @@
 
 #include <dataStructure/IdentifierFieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
 IdentifierFieldElement::IdentifierFieldElement() {
     this->setFieldID("identifierField");

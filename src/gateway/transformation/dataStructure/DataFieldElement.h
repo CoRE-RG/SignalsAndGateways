@@ -10,9 +10,9 @@
 
 #include <dataStructure/FieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
-class DataFieldElement: public Transformation::FieldElement {
+class DataFieldElement: public dataStruct::FieldElement {
 public:
     DataFieldElement(int dataLength);
     virtual ~DataFieldElement();

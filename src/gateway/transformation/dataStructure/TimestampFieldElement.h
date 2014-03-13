@@ -10,9 +10,9 @@
 
 #include <FieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
-class TimestampFieldElement: public Transformation::FieldElement {
+class TimestampFieldElement: public dataStruct::FieldElement {
 public:
     TimestampFieldElement();
     virtual ~TimestampFieldElement();

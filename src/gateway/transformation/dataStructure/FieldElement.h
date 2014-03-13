@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace Transformation {
+namespace dataStruct {
 
 class FieldElement {
 public:

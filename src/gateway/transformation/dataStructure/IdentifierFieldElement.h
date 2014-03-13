@@ -10,9 +10,9 @@
 
 #include <dataStructure/FieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
-class IdentifierFieldElement: public Transformation::FieldElement {
+class IdentifierFieldElement: public dataStruct::FieldElement {
 public:
     IdentifierFieldElement();
     virtual ~IdentifierFieldElement();

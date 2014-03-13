@@ -17,7 +17,10 @@
 #define __SIGNALSANDGATEWAYS_TRANSFORMATION_H_
 
 #include <omnetpp.h>
+#include "StaticTransformationIDList.h"
 #include "ITransformation.h"
+#include "FieldElement.h"
+#include <vector>
 
 /**
  * TODO - Generated class
@@ -28,6 +31,9 @@ class Transformation : public cSimpleModule, ITransformation
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
     virtual cPacket transform(cMessage msg);
+  private:
+    std::vector<dataStruct::FieldElement> transportFrame;
+    StaticTransformationIDList *transformMap;
 };
 
 #endif

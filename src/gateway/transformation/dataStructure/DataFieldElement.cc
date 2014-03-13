@@ -8,7 +8,7 @@
 #include <dataStructure/DataFieldElement.h>
 #include <stdlib.h>
 
-namespace Transformation {
+namespace dataStruct {
 
 DataFieldElement::DataFieldElement(int dataLength) {
     this->dataLength = dataLength;

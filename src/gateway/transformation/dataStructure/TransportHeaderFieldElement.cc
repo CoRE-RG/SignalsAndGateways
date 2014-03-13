@@ -7,7 +7,7 @@
 
 #include <TransportHeaderFieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
 TransportHeaderFieldElement::TransportHeaderFieldElement() {
     this->setFieldID("TransportHeaderField");

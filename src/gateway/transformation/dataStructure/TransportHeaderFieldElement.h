@@ -10,9 +10,9 @@
 
 #include <FieldElement.h>
 
-namespace Transformation {
+namespace dataStruct {
 
-class TransportHeaderFieldElement: public Transformation::FieldElement {
+class TransportHeaderFieldElement: public dataStruct::FieldElement {
 public:
     TransportHeaderFieldElement();
     virtual ~TransportHeaderFieldElement();

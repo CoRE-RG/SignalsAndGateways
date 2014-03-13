@@ -12,13 +12,17 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-
+cplusplus {{
+#include <vector>
+#include "FieldElement.h"
+typedef std::vector<dataStruct::FieldElement> FieldSequence;
+}}
 //
 // TODO generated message class
 //
+class noncobject FieldSequence;
+
 packet InterConnectMsg {
-    int someField;
-    string anotherField;
-    double arrayField1[];
-    double arrayField2[10];
+    FieldSequence transportFrame;
+    string transformationID;
 }
