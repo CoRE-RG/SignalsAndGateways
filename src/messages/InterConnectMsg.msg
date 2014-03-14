@@ -25,4 +25,5 @@ class noncobject FieldSequence;
 packet InterConnectMsg {
     FieldSequence transportFrame;
     string transformationID;
+    string frameFormat;
 }

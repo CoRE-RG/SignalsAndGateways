@@ -17,13 +17,22 @@ public:
     DataFieldElement(int dataLength);
     virtual ~DataFieldElement();
 
-    const char* getData() const {
-        return data;
+
+    int getDataLength() const {
+        return dataLength;
+    }
+
+    const char getData(int index) const {
+        return data[index];
+    }
+
+    void setData(char data, int index) {
+        this->data[index] = data;
     }
 
 private:
     int dataLength;
-    char* data;
+    char *data;
 };
 
 } /* namespace Transformation */

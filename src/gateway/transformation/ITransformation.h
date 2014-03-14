@@ -18,7 +18,7 @@
 
 class ITransformation {
 public:
-    virtual cPacket transform(cMessage msg) = 0;
+    virtual cPacket *transform(cMessage *msg) = 0;
 };
 
 #endif /* ITRANSFORMATION_H_ */

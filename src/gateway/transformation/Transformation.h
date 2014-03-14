@@ -21,6 +21,8 @@
 #include "ITransformation.h"
 #include "FieldElement.h"
 #include <vector>
+#include "InterConnectMsg_m.h"
+#include "candataframe_m.h"
 
 /**
  * TODO - Generated class
@@ -30,10 +32,12 @@ class Transformation : public cSimpleModule, ITransformation
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
-    virtual cPacket transform(cMessage msg);
+    virtual cPacket *transform(cMessage *msg);
   private:
     std::vector<dataStruct::FieldElement> transportFrame;
     StaticTransformationIDList *transformMap;
+    FieldSequence transformCanToTransport(CanDataFrame *msg);
+    CanDataFrame *transformTransportToCan(FieldSequence transportFrame);
 };
 
 #endif

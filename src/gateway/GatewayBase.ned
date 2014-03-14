@@ -49,8 +49,8 @@ module GatewayBase
     connections:
         busCon[0] <--> iocom.appInterface++;
         ethCon[0] <--> iocom.appInterface++;
-        iocom.out <--> route.in;
-        route.out <--> transform.in;
-        transform.out <--> prebuff.in;
-        prebuff.out <--> iocom.in;
+        iocom.out --> route.in;
+        route.out --> transform.in;
+        transform.out --> prebuff.in;
+        prebuff.out --> iocom.in;
 }

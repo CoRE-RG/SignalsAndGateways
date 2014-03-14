@@ -12,20 +12,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+cplusplus {{
+#include <vector>
+#include "FieldElement.h"
+typedef std::vector<dataStruct::FieldElement> FieldSequence;
+}}
+//
+// TODO generated message class
+//
+class noncobject FieldSequence;
 
-#ifndef __INOUTCOMING_H_
-#define __INOUTCOMING_H_
-
-#include <omnetpp.h>
-
-/**
- * TODO - Generated class
- */
-class InOutComing : public cSimpleModule
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+packet FieldSequenceMessage {
+    FieldSequence transportFrame;
+}

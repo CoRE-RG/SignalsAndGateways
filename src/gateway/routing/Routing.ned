@@ -22,6 +22,6 @@ import signalsandgateways.gateway.IConnection;
 simple Routing like IConnection
 {
     gates:
-   		inout in @label (InterConnectMsg);
-   		inout out @label (InterConnectMsg);
+   		input in @label (InterConnectMsg);
+   		output out @label (InterConnectMsg);
 }

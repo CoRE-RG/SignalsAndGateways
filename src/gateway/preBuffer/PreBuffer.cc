@@ -14,6 +14,9 @@
 // 
 
 #include "PreBuffer.h"
+#include "InterConnectMsg_m.h"
+#include "FieldSequenceMessage_m.h"
+#include "candataframe_m.h"
 
 Define_Module(PreBuffer);
 
@@ -24,5 +27,16 @@ void PreBuffer::initialize()
 
 void PreBuffer::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    if(msg->arrivedOn("in")){
+        InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
+        if(strcmp(interDataStructure->getFrameFormat(), "canDataFrame") == 0){
+            FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+            fieldSequence->setTransportFrame(interDataStructure->getTransportFrame());
+            interDataStructure->encapsulate(fieldSequence);
+            send(interDataStructure, "out");
+        }else if (strcmp(interDataStructure->getFrameFormat(), "transportFrame") == 0){
+            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
+            send(canDataFrame, "out");
+        }
+    }
 }

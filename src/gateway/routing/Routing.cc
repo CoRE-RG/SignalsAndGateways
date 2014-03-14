@@ -14,6 +14,10 @@
 // 
 
 #include "Routing.h"
+#include "InterConnectMsg_m.h"
+#include "candataframe_m.h"
+#include "CTFrame_m.h"
+#include "FieldSequenceMessage_m.h"
 
 Define_Module(Routing);
 
@@ -24,5 +28,20 @@ void Routing::initialize()
 
 void Routing::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
+    cPacket *delivery = interDataStructure->decapsulate();
+    interDataStructure->setTransformationID("canTocan");
+    EV << "routing: " << "canTocan" << endl;
+    EV << "typeid of delivery: " << typeid(delivery).name() << endl;
+    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        EV << "routing: " << "CanDataFrame" << endl;
+        interDataStructure->setFrameFormat("canDataFrame");
+        interDataStructure->encapsulate(delivery);
+    }else if (dynamic_cast<EtherFrame*>(delivery) != NULL){
+        EV << "routing: " << "EtherFrame" << endl;
+        interDataStructure->setFrameFormat("transportFrame");
+        FieldSequenceMessage *transportFrame = dynamic_cast<FieldSequenceMessage*>(delivery);
+        interDataStructure->setTransportFrame(transportFrame->getTransportFrame());
+    }
+    send(interDataStructure, "out");
 }
