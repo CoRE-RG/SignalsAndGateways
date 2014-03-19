@@ -12,14 +12,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-cplusplus {{
-#include "FieldSequence.h"
-}}
-//
-// TODO generated message class
-//
-class noncobject FieldSequence;
 
-packet FieldSequenceMessage {
-    FieldSequence transportFrame;
+#include <TimeTriggeredBuffer.h>
+
+TimeTriggeredBuffer::TimeTriggeredBuffer() {
+    // TODO Auto-generated constructor stub
+
 }
+
+TimeTriggeredBuffer::~TimeTriggeredBuffer() {
+    // TODO Auto-generated destructor stub
+}
+

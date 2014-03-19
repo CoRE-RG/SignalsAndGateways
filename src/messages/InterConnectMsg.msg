@@ -13,9 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include <vector>
-#include "FieldElement.h"
-typedef std::vector<dataStruct::FieldElement> FieldSequence;
+#include "FieldSequence.h"
 }}
 //
 // TODO generated message class

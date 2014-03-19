@@ -30,7 +30,12 @@ public:
         this->data[index] = data;
     }
 
+    void setDataLength(int dataLength) {
+        this->dataLength = dataLength;
+    }
+
 private:
+    virtual void dummy(){}
     int dataLength;
     char *data;
 };

@@ -26,6 +26,7 @@ public:
     }
 
 private:
+    virtual void dummy();
     int identifier;
 };
 

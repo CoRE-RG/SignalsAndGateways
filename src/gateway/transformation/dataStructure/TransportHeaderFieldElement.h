@@ -42,6 +42,7 @@ public:
     }
 
 private:
+    virtual void dummy(){}
     int staticTranslationID;
     int staticBusID;
     bool actualityFlag;

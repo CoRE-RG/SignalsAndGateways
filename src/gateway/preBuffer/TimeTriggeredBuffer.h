@@ -12,14 +12,20 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-cplusplus {{
-#include "FieldSequence.h"
-}}
-//
-// TODO generated message class
-//
-class noncobject FieldSequence;
 
-packet FieldSequenceMessage {
-    FieldSequence transportFrame;
-}
+#ifndef TIMETRIGGEREDBUFFER_H_
+#define TIMETRIGGEREDBUFFER_H_
+
+#include <map>
+#include <string>
+#include "FieldSequence.h"
+
+class TimeTriggeredBuffer {
+public:
+    TimeTriggeredBuffer();
+    virtual ~TimeTriggeredBuffer();
+private:
+    std::map<std::string, FieldSequence> buffer;
+};
+
+#endif /* TIMETRIGGEREDBUFFER_H_ */

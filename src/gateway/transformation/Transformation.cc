@@ -67,29 +67,31 @@ FieldSequence Transformation::transformCanToTransport(CanDataFrame *msg){
     /*
      * Uebersetzungsprotokoll
      */
-    FieldSequence protocolFieldSequence = *(new FieldSequence);
-    IdentifierFieldElement *identifier = new IdentifierFieldElement;
+    FieldSequence protocolFieldSequence;
+    std::shared_ptr<dataStruct::IdentifierFieldElement> identifier (new IdentifierFieldElement());
+    EV << "Transformation: getCanID(): " << msg->getCanID();
     identifier->setIdentifier(msg->getCanID());
-    DataFieldElement *data = new DataFieldElement(msg->getLength());
+    std::shared_ptr<dataStruct::DataFieldElement> data (new DataFieldElement(msg->getDataArraySize()));
+    data->setDataLength(msg->getDataArraySize());
     for (unsigned int i=0; i<msg->getDataArraySize(); i++){
         data->setData(msg->getData(i), i);
     }
-    TimestampFieldElement *timestamp = new TimestampFieldElement;
+    std::shared_ptr<dataStruct::TimestampFieldElement>  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(clock());
     /*
      * Transportprotokollheader
      */
-    TransportHeaderFieldElement *transportHeader = new TransportHeaderFieldElement;
+    std::shared_ptr<dataStruct::TransportHeaderFieldElement>  transportHeader (new TransportHeaderFieldElement());
     transportHeader->setStaticTranslationId(1);
     transportHeader->setStaticBusId(0);
     transportHeader->setActualityFlag(true);
     /*
      * Create sequence
      */
-    protocolFieldSequence.push_back(*(transportHeader));
-    protocolFieldSequence.push_back(*(identifier));
-    protocolFieldSequence.push_back(*(data));
-    protocolFieldSequence.push_back(*(timestamp));
+    protocolFieldSequence.push_back(transportHeader);
+    protocolFieldSequence.push_back(identifier);
+    protocolFieldSequence.push_back(data);
+    protocolFieldSequence.push_back(timestamp);
 
     return protocolFieldSequence;
 }
@@ -98,19 +100,19 @@ FieldSequence Transformation::transformCanToTransport(CanDataFrame *msg){
 CanDataFrame *Transformation::transformTransportToCan(FieldSequence transportFrame){
     CanDataFrame *canDataFrame = new CanDataFrame;
     for (int i = 0; not transportFrame.empty(); i++) {
-        FieldElement element = transportFrame.at(transportFrame.size());
-        if(dynamic_cast<IdentifierFieldElement*>(&element) != NULL){
-            IdentifierFieldElement *specificElement  = dynamic_cast<IdentifierFieldElement*>(&element);
+        std::shared_ptr<FieldElement> element = transportFrame.at(transportFrame.size());
+        if(std::dynamic_pointer_cast<IdentifierFieldElement>(element) != NULL){
+            std::shared_ptr<IdentifierFieldElement> specificElement  = std::dynamic_pointer_cast<IdentifierFieldElement>(element);
             canDataFrame->setCanID(specificElement->getIdentifier());
-        }else if (dynamic_cast<DataFieldElement*>(&element) != NULL){
-            DataFieldElement *specificElement = dynamic_cast<DataFieldElement*>(&element);
+        }else if (std::dynamic_pointer_cast<DataFieldElement>(element) != NULL){
+            std::shared_ptr<DataFieldElement> specificElement = std::dynamic_pointer_cast<DataFieldElement>(element);
             for (int i = 0; specificElement->getDataLength() < i ; i++){
                 canDataFrame->setData(specificElement->getData(i), i);
             }
-        }else if (dynamic_cast<TimestampFieldElement*>(&element) != NULL){
-            TimestampFieldElement *specificElement = dynamic_cast<TimestampFieldElement*>(&element);
+        }else if (std::dynamic_pointer_cast<TimestampFieldElement>(element) != NULL){
+            std::shared_ptr<TimestampFieldElement> specificElement = std::dynamic_pointer_cast<TimestampFieldElement>(element);
             canDataFrame->setTimestamp(specificElement->getTimestamp());
-        }else if (dynamic_cast<TransportHeaderFieldElement*>(&element) != NULL){
+        }else if (std::dynamic_pointer_cast<TransportHeaderFieldElement>(element) != NULL){
 
         }
         transportFrame.pop_back();

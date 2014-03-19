@@ -14,6 +14,9 @@
 // 
 
 #include "Analysis.h"
+#include <vector>
+#include <memory>
+#include "FieldElement.h"
 
 Define_Module(Analysis);
 

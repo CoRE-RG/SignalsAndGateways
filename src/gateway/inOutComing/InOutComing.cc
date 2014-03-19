@@ -33,34 +33,46 @@ void InOutComing::handleMessage(cMessage *msg)
 {
 
     if(msg->arrivedOn("appInterface$i",0) || msg->arrivedOn("appInterface$i",1)){
+        EV << "InOutComing: arrivedOn 'appInterface' " << endl;
         TransportMessage *transportMsg = dynamic_cast<TransportMessage*>(msg);
         InterConnectMsg *interDataStructure = new InterConnectMsg;
         interDataStructure->encapsulate(transportMsg->decapsulate());
         send(interDataStructure, "out");
     }else if(msg->arrivedOn("in")){
+        EV << "InOutComing: arrivedOn 'in' " << endl;
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         TransportMessage *transportMsg = new TransportMessage;
         cPacket *delivery = interDataStructure->decapsulate();
         if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+            EV << "InOutComing: sending out 'CanDataFrame' on 'appInterface - 0' " << endl;
             transportMsg->encapsulate(delivery);
             send(transportMsg, "appInterface$o", 0);
         }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+            EV << "InOutComing: sending out 'FieldSequenceMessage' on 'appInterface - 0' " << endl;
             CoRE4INET::CTFrame *ethernetFrame = new CoRE4INET::CTFrame("");
             FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
             FieldSequence transportFrame = fieldSequence->getTransportFrame();
+
             for (int i = 0; i < transportFrame.size(); i++) {
-                dataStruct::FieldElement element = transportFrame.at(i);
-                if(dynamic_cast<dataStruct::IdentifierFieldElement*>(&element) != NULL){
-                    dataStruct::IdentifierFieldElement *specificElement  = dynamic_cast<dataStruct::IdentifierFieldElement*>(&element);
-                    uint16_t ctID = 0;
-                    switch(specificElement->getIdentifier()){
-                        case 1 : ctID = 10; break;
-                        case 5 : ctID = 100; break;
-                        case 2 : ctID = 150; break;
-                        case 3 : ctID = 200; break;
-                        default: ctID = -1;
+                std::shared_ptr<dataStruct::FieldElement> element = transportFrame.at(i);
+                EV << "InOutComing: for-index: " << i << endl;
+                if(element->getFieldID() == "identifierField"){
+                    std::shared_ptr<dataStruct::IdentifierFieldElement> specificElement  = std::dynamic_pointer_cast<dataStruct::IdentifierFieldElement>(element);
+                    if(specificElement){
+                        uint16_t ctID = 0;
+                        EV << "InOutComing: identifierField : " << specificElement->getIdentifier() << endl;
+                        switch(specificElement->getIdentifier()){
+                            case 1 : ctID = 100; break;
+                            case 5 : ctID = 10; break;
+                            case 2 : ctID = 150; break;
+                            case 3 : ctID = 200; break;
+                            default: ctID = USHRT_MAX;
+                        }
+                        ethernetFrame->setCtID(ctID);
+                        EV << "ethernetFrame->setCtID: " << ethernetFrame->getCtID() << endl;
+                        break;
                     }
-                    ethernetFrame->setCtID(ctID);
+                    EV << "InOutComing: setting CTID on ethernetFrame failed!" << endl;
                 }
             }
             ethernetFrame->encapsulate(delivery);

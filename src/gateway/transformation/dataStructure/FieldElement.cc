@@ -25,5 +25,9 @@ std::string FieldElement::getFieldID(){
     return this->fieldID;
 }
 
+void FieldElement::dummy(){
+
+}
+
 } /* namespace Transformation */
 

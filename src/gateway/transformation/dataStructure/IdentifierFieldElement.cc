@@ -18,4 +18,8 @@ IdentifierFieldElement::~IdentifierFieldElement() {
 
 }
 
+void IdentifierFieldElement::dummy(){
+
+}
+
 } /* namespace Transformation */
