@@ -13,24 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
-#define __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
+#include "MessageDispatcher.h"
 
-#include <omnetpp.h>
-#include "FieldSequenceBuffer.h"
-#include "MultipleFieldSequenceMessage.h"
+Define_Module(MessageDispatcher);
 
-/**
- * TODO - Generated class
- */
-class TimeTriggeredBuffer : public cSimpleModule
+void MessageDispatcher::initialize()
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  private:
-    FieldSequenceBuffer buffer;
-    cMessage *timerEvent;
-};
+    // TODO - Generated method body
+}
 
-#endif
+void MessageDispatcher::handleMessage(cMessage *msg)
+{
+    // TODO - Generated method body
+}

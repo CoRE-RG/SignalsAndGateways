@@ -13,43 +13,32 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <TimeTriggeredBuffer.h>
-#include "IdentifierFieldElement.h"
+#include "TimeTriggeredBuffer.h"
 
-TimeTriggeredBuffer::TimeTriggeredBuffer() {
-    this->timeQueue = new cQueue("preBuffer", compare);
+Define_Module(TimeTriggeredBuffer);
+
+void TimeTriggeredBuffer::initialize()
+{
+    buffer = FieldSequenceBuffer();
+    timerEvent = new cMessage("Timer");
 }
 
-TimeTriggeredBuffer::~TimeTriggeredBuffer() {
-    this->timeQueue->clear();
-}
+void TimeTriggeredBuffer::handleMessage(cMessage *msg)
+{
+    if(dynamic_cast<FieldSequenceMessage*>(msg) != NULL){
+        FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
+        if((timerEvent->getTimestamp()-simTime()) > fieldSequence->getMaxWaitingTime()){
+            cancelEvent(timerEvent);
+            timerEvent->setTimestamp(fieldSequence->getMaxWaitingTime());
+            scheduleAt(fieldSequence->getMaxWaitingTime(), timerEvent);
+        }
+        buffer.enqueue(fieldSequence);
 
-void TimeTriggeredBuffer::enqueue(FieldSequenceMessage* value){
-//    this->buffer.insert(ValuePair(key, value));
-    this->timeQueue->insert(value);
-}
-
-FieldSequenceMessage* TimeTriggeredBuffer::dequeue() const{
-//    TimeBuffer::const_iterator pos =  this->buffer.find(key);
-//    FieldSequence *value = NULL;
-//    if(pos != buffer.end()){
-//        *value = pos->second;
-//    }
-//    return *value;
-    FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(this->timeQueue->pop());
-    return fieldSequence;
-}
-
-int TimeTriggeredBuffer::compareFunc(cObject *a, cObject *b){
-    FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
-    FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
-    int returnValue = 0;
-    if(canA == NULL || canB == NULL){
-        FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
-        FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
-        //returnValue = canA_fieldSequence->getField<IdentifierFieldElement>()->getIdentifier();
-    }else{
-        opp_error("Insertion of object in PreBuffer failed. Only CanDataFrame-objects are supported!");
+    }else if(msg == timerEvent){
+        MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
+        while(not(buffer.isEmpty())){
+            multiFieldSequence->pushFieldSequence(buffer.dequeue()->getTransportFrame());
+        }
+        send(multiFieldSequence, "bufferOut");
     }
-    return returnValue;
 }

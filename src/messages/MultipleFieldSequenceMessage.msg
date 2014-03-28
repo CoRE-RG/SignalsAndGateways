@@ -12,25 +12,17 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+cplusplus {{
+#include <list>
+#include "FieldSequenceDataStructure.h"
+typedef std::list<FieldSequenceDataStructure> FieldSequenceList;
+}}
+//
+// TODO generated message class
+//
+class noncobject FieldSequenceList;
 
-#ifndef __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
-#define __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
-
-#include <omnetpp.h>
-#include "FieldSequenceBuffer.h"
-#include "MultipleFieldSequenceMessage.h"
-
-/**
- * TODO - Generated class
- */
-class TimeTriggeredBuffer : public cSimpleModule
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  private:
-    FieldSequenceBuffer buffer;
-    cMessage *timerEvent;
-};
-
-#endif
+packet MultipleFieldSequenceMessage {
+    @customize(true);  // see the generated C++ header for more info
+    abstract FieldSequenceList fieldSequenceList;
+}

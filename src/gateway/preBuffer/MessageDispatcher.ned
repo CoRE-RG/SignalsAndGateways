@@ -13,24 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
-#define __SIGNALSANDGATEWAYS_TIMETRIGGEREDBUFFER_H_
-
-#include <omnetpp.h>
-#include "FieldSequenceBuffer.h"
-#include "MultipleFieldSequenceMessage.h"
-
-/**
- * TODO - Generated class
- */
-class TimeTriggeredBuffer : public cSimpleModule
+package signalsandgateways.gateway.preBuffer;
+import signalsandgateways.gateway.IConnection;
+//
+// TODO auto-generated module
+//
+simple MessageDispatcher like IConnection
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-  private:
-    FieldSequenceBuffer buffer;
-    cMessage *timerEvent;
-};
-
-#endif
+    parameters:
+    	int numberOfVlinks;
+    gates:
+    	input in @label (InterConnectMsg);
+        output out @label (InterConnectMsg);
+}
