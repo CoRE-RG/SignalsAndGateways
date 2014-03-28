@@ -29,19 +29,5 @@ void Routing::initialize()
 void Routing::handleMessage(cMessage *msg)
 {
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-    cPacket *delivery = interDataStructure->decapsulate();
-    interDataStructure->setTransformationID("canTocan");
-    EV << "routing: " << "canTocan" << endl;
-    EV << "typeid of delivery: " << typeid(delivery).name() << endl;
-    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
-        EV << "routing: " << "CanDataFrame" << endl;
-        interDataStructure->setFrameFormat("canDataFrame");
-        interDataStructure->encapsulate(delivery);
-    }else if (dynamic_cast<EtherFrame*>(delivery) != NULL){
-        EV << "routing: " << "EtherFrame" << endl;
-        interDataStructure->setFrameFormat("transportFrame");
-        FieldSequenceMessage *transportFrame = dynamic_cast<FieldSequenceMessage*>(delivery);
-        interDataStructure->setTransportFrame(transportFrame->getTransportFrame());
-    }
     send(interDataStructure, "out");
 }

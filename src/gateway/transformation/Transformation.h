@@ -23,6 +23,7 @@
 #include <vector>
 #include "InterConnectMsg_m.h"
 #include "candataframe_m.h"
+#include "FieldSequenceDataStructure.h"
 
 /**
  * TODO - Generated class
@@ -34,10 +35,9 @@ class Transformation : public cSimpleModule, ITransformation
     virtual void handleMessage(cMessage *msg);
     virtual cPacket *transform(cMessage *msg);
   private:
-    std::vector<dataStruct::FieldElement> transportFrame;
     StaticTransformationIDList *transformMap;
-    FieldSequence transformCanToTransport(CanDataFrame *msg);
-    CanDataFrame *transformTransportToCan(FieldSequence transportFrame);
+    FieldSequenceDataStructure transformCanToTransport(CanDataFrame *msg);
+    CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame);
 };
 
 #endif

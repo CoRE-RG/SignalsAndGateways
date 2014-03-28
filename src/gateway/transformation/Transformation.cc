@@ -18,6 +18,7 @@
 #include "DataFieldElement.h"
 #include "TimestampFieldElement.h"
 #include "TransportHeaderFieldElement.h"
+#include "FieldSequenceMessage_m.h"
 
 using namespace dataStruct;
 
@@ -46,12 +47,15 @@ cPacket *Transformation::transform(cMessage *msg){
             if(strcmp(interDataStructure->getFrameFormat(), "canDataFrame") == 0){
                 EV << "transform: " << "canDataFrame" << endl;
                 CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
-                FieldSequence transportFrame = transformCanToTransport(canDataFrame);
-                interDataStructure->setTransportFrame(transportFrame);
+                FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
+                FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+                fieldSequence->setTransportFrame(transportFrame);
+                interDataStructure->encapsulate(fieldSequence);
                 returnMessage = interDataStructure;
             }else if(strcmp(interDataStructure->getFrameFormat(), "transportFrame") == 0){
                 EV << "transform: " << "transportFrame" << endl;
-                FieldSequence transportFrame = interDataStructure->getTransportFrame();
+                FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
+                FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
                 CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
                 interDataStructure->encapsulate(canDataFrame);
                 returnMessage = interDataStructure;
@@ -63,11 +67,11 @@ cPacket *Transformation::transform(cMessage *msg){
     return returnMessage;
 }
 
-FieldSequence Transformation::transformCanToTransport(CanDataFrame *msg){
+FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame *msg){
     /*
      * Uebersetzungsprotokoll
      */
-    FieldSequence protocolFieldSequence;
+    FieldSequenceDataStructure protocolFieldSequence;
     std::shared_ptr<dataStruct::IdentifierFieldElement> identifier (new IdentifierFieldElement());
     EV << "Transformation: getCanID(): " << msg->getCanID();
     identifier->setIdentifier(msg->getCanID());
@@ -88,34 +92,40 @@ FieldSequence Transformation::transformCanToTransport(CanDataFrame *msg){
     /*
      * Create sequence
      */
-    protocolFieldSequence.push_back(transportHeader);
-    protocolFieldSequence.push_back(identifier);
-    protocolFieldSequence.push_back(data);
-    protocolFieldSequence.push_back(timestamp);
+    protocolFieldSequence.pushField(transportHeader);
+    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
+    protocolFieldSequence.pushField(timestamp);
+    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
+    protocolFieldSequence.pushField(data);
+    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
+    protocolFieldSequence.pushField(identifier);
+    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
 
     return protocolFieldSequence;
 }
 
 
-CanDataFrame *Transformation::transformTransportToCan(FieldSequence transportFrame){
-    CanDataFrame *canDataFrame = new CanDataFrame;
-    for (int i = 0; not transportFrame.empty(); i++) {
-        std::shared_ptr<FieldElement> element = transportFrame.at(transportFrame.size());
-        if(std::dynamic_pointer_cast<IdentifierFieldElement>(element) != NULL){
-            std::shared_ptr<IdentifierFieldElement> specificElement  = std::dynamic_pointer_cast<IdentifierFieldElement>(element);
-            canDataFrame->setCanID(specificElement->getIdentifier());
-        }else if (std::dynamic_pointer_cast<DataFieldElement>(element) != NULL){
-            std::shared_ptr<DataFieldElement> specificElement = std::dynamic_pointer_cast<DataFieldElement>(element);
-            for (int i = 0; specificElement->getDataLength() < i ; i++){
-                canDataFrame->setData(specificElement->getData(i), i);
-            }
-        }else if (std::dynamic_pointer_cast<TimestampFieldElement>(element) != NULL){
-            std::shared_ptr<TimestampFieldElement> specificElement = std::dynamic_pointer_cast<TimestampFieldElement>(element);
-            canDataFrame->setTimestamp(specificElement->getTimestamp());
-        }else if (std::dynamic_pointer_cast<TransportHeaderFieldElement>(element) != NULL){
+CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame){
+    CanDataFrame *canDataFrame = new CanDataFrame("message");
+    canDataFrame->setPeriod(0);
 
+    try{
+        std::shared_ptr<IdentifierFieldElement> identifierElement  = transportFrame.getField<IdentifierFieldElement>();
+        canDataFrame->setCanID(identifierElement->getIdentifier());
+
+        std::shared_ptr<DataFieldElement> dataElement = transportFrame.getField<DataFieldElement>();
+        for (int i = 0; dataElement->getDataLength() < i ; i++){
+            canDataFrame->setData(dataElement->getData(i), i);
         }
-        transportFrame.pop_back();
+        canDataFrame->setLength(canDataFrame->getDataArraySize());
+
+        std::shared_ptr<TimestampFieldElement> timestampElement = transportFrame.getField<TimestampFieldElement>();
+         //canDataFrame->setTimestamp(timestampElement->getTimestamp());
+    }catch(cException e){
+        opp_error(e.what());
     }
+
+    transportFrame.clear();
+
     return canDataFrame;
 }

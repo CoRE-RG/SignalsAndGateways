@@ -18,14 +18,39 @@
 
 #include <map>
 #include <string>
-#include "FieldSequence.h"
+#include "FieldSequenceMessage_m.h"
+#include "FieldSequenceDataStructure.h"
+#include <cqueue.h>
+#include "candataframe_m.h"
+
+typedef std::map<std::string, FieldSequence> TimeBuffer;
+typedef TimeBuffer::value_type ValuePair;
+/**
+ * Type for comparison functions for cObject. Return value should be:
+ * - less than zero if a < b
+ * - greater than zero if a > b
+ * - zero if a == b
+ *
+ * @ingroup EnumsTypes
+ */
+typedef int (*compareFunc)(cObject *a, cObject *b);
 
 class TimeTriggeredBuffer {
 public:
     TimeTriggeredBuffer();
     virtual ~TimeTriggeredBuffer();
+    void enqueue(FieldSequenceMessage*);
+    FieldSequenceMessage* dequeue() const;
+
+    TimeBuffer getBuffer() const {
+        return buffer;
+    }
+
 private:
-    std::map<std::string, FieldSequence> buffer;
+    TimeBuffer buffer;
+    cQueue *timeQueue;
+    int compareFunc(cObject *a, cObject *b);
+    CompareFunc compare;
 };
 
 #endif /* TIMETRIGGEREDBUFFER_H_ */

@@ -29,14 +29,6 @@ void PreBuffer::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-        if(strcmp(interDataStructure->getFrameFormat(), "canDataFrame") == 0){
-            FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
-            fieldSequence->setTransportFrame(interDataStructure->getTransportFrame());
-            interDataStructure->encapsulate(fieldSequence);
-            send(interDataStructure, "out");
-        }else if (strcmp(interDataStructure->getFrameFormat(), "transportFrame") == 0){
-            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
-            send(canDataFrame, "out");
-        }
+        send(interDataStructure, "out");
     }
 }

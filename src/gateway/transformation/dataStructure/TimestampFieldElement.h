@@ -26,7 +26,7 @@ public:
     }
 
 private:
-    virtual void dummy(){}
+    virtual void dummy();
     clock_t timestamp;
 };
 

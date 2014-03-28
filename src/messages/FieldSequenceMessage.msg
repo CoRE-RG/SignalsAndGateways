@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include "FieldSequence.h"
+#include "FieldSequenceDataStructure.h"
 }}
 //
 // TODO generated message class
 //
-class noncobject FieldSequence;
+class noncobject FieldSequenceDataStructure;
 
 packet FieldSequenceMessage {
-    FieldSequence transportFrame;
+    FieldSequenceDataStructure transportFrame;
 }

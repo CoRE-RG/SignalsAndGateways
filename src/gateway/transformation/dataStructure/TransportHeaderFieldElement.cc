@@ -18,4 +18,8 @@ TransportHeaderFieldElement::~TransportHeaderFieldElement() {
     // TODO Auto-generated destructor stub
 }
 
+void TransportHeaderFieldElement::dummy(){
+
+}
+
 } /* namespace Transformation */

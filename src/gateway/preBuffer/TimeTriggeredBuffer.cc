@@ -14,13 +14,42 @@
 // 
 
 #include <TimeTriggeredBuffer.h>
+#include "IdentifierFieldElement.h"
 
 TimeTriggeredBuffer::TimeTriggeredBuffer() {
-    // TODO Auto-generated constructor stub
-
+    this->timeQueue = new cQueue("preBuffer", compare);
 }
 
 TimeTriggeredBuffer::~TimeTriggeredBuffer() {
-    // TODO Auto-generated destructor stub
+    this->timeQueue->clear();
 }
 
+void TimeTriggeredBuffer::enqueue(FieldSequenceMessage* value){
+//    this->buffer.insert(ValuePair(key, value));
+    this->timeQueue->insert(value);
+}
+
+FieldSequenceMessage* TimeTriggeredBuffer::dequeue() const{
+//    TimeBuffer::const_iterator pos =  this->buffer.find(key);
+//    FieldSequence *value = NULL;
+//    if(pos != buffer.end()){
+//        *value = pos->second;
+//    }
+//    return *value;
+    FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(this->timeQueue->pop());
+    return fieldSequence;
+}
+
+int TimeTriggeredBuffer::compareFunc(cObject *a, cObject *b){
+    FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
+    FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
+    int returnValue = 0;
+    if(canA == NULL || canB == NULL){
+        FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
+        FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
+        //returnValue = canA_fieldSequence->getField<IdentifierFieldElement>()->getIdentifier();
+    }else{
+        opp_error("Insertion of object in PreBuffer failed. Only CanDataFrame-objects are supported!");
+    }
+    return returnValue;
+}
