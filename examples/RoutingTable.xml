@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE routingTable SYSTEM "../src/gateway/routing/RoutingTable.dtd">
+
+<routingTable>
+	<item>
+		<source>
+			<sourceBusID>
+				canbus1
+			</sourceBusID>
+			<sourceObjectID>
+				1
+			</sourceObjectID>
+			<sourceTyp>
+				can
+			</sourceTyp>
+			<sourceChannel>
+				
+			</sourceChannel>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus2
+			</destinationBusID>
+			<destinationObjectID>
+				1
+			</destinationObjectID>
+			<destinationTyp>
+				can
+			</destinationTyp>
+			<destinationChannel>
+				
+			</destinationChannel>
+		</destination>
+		<options>
+			<holdUpTime>
+			
+			</holdUpTime>
+		</options>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus1
+			</sourceBusID>
+			<sourceObjectID>
+				5
+			</sourceObjectID>
+			<sourceTyp>
+				van
+			</sourceTyp>
+			<sourceChannel>
+				
+			</sourceChannel>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus2
+			</destinationBusID>
+			<destinationObjectID>
+				5
+			</destinationObjectID>
+			<destinationTyp>
+				can
+			</destinationTyp>
+			<destinationChannel>
+				
+			</destinationChannel>
+		</destination>
+		<options>
+			<holdUpTime>
+			
+			</holdUpTime>
+		</options>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus2
+			</sourceBusID>
+			<sourceObjectID>
+				2
+			</sourceObjectID>
+			<sourceTyp>
+				can
+			</sourceTyp>
+			<sourceChannel>
+				
+			</sourceChannel>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus2
+			</destinationBusID>
+			<destinationObjectID>
+				2
+			</destinationObjectID>
+			<destinationTyp>
+				can
+			</destinationTyp>
+			<destinationChannel>
+				
+			</destinationChannel>
+		</destination>
+		<options>
+			<holdUpTime>
+			
+			</holdUpTime>
+		</options>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus2
+			</sourceBusID>
+			<sourceObjectID>
+				3
+			</sourceObjectID>
+			<sourceTyp>
+				can
+			</sourceTyp>
+			<sourceChannel>
+				
+			</sourceChannel>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus2
+			</destinationBusID>
+			<destinationObjectID>
+				3
+			</destinationObjectID>
+			<destinationTyp>
+				can
+			</destinationTyp>
+			<destinationChannel>
+				
+			</destinationChannel>
+		</destination>
+		<options>
+			<holdUpTime>
+			
+			</holdUpTime>
+		</options>
+	</item>
+	
+</routingTable>

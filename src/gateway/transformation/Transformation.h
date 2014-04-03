@@ -38,6 +38,11 @@ class Transformation : public cSimpleModule, ITransformation
     StaticTransformationIDList *transformMap;
     FieldSequenceDataStructure transformCanToTransport(CanDataFrame *msg);
     CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame);
+    cXMLElement *routingTable;
+    cXMLElementList items;
+    cXMLElement* source;
+    cXMLElement* destination;
+    cXMLElement* options;
 };
 
 #endif

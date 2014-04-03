@@ -22,6 +22,8 @@ import signalsandgateways.gateway.IConnection;
 //
 simple Transformation like IConnection
 {
+    parameters:
+    	xml routingTable;
     gates:
         input in @label (InterConnectMsg);
         output out @label (InterConnectMsg);

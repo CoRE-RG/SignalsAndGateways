@@ -24,7 +24,10 @@
  */
 class Routing : public cSimpleModule, IRouting
 {
-  protected:
+private:
+    cXMLElement *routingTable;
+    cXMLElementList items;
+protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 };

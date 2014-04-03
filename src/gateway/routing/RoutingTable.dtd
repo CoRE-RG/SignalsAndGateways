@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT routingTable				((item)*)>
+
+<!ELEMENT item						((source), (destination)+, (options)*)>
+
+<!ELEMENT source (sourceBusID, sourceObjectID, sourceTyp, sourceChannel)>
+<!ELEMENT sourceBusID				(#PCDATA)>
+<!ELEMENT sourceObjectID			(#PCDATA)>
+<!ELEMENT sourceTyp					(#PCDATA)>
+<!ELEMENT sourceChannel				(#PCDATA)>
+
+<!ELEMENT destination (destinationBusID, destinationObjectID, destinationTyp, destinationChannel)>
+<!ELEMENT destinationBusID			(#PCDATA)>
+<!ELEMENT destinationObjectID		(#PCDATA)>
+<!ELEMENT destinationTyp			(#PCDATA)>
+<!ELEMENT destinationChannel		(#PCDATA)>
+
+<!ELEMENT options ((holdUpTime)*)>
+<!ELEMENT holdUpTime				(#PCDATA)>

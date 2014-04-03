@@ -13,14 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-
+#include <cxmlelement.h>
 }}
 //
 // TODO generated message class
 //
-class noncobject FieldSequenceDataStructure;
+class noncobject cXMLElement;
 
 packet InterConnectMsg {
+	cXMLElement routingData;
     string transformationID;
     string frameFormat;
 }

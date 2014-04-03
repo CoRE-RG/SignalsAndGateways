@@ -18,16 +18,41 @@
 #include "candataframe_m.h"
 #include "CTFrame_m.h"
 #include "FieldSequenceMessage_m.h"
+#include "MultipleFieldSequenceMessage.h"
+#include "IdentifierFieldElement.h"
 
 Define_Module(Routing);
 
 void Routing::initialize()
 {
-    // TODO - Generated method body
+    routingTable = par("routingTable").xmlValue();
+    items = routingTable->getChildren();
 }
 
 void Routing::handleMessage(cMessage *msg)
 {
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
+    cPacket *delivery = interDataStructure->getEncapsulatedPacket();
+    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+        for(auto &element : items){
+            const char* elementValue = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+            if(atoi(elementValue) == canDataFrame->getCanID()){
+                interDataStructure->setRoutingData(*element);
+                break;
+            }
+        }
+    }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){ //Muss später in MultipleFieldSequenceMessage geaendert werden!
+        FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
+        for(auto &element : items){
+            const char* elementValue = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+            std::shared_ptr<IdentifierFieldElement> identifierElement = fieldSequence->getTransportFrame().getField<IdentifierFieldElement>();
+            if(atoi(elementValue) == identifierElement->getIdentifier()){
+                interDataStructure->setRoutingData(*element);
+                break;
+            }
+        }
+    }
+
     send(interDataStructure, "out");
 }

@@ -27,6 +27,8 @@ Define_Module(Transformation);
 void Transformation::initialize()
 {
     this->transformMap = new StaticTransformationIDList();
+    routingTable = par("routingTable").xmlValue();
+    items = routingTable->getChildren();
 }
 
 void Transformation::handleMessage(cMessage *msg)
@@ -40,6 +42,31 @@ cPacket *Transformation::transform(cMessage *msg){
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
     cPacket *returnMessage = NULL;
     EV << "transform entrance" << endl;
+    source = interDataStructure->getRoutingData().getFirstChildWithTag("source");
+    destination = interDataStructure->getRoutingData().getFirstChildWithTag("destination");
+    options = interDataStructure->getRoutingData().getFirstChildWithTag("options");
+
+    const char* sourceTyp = source->getFirstChildWithTag("sourceTyp")->getNodeValue();
+    for(auto &element : destination){
+
+    }
+
+    switch (transformMap->getTransformationID()) {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        default:
+            break;
+    }
     if(transformMap->getTransformationID(interDataStructure->getTransformationID()) > 0){
         EV << "transform: " << "transformationID > 0" << endl;
         if(strcmp(interDataStructure->getTransformationID(),"canTocan") == 0){
@@ -93,21 +120,18 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      * Create sequence
      */
     protocolFieldSequence.pushField(transportHeader);
-    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
     protocolFieldSequence.pushField(timestamp);
-    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
     protocolFieldSequence.pushField(data);
-    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
     protocolFieldSequence.pushField(identifier);
-    EV << "protocolFieldSequence.size()" << protocolFieldSequence.size() << endl;
 
     return protocolFieldSequence;
 }
 
 
 CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame){
-    CanDataFrame *canDataFrame = new CanDataFrame("message");
-    canDataFrame->setPeriod(0);
+    CanDataFrame *canDataFrame = new CanDataFrame();
+    canDataFrame->setNode("CAN-TTE-Gateway");
+    canDataFrame->setRtr(false);
 
     try{
         std::shared_ptr<IdentifierFieldElement> identifierElement  = transportFrame.getField<IdentifierFieldElement>();
