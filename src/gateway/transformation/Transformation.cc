@@ -34,64 +34,57 @@ void Transformation::initialize()
 void Transformation::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
-        send(transform(msg), "out");
+        transform(msg);
     }
 }
 
-cPacket *Transformation::transform(cMessage *msg){
+InterConnectMsg *Transformation::transform(cMessage *msg){
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-    cPacket *returnMessage = NULL;
-    EV << "transform entrance" << endl;
+
     source = interDataStructure->getRoutingData().getFirstChildWithTag("source");
-    destination = interDataStructure->getRoutingData().getFirstChildWithTag("destination");
+    destination = interDataStructure->getRoutingData().getChildrenByTagName("destination");
     options = interDataStructure->getRoutingData().getFirstChildWithTag("options");
 
-    const char* sourceTyp = source->getFirstChildWithTag("sourceTyp")->getNodeValue();
+    cPacket *delivery = interDataStructure->decapsulate();
+
+    const char* sourceTyp = source->getFirstChildWithTag("sourceType")->getNodeValue();
+    EV << "sourceType: " << sourceTyp << endl;
     for(auto &element : destination){
+        switch (transformMap->getTransformationID(*sourceTyp + "To" + *(element->getFirstChildWithTag("destinationType")->getNodeValue()))) {
+            EV << "destinationType: " << element->getFirstChildWithTag("destinationType")->getNodeValue() << endl;
+            case 1://canTocan
+                {//to declare the scope for the assigned variables
+                    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+                        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+                        FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
+                        FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+                        fieldSequence->setTransportFrame(transportFrame);
+                        interDataStructure->encapsulate(fieldSequence);
+                        send(interDataStructure, "out");
+                    }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+                        FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
+                        FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
+                        CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
+                        interDataStructure->setBackboneCTID(atoi(element->getFirstChildWithTag("backboneCTID")->getNodeValue()));
+                        interDataStructure->encapsulate(canDataFrame);
+                        send(interDataStructure, "out");
+                    }
+                }
+                break;
+            case 2://canToFlexray
 
-    }
+                break;
+            case 3://flexrayToFlexray
 
-    switch (transformMap->getTransformationID()) {
-        case 1:
+                break;
+            case 4://flexrayTocan
 
-            break;
-        case 2:
-
-            break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-        default:
-            break;
-    }
-    if(transformMap->getTransformationID(interDataStructure->getTransformationID()) > 0){
-        EV << "transform: " << "transformationID > 0" << endl;
-        if(strcmp(interDataStructure->getTransformationID(),"canTocan") == 0){
-            EV << "transform: " << "canTocan" << endl;
-            if(strcmp(interDataStructure->getFrameFormat(), "canDataFrame") == 0){
-                EV << "transform: " << "canDataFrame" << endl;
-                CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
-                FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
-                FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
-                fieldSequence->setTransportFrame(transportFrame);
-                interDataStructure->encapsulate(fieldSequence);
-                returnMessage = interDataStructure;
-            }else if(strcmp(interDataStructure->getFrameFormat(), "transportFrame") == 0){
-                EV << "transform: " << "transportFrame" << endl;
-                FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
-                FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
-                interDataStructure->encapsulate(canDataFrame);
-                returnMessage = interDataStructure;
-            }
+                break;
+            default:
+                opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
         }
-    }else{
-        //invalid transformation ID
     }
-    return returnMessage;
+    return interDataStructure;
 }
 
 FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame *msg){
@@ -113,8 +106,8 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      * Transportprotokollheader
      */
     std::shared_ptr<dataStruct::TransportHeaderFieldElement>  transportHeader (new TransportHeaderFieldElement());
-    transportHeader->setStaticTranslationId(1);
-    transportHeader->setStaticBusId(0);
+    transportHeader->setStaticTranslationID(1);
+    transportHeader->setStaticBusID(msg->getNode());
     transportHeader->setActualityFlag(true);
     /*
      * Create sequence
@@ -144,7 +137,7 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         canDataFrame->setLength(canDataFrame->getDataArraySize());
 
         std::shared_ptr<TimestampFieldElement> timestampElement = transportFrame.getField<TimestampFieldElement>();
-         //canDataFrame->setTimestamp(timestampElement->getTimestamp());
+        //canDataFrame->setTimestamp(timestampElement->getTimestamp());
     }catch(cException e){
         opp_error(e.what());
     }

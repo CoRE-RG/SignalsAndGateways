@@ -15,6 +15,7 @@
 cplusplus {{
 #include <list>
 #include "FieldSequenceDataStructure.h"
+
 typedef std::list<FieldSequenceDataStructure> FieldSequenceList;
 }}
 //
@@ -25,4 +26,5 @@ class noncobject FieldSequenceList;
 packet MultipleFieldSequenceMessage {
     @customize(true);  // see the generated C++ header for more info
     abstract FieldSequenceList fieldSequenceList;
+    int backboneCTID;
 }

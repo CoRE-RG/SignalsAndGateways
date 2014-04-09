@@ -20,7 +20,6 @@
 #include "StaticTransformationIDList.h"
 #include "ITransformation.h"
 #include "FieldElement.h"
-#include <vector>
 #include "InterConnectMsg_m.h"
 #include "candataframe_m.h"
 #include "FieldSequenceDataStructure.h"
@@ -33,7 +32,7 @@ class Transformation : public cSimpleModule, ITransformation
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
-    virtual cPacket *transform(cMessage *msg);
+    virtual InterConnectMsg *transform(cMessage *msg);
   private:
     StaticTransformationIDList *transformMap;
     FieldSequenceDataStructure transformCanToTransport(CanDataFrame *msg);
@@ -41,7 +40,7 @@ class Transformation : public cSimpleModule, ITransformation
     cXMLElement *routingTable;
     cXMLElementList items;
     cXMLElement* source;
-    cXMLElement* destination;
+    cXMLElementList destination;
     cXMLElement* options;
 };
 

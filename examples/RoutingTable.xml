@@ -10,9 +10,9 @@
 			<sourceObjectID>
 				1
 			</sourceObjectID>
-			<sourceTyp>
+			<sourceType>
 				can
-			</sourceTyp>
+			</sourceType>
 			<sourceChannel>
 				
 			</sourceChannel>
@@ -24,12 +24,15 @@
 			<destinationObjectID>
 				1
 			</destinationObjectID>
-			<destinationTyp>
+			<destinationType>
 				can
-			</destinationTyp>
+			</destinationType>
 			<destinationChannel>
 				
 			</destinationChannel>
+			<backboneCTID>
+				100
+			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -46,9 +49,9 @@
 			<sourceObjectID>
 				5
 			</sourceObjectID>
-			<sourceTyp>
+			<sourceType>
 				van
-			</sourceTyp>
+			</sourceType>
 			<sourceChannel>
 				
 			</sourceChannel>
@@ -60,12 +63,15 @@
 			<destinationObjectID>
 				5
 			</destinationObjectID>
-			<destinationTyp>
+			<destinationType>
 				can
-			</destinationTyp>
+			</destinationType>
 			<destinationChannel>
 				
 			</destinationChannel>
+			<backboneCTID>
+				10
+			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -82,9 +88,9 @@
 			<sourceObjectID>
 				2
 			</sourceObjectID>
-			<sourceTyp>
+			<sourceType>
 				can
-			</sourceTyp>
+			</sourceType>
 			<sourceChannel>
 				
 			</sourceChannel>
@@ -96,12 +102,15 @@
 			<destinationObjectID>
 				2
 			</destinationObjectID>
-			<destinationTyp>
+			<destinationType>
 				can
-			</destinationTyp>
+			</destinationType>
 			<destinationChannel>
 				
 			</destinationChannel>
+			<backboneCTID>
+				150
+			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -118,9 +127,9 @@
 			<sourceObjectID>
 				3
 			</sourceObjectID>
-			<sourceTyp>
+			<sourceType>
 				can
-			</sourceTyp>
+			</sourceType>
 			<sourceChannel>
 				
 			</sourceChannel>
@@ -132,14 +141,17 @@
 			<destinationObjectID>
 				3
 			</destinationObjectID>
-			<destinationTyp>
+			<destinationType>
 				can
-			</destinationTyp>
+			</destinationType>
 			<destinationChannel>
 				
 			</destinationChannel>
+			<backboneCTID>
+				200
+			</backboneCTID>
 		</destination>
-		<options>
+		<options>			
 			<holdUpTime>
 			
 			</holdUpTime>

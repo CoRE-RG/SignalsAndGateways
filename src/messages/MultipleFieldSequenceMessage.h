@@ -15,6 +15,7 @@ class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 private:
      void copy(const MultipleFieldSequenceMessage& other) { }
      FieldSequenceList fieldSequenceList;
+     int fieldCount;
 public:
      MultipleFieldSequenceMessage(const char *name=NULL, int kind=0) : MultipleFieldSequenceMessage_Base(name,kind) {
          fieldSequenceList = FieldSequenceList();
@@ -37,13 +38,19 @@ public:
      void pushFieldSequence(FieldSequenceDataStructure transportFrame){
          fieldSequenceList.push_front(transportFrame);
          addByteLength(sizeof(FieldSequenceDataStructure));
+         fieldCount++;
      }
 
      FieldSequenceDataStructure popFieldSequence(){
          FieldSequenceDataStructure element = fieldSequenceList.back();
          fieldSequenceList.pop_back();
          this->setByteLength(getByteLength()-sizeof(FieldSequenceDataStructure));
+         fieldCount--;
          return element;
+     }
+
+     int getFieldCount(){
+         return fieldCount;
      }
 
      virtual FieldSequenceList& getFieldSequenceList(){

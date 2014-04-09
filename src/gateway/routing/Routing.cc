@@ -20,6 +20,7 @@
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "IdentifierFieldElement.h"
+#include "TransportHeaderFieldElement.h"
 
 Define_Module(Routing);
 
@@ -32,27 +33,46 @@ void Routing::initialize()
 void Routing::handleMessage(cMessage *msg)
 {
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-    cPacket *delivery = interDataStructure->getEncapsulatedPacket();
+    cPacket *delivery = interDataStructure->decapsulate();
     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+        InterConnectMsg *newInterDateStructure = new InterConnectMsg;
+        newInterDateStructure->encapsulate(delivery);
         for(auto &element : items){
-            const char* elementValue = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-            if(atoi(elementValue) == canDataFrame->getCanID()){
-                interDataStructure->setRoutingData(*element);
-                break;
+            const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+            if(strcmp(sourceBusID, canDataFrame->getNode())){
+                const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                if(atoi(sourceObjectID) == canDataFrame->getCanID()){
+                    newInterDateStructure->setRoutingData(*element);
+                    send(newInterDateStructure, "out");
+                    break;
+                }
             }
+
         }
-    }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){ //Muss später in MultipleFieldSequenceMessage geaendert werden!
-        FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-        for(auto &element : items){
-            const char* elementValue = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-            std::shared_ptr<IdentifierFieldElement> identifierElement = fieldSequence->getTransportFrame().getField<IdentifierFieldElement>();
-            if(atoi(elementValue) == identifierElement->getIdentifier()){
-                interDataStructure->setRoutingData(*element);
-                break;
+    }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
+        MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(delivery);
+        while(multiFieldSequence->getFieldCount() > 0){
+            InterConnectMsg *newInterDateStructure = new InterConnectMsg;
+            FieldSequenceDataStructure transportFrame = multiFieldSequence->popFieldSequence();
+            for(auto &element : items){
+                const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+                    std::shared_ptr<TransportHeaderFieldElement> identifierElement = transportFrame.getField<TransportHeaderFieldElement>();
+                    if(strcmp(sourceBusID, identifierElement->getStaticBusID())){
+                        const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                        std::shared_ptr<IdentifierFieldElement> identifierElement = transportFrame.getField<IdentifierFieldElement>();
+                        if(atoi(sourceObjectID) == identifierElement->getIdentifier()){
+                            newInterDateStructure->setRoutingData(*element);
+                            break;
+                        }
+                    }
             }
+            FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+            fieldSequence->setTransportFrame(transportFrame);
+            newInterDateStructure->encapsulate(fieldSequence);
+            send(newInterDateStructure, "out");
         }
     }
 
-    send(interDataStructure, "out");
+    delete interDataStructure;
 }

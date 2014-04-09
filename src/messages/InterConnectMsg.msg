@@ -22,6 +22,5 @@ class noncobject cXMLElement;
 
 packet InterConnectMsg {
 	cXMLElement routingData;
-    string transformationID;
-    string frameFormat;
+	    int backboneCTID;
 }

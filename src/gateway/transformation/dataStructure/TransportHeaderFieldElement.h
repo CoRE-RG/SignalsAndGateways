@@ -25,26 +25,27 @@ public:
         this->actualityFlag = actualityFlag;
     }
 
-    int getStaticBusId() const {
-        return staticBusID;
-    }
 
-    void setStaticBusId(int staticBusId) {
-        staticBusID = staticBusId;
-    }
-
-    int getStaticTranslationId() const {
+    int getStaticTranslationID() const {
         return staticTranslationID;
     }
 
-    void setStaticTranslationId(int staticTranslationId) {
+    void setStaticTranslationID(int staticTranslationId) {
         staticTranslationID = staticTranslationId;
+    }
+
+    const char* getStaticBusID() const {
+        return staticBusID;
+    }
+
+    void setStaticBusID(const char* staticBusId) {
+        staticBusID = staticBusId;
     }
 
 private:
     virtual void dummy();
     int staticTranslationID;
-    int staticBusID;
+    const char* staticBusID;
     bool actualityFlag;
 };
 

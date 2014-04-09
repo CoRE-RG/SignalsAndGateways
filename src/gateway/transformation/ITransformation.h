@@ -16,9 +16,11 @@
 #ifndef ITRANSFORMATION_H_
 #define ITRANSFORMATION_H_
 
+#include "InterConnectMsg_m.h"
+
 class ITransformation {
 public:
-    virtual cPacket *transform(cMessage *msg) = 0;
+    virtual InterConnectMsg *transform(cMessage *msg) = 0;
 };
 
 #endif /* ITRANSFORMATION_H_ */
