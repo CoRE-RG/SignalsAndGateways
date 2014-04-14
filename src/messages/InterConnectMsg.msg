@@ -18,9 +18,9 @@ cplusplus {{
 //
 // TODO generated message class
 //
-class noncobject cXMLElement;
+class noncobject cXMLElementList;
 
 packet InterConnectMsg {
-	cXMLElement routingData;
-	    int backboneCTID;
+	cXMLElementList routingData;
+	int backboneCTID;
 }

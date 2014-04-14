@@ -13,21 +13,24 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef TTEAPPLICATIONBASE_H_
-#define TTEAPPLICATIONBASE_H_
+#ifndef UTILITY_H_
+#define UTILITY_H_
 
-#include <omnetpp.h>
-#include "applications/base/ApplicationBase.h"
-#include "TransportMessage_m.h"
+#include <string>
+#include <algorithm>
+#include <functional>
 
-class TTEApplicationBase: public CoRE4INET::ApplicationBase {
-private:
-    void initialize();
-    void handleMessage(cMessage *msg);
-public:
-    TTEApplicationBase();
-    virtual ~TTEApplicationBase();
-};
+namespace UTLTY{
 
-#endif /* TTEAPPLICATIONBASE_H_ */
-Define_Module(TTEApplicationBase);
+    class Utility {
+    public:
+        static void stripNonAlphaNum(std::string & str);
+        static std::string stripNonAlphaNum(const char *str);
+        static std::string stripNonAlphaNum(const char *str, int maxLength);
+    };
+
+}
+
+
+
+#endif /* UTILITY_H_ */

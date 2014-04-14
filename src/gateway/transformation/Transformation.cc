@@ -19,6 +19,8 @@
 #include "TimestampFieldElement.h"
 #include "TransportHeaderFieldElement.h"
 #include "FieldSequenceMessage_m.h"
+#include "Utility.h"
+
 
 using namespace dataStruct;
 
@@ -36,52 +38,75 @@ void Transformation::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         transform(msg);
     }
+    delete msg;
 }
 
 InterConnectMsg *Transformation::transform(cMessage *msg){
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
 
-    source = interDataStructure->getRoutingData().getFirstChildWithTag("source");
-    destination = interDataStructure->getRoutingData().getChildrenByTagName("destination");
-    options = interDataStructure->getRoutingData().getFirstChildWithTag("options");
+    for(auto &element : interDataStructure->getRoutingData()){
+        if(strcmp(element->getTagName(), "source") == 0){
+            source = element;
+        }else if(strcmp(element->getTagName(), "destination") == 0){
+            destination = element->getParentNode()->getChildrenByTagName("destination");
+        }else if(strcmp(element->getTagName(), "options") == 0){
+            options = element;
+        }
+    }
 
-    cPacket *delivery = interDataStructure->decapsulate();
+    cPacket *delivery = interDataStructure->getEncapsulatedPacket();
 
-    const char* sourceTyp = source->getFirstChildWithTag("sourceType")->getNodeValue();
+    string sourceTyp = source->getFirstChildWithTag("sourceType")->getNodeValue();
+    UTLTY::Utility::stripNonAlphaNum(sourceTyp);
     EV << "sourceType: " << sourceTyp << endl;
+    string to = "To";
+    UTLTY::Utility::stripNonAlphaNum(to);
+
+    bool stopLoop = false;
     for(auto &element : destination){
-        switch (transformMap->getTransformationID(*sourceTyp + "To" + *(element->getFirstChildWithTag("destinationType")->getNodeValue()))) {
-            EV << "destinationType: " << element->getFirstChildWithTag("destinationType")->getNodeValue() << endl;
-            case 1://canTocan
-                {//to declare the scope for the assigned variables
-                    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
-                        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
-                        FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
-                        FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
-                        fieldSequence->setTransportFrame(transportFrame);
-                        interDataStructure->encapsulate(fieldSequence);
-                        send(interDataStructure, "out");
-                    }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
-                        FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-                        FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                        CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
-                        interDataStructure->setBackboneCTID(atoi(element->getFirstChildWithTag("backboneCTID")->getNodeValue()));
-                        interDataStructure->encapsulate(canDataFrame);
-                        send(interDataStructure, "out");
+        string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
+        UTLTY::Utility::stripNonAlphaNum(destinationType);
+        EV << "destinationType: " << destinationType << endl;
+
+        string tranformation = sourceTyp + to + destinationType;
+
+        EV << "tranformation: " << tranformation << endl;
+        if(not(stopLoop)){
+            switch (transformMap->getTransformationID(tranformation)) {
+                case 1://canTocan
+                    {//to declare the scope for the assigned variables
+                        InterConnectMsg *newInterDataStructure = new InterConnectMsg;
+                        newInterDataStructure->setRoutingData(interDataStructure->getRoutingData());
+                        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+                            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+                            FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
+                            FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+                            fieldSequence->setTransportFrame(transportFrame);
+                            newInterDataStructure->encapsulate(fieldSequence);
+                            send(newInterDataStructure, "out");
+                            stopLoop = true;
+                        }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+                            FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
+                            FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
+                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
+                            newInterDataStructure->setBackboneCTID(atoi(element->getFirstChildWithTag("backboneCTID")->getNodeValue()));
+                            newInterDataStructure->encapsulate(canDataFrame);
+                            send(newInterDataStructure, "out");
+                        }
                     }
-                }
-                break;
-            case 2://canToFlexray
+                    break;
+                case 2://canToFlexray
 
-                break;
-            case 3://flexrayToFlexray
+                    break;
+                case 3://flexrayToFlexray
 
-                break;
-            case 4://flexrayTocan
+                    break;
+                case 4://flexrayTocan
 
-                break;
-            default:
-                opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
+                    break;
+                default:
+                    opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
+            }
         }
     }
     return interDataStructure;
@@ -146,3 +171,4 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
 
     return canDataFrame;
 }
+

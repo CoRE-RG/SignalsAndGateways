@@ -21,6 +21,7 @@
 #include "MultipleFieldSequenceMessage.h"
 #include "IdentifierFieldElement.h"
 #include "TransportHeaderFieldElement.h"
+#include "Utility.h"
 
 Define_Module(Routing);
 
@@ -38,17 +39,24 @@ void Routing::handleMessage(cMessage *msg)
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(delivery);
+        int i = 0;
         for(auto &element : items){
+            EV << "Cycle: " << i << endl;
             const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-            if(strcmp(sourceBusID, canDataFrame->getNode())){
+            std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID, 10);
+            EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
+            if(strcmp(str_sourceBusID.c_str(), canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getParentModule()->getName()) == 0){
                 const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                if(atoi(sourceObjectID) == canDataFrame->getCanID()){
-                    newInterDateStructure->setRoutingData(*element);
+                std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID, 10);
+                EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
+                if(atoi(str_sourceObjectID.c_str()) == canDataFrame->getCanID()){
+                    newInterDateStructure->setRoutingData(element->getChildren());
                     send(newInterDateStructure, "out");
+                    EV << "RoutingData found!" << endl;
                     break;
                 }
             }
-
+            i++;
         }
     }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
         MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(delivery);
@@ -62,7 +70,7 @@ void Routing::handleMessage(cMessage *msg)
                         const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                         std::shared_ptr<IdentifierFieldElement> identifierElement = transportFrame.getField<IdentifierFieldElement>();
                         if(atoi(sourceObjectID) == identifierElement->getIdentifier()){
-                            newInterDateStructure->setRoutingData(*element);
+                            newInterDateStructure->setRoutingData(element->getChildren());
                             break;
                         }
                     }
@@ -74,5 +82,5 @@ void Routing::handleMessage(cMessage *msg)
         }
     }
 
-    delete interDataStructure;
+    delete msg;
 }

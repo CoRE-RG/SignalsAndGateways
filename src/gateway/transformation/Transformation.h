@@ -24,6 +24,7 @@
 #include "candataframe_m.h"
 #include "FieldSequenceDataStructure.h"
 
+
 /**
  * TODO - Generated class
  */
