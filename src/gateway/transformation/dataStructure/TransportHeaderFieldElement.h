@@ -9,6 +9,7 @@
 #define TRANSPORTHEADERFIELDELEMENT_H_
 
 #include <FieldElement.h>
+#include <string>
 
 namespace dataStruct {
 
@@ -34,18 +35,18 @@ public:
         staticTranslationID = staticTranslationId;
     }
 
-    const char* getStaticBusID() const {
+    std::string getStaticBusID() const {
         return staticBusID;
     }
 
-    void setStaticBusID(const char* staticBusId) {
+    void setStaticBusID(std::string staticBusId) {
         staticBusID = staticBusId;
     }
 
 private:
     virtual void dummy();
     int staticTranslationID;
-    const char* staticBusID;
+    std::string staticBusID;
     bool actualityFlag;
 };
 

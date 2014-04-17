@@ -11,11 +11,10 @@ namespace dataStruct {
 
 TransportHeaderFieldElement::TransportHeaderFieldElement() {
     this->setFieldID("TransportHeaderField");
-
 }
 
 TransportHeaderFieldElement::~TransportHeaderFieldElement() {
-    // TODO Auto-generated destructor stub
+
 }
 
 void TransportHeaderFieldElement::dummy(){

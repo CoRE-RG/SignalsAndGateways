@@ -13,12 +13,16 @@
 class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 {
 private:
-     void copy(const MultipleFieldSequenceMessage& other) { }
      FieldSequenceList fieldSequenceList;
      int fieldCount;
+     void copy(const MultipleFieldSequenceMessage& other) {
+         fieldSequenceList = other.copyFiledSequenceList();
+         fieldCount = other.getFieldCount();
+     }
 public:
      MultipleFieldSequenceMessage(const char *name=NULL, int kind=0) : MultipleFieldSequenceMessage_Base(name,kind) {
          fieldSequenceList = FieldSequenceList();
+         fieldCount = 0;
      }
 
      MultipleFieldSequenceMessage(const MultipleFieldSequenceMessage& other) : MultipleFieldSequenceMessage_Base(other) {
@@ -31,7 +35,7 @@ public:
          return *this;
      }
 
-     virtual MultipleFieldSequenceMessage *dup() const {
+     MultipleFieldSequenceMessage *dup() const {
          return new MultipleFieldSequenceMessage(*this);
      }
 
@@ -39,9 +43,11 @@ public:
          fieldSequenceList.push_front(transportFrame);
          addByteLength(sizeof(FieldSequenceDataStructure));
          fieldCount++;
+         EV << "Field pushed to MultipleFieldSequenceMessage" << endl;
      }
 
      FieldSequenceDataStructure popFieldSequence(){
+         EV << "Length of List: " << fieldSequenceList.size() << endl;
          FieldSequenceDataStructure element = fieldSequenceList.back();
          fieldSequenceList.pop_back();
          this->setByteLength(getByteLength()-sizeof(FieldSequenceDataStructure));
@@ -49,15 +55,19 @@ public:
          return element;
      }
 
-     int getFieldCount(){
+     int getFieldCount() const{
          return fieldCount;
      }
 
-     virtual FieldSequenceList& getFieldSequenceList(){
+     FieldSequenceList copyFiledSequenceList() const{
          return fieldSequenceList;
      }
 
-     virtual void setFieldSequenceList(const FieldSequenceList& fieldSequenceList){
+     FieldSequenceList& getFieldSequenceList() {
+         return fieldSequenceList;
+     }
+
+     void setFieldSequenceList(const FieldSequenceList& fieldSequenceList){
          this->fieldSequenceList = fieldSequenceList;
      }
 

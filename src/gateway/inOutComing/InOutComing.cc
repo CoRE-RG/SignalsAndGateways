@@ -54,6 +54,7 @@ void InOutComing::handleMessage(cMessage *msg)
             send(transportMsg, "appInterface$o", 0);
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
             CoRE4INET::CTFrame *ethernetFrame = new CoRE4INET::CTFrame("");
+            EV << "CTID: " << interDataStructure->getBackboneCTID();
             ethernetFrame->setCtID(interDataStructure->getBackboneCTID());
             ethernetFrame->encapsulate(delivery);
             transportMsg->encapsulate(ethernetFrame);

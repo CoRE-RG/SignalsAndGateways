@@ -24,6 +24,11 @@ class FieldSequenceDataStructure{
             fieldSequence = FieldSequence();
         }
 
+//        FieldSequenceDataStructure(FieldSequenceDataStructure& transportFrame){
+//            //fieldSequence = FieldSequence();
+//            fieldSequence = transportFrame.getFieldSequenceList();
+//        }
+
         ~FieldSequenceDataStructure(){
             fieldSequence.clear();
         }
@@ -67,6 +72,10 @@ class FieldSequenceDataStructure{
          */
         int size(){
             return fieldSequence.size();
+        }
+
+        FieldSequence getFieldSequenceList(){
+            return fieldSequence;
         }
 };
 

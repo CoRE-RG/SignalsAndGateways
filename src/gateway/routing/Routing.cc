@@ -37,15 +37,16 @@ void Routing::handleMessage(cMessage *msg)
     cPacket *delivery = interDataStructure->decapsulate();
     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+        canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getParentModule()->getName());
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
-        newInterDateStructure->encapsulate(delivery);
+        newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;
         for(auto &element : items){
             EV << "Cycle: " << i << endl;
             const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
             std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID, 10);
             EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
-            if(strcmp(str_sourceBusID.c_str(), canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getParentModule()->getName()) == 0){
+            if(strcmp(str_sourceBusID.c_str(), canDataFrame->getNode()) == 0){
                 const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                 std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID, 10);
                 EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
@@ -63,22 +64,33 @@ void Routing::handleMessage(cMessage *msg)
         while(multiFieldSequence->getFieldCount() > 0){
             InterConnectMsg *newInterDateStructure = new InterConnectMsg;
             FieldSequenceDataStructure transportFrame = multiFieldSequence->popFieldSequence();
+            int i = 0;
             for(auto &element : items){
+                EV << "Cycle: " << i << endl;
                 const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-                    std::shared_ptr<TransportHeaderFieldElement> identifierElement = transportFrame.getField<TransportHeaderFieldElement>();
-                    if(strcmp(sourceBusID, identifierElement->getStaticBusID())){
-                        const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                        std::shared_ptr<IdentifierFieldElement> identifierElement = transportFrame.getField<IdentifierFieldElement>();
-                        if(atoi(sourceObjectID) == identifierElement->getIdentifier()){
-                            newInterDateStructure->setRoutingData(element->getChildren());
-                            break;
-                        }
+                std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID, 10);
+                EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
+                std::shared_ptr<TransportHeaderFieldElement> transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
+                if(strcmp(str_sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
+                    const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                    std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID, 10);
+                    EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
+                    std::shared_ptr<IdentifierFieldElement> identifierElement = transportFrame.getField<IdentifierFieldElement>();
+                    if(atoi(str_sourceObjectID.c_str()) == identifierElement->getIdentifier()){
+                        newInterDateStructure->setRoutingData(element->getChildren());
+                        EV << "RoutingData found!" << endl;
+                        break;
                     }
+                }
+                i++;
             }
-            FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
-            fieldSequence->setTransportFrame(transportFrame);
-            newInterDateStructure->encapsulate(fieldSequence);
-            send(newInterDateStructure, "out");
+            if(newInterDateStructure->getRoutingData().size() > 0){
+                FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
+                fieldSequence->setTransportFrame(transportFrame);
+                newInterDateStructure->encapsulate(fieldSequence);
+                send(newInterDateStructure, "out");
+            }
+
         }
     }
 

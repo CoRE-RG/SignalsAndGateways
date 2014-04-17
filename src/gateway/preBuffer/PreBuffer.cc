@@ -18,6 +18,7 @@
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "candataframe_m.h"
+#include "TransportHeaderFieldElement.h"
 
 Define_Module(PreBuffer);
 
@@ -30,10 +31,16 @@ void PreBuffer::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-        FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
-        MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage;
-        multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
-        interDataStructure->encapsulate(multiFieldSequence);
+        cPacket *delivery = interDataStructure->decapsulate();
+        if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+            FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
+            MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage;
+            multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+            interDataStructure->encapsulate(multiFieldSequence);
+        }else if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+            interDataStructure->encapsulate(delivery);
+        }
+
         send(interDataStructure, "out");
     }
 }

@@ -83,13 +83,15 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
                             newInterDataStructure->encapsulate(fieldSequence);
+                            int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("backboneCTID")->getNodeValue(), 3).c_str());
+                            EV << "CTID: " << ctID << endl;
+                            newInterDataStructure->setBackboneCTID(ctID);
                             send(newInterDataStructure, "out");
                             stopLoop = true;
                         }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
                             FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
                             CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
-                            newInterDataStructure->setBackboneCTID(atoi(element->getFirstChildWithTag("backboneCTID")->getNodeValue()));
                             newInterDataStructure->encapsulate(canDataFrame);
                             send(newInterDataStructure, "out");
                         }
@@ -132,7 +134,9 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      */
     std::shared_ptr<dataStruct::TransportHeaderFieldElement>  transportHeader (new TransportHeaderFieldElement());
     transportHeader->setStaticTranslationID(1);
+    std::string test = msg->getNode();
     transportHeader->setStaticBusID(msg->getNode());
+    std::string test2 = transportHeader->getStaticBusID();
     transportHeader->setActualityFlag(true);
     /*
      * Create sequence
