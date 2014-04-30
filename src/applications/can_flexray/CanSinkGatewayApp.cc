@@ -19,8 +19,7 @@
 
 Define_Module(CanSinkGatewayApp);
 
-void CanSinkGatewayApp::handleMessage(cMessage *msg)
-{
+void CanSinkGatewayApp::handleMessage(cMessage *msg) {
     std::string msgClass = msg->getClassName();
     if (msg->arrivedOn("controllerIn")) {
         bufferMessageCounter++;
@@ -35,11 +34,18 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg)
         TransportMessage *transFrame = new TransportMessage();
         transFrame->encapsulate(frame->dup());
         send(transFrame, "busInterfaceOut");
-        EV << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'" << endl;
+        EV
+                  << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'"
+                  << endl;
+
+        CanInputBuffer *buffer =
+                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
+        buffer->deleteFrame(currentFrameID);
+        idle = true;
 
     } else if (msg->isSelfMessage()) {
-        CanInputBuffer *buffer = (CanInputBuffer*) (getParentModule()->getSubmodule(
-                "bufferIn"));
+        CanInputBuffer *buffer =
+                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
         if (bufferMessageCounter > 0) {
             requestFrame();

@@ -14,15 +14,15 @@
 // 
 
 package signalsandgateways.gateway.preBuffer;
-import signalsandgateways.gateway.IConnection;
+
 //
 // TODO auto-generated module
 //
-simple PreBuffer like IConnection
+simple Dispatcher
 {
-    @display("bgb=209,144");
+    parameters:
+        xml routingTable;
     gates:
-        input in @label(InterConnectMsg);
-        output out @label(InterConnectMsg);
+        input triggerIn @directIn;
         inout moduleConnect @label(InterConnectMsg);
 }

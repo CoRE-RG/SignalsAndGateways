@@ -13,9 +13,6 @@
 			<sourceType>
 				can
 			</sourceType>
-			<sourceChannel>
-				
-			</sourceChannel>
 		</source>
 		<destination>
 			<destinationBusID>
@@ -27,16 +24,13 @@
 			<destinationType>
 				can
 			</destinationType>
-			<destinationChannel>
-				
-			</destinationChannel>
 			<backboneCTID>
 				100
 			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
-			
+				300
 			</holdUpTime>
 		</options>
 	</item>
@@ -52,9 +46,6 @@
 			<sourceType>
 				can
 			</sourceType>
-			<sourceChannel>
-				
-			</sourceChannel>
 		</source>
 		<destination>
 			<destinationBusID>
@@ -66,16 +57,13 @@
 			<destinationType>
 				can
 			</destinationType>
-			<destinationChannel>
-				
-			</destinationChannel>
 			<backboneCTID>
-				10
+				40
 			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
-			
+				120
 			</holdUpTime>
 		</options>
 	</item>
@@ -91,9 +79,6 @@
 			<sourceType>
 				can
 			</sourceType>
-			<sourceChannel>
-				
-			</sourceChannel>
 		</source>
 		<destination>
 			<destinationBusID>
@@ -105,16 +90,13 @@
 			<destinationType>
 				can
 			</destinationType>
-			<destinationChannel>
-				
-			</destinationChannel>
 			<backboneCTID>
 				150
 			</backboneCTID>
 		</destination>
 		<options>
 			<holdUpTime>
-			
+				300
 			</holdUpTime>
 		</options>
 	</item>
@@ -130,9 +112,6 @@
 			<sourceType>
 				can
 			</sourceType>
-			<sourceChannel>
-				
-			</sourceChannel>
 		</source>
 		<destination>
 			<destinationBusID>
@@ -144,18 +123,15 @@
 			<destinationType>
 				can
 			</destinationType>
-			<destinationChannel>
-				
-			</destinationChannel>
 			<backboneCTID>
 				200
 			</backboneCTID>
 		</destination>
 		<options>			
 			<holdUpTime>
-			
+				200
 			</holdUpTime>
 		</options>
 	</item>
-	
+
 </routingTable>

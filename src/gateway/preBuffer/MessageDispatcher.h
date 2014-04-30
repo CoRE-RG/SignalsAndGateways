@@ -17,12 +17,22 @@
 #define __SIGNALSANDGATEWAYS_MESSAGEDISPATCHER_H_
 
 #include <omnetpp.h>
+#include "TimeTriggeredBuffer.h"
+#include <map>
+#include <string>
+
+typedef std::map<std::string, TimeTriggeredBuffer*> TTBufferMap;
+typedef TTBufferMap::value_type ValuePair;
 
 /**
  * TODO - Generated class
  */
 class MessageDispatcher : public cSimpleModule
 {
+private:
+    cXMLElement *routingTable;
+    cXMLElementList items;
+    TTBufferMap timeBuffers;
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);

@@ -3,17 +3,15 @@
 
 <!ELEMENT item						((source), (destination)+, (options)*)>
 
-<!ELEMENT source (sourceBusID, sourceObjectID, sourceType, sourceChannel)>
+<!ELEMENT source (sourceBusID, sourceObjectID, sourceType)>
 <!ELEMENT sourceBusID				(#PCDATA)>
 <!ELEMENT sourceObjectID			(#PCDATA)>
 <!ELEMENT sourceType				(#PCDATA)>
-<!ELEMENT sourceChannel				(#PCDATA)>
 
-<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, destinationChannel, backboneCTID)>
+<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, backboneCTID)>
 <!ELEMENT destinationBusID			(#PCDATA)>
 <!ELEMENT destinationObjectID		(#PCDATA)>
 <!ELEMENT destinationType			(#PCDATA)>
-<!ELEMENT destinationChannel		(#PCDATA)>
 <!ELEMENT backboneCTID				(#PCDATA)>
 
 <!ELEMENT options ((holdUpTime)*)>

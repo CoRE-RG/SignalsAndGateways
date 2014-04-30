@@ -21,6 +21,5 @@ package signalsandgateways.gateway.preBuffer;
 simple TimeTriggeredBuffer
 {
     gates:
-        input bufferIn;
-        output bufferOut;
+        input bufferIn @directIn;
 }

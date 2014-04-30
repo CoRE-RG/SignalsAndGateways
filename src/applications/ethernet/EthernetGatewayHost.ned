@@ -22,22 +22,22 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 module EthernetGatewayHost extends TTEEtherHost
 {
     parameters:
-        int numTTvlink = default(0);
+        int numberOfVlinks = default(0);
     gates:
         inout ethInterface @labels(TransportMessage);
     submodules:
         gatewayApp: TTEApplicationBase {
             @display("p=340,37");
         }
-        TTvlinks[numTTvlink]: TTDoubleBuffer {
+        TTvlinks[numberOfVlinks]: TTDoubleBuffer {
             @display("p=517,37");
         }
-        TTvlinks_ctc[numTTvlink]: TTIncoming {
+        TTvlinks_ctc[numberOfVlinks]: TTIncoming {
             @display("p=517,154");
         }
     connections:
         ethInterface <--> gatewayApp.ethInterface;
-        for i=0..numTTvlink-1 {
+        for i=0..numberOfVlinks-1 {
             TTvlinks_ctc[i].out --> TTvlinks[i].in;
         }
 		//ethg <--> gatewayApp.tteInterface;

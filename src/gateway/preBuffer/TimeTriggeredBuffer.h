@@ -25,12 +25,22 @@
  */
 class TimeTriggeredBuffer : public cSimpleModule
 {
+public:
+    std::string getDispatchedCTID() const {
+        return dispatchedCTID;
+    }
+
+    void setDispatchedCTID(std::string dispatchedCTID) {
+        this->dispatchedCTID = dispatchedCTID;
+    }
+
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
   private:
     FieldSequenceBuffer buffer;
     cMessage *timerEvent;
+    std::string dispatchedCTID;
 };
 
 #endif

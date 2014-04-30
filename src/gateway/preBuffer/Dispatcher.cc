@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "MessageDispatcher.h"
+#include "Dispatcher.h"
 #include "Utility.h"
 #include "InterConnectMsg_m.h"
 
-Define_Module(MessageDispatcher);
+Define_Module(Dispatcher);
 
-void MessageDispatcher::initialize()
+void Dispatcher::initialize()
 {
     //Initialisierung der Map notwendig?
 
@@ -30,22 +30,25 @@ void MessageDispatcher::initialize()
         for(auto &destination : element->getChildrenByTagName("destination")){
             const char* backboneCTID = destination->getFirstChildWithTag("backboneCTID")->getNodeValue();
             std::string str_backboneCTID = UTLTY::Utility::stripNonAlphaNum(backboneCTID, 10);
-            cModule *msgBuffer = getSubmodule("MessageBuffers", i);
+            cModule *msgBuffer = getParentModule()->getSubmodule("messageBuffers", i);
             TimeTriggeredBuffer *currentBuffer = dynamic_cast<TimeTriggeredBuffer*>(msgBuffer);
             currentBuffer->setDispatchedCTID(str_backboneCTID);
             timeBuffers.insert(ValuePair(str_backboneCTID, currentBuffer));
             i++;
+
         }
     }
 }
 
-void MessageDispatcher::handleMessage(cMessage *msg)
+void Dispatcher::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("in")){
+    if(msg->arrivedOn("moduleConnect$i")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         TTBufferMap::const_iterator bufferPosition = timeBuffers.find(std::to_string(interDataStructure->getBackboneCTID()));
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
         if(bufferPosition != timeBuffers.end()){
+            std::string test1 = bufferPosition->first;
+            TimeTriggeredBuffer *test2 = bufferPosition->second;
             sendDirect(fieldSequence, bufferPosition->second, "bufferIn");
         }else{
             opp_error("Cannot find Pre-Buffer to specified backboneID in Message!");

@@ -13,16 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.gateway.preBuffer;
-import signalsandgateways.gateway.IConnection;
-//
-// TODO auto-generated module
-//
-simple PreBuffer like IConnection
+#ifndef __SIGNALSANDGATEWAYS_DISPATCHER_H_
+#define __SIGNALSANDGATEWAYS_DISPATCHER_H_
+
+#include <omnetpp.h>
+#include "TimeTriggeredBuffer.h"
+#include <map>
+#include <string>
+
+typedef std::map<std::string, TimeTriggeredBuffer*> TTBufferMap;
+typedef TTBufferMap::value_type ValuePair;
+/**
+ * TODO - Generated class
+ */
+class Dispatcher : public cSimpleModule
 {
-    @display("bgb=209,144");
-    gates:
-        input in @label(InterConnectMsg);
-        output out @label(InterConnectMsg);
-        inout moduleConnect @label(InterConnectMsg);
-}
+  private:
+    cXMLElement *routingTable;
+    cXMLElementList items;
+    TTBufferMap timeBuffers;
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+#endif

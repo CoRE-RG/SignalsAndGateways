@@ -24,7 +24,7 @@ Define_Module(PreBuffer);
 
 void PreBuffer::initialize()
 {
-    // TODO - Generated method body
+    cumulate = true;
 }
 
 void PreBuffer::handleMessage(cMessage *msg)
@@ -34,13 +34,23 @@ void PreBuffer::handleMessage(cMessage *msg)
         cPacket *delivery = interDataStructure->decapsulate();
         if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
             FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-            MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage;
-            multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
-            interDataStructure->encapsulate(multiFieldSequence);
+            if(cumulate){
+                interDataStructure->encapsulate(delivery);
+                send(interDataStructure, "moduleConnect$o");
+            }else{
+                MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage;
+                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+                interDataStructure->encapsulate(multiFieldSequence);
+                send(interDataStructure, "out");
+            }
+
         }else if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
             interDataStructure->encapsulate(delivery);
+            send(interDataStructure, "out");
         }
 
+    }else if(msg->arrivedOn("moduleConnect")){
+        InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         send(interDataStructure, "out");
     }
 }

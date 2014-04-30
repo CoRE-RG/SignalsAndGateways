@@ -18,11 +18,20 @@ import signalsandgateways.gateway.IConnection;
 //
 // TODO auto-generated module
 //
-simple MessageDispatcher like IConnection
+module MessageDispatcher
 {
     parameters:
-    	int numberOfVlinks;
+        int numberOfVlinks = default(0);
+        @display("bgb=268,218");
     gates:
-    	input in @label (InterConnectMsg);
-        output out @label (InterConnectMsg);
+        inout moduleConnect @label(InterConnectMsg);
+    submodules:
+        messageBuffers[numberOfVlinks]: TimeTriggeredBuffer {
+            @display("p=134,125");
+        }
+        dispatcher: Dispatcher {
+            @display("p=134,45");
+        }
+    connections:
+        moduleConnect <--> dispatcher.moduleConnect;
 }

@@ -29,7 +29,12 @@ void FieldSequenceBuffer::enqueue(FieldSequenceMessage* value){
 }
 
 FieldSequenceMessage* FieldSequenceBuffer::dequeue(){
-    FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(timeQueue.pop());
+    FieldSequenceMessage* fieldSequence = NULL;
+    if(!timeQueue.isEmpty()){
+        fieldSequence = dynamic_cast<FieldSequenceMessage*>(timeQueue.pop());
+    }else{
+        opp_error("Trying to dequeue an element of FieldSequenceBuffer, but the buffer is empty!");
+    }
     return fieldSequence;
 }
 
@@ -42,7 +47,7 @@ int FieldSequenceBuffer::compareFunc(cObject *a, cObject *b){
         FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
         returnValue = (canA_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier())-(canB_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier());
     }else{
-        opp_error("Insertion of object in PreBuffer failed. Only CanDataFrame-objects are supported!");
+        opp_error("Insertion of object in PreBuffer failed. Only FieldSequenceMessage-objects are supported!");
     }
     return returnValue;
 }

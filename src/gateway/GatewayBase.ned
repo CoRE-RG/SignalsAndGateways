@@ -21,30 +21,36 @@ import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
 import signalsandgateways.gateway.gatewayStrategy.GatewayStrategy;
 import signalsandgateways.gateway.analysis.Analysis;
+import signalsandgateways.gateway.preBuffer.MessageDispatcher;
 
 module GatewayBase
 {
+    @display("bgb=401,241");
     gates:
         inout busCon[];
         inout ethCon[];
     submodules:
         iocom: InOutComing {
-            @display("p=114,30");
+            @display("p=198,43");
         }
         route: Routing {
-            @display("p=204,104");
+            @display("p=288,117");
         }
         transform: Transformation {
-            @display("p=114,179");
+            @display("p=198,192");
         }
         prebuff: PreBuffer {
-            @display("p=29,104");
+            @display("p=113,117");
+        }
+        messagedispatcher: MessageDispatcher {
+
+            @display("p=74,43");
         }
         strategy: GatewayStrategy {
-            @display("p=307,30");
+            @display("p=344,37");
         }
         analysis: Analysis {
-            @display("p=307,111");
+            @display("p=344,118");
         }
     connections:
         busCon[0] <--> iocom.appInterface++;
@@ -53,4 +59,5 @@ module GatewayBase
         route.out --> transform.in;
         transform.out --> prebuff.in;
         prebuff.out --> iocom.in;
+        prebuff.moduleConnect <--> messagedispatcher.moduleConnect;
 }

@@ -27,6 +27,8 @@ class PreBuffer : public cSimpleModule, IPreBuffer
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+  private:
+    bool cumulate;
 };
 
 #endif
