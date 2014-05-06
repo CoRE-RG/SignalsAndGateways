@@ -25,7 +25,7 @@ import signalsandgateways.gateway.preBuffer.MessageDispatcher;
 
 module GatewayBase
 {
-    @display("bgb=401,241");
+    @display("bgb=401,241;i=device/hub");
     gates:
         inout busCon[];
         inout ethCon[];

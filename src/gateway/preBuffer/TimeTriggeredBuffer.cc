@@ -26,6 +26,7 @@ void TimeTriggeredBuffer::initialize()
 void TimeTriggeredBuffer::handleMessage(cMessage *msg)
 {
     if(dynamic_cast<FieldSequenceMessage*>(msg) != NULL){
+        dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
         if(not(timerEvent->isScheduled()) || (timerEvent->getTimestamp()-simTime()) > fieldSequence->getMaxWaitingTime()){
             cancelEvent(timerEvent);
@@ -39,6 +40,6 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         while(not(buffer.isEmpty())){
             multiFieldSequence->pushFieldSequence(buffer.dequeue()->getTransportFrame());
         }
-        sendDirect(multiFieldSequence, getModuleByPath("gateway/preBuffer/MessageDispatcher"), "triggerIn");
+        sendDirect(multiFieldSequence, dispatcher, "triggerIn");
     }
 }

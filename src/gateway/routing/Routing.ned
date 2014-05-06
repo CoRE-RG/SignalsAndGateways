@@ -23,6 +23,7 @@ simple Routing like IConnection
 {
     parameters:
         xml routingTable;
+        @display("i=block/routing");
     gates:
    		input in @label (InterConnectMsg);
    		output out @label (InterConnectMsg);

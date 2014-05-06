@@ -24,7 +24,7 @@ Define_Module(PreBuffer);
 
 void PreBuffer::initialize()
 {
-    cumulate = true;
+    cumulate = par("cumulate");
 }
 
 void PreBuffer::handleMessage(cMessage *msg)
@@ -49,7 +49,7 @@ void PreBuffer::handleMessage(cMessage *msg)
             send(interDataStructure, "out");
         }
 
-    }else if(msg->arrivedOn("moduleConnect")){
+    }else if(msg->arrivedOn("moduleConnect$i")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         send(interDataStructure, "out");
     }

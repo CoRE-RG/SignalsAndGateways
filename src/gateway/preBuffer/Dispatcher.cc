@@ -44,12 +44,13 @@ void Dispatcher::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("moduleConnect$i")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-        TTBufferMap::const_iterator bufferPosition = timeBuffers.find(std::to_string(interDataStructure->getBackboneCTID()));
+        std::string key = std::to_string(interDataStructure->getBackboneCTID());
+        TTBufferMap::const_iterator bufferPosition = timeBuffers.find(key);
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
         if(bufferPosition != timeBuffers.end()){
-            std::string test1 = bufferPosition->first;
-            TimeTriggeredBuffer *test2 = bufferPosition->second;
-            sendDirect(fieldSequence, bufferPosition->second, "bufferIn");
+            TimeTriggeredBuffer *foundBuffer =
+                    dynamic_cast<TimeTriggeredBuffer*>(bufferPosition->second);
+            sendDirect(fieldSequence, foundBuffer, "bufferIn");
         }else{
             opp_error("Cannot find Pre-Buffer to specified backboneID in Message!");
         }
@@ -60,7 +61,6 @@ void Dispatcher::handleMessage(cMessage *msg)
         TimeTriggeredBuffer *sendBuffer = dynamic_cast<TimeTriggeredBuffer*>(msg->getSenderModule());
         interDataStructure->setBackboneCTID(atoi((sendBuffer->getDispatchedCTID()).c_str()));
         interDataStructure->encapsulate(multiFieldSequence);
-        send(interDataStructure, "moduleConnect");
+        send(interDataStructure, "moduleConnect$o");
     }
-
 }

@@ -21,6 +21,7 @@ package signalsandgateways.gateway.preBuffer;
 simple Dispatcher
 {
     parameters:
+        @display("i=block/transport");
         xml routingTable;
     gates:
         input triggerIn @directIn;

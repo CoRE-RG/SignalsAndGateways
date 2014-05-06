@@ -24,6 +24,7 @@ simple Transformation like IConnection
 {
     parameters:
     	xml routingTable;
+    	@display("i=block/segm");
     gates:
         input in @label (InterConnectMsg);
         output out @label (InterConnectMsg);

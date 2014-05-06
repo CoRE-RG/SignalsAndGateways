@@ -41,6 +41,7 @@ public:
     FieldSequenceBuffer buffer;
     cMessage *timerEvent;
     std::string dispatchedCTID;
+    cModule *dispatcher;
 };
 
 #endif

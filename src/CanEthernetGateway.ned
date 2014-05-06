@@ -21,7 +21,7 @@ import signalsandgateways.applications.can_flexray.CanGatewayNode;
 
 module CanEthernetGateway
 {
-    @display("bgb=243,216");
+    @display("bgb=243,216;i=device/router");
     gates:
         inout ethg;
         inout cang;

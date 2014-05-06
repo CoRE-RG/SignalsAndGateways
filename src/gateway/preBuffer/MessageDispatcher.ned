@@ -22,7 +22,7 @@ module MessageDispatcher
 {
     parameters:
         int numberOfVlinks = default(0);
-        @display("bgb=268,218");
+        @display("bgb=268,218;i=block/subqueue");
     gates:
         inout moduleConnect @label(InterConnectMsg);
     submodules:

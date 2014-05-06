@@ -20,7 +20,10 @@ import signalsandgateways.gateway.IConnection;
 //
 simple PreBuffer like IConnection
 {
-    @display("bgb=209,144");
+
+    parameters:
+        @display("bgb=209,144;i=block/queue");
+        bool cumulate = default(true);
     gates:
         input in @label(InterConnectMsg);
         output out @label(InterConnectMsg);

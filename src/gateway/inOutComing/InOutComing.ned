@@ -20,6 +20,8 @@ import signalsandgateways.gateway.IConnection;
 //
 simple InOutComing like IConnection
 {
+    parameters:
+    	@display("i=block/layer");
     gates:
         input in @label (InterConnectMsg);
         output out @label (InterConnectMsg);

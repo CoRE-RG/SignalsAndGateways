@@ -20,6 +20,8 @@ package signalsandgateways.gateway.preBuffer;
 //
 simple TimeTriggeredBuffer
 {
+    parameters:
+        @display("i=block/timer");
     gates:
         input bufferIn @directIn;
 }
