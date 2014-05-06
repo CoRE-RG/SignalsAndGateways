@@ -20,11 +20,23 @@
 #include "CanTrafficSinkAppBase.h"
 
 /**
- * TODO - Generated class
+ * @brief Source-Application for the CAN-Node
+ *
+ * This module receives a TransportMessage with an encapsulated CanDataFrame.
+ * The CanDataFrame is decapsulated and applied to the CAN-bus.
+ *
+ * @author Sebastian Mueller
  */
 class CanSinkGatewayApp : public virtual CanTrafficSinkAppBase
 {
   protected:
+    /**
+     * @brief Handles incoming TransportMessages
+     *
+     * If the incoming message is a TransportMessage, then the encapsulated CanDataFrame is decapsulated and send to the CanBuffer.
+     *
+     * @param msg The incoming message
+     */
     void handleMessage(cMessage *msg);
 };
 

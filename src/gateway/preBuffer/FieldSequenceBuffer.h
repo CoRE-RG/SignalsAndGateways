@@ -26,24 +26,51 @@
  * - greater than zero if a > b
  * - zero if a == b
  *
- * @ingroup EnumsTypes
  */
 typedef int (*compareFunc)(cObject *a, cObject *b);
 
+/**
+ * @brief Stores FieldSequenceMessages in a cQueue ordered by the IdentifierFieldElement.
+ *
+ * @see FieldSequenceMessage, IdentifierFieldElement, TimeTriggeredBuffer
+ *
+ * @author Sebastian Mueller
+ */
 class FieldSequenceBuffer {
 public:
     FieldSequenceBuffer();
     virtual ~FieldSequenceBuffer();
+    /**
+     * @brief Enqueues a FieldSequenceMessage ordered by the IdentifierFieldElement
+     *
+     * @param FieldSequenceMessage to enqueue
+     */
     void enqueue(FieldSequenceMessage*);
+    /**
+     * @brief Dequeues a FieldSequenceMessage according to the order in the queue
+     * @return Next FieldSequenceMessage of the queue
+     */
     FieldSequenceMessage* dequeue();
+    /**
+     * @brief Indicates whether the queue is empty or not.
+     * @return true if queue contains no objects or false if the queue contains at least one object
+     */
     bool isEmpty();
-
+    /**
+     * @brief Return the entire queue as cQueue.
+     * @return entire cQueue
+     */
     const cQueue getQueue() {
         return timeQueue;
     }
 
 private:
+    //Queue to hold the FieldSequenceMessages
     cQueue timeQueue;
+    /**
+     * @brief Compare-Function to compare to Objects of the queue. This function defines the order of the queue.
+     * @return less than zero if a < b OR greater than zero if a > b OR zero if a == b
+     */
     int compareFunc(cObject *a, cObject *b);
     CompareFunc compare;
 };

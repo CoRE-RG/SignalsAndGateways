@@ -16,14 +16,26 @@
 package signalsandgateways.gateway.preBuffer;
 
 //
-// TODO auto-generated module
+// Dispatches the incoming messages to the appropriate TimeTriggeredBuffer.
+//
+// For each virtual link, which are defined in the routing table, the appropriate TimeTriggeredBuffer
+// is generated automatically within the initialization process.
+// Incoming messages are stored in the corresponding TimeTriggeredBuffer and will be hold there according to the time strategy.
+// According to the time strategy all stored messages of the TimeTriggeredBuffer are returning to this Dispatcher in a MultipleFieldSequenceMessage.
+//
+// @see TimeTriggeredBuffer, MultipleFieldSequenceMessage
+//
+// @author Sebastian Mueller
 //
 simple Dispatcher
 {
     parameters:
         @display("i=block/transport");
+        //path to the routing table
         xml routingTable;
     gates:
+        //input connection for returning messages of the TimeTriggeredBuffer
         input triggerIn @directIn;
+        //connection to the overlying module
         inout moduleConnect @label(InterConnectMsg);
 }

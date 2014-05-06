@@ -18,12 +18,14 @@ package signalsandgateways.applications.can_flexray;
 import busmodel.applications.can.source.CanTrafficSourceAppBase;
 
 //
-// TODO auto-generated module
+// Represents the Source-gatewayApp of the CAN-node. Here are TransportMessages arriving from the Gateway and forwarded to the CAN-bus.
 //
+// @author Sebastian Mueller
 simple CanSourceGatewayApp extends CanTrafficSourceAppBase
 {
     parameters:
         @class(CanSourceGatewayApp);
     gates:
+    	//Connection to the gateway   
         input busInterfaceIn @labels(TransportFrame);
 }

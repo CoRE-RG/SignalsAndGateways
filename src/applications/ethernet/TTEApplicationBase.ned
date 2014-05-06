@@ -16,13 +16,15 @@
 package signalsandgateways.applications.ethernet;
 
 import core4inet.applications.base.ApplicationBase;
+
 //
-// TODO auto-generated type
+// Represents application base for the ethernet node in the gateway.
 //
+// @author Sebastian Mueller
 simple TTEApplicationBase extends ApplicationBase like IEthernetGatewayApplication
 {
     @class(TTEApplicationBase);
     gates:
+        //Connection to the gateway    
         inout ethInterface @labels(TransportMessage);
-    	//inout tteInterface;
 }

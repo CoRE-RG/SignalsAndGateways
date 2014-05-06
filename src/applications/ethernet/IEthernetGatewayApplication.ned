@@ -18,10 +18,12 @@ package signalsandgateways.applications.ethernet;
 import  core4inet.applications.base.IApplication;
 
 //
-// TODO auto-generated module
+// Interface for ethernet node in the gateway.
 //
+// @author Sebastian Mueller
 moduleinterface IEthernetGatewayApplication extends IApplication
 {
     gates:
+        //Connection to the gateway functionality
     	inout ethInterface @labels(TransportMessage);
 }

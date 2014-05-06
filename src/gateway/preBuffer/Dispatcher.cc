@@ -21,8 +21,6 @@ Define_Module(Dispatcher);
 
 void Dispatcher::initialize()
 {
-    //Initialisierung der Map notwendig?
-
     routingTable = par("routingTable").xmlValue();
     items = routingTable->getChildren();
     int i = 0;

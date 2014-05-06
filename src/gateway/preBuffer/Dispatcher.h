@@ -21,19 +21,45 @@
 #include <map>
 #include <string>
 
+//Definition of the map to administrate the TimeTriggerdBuffers
 typedef std::map<std::string, TimeTriggeredBuffer*> TTBufferMap;
 typedef TTBufferMap::value_type ValuePair;
 /**
- * TODO - Generated class
+ * @brief Dispatches the incoming messages to the appropriate TimeTriggeredBuffer.
+ *
+ * For each virtual link, which are defined in the routing table, the appropriate TimeTriggeredBuffer
+ * is generated automatically within the initialization process.
+ * Incoming messages are stored in the corresponding TimeTriggeredBuffer and will be hold there according to the time strategy.
+ * According to the time strategy all stored messages of the TimeTriggeredBuffer are returning to this Dispatcher in a MultipleFieldSequenceMessage.
+ *
+ * @see TimeTriggeredBuffer, MultipleFieldSequenceMessage
+ *
+ * @author Sebastian Mueller
  */
-class Dispatcher : public cSimpleModule
-{
-  private:
+class Dispatcher: public cSimpleModule {
+private:
+    //entire routing table
     cXMLElement *routingTable;
+    //all items of the routing table
     cXMLElementList items;
+    //map to administrate TimeTriggerdBuffers
     TTBufferMap timeBuffers;
-  protected:
+protected:
+    /**
+     * @brief For each virtual link, which are defined in the routing table, the appropriate TimeTriggeredBuffer is generated automatically and for administration purposes linked in a map.
+     */
     virtual void initialize();
+    /**
+     * @brief Handles incoming messages
+     *
+     * Incoming messages are stored in the corresponding TimeTriggeredBuffer and will be hold there according to the time strategy.
+     * According to the time strategy all stored messages of the TimeTriggeredBuffer are returning to this Dispatcher in a MultipleFieldSequenceMessage.
+     * The returning MultipleFieldSequenceMessage of the TimeTriggeredBuffer is send back to the PreBuffer module encapsulated in a InterConnectMsg.
+     *
+     * @see TimeTriggerdBuffer, MultipleFieldSequenceMessage
+     *
+     * @param msg The incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

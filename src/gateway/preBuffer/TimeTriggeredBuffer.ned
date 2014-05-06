@@ -16,12 +16,22 @@
 package signalsandgateways.gateway.preBuffer;
 
 //
-// TODO auto-generated module
+// Stores FieldSequenceMessages in a FieldSequenceBuffer according to a time strategy.
+//
+// According to the time strategy all stored messages in the FieldSequnceBuffer are retrieved and collected in a MultipleFieldSequenceMessage,
+// which is send back to the Dispatcher.
+// For each bus message, which is identified by the member-/object-ID, a maximum holdUpTime is defined in the routing table.
+// The TimeTriggeredBuffer is using these parameters to calculate the remaining waiting time.
+//
+// @see Dispatcher, MultipleFieldSequenceMessage
+//
+// @author Sebastian Mueller
 //
 simple TimeTriggeredBuffer
 {
     parameters:
         @display("i=block/timer");
     gates:
+        //input connection for incoming data frames
         input bufferIn @directIn;
 }

@@ -20,11 +20,23 @@
 #include "CanTrafficSourceAppBase.h"
 
 /**
- * TODO - Generated class
+ * @brief Sink-Application for the CAN-Node
+ *
+ * This module receives the CanDataFrame and encapsulate it in a TransportMessage.
+ * Then the TransportMessage is send to the gateway.
+ *
+ * @author Sebastian Mueller
  */
 class CanSourceGatewayApp : public CanTrafficSourceAppBase
 {
   protected:
+    /**
+     * @brief Handles incoming CanDataFrames
+     *
+     * If the incoming message is a CanDataFrame, then the CanDataFrame is encapsulated in a TransportMessage and forwarded to the gateway.
+     *
+     * @param msg The incoming message
+     */
     virtual void handleMessage(cMessage *msg);
 };
 

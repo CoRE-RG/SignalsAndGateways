@@ -18,12 +18,14 @@ package signalsandgateways.applications.can_flexray;
 import busmodel.applications.can.sink.CanTrafficSinkAppBase;
 
 //
-// TODO auto-generated module
+// Represents the Sink-gatewayApp of the CAN-node. Here are CanDataFrames arriving from the CAN-bus and forwarded to the gateway.
 //
+// @author Sebastian Mueller
 simple CanSinkGatewayApp extends CanTrafficSinkAppBase
 {
     parameters:
         @class(CanSinkGatewayApp);
-    gates:         
+    gates:     
+        //Connection to the gateway    
         output busInterfaceOut @labels(TransportFrame);
 }

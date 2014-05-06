@@ -19,6 +19,10 @@ import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
 
+//
+// Represents the ethernet node in the ethernet backbone network with connection to the gateway.
+//
+// @author Sebastian Mueller
 module EthernetGatewayHost extends TTEEtherHost
 {
     parameters:
@@ -26,12 +30,15 @@ module EthernetGatewayHost extends TTEEtherHost
     gates:
         inout ethInterface @labels(TransportMessage);
     submodules:
+        //Application for the ethernet node in the gateway
         gatewayApp: TTEApplicationBase {
             @display("p=340,37");
         }
+        //Vector of output buffers for timetriggered traffic(TT)
         TTvlinks[numberOfVlinks]: TTDoubleBuffer {
             @display("p=517,37");
         }
+        //Vector of input buffers for timetriggered traffic(TT)
         TTvlinks_ctc[numberOfVlinks]: TTIncoming {
             @display("p=517,154");
         }
@@ -40,5 +47,4 @@ module EthernetGatewayHost extends TTEEtherHost
         for i=0..numberOfVlinks-1 {
             TTvlinks_ctc[i].out --> TTvlinks[i].in;
         }
-		//ethg <--> gatewayApp.tteInterface;
 }

@@ -15,23 +15,30 @@
 
 package signalsandgateways.gateway.preBuffer;
 import signalsandgateways.gateway.IConnection;
+
 //
-// TODO auto-generated module
+// Represents the connection between dispatching messages and storing respectively cumulating messages in the TimeTriggeredBuffers.
 //
+// @author Sebastian Mueller
 module MessageDispatcher
 {
     parameters:
+        //number of varied virual links defined in the routing table
         int numberOfVlinks = default(0);
         @display("bgb=268,218;i=block/subqueue");
     gates:
+        //connection between Dispatcher and PreBuffer
         inout moduleConnect @label(InterConnectMsg);
     submodules:
+        //vector of TimeTriggeredBuffers to store and cumulate the messages
         messageBuffers[numberOfVlinks]: TimeTriggeredBuffer {
             @display("p=134,125");
         }
+        //redirectes the incoming messages to the corresponding TimeTriggeredBuffer
         dispatcher: Dispatcher {
             @display("p=134,45");
         }
     connections:
+        //inter module connection of Dispatcher and PreBuffer
         moduleConnect <--> dispatcher.moduleConnect;
 }

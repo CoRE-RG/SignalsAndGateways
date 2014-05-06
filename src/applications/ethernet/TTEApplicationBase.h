@@ -20,9 +20,27 @@
 #include "applications/base/ApplicationBase.h"
 #include "TransportMessage_m.h"
 
+/**
+ * @brief gateway application for the Ethernet-Node
+ *
+ * This module represents the connection between the ethernet-backbone network and the gateway.
+ *
+ * @author Sebastian Mueller
+ */
 class TTEApplicationBase: public CoRE4INET::ApplicationBase {
 private:
+    /**
+     * @brief calls the inherited initialize-method
+     */
     void initialize();
+    /**
+     * @brief Handles incoming messages
+     *
+     * Messages from the ethernet network are encapsulated in a TransportMessage und forwarded to the gateway.
+     * And the other direction, which means messages from the gateway, are send to the ethernet network as CT-Frames.
+     *
+     * @param msg The incoming message
+     */
     void handleMessage(cMessage *msg);
 public:
     TTEApplicationBase();

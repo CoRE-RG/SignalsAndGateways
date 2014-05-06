@@ -16,10 +16,12 @@
 package signalsandgateways.applications.can_flexray;
 
 //
-// TODO auto-generated type
+// Interface for gateway applications.
 //
+// @author Sebastian Mueller
 moduleinterface IBusGatewayApplication
 {
     gates:
+        //Connection to the gateway functionality
     	inout busInterface;
 }

@@ -26,7 +26,7 @@ Define_Module(InOutComing);
 
 void InOutComing::initialize()
 {
-    // TODO - Generated method body
+
 }
 
 void InOutComing::handleMessage(cMessage *msg)
