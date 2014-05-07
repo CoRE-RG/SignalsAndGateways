@@ -1,9 +1,3 @@
-/*
- * DataFieldElement.h
- *
- *  Created on: Mar 11, 2014
- *      Author: sebastian
- */
 
 #ifndef DATAFIELDELEMENT_H_
 #define DATAFIELDELEMENT_H_
@@ -12,6 +6,13 @@
 
 namespace dataStruct {
 
+/**
+ * @brief FieldElement for the FieldSequenceMessages which stores the payload
+ *
+ * @see FieldElement
+ *
+ * @author Sebastian Mueller
+ */
 class DataFieldElement: public dataStruct::FieldElement {
 public:
     DataFieldElement(int dataLength);

@@ -1,9 +1,3 @@
-/*
- * FieldElement.h
- *
- *  Created on: Mar 10, 2014
- *      Author: sebastian
- */
 
 #ifndef FIELDELEMENT_H_
 #define FIELDELEMENT_H_
@@ -12,6 +6,13 @@
 
 namespace dataStruct {
 
+/**
+ * @brief FieldElement which compose the base of all FieldElements.
+ *
+ * @see DataFieldElement, IdentifierFieldElement, TimestampFieldElement, TransportHeaderFieldElement
+ *
+ * @author Sebastian Mueller
+ */
 class FieldElement {
 public:
     FieldElement();

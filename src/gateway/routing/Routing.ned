@@ -17,14 +17,23 @@ package signalsandgateways.gateway.routing;
 import signalsandgateways.gateway.IConnection;
 
 //
-// TODO auto-generated module
+// Based on the content of the incoming message the corresponding routing data is collected.
+//
+// Independent of the message type, which can be CanDataFrame or MultipleFieldSequenceMessage, the
+// same search keys are used.
+// The routing table is specified by the parameter 'routingTable'.
+//
+// @author Sebastian Mueller
 //
 simple Routing like IConnection
 {
     parameters:
+        //path to the routing table
         xml routingTable;
         @display("i=block/routing");
     gates:
+        //Input connection for the inter module data exchange within the gateway
    		input in @label (InterConnectMsg);
+   		//Output connection for the inter module data exchange within the gateway
    		output out @label (InterConnectMsg);
 }

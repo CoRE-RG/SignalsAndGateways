@@ -1,9 +1,3 @@
-/*
- * TimestampFieldElement.h
- *
- *  Created on: Mar 11, 2014
- *      Author: sebastian
- */
 
 #ifndef TIMESTAMPFIELDELEMENT_H_
 #define TIMESTAMPFIELDELEMENT_H_
@@ -12,6 +6,13 @@
 
 namespace dataStruct {
 
+/**
+ * @brief FieldElement for the FieldSequenceMessages which stores the timestamp
+ *
+ * @see FieldElement
+ *
+ * @author Sebastian Mueller
+ */
 class TimestampFieldElement: public dataStruct::FieldElement {
 public:
     TimestampFieldElement();

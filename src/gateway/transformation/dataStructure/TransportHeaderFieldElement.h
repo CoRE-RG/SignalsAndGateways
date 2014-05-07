@@ -1,9 +1,3 @@
-/*
- * TransportHeaderFieldElement.h
- *
- *  Created on: Mar 11, 2014
- *      Author: sebastian
- */
 
 #ifndef TRANSPORTHEADERFIELDELEMENT_H_
 #define TRANSPORTHEADERFIELDELEMENT_H_
@@ -13,6 +7,17 @@
 
 namespace dataStruct {
 
+/**
+ * @brief FieldElement for the FieldSequenceMessages which stores the transport header.
+ * Following fields are included:
+ * - StaticBusID
+ * - StaticTranslationID
+ * - ActualityFlag
+ *
+ * @see FieldElement
+ *
+ * @author Sebastian Mueller
+ */
 class TransportHeaderFieldElement: public dataStruct::FieldElement {
 public:
     TransportHeaderFieldElement();
