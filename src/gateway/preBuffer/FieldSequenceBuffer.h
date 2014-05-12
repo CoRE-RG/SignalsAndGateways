@@ -36,7 +36,7 @@ typedef int (*compareFunc)(cObject *a, cObject *b);
  *
  * @author Sebastian Mueller
  */
-class FieldSequenceBuffer {
+class FieldSequenceBuffer: public cObject {
 public:
     FieldSequenceBuffer();
     virtual ~FieldSequenceBuffer();
@@ -62,6 +62,16 @@ public:
      */
     const cQueue getQueue() {
         return timeQueue;
+    }
+
+    /**
+     * @brief Calls the clear() function of cQueue
+     *
+     * Empties the container. Contained objects that were owned by the
+     * queue (see getTakeOwnership()) will be deleted.
+     */
+    void clear(){
+        timeQueue.clear();
     }
 
 private:

@@ -82,6 +82,8 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
+                            simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(options->getFirstChildWithTag("holdUpTime")->getNodeValue(), 5).c_str()));
+                            fieldSequence->setMaxWaitingTime(maxWaitingTime);
                             newInterDataStructure->encapsulate(fieldSequence);
                             int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("backboneCTID")->getNodeValue(), 3).c_str());
                             EV << "CTID: " << ctID << endl;
@@ -129,6 +131,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     }
     std::shared_ptr<dataStruct::TimestampFieldElement>  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(clock());
+    EV << "Transformation: Clock() " << clock() << endl;
     /*
      * Transportprotokollheader
      */

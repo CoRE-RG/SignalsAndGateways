@@ -88,6 +88,8 @@ public:
     std::string dispatchedCTID;
     //Module pointer to the dispatcher
     cModule *dispatcher;
+    //For calculation purposes
+    const int mili = 1000;
 };
 
 #endif

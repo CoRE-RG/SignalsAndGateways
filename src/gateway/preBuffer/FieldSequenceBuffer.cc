@@ -17,7 +17,7 @@
 #include "IdentifierFieldElement.h"
 
 FieldSequenceBuffer::FieldSequenceBuffer() {
-    timeQueue = cQueue("preBuffer", compare);
+    timeQueue = cQueue("preBuffer", NULL);//compare);
 }
 
 FieldSequenceBuffer::~FieldSequenceBuffer() {
