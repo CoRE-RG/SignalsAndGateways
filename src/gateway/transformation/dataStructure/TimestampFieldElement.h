@@ -3,6 +3,7 @@
 #define TIMESTAMPFIELDELEMENT_H_
 
 #include <FieldElement.h>
+#include <simtime_t.h>
 
 namespace dataStruct {
 
@@ -18,17 +19,16 @@ public:
     TimestampFieldElement();
     virtual ~TimestampFieldElement();
 
-    clock_t getTimestamp() const {
+    simtime_t getTimestamp() const {
         return timestamp;
     }
 
-    void setTimestamp(clock_t timestamp) {
+    void setTimestamp(simtime_t timestamp) {
         this->timestamp = timestamp;
     }
 
 private:
-    virtual void dummy();
-    clock_t timestamp;
+    simtime_t timestamp;
 };
 
 } /* namespace Transformation */

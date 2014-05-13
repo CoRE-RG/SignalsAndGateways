@@ -28,15 +28,9 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
     if(dynamic_cast<FieldSequenceMessage*>(msg) != NULL){
         dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
-        char buf[32];
-        //simtimeToStr(simTime(),buf);
-        simtime_t test0 = timerEvent->getTimestamp();
-        simtime_t test1 = timerEvent->getTimestamp()-simTime();
-        simtime_t test2 = fieldSequence->getMaxWaitingTime();
-        simtime_t test3 = test1 - test2;
         if(not(timerEvent->isScheduled()) || ((timerEvent->getTimestamp()-simTime()) > fieldSequence->getMaxWaitingTime())){
             cancelEvent(timerEvent);
-            simtime_t timerValue = simTime()+SimTime(fieldSequence->getMaxWaitingTime()/mili);
+            simtime_t timerValue = simTime()+(fieldSequence->getMaxWaitingTime()/mili);
             timerEvent->setTimestamp(timerValue);
 
             EV << "Max waiting time: " << fieldSequence->getMaxWaitingTime() << " timerValue: " << timerValue << endl;
@@ -47,7 +41,9 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
     }else if(msg == timerEvent){
         MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
         while(not(buffer.isEmpty())){
-            multiFieldSequence->pushFieldSequence(buffer.dequeue()->getTransportFrame());
+            FieldSequenceMessage *fieldSequence = buffer.dequeue();
+            multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+            delete fieldSequence;
         }
         buffer.clear();
         sendDirect(multiFieldSequence, dispatcher, "triggerIn");

@@ -36,7 +36,6 @@ public:
     }
 
 private:
-    virtual void dummy();
     int dataLength;
     char *data;
 };

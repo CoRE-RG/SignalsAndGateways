@@ -23,8 +23,12 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("busInterfaceIn")){
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
-        CanDataFrame *transDataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
-        send(transDataFrame, "out");
+        CanDataFrame *canDataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
+        simtime_t timeDifference = simTime()-canDataFrame->getArrivalTime();
+        char timeReport [85];
+        sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
+        bubble(timeReport);
+        send(canDataFrame, "out");
     }
 
 }

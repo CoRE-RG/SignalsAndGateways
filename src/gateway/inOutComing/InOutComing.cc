@@ -35,6 +35,7 @@ void InOutComing::handleMessage(cMessage *msg)
     if(msg->arrivedOn("appInterface$i",0) || msg->arrivedOn("appInterface$i",1)){
         TransportMessage *transportMsg = dynamic_cast<TransportMessage*>(msg);
         InterConnectMsg *interDataStructure = new InterConnectMsg;
+        interDataStructure->setFirstArrivalTimeOnCan(transportMsg->getFirstArrivalTimeOnCan());
 
         cPacket *delivery = transportMsg->decapsulate();
         if(dynamic_cast<CanDataFrame*>(delivery) != NULL){

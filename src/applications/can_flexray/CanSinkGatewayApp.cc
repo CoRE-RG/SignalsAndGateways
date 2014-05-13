@@ -32,6 +32,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         currentFrameID = i;
         bufferMessageCounter--;
         TransportMessage *transFrame = new TransportMessage();
+        transFrame->setFirstArrivalTimeOnCan(msg->getArrivalTime());
         transFrame->encapsulate(frame->dup());
         send(transFrame, "busInterfaceOut");
         EV

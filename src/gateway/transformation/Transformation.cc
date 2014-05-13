@@ -79,6 +79,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                         newInterDataStructure->setRoutingData(interDataStructure->getRoutingData());
                         if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+                            canDataFrame->setArrivalTime(interDataStructure->getFirstArrivalTimeOnCan());
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
@@ -93,7 +94,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                         }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
                             FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame);
+                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, element);
                             newInterDataStructure->encapsulate(canDataFrame);
                             send(newInterDataStructure, "out");
                         }
@@ -130,8 +131,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
         data->setData(msg->getData(i), i);
     }
     std::shared_ptr<dataStruct::TimestampFieldElement>  timestamp (new TimestampFieldElement());
-    timestamp->setTimestamp(clock());
-    EV << "Transformation: Clock() " << clock() << endl;
+    timestamp->setTimestamp(msg->getArrivalTime());
     /*
      * Transportprotokollheader
      */
@@ -153,14 +153,15 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
 }
 
 
-CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame){
+CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination){
     CanDataFrame *canDataFrame = new CanDataFrame();
     canDataFrame->setNode("CAN-TTE-Gateway");
     canDataFrame->setRtr(false);
 
     try{
-        std::shared_ptr<IdentifierFieldElement> identifierElement  = transportFrame.getField<IdentifierFieldElement>();
-        canDataFrame->setCanID(identifierElement->getIdentifier());
+        string destinationCanID = routingDestination->getFirstChildWithTag("destinationObjectID")->getNodeValue();
+        UTLTY::Utility::stripNonAlphaNum(destinationCanID);
+        canDataFrame->setCanID(atoi(destinationCanID.c_str()));
 
         std::shared_ptr<DataFieldElement> dataElement = transportFrame.getField<DataFieldElement>();
         for (int i = 0; dataElement->getDataLength() < i ; i++){
@@ -169,7 +170,7 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         canDataFrame->setLength(canDataFrame->getDataArraySize());
 
         std::shared_ptr<TimestampFieldElement> timestampElement = transportFrame.getField<TimestampFieldElement>();
-        //canDataFrame->setTimestamp(timestampElement->getTimestamp());
+        canDataFrame->setArrivalTime(timestampElement->getTimestamp());
     }catch(cException e){
         opp_error(e.what());
     }

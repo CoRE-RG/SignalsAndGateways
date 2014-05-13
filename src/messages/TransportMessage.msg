@@ -16,4 +16,5 @@
 packet TransportMessage
 {
 	int ctID;
+	simtime_t firstArrivalTimeOnCan;
 };

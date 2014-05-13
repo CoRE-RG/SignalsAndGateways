@@ -18,8 +18,4 @@ TimestampFieldElement::~TimestampFieldElement() {
     // TODO Auto-generated destructor stub
 }
 
-void TimestampFieldElement::dummy(){
-
-}
-
 } /* namespace Transformation */

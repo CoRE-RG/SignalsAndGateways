@@ -86,7 +86,7 @@ class Transformation : public cSimpleModule, ITransformation
     /**
      *
      */
-    CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame);
+    CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination);
     //entire routing table
     cXMLElement *routingTable;
     //all items of the routing table

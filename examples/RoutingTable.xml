@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE routingTable SYSTEM "../src/gateway/routing/RoutingTable.dtd">
 
-<routingTable>
+<routingTable DTDversion="1.0">
 	<item>
 		<source>
 			<sourceBusID>
@@ -129,7 +129,7 @@
 		</destination>
 		<options>			
 			<holdUpTime>
-				200
+				0
 			</holdUpTime>
 		</options>
 	</item>

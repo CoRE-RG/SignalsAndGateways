@@ -49,7 +49,6 @@ public:
     }
 
 private:
-    virtual void dummy();
     int staticTranslationID;
     std::string staticBusID;
     bool actualityFlag;

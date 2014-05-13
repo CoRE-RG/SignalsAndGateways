@@ -17,8 +17,4 @@ TransportHeaderFieldElement::~TransportHeaderFieldElement() {
 
 }
 
-void TransportHeaderFieldElement::dummy(){
-
-}
-
 } /* namespace Transformation */

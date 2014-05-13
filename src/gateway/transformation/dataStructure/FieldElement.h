@@ -22,7 +22,6 @@ protected:
     void setFieldID(std::string fieldID);
 private:
     std::string fieldID;
-    virtual void dummy();
 };
 
 } /* namespace Transformation */

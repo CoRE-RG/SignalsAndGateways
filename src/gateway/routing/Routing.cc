@@ -51,6 +51,7 @@ void Routing::handleMessage(cMessage *msg)
                 std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID, 10);
                 EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
                 if(atoi(str_sourceObjectID.c_str()) == canDataFrame->getCanID()){
+                    newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData(element->getChildren());
                     send(newInterDateStructure, "out");
                     EV << "RoutingData found!" << endl;

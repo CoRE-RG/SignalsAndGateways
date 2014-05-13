@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT routingTable				((item)*)>
+<!ATTLIST routingTable
+	DTDversion		CDATA #REQUIRED
+>
+<!-- DTD version: 1.0 -->
 
 <!ELEMENT item						((source), (destination)+, (options)*)>
 

@@ -23,4 +23,5 @@ class noncobject cXMLElementList;
 packet InterConnectMsg {
 	cXMLElementList routingData;
 	int backboneCTID;
+	simtime_t firstArrivalTimeOnCan;
 }

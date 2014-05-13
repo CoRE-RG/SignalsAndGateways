@@ -20,8 +20,4 @@ DataFieldElement::~DataFieldElement() {
     free(data);
 }
 
-void DataFieldElement::dummy(){
-
-}
-
 } /* namespace Transformation */
