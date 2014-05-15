@@ -21,25 +21,38 @@ import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
 import signalsandgateways.gateway.preBuffer.MessageDispatcher;
 
+//
+// Consilidation of all top level modules of the gateway
+//
+// @author Sebastian Mueller
+//
+
 module GatewayBase
 {
     @display("bgb=401,241;i=device/hub");
     gates:
+        //connection to the bus-systems
         inout busCon[];
+        //connection to the ethernet networks
         inout ethCon[];
     submodules:
+        //module that transact the communication from and to the network- and bus-interfaces
         iocom: InOutComing {
             @display("p=198,43");
         }
+        //module that handles the routing data
         route: Routing {
             @display("p=288,117");
         }
+        //module that performs the transformations in all directions
         transform: Transformation {
             @display("p=198,192");
         }
+        //module that coordinates the preBuffer behaivior
         prebuff: PreBuffer {
             @display("p=113,117");
         }
+        //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
         messagedispatcher: MessageDispatcher {
 
             @display("p=74,43");

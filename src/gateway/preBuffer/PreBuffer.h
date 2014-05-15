@@ -17,7 +17,6 @@
 #define __SIGNALSANDGATEWAYS_PREBUFFER_H_
 
 #include <omnetpp.h>
-#include "IPreBuffer.h"
 
 /**
  * @brief FieldSequenceMessage are redirected to a Buffer for accumulation of multiple Frames or optionally forwarded immediate. CanDataFrames are always forwarded immediate.
@@ -32,7 +31,7 @@
  *
  * @author Sebastian Mueller
  */
-class PreBuffer: public cSimpleModule, IPreBuffer {
+class PreBuffer: public cSimpleModule {
 protected:
     /**
      * @brief Initialization of the parameters

@@ -1,9 +1,3 @@
-/*
- * FieldSequence.h
- *
- *  Created on: Mar 19, 2014
- *      Author: sebastian
- */
 
 #ifndef FIELDSEQUENCE_H_
 #define FIELDSEQUENCE_H_
@@ -16,6 +10,14 @@ using namespace dataStruct;
 
 typedef std::vector<std::shared_ptr<FieldElement>> FieldSequence;
 
+/**
+ * @brief Holds FieldElements in a vector of shared pointers.
+ *
+ * FieldElements like DataFieldElement, IdentifierFieldElement, TimestampFieldElement and TransportHeaderFieldElement
+ * can be added and gotten by parametric functions.
+ *
+ * @author Sebastian Mueller
+ */
 class FieldSequenceDataStructure{
     private:
         FieldSequence fieldSequence;
@@ -24,17 +26,14 @@ class FieldSequenceDataStructure{
             fieldSequence = FieldSequence();
         }
 
-//        FieldSequenceDataStructure(FieldSequenceDataStructure& transportFrame){
-//            //fieldSequence = FieldSequence();
-//            fieldSequence = transportFrame.getFieldSequenceList();
-//        }
-
         ~FieldSequenceDataStructure(){
             fieldSequence.clear();
         }
 
         /**
-         *  Adds the given element to the sequence.
+         * @brief Adds the given element to the sequence.
+         *
+         * @param element an object that inherit FieldElement
          */
         template<typename T>
         void pushField(T element){
@@ -42,7 +41,11 @@ class FieldSequenceDataStructure{
         }
 
         /**
-         * Returnes first occurrence of specified type. The Element will not be deleted!
+         * @brief Returnes first occurrence of specified type. The Element will not be deleted!
+         *
+         * Example: object.getField<DataFieldElement>()
+         *
+         * @return shared_ptr<T> shared pointer of T
          */
         template<typename T>
         std::shared_ptr<T> getField(){
@@ -61,19 +64,26 @@ class FieldSequenceDataStructure{
         }
 
         /**
-         * Deletes all Elements of the sequence.
+         * @brief Deletes all Elements of the sequence.
          */
         void clear(){
             fieldSequence.clear();
         }
 
         /**
-         * Returns the number of elements within the datastructure
+         * @brief Returns the number of elements within the datastructure
+         *
+         * @return int number of element within the FieldSequenceList
          */
         int size(){
             return fieldSequence.size();
         }
 
+        /**
+         * @brief Returns an object of current state of the FieldSeqenceList
+         *
+         * @return object of current FieldSequenceList
+         */
         FieldSequence getFieldSequenceList(){
             return fieldSequence;
         }

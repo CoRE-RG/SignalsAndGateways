@@ -17,7 +17,6 @@
 #define __SIGNALSANDGATEWAYS_ROUTING_H_
 
 #include <omnetpp.h>
-#include "IRouting.h"
 
 /**
  * @brief Based on the content of the incoming message the corresponding routing data is collected.
@@ -28,7 +27,7 @@
  *
  * @author Sebastian Mueller
  */
-class Routing : public cSimpleModule, IRouting
+class Routing : public cSimpleModule
 {
 private:
     //entire routing table

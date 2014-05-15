@@ -15,7 +15,7 @@
 //package signalsandgateways.examples;
 
 import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
-import signalsandgateways.CanEthernetGateway;
+import signalsandgateways.BusEthernetGateway;
 
 //
 // Small sample network with three hosts and one switch that shows how to 

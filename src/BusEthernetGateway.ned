@@ -19,19 +19,29 @@ import signalsandgateways.gateway.GatewayBase;
 import signalsandgateways.applications.ethernet.EthernetGatewayHost;
 import signalsandgateways.applications.can_flexray.CanGatewayNode;
 
-module CanEthernetGateway
+//
+// Interconnection between bus- and network-interfaces and the gateway functionality
+//
+// @author Sebastian Mueller
+//
+module BusEthernetGateway
 {
     @display("bgb=243,216;i=device/router");
     gates:
+        //ethernet connection
         inout ethg;
+        //bus connection
         inout cang;
     submodules:
+        //bus module
         can: CanGatewayNode {
             @display("p=192,50");
         }
+        //ethernet module
         tte: EthernetGatewayHost {
             @display("p=38,50");
         }
+        //gateway module
         gateway: GatewayBase {
             @display("p=120,135");
         }

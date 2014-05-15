@@ -16,7 +16,9 @@
 package signalsandgateways.gateway;
 
 //
-// TODO auto-generated type
+// Interface for the interconnection between modules within the gateway
+//
+// @author Sebastian Mueller
 //
 moduleinterface IConnection
 {

@@ -83,10 +83,10 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
-                            simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(options->getFirstChildWithTag("holdUpTime")->getNodeValue(), 5).c_str()));
+                            simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(options->getFirstChildWithTag("holdUpTime")->getNodeValue(), 10).c_str()));
                             fieldSequence->setMaxWaitingTime(maxWaitingTime);
                             newInterDataStructure->encapsulate(fieldSequence);
-                            int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("backboneCTID")->getNodeValue(), 3).c_str());
+                            int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("backboneCTID")->getNodeValue(), 10).c_str());
                             EV << "CTID: " << ctID << endl;
                             newInterDataStructure->setBackboneCTID(ctID);
                             send(newInterDataStructure, "out");
@@ -123,7 +123,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      */
     FieldSequenceDataStructure protocolFieldSequence;
     std::shared_ptr<dataStruct::IdentifierFieldElement> identifier (new IdentifierFieldElement());
-    EV << "Transformation: getCanID(): " << msg->getCanID();
+    EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
     std::shared_ptr<dataStruct::DataFieldElement> data (new DataFieldElement(msg->getDataArraySize()));
     data->setDataLength(msg->getDataArraySize());
@@ -137,9 +137,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      */
     std::shared_ptr<dataStruct::TransportHeaderFieldElement>  transportHeader (new TransportHeaderFieldElement());
     transportHeader->setStaticTranslationID(1);
-    std::string test = msg->getNode();
     transportHeader->setStaticBusID(msg->getNode());
-    std::string test2 = transportHeader->getStaticBusID();
     transportHeader->setActualityFlag(true);
     /*
      * Create sequence

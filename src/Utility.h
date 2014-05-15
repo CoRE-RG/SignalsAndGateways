@@ -22,15 +22,37 @@
 
 namespace UTLTY{
 
-    class Utility {
+/**
+ * @brief Utility class to offer functions over module borders
+ *
+ * @author Sebastian Mueller
+ */
+class Utility {
     public:
+        /**
+         * @brief Strips all non alphanumeric characters from the string
+         *
+         * The operation is executed directly on the given string reference.
+         *
+         * @param string string to strip
+         */
         static void stripNonAlphaNum(std::string & str);
+        /**
+         * @brief Strips all non alphanumeric characters from the char*.
+         *
+         * @param char* to strip
+         * @return string string representation with all alphanumeric characters of the char*.
+         */
         static std::string stripNonAlphaNum(const char *str);
+        /**
+         * @brief Strips all non alphanumeric characters from the char*. MaxLength pretend the maximum length of the returning string.
+         *
+         * @param char* to strip
+         * @return string string representation with alphanumeric characters of the char* with respect to the given maximum length.
+         */
         static std::string stripNonAlphaNum(const char *str, int maxLength);
     };
 
 }
-
-
 
 #endif /* UTILITY_H_ */

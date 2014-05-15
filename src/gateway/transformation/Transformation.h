@@ -75,15 +75,31 @@ class Transformation : public cSimpleModule, ITransformation
      * The CanID and data is extracted from the CanDataFrame and added to a sequence list.
      * Following additional fields are added to the sequence list:
      * - TransportHeader composed of staticTransformationID, staticBusID and actualityFlag.
-     * - Timestamp with current time
+     * - Timestamp set to the arrival time on the Can-Interface of the gateway
      *
-     * @see CanDataFrame, StaticTransformationList, DataFieldElement, IdentifierFieldElement, TimestampFieldElement, TransportHeaderFieldElement
+     * More detailed specification of the meta information in the TransportHeader:
+     * - StaticTranslationID: declare the translation process
+     * - StaticBusID: identifies the corresponding arrival bus
+     * - ActualityFlag: specifies whether the frame is allready send or not(used in PreBuffer)
+     *
+     * @see FieldSequnceDataStructure, CanDataFrame, StaticTransformationList, DataFieldElement, IdentifierFieldElement, TimestampFieldElement, TransportHeaderFieldElement
      *
      * @param msg CanDataFrame
      * @return FieldSequenceDataStructure performed data structure by transformation process
      */
     FieldSequenceDataStructure transformCanToTransport(CanDataFrame *msg);
     /**
+     * @brief Transforms a FieldSequenceDataStructure to a CanDataFrame
+     *
+     * The CanID of the new CanDataFrame is set to the destinationCanID of the corresponding entry in the routingTable.
+     * The data field and timestamp field will be retrieved from the FieldSequenceDataStructure and added to the CanDataFrame
+     *
+     * If single FieldElements will not be found, then a exception is thrown.
+     *
+     * @see FieldSequenceDataStructure, CanDataFrame, DataFieldElement, IdentifierFieldElement, TimestampFieldElement
+     *
+     * @param FieldSequenceDataStructure FieldSequenceDataStructure, which will be transformed
+     * @return CanDataFrame new performed CanDataFrame
      *
      */
     CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination);

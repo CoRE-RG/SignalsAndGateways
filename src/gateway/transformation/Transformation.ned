@@ -18,7 +18,7 @@ package signalsandgateways.gateway.transformation;
 import signalsandgateways.gateway.IConnection;
 
 //
-// @brief Transformation of bus messages in FieldSequenceMessages and vice versa.
+// Transformation of bus messages in FieldSequenceMessages and vice versa.
 //
 // This module converts the incoming bus message in a sequence of fields.
 // On the other hand incoming messages which consists of a sequence are converted to the specified bus message.
