@@ -17,7 +17,7 @@
 #include "InterConnectMsg_m.h"
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 #include "TransportHeaderFieldElement.h"
 
 Define_Module(PreBuffer);
@@ -44,7 +44,7 @@ void PreBuffer::handleMessage(cMessage *msg)
                 send(interDataStructure, "out");
             }
 
-        }else if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        }else if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
             interDataStructure->encapsulate(delivery);
             send(interDataStructure, "out");
         }

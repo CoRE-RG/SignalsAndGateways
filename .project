@@ -3,8 +3,8 @@
 	<name>SignalsAndGateways</name>
 	<comment></comment>
 	<projects>
-		<project>BusModel</project>
 		<project>CoRE4INET</project>
+		<project>FiCo4OMNeT</project>
 		<project>inet</project>
 	</projects>
 	<buildSpec>

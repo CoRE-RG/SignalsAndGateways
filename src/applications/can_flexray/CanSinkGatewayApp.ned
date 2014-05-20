@@ -15,7 +15,7 @@
 
 package signalsandgateways.applications.can_flexray;
 
-import busmodel.applications.can.sink.CanTrafficSinkAppBase;
+import fico4omnet.applications.can.sink.CanTrafficSinkAppBase;
 
 //
 // Represents the Sink-gatewayApp of the CAN-node. Here are CanDataFrames arriving from the CAN-bus and forwarded to the gateway.

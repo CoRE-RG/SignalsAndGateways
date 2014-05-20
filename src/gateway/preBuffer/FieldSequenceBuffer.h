@@ -18,7 +18,7 @@
 
 #include "FieldSequenceMessage_m.h"
 #include <cqueue.h>
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 
 /**
  * Type for comparison functions for cObject. Return value should be:

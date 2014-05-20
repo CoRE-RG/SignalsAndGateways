@@ -63,6 +63,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
     UTLTY::Utility::stripNonAlphaNum(to);
 
     bool stopLoop = false;
+    int destinationCount = 0;
     for(auto &element : destination){
         string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
         UTLTY::Utility::stripNonAlphaNum(destinationType);
@@ -96,6 +97,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
                             CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, element);
                             newInterDataStructure->encapsulate(canDataFrame);
+                            newInterDataStructure->setAssignedDestinationCount(destinationCount);
                             send(newInterDataStructure, "out");
                         }
                     }
@@ -113,6 +115,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                     opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
             }
         }
+        destinationCount++;
     }
     return interDataStructure;
 }

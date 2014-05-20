@@ -3,7 +3,7 @@
 <!ATTLIST routingTable
 	DTDversion		CDATA #REQUIRED
 >
-<!-- DTD version: 1.0 -->
+<!-- DTD version: 1.1 -->
 
 <!ELEMENT item						((source), (destination)+, (options)*)>
 
@@ -12,11 +12,12 @@
 <!ELEMENT sourceObjectID			(#PCDATA)>
 <!ELEMENT sourceType				(#PCDATA)>
 
-<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, backboneCTID)>
+<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, backboneCTID, backboneTransferType)>
 <!ELEMENT destinationBusID			(#PCDATA)>
 <!ELEMENT destinationObjectID		(#PCDATA)>
 <!ELEMENT destinationType			(#PCDATA)>
 <!ELEMENT backboneCTID				(#PCDATA)>
+<!ELEMENT backboneTransferType		(#PCDATA)>
 
 <!ELEMENT options ((holdUpTime)*)>
 <!ELEMENT holdUpTime				(#PCDATA)>

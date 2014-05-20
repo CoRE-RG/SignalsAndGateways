@@ -15,7 +15,7 @@
 
 #include "Routing.h"
 #include "InterConnectMsg_m.h"
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 #include "CTFrame_m.h"
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
@@ -24,6 +24,7 @@
 #include "Utility.h"
 
 Define_Module(Routing);
+using namespace FiCo4OMNeT;
 
 void Routing::initialize()
 {

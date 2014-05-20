@@ -15,7 +15,7 @@
 
 #include "CanSinkGatewayApp.h"
 #include "TransportMessage_m.h"
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 
 Define_Module(CanSinkGatewayApp);
 
@@ -26,8 +26,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         if (idle) {
             requestFrame();
         }
-    } else if (msgClass.compare("CanDataFrame") == 0) {
-        CanDataFrame *frame = check_and_cast<CanDataFrame *>(msg);
+    } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
         int i = frame->getCanID();
         currentFrameID = i;
         bufferMessageCounter--;

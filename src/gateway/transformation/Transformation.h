@@ -21,8 +21,10 @@
 #include "ITransformation.h"
 #include "FieldElement.h"
 #include "InterConnectMsg_m.h"
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 #include "FieldSequenceDataStructure.h"
+
+using namespace FiCo4OMNeT;
 
 /**
  * @brief Transformation of bus messages in FieldSequenceMessages and vice versa.

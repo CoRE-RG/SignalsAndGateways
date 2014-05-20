@@ -16,7 +16,7 @@
 #include "TTEApplicationBase.h"
 #include "Incoming.h"
 #include "CTFrame.h"
-#include "buffer/base/Buffer.h"
+#include "buffer/AS6802/CTBuffer.h"
 
 using namespace CoRE4INET;
 
@@ -30,11 +30,11 @@ TTEApplicationBase::~TTEApplicationBase() {
 }
 
 void TTEApplicationBase::initialize(){
-    ApplicationBase::initialize();
+    CTApplicationBase::initialize();
 }
 
 void TTEApplicationBase::handleMessage(cMessage *msg) {
-    ApplicationBase::handleMessage(msg);
+    CTApplicationBase::handleMessage(msg);
 
     if(msg->arrivedOn("TTin"))
     {
@@ -43,7 +43,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
             send(transFrame, "ethInterface$o");
-            EV << getFullName()<< ": Message send from gatewayApp to routing";
+            EV << getFullName()<< ": Message send from gatewayApp to routing" << endl;
         }
     }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
@@ -51,11 +51,16 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         //delete transFrame;
 
         //Gate für BE-Traffik: getParentModule()->getSubmodule("bgOut");
-        std::list<CoRE4INET::Buffer*> buffer = buffers[ctFrame->getCtID()];
-        for(std::list<CoRE4INET::Buffer*>::iterator buf = buffer.begin();
-                               buf!=buffer.end();buf++){
-            Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
-            sendDirect(ctFrame->dup(), in->gate("in"));
+        //std::map<uint16_t, std::list<CTBuffer*> > ctbuffers
+        if(strcmp(transFrame->getBackboneTransferType(), "TT")||strcmp(transFrame->getBackboneTransferType(), "RC")){
+            std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
+            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin();
+                                   buf!=buffer.end();buf++){
+                Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
+                sendDirect(ctFrame->dup(), in->gate("in"));
+            }
+        }else if(strcmp(transFrame->getBackboneTransferType(), "BG")){
+
         }
         delete ctFrame;
     }

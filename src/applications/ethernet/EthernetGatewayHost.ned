@@ -18,6 +18,8 @@ package signalsandgateways.applications.ethernet;
 import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
 //
 // Represents the ethernet node in the ethernet backbone network with connection to the gateway.
@@ -26,7 +28,9 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 module EthernetGatewayHost extends TTEEtherHost
 {
     parameters:
-        int numberOfVlinks = default(0);
+        int numberOfTT_Vlinks = default(0);
+        int numberOfRC_Vlinks = default(0);
+        int numberOfBG_Vlinks = default(0);
     gates:
         inout ethInterface @labels(TransportMessage);
     submodules:
@@ -35,16 +39,29 @@ module EthernetGatewayHost extends TTEEtherHost
             @display("p=340,37");
         }
         //Vector of output buffers for timetriggered traffic(TT)
-        TTvlinks[numberOfVlinks]: TTDoubleBuffer {
+        TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {
             @display("p=517,37");
         }
         //Vector of input buffers for timetriggered traffic(TT)
-        TTvlinks_ctc[numberOfVlinks]: TTIncoming {
+        TTvlinks_ctc[numberOfTT_Vlinks]: TTIncoming {
             @display("p=517,154");
+        }
+        //Vector of output buffers for rate constrained traffic(RC)
+        RCvlinks[numberOfRC_Vlinks]: RCQueueBuffer {
+            parameters:
+                @display("p=768,37");
+        }
+        //Vector of input buffers for rate constrained traffic(RC)
+        RCvlinks_ctc[numberOfRC_Vlinks]: RCIncoming {
+            parameters:
+                @display("p=768,154");
         }
     connections:
         ethInterface <--> gatewayApp.ethInterface;
-        for i=0..numberOfVlinks-1 {
+        for i=0..numberOfTT_Vlinks-1 {
             TTvlinks_ctc[i].out --> TTvlinks[i].in;
+        }
+        for i=0..numberOfRC_Vlinks-1 {
+            RCvlinks_ctc[i].out --> RCvlinks[i].in;
         }
 }

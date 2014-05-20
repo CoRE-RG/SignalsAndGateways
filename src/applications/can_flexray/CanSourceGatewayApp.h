@@ -27,6 +27,9 @@
  *
  * @author Sebastian Mueller
  */
+
+using namespace FiCo4OMNeT;
+
 class CanSourceGatewayApp : public CanTrafficSourceAppBase
 {
   protected:

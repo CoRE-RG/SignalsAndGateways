@@ -17,7 +17,7 @@
 #define TTEAPPLICATIONBASE_H_
 
 #include <omnetpp.h>
-#include "applications/base/ApplicationBase.h"
+#include "applications/AS6802/CTApplicationBase.h"
 #include "TransportMessage_m.h"
 
 /**
@@ -27,7 +27,7 @@
  *
  * @author Sebastian Mueller
  */
-class TTEApplicationBase: public CoRE4INET::ApplicationBase {
+class TTEApplicationBase: public virtual CoRE4INET::CTApplicationBase {
 private:
     /**
      * @brief calls the inherited initialize-method

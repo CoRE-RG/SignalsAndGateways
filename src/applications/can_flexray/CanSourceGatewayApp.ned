@@ -15,7 +15,7 @@
 
 package signalsandgateways.applications.can_flexray;
 
-import busmodel.applications.can.source.CanTrafficSourceAppBase;
+import fico4omnet.applications.can.source.CanTrafficSourceAppBase;
 
 //
 // Represents the Source-gatewayApp of the CAN-node. Here are TransportMessages arriving from the Gateway and forwarded to the CAN-bus.

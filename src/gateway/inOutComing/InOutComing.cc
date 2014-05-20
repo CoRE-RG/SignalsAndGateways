@@ -14,13 +14,14 @@
 // 
 
 #include "InOutComing.h"
-#include "candataframe_m.h"
+#include "CanDataFrame_m.h"
 #include "CTFrame.h"
 #include "TransportMessage_m.h"
 #include "InterConnectMsg_m.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "FieldElement.h"
 #include "IdentifierFieldElement.h"
+#include "Utility.h"
 
 Define_Module(InOutComing);
 
@@ -38,7 +39,7 @@ void InOutComing::handleMessage(cMessage *msg)
         interDataStructure->setFirstArrivalTimeOnCan(transportMsg->getFirstArrivalTimeOnCan());
 
         cPacket *delivery = transportMsg->decapsulate();
-        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
             interDataStructure->encapsulate(delivery);
         }else if (dynamic_cast<EtherFrame*>(delivery) != NULL){
             CoRE4INET::CTFrame *ethernetFrame = dynamic_cast<CoRE4INET::CTFrame*>(delivery);
@@ -50,7 +51,24 @@ void InOutComing::handleMessage(cMessage *msg)
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         TransportMessage *transportMsg = new TransportMessage;
         cPacket *delivery = interDataStructure->decapsulate();
-        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
+            cXMLElementList destination;
+            for(auto &element : interDataStructure->getRoutingData()){
+                if(strcmp(element->getTagName(), "destination") == 0){
+                    destination = element->getParentNode()->getChildrenByTagName("destination");
+                }
+            }
+            int assignedDestinationCount = interDataStructure->getAssignedDestinationCount();
+            int currentDestinationCount = 0;
+            for(auto &element : destination){
+                if(currentDestinationCount == assignedDestinationCount){
+                    std::string backboneTransferType = element->getFirstChildWithTag("backboneTransferType")->getNodeValue();
+                    UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
+                    transportMsg->setBackboneTransferType(backboneTransferType.c_str());
+                    break;
+                }
+                currentDestinationCount++;
+            }
             transportMsg->encapsulate(delivery);
             send(transportMsg, "appInterface$o", 0);
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){

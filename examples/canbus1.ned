@@ -1,5 +1,5 @@
-import busmodel.bus.can.CanBus;
-import busmodel.nodes.can.CanNode;
+import fico4omnet.bus.can.CanBus;
+import fico4omnet.nodes.can.CanNode;
 
 // Generic network configuration for CAN-Networks
 // 
@@ -13,10 +13,10 @@ module CanBus1
         bus: CanBus {
             @display("i=abstract/bus");
         }
-        node[bus.nodecount-1]: CanNode;
+        node[2]: CanNode;
             
     connections:
-        for i=0..(bus.nodecount-2) {
+        for i=0..(1) {
             bus.gate++ <--> node[i].gate;
         }
         bus.gate++ <--> gatewayConnect;

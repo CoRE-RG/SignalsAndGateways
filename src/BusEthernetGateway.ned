@@ -48,7 +48,7 @@ module BusEthernetGateway
     connections:
         can.busInterface <--> gateway.busCon++;//can.busInterface <--> gateway.busCon++;
         tte.ethInterface <--> gateway.ethCon++;
-        
+
         can.gate <--> cang; //can.gate
         tte.ethg <--> ethg;
 

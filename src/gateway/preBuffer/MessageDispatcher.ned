@@ -24,14 +24,14 @@ module MessageDispatcher
 {
     parameters:
         //number of varied virual links defined in the routing table
-        int numberOfVlinks = default(0);
+        int totalNumberOfVlinks = default(0);
         @display("bgb=268,218;i=block/subqueue");
     gates:
         //connection between Dispatcher and PreBuffer
         inout moduleConnect @label(InterConnectMsg);
     submodules:
         //vector of TimeTriggeredBuffers to store and cumulate the messages
-        messageBuffers[numberOfVlinks]: TimeTriggeredBuffer {
+        messageBuffers[totalNumberOfVlinks]: TimeTriggeredBuffer {
             @display("p=134,125");
         }
         //redirectes the incoming messages to the corresponding TimeTriggeredBuffer

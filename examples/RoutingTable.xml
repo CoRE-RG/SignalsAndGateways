@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE routingTable SYSTEM "../src/gateway/routing/RoutingTable.dtd">
 
-<routingTable DTDversion="1.0">
+<routingTable DTDversion="1.1">
 	<item>
 		<source>
 			<sourceBusID>
@@ -27,6 +27,9 @@
 			<backboneCTID>
 				100
 			</backboneCTID>
+			<backboneTransferType>
+				TT
+			</backboneTransferType>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -60,6 +63,9 @@
 			<backboneCTID>
 				40
 			</backboneCTID>
+			<backboneTransferType>
+				TT
+			</backboneTransferType>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -93,6 +99,9 @@
 			<backboneCTID>
 				150
 			</backboneCTID>
+			<backboneTransferType>
+				TT
+			</backboneTransferType>
 		</destination>
 		<options>
 			<holdUpTime>
@@ -126,6 +135,9 @@
 			<backboneCTID>
 				200
 			</backboneCTID>
+			<backboneTransferType>
+				TT
+			</backboneTransferType>
 		</destination>
 		<options>			
 			<holdUpTime>

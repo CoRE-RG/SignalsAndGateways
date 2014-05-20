@@ -15,13 +15,13 @@
 
 package signalsandgateways.applications.ethernet;
 
-import core4inet.applications.base.ApplicationBase;
+import core4inet.applications.AS6802.CTApplicationBase;
 
 //
 // Represents application base for the ethernet node in the gateway.
 //
 // @author Sebastian Mueller
-simple TTEApplicationBase extends ApplicationBase like IEthernetGatewayApplication
+simple TTEApplicationBase extends CTApplicationBase like IEthernetGatewayApplication
 {
     @class(TTEApplicationBase);
     gates:
