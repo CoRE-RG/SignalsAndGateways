@@ -22,6 +22,7 @@
 #include "FieldElement.h"
 #include "IdentifierFieldElement.h"
 #include "Utility.h"
+#include "cxmlelement.h"
 
 Define_Module(InOutComing);
 
@@ -51,32 +52,50 @@ void InOutComing::handleMessage(cMessage *msg)
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         TransportMessage *transportMsg = new TransportMessage;
         cPacket *delivery = interDataStructure->decapsulate();
+
+//        cXMLElementList destination;
+//        cXMLElement *currentDestination = NULL;
+//        for(auto &element : interDataStructure->getRoutingData()){
+//            if(strcmp(element->getTagName(), "destination") == 0){
+//                destination = element->getParentNode()->getChildrenByTagName("destination");
+//            }
+//        }
+//        int assignedDestinationCount = interDataStructure->getAssignedDestinationCount();
+//        int currentDestinationCount = 0;
+//        for(auto &element : destination){
+//            if(currentDestinationCount == assignedDestinationCount){
+//                currentDestination = element;
+//                break;
+//            }
+//            currentDestinationCount++;
+//        }
+
         if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
-            cXMLElementList destination;
-            for(auto &element : interDataStructure->getRoutingData()){
-                if(strcmp(element->getTagName(), "destination") == 0){
-                    destination = element->getParentNode()->getChildrenByTagName("destination");
-                }
-            }
-            int assignedDestinationCount = interDataStructure->getAssignedDestinationCount();
-            int currentDestinationCount = 0;
-            for(auto &element : destination){
-                if(currentDestinationCount == assignedDestinationCount){
-                    std::string backboneTransferType = element->getFirstChildWithTag("backboneTransferType")->getNodeValue();
-                    UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
-                    transportMsg->setBackboneTransferType(backboneTransferType.c_str());
-                    break;
-                }
-                currentDestinationCount++;
-            }
             transportMsg->encapsulate(delivery);
             send(transportMsg, "appInterface$o", 0);
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
-            CoRE4INET::CTFrame *ethernetFrame = new CoRE4INET::CTFrame("");
-            EV << "CTID: " << interDataStructure->getBackboneCTID();
-            ethernetFrame->setCtID(interDataStructure->getBackboneCTID());
-            ethernetFrame->encapsulate(delivery);
-            transportMsg->encapsulate(ethernetFrame);
+//            std::string backboneTransferType = currentDestination->getFirstChildWithTag("backboneTransferType")->getNodeValue();
+//            UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
+            transportMsg->setBackboneTransferType(interDataStructure->getBackboneTransferType());
+            if(strcmp(interDataStructure->getBackboneTransferType(), "BG")){
+                EthernetIIFrame *bgFrame = new EthernetIIFrame();
+                MACAddress address(interDataStructure->getDirectMacAdress());
+                bgFrame->setDest(address);
+                bgFrame->encapsulate(delivery);
+                bgFrame->setByteLength(sizeof(delivery));
+                //Padding
+                if (bgFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
+                    bgFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);
+                }
+                transportMsg->encapsulate(bgFrame);
+            }else{
+                CoRE4INET::CTFrame *ctFrame = new CoRE4INET::CTFrame("");
+                EV << "CTID: " << interDataStructure->getBackboneCTID();
+                ctFrame->setCtID(interDataStructure->getBackboneCTID());
+                ctFrame->encapsulate(delivery);
+                transportMsg->encapsulate(ctFrame);
+            }
+
             send(transportMsg, "appInterface$o", 1);
         }
     }

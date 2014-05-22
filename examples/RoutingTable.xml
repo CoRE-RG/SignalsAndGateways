@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE routingTable SYSTEM "../src/gateway/routing/RoutingTable.dtd">
 
-<routingTable DTDversion="1.1">
+<routingTable DTDversion="1.2">
 	<item>
 		<source>
 			<sourceBusID>
@@ -24,18 +24,26 @@
 			<destinationType>
 				can
 			</destinationType>
-			<backboneCTID>
-				100
-			</backboneCTID>
-			<backboneTransferType>
-				TT
-			</backboneTransferType>
+			<backbone>
+				<backboneCTID>
+					100
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					300
+				</holdUpTime>
+			</backbone>
 		</destination>
-		<options>
-			<holdUpTime>
-				300
-			</holdUpTime>
-		</options>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
 	</item>
 	
 	<item>
@@ -60,18 +68,26 @@
 			<destinationType>
 				can
 			</destinationType>
-			<backboneCTID>
-				40
-			</backboneCTID>
-			<backboneTransferType>
-				TT
-			</backboneTransferType>
-		</destination>
-		<options>
-			<holdUpTime>
+			<backbone>
+				<backboneCTID>
+					40
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
 				120
 			</holdUpTime>
-		</options>
+			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
 	</item>
 	
 	<item>
@@ -96,18 +112,26 @@
 			<destinationType>
 				can
 			</destinationType>
-			<backboneCTID>
-				150
-			</backboneCTID>
-			<backboneTransferType>
-				TT
-			</backboneTransferType>
-		</destination>
-		<options>
-			<holdUpTime>
-				300
+			<backbone>
+				<backboneCTID>
+					150
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					300
 			</holdUpTime>
-		</options>
+			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
 	</item>
 	
 	<item>
@@ -132,18 +156,26 @@
 			<destinationType>
 				can
 			</destinationType>
-			<backboneCTID>
-				200
-			</backboneCTID>
-			<backboneTransferType>
-				TT
-			</backboneTransferType>
-		</destination>
-		<options>			
-			<holdUpTime>
-				0
+			<backbone>
+				<backboneCTID>
+					200
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					0
 			</holdUpTime>
-		</options>
+			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
 	</item>
 
 </routingTable>

@@ -17,6 +17,8 @@
 #include "Incoming.h"
 #include "CTFrame.h"
 #include "buffer/AS6802/CTBuffer.h"
+#include "BGBuffer.h"
+#include "MultipleFieldSequenceMessage.h"
 
 using namespace CoRE4INET;
 
@@ -43,26 +45,28 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
             send(transFrame, "ethInterface$o");
-            EV << getFullName()<< ": Message send from gatewayApp to routing" << endl;
+            EV << getFullName()<< ": Message send from gatewayApp to gateway functionality" << endl;
         }
     }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
-        CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
-        //delete transFrame;
-
-        //Gate für BE-Traffik: getParentModule()->getSubmodule("bgOut");
-        //std::map<uint16_t, std::list<CTBuffer*> > ctbuffers
         if(strcmp(transFrame->getBackboneTransferType(), "TT")||strcmp(transFrame->getBackboneTransferType(), "RC")){
+            CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
             for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin();
                                    buf!=buffer.end();buf++){
                 Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
                 sendDirect(ctFrame->dup(), in->gate("in"));
             }
+            delete ctFrame;
         }else if(strcmp(transFrame->getBackboneTransferType(), "BG")){
-
+            EthernetIIFrame *bgFrame = dynamic_cast<EthernetIIFrame*>(transFrame->decapsulate());
+            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
+                    buf != bgbuffers.end(); buf++) {
+                sendDirect(bgFrame, (*buf)->gate("in"));
+            }
+            delete bgFrame;
         }
-        delete ctFrame;
+
     }
-    //delete msg;
+    delete msg;
 }

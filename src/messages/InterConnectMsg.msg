@@ -22,7 +22,10 @@ class noncobject cXMLElementList;
 
 packet InterConnectMsg {
 	cXMLElementList routingData;
+	string backboneTransferType;
 	int backboneCTID;
+	string directMacAdress;
+	bool messageAccumulation;
 	int assignedDestinationCount; 
 	simtime_t firstArrivalTimeOnCan;
 }

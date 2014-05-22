@@ -3,21 +3,26 @@
 <!ATTLIST routingTable
 	DTDversion		CDATA #REQUIRED
 >
-<!-- DTD version: 1.1 -->
+<!-- DTD version: 1.2 -->
 
-<!ELEMENT item						((source), (destination)+, (options)*)>
+<!ELEMENT item						((source), (destination)+, gatewayOptions)>
 
 <!ELEMENT source (sourceBusID, sourceObjectID, sourceType)>
 <!ELEMENT sourceBusID				(#PCDATA)>
 <!ELEMENT sourceObjectID			(#PCDATA)>
 <!ELEMENT sourceType				(#PCDATA)>
 
-<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, backboneCTID, backboneTransferType)>
+<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, (backbone)+)>
 <!ELEMENT destinationBusID			(#PCDATA)>
 <!ELEMENT destinationObjectID		(#PCDATA)>
 <!ELEMENT destinationType			(#PCDATA)>
-<!ELEMENT backboneCTID				(#PCDATA)>
-<!ELEMENT backboneTransferType		(#PCDATA)>
 
-<!ELEMENT options ((holdUpTime)*)>
+<!ELEMENT backbone ((backboneCTID | directMacAdress), backboneTransferType, messageAccumulation, holdUpTime)>
+<!ELEMENT backboneCTID				(#PCDATA)>
+<!ELEMENT directMacAdress			(#PCDATA)>
+<!ELEMENT backboneTransferType		(#PCDATA)>
+<!ELEMENT messageAccumulation		(#PCDATA)>
 <!ELEMENT holdUpTime				(#PCDATA)>
+
+<!ELEMENT gatewayOptions (allwaysSendOldAndNew)>
+<!ELEMENT allwaysSendOldAndNew		(#PCDATA)>

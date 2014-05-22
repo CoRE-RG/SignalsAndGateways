@@ -24,7 +24,7 @@ Define_Module(PreBuffer);
 
 void PreBuffer::initialize()
 {
-    cumulate = par("cumulate");
+
 }
 
 void PreBuffer::handleMessage(cMessage *msg)
@@ -34,7 +34,7 @@ void PreBuffer::handleMessage(cMessage *msg)
         cPacket *delivery = interDataStructure->decapsulate();
         if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
             FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-            if(cumulate){
+            if(interDataStructure->getMessageAccumulation()){
                 interDataStructure->encapsulate(delivery);
                 send(interDataStructure, "moduleConnect$o");
             }else{

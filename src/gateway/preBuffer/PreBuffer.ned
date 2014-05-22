@@ -34,8 +34,6 @@ simple PreBuffer like IConnection
 
     parameters:
         @display("bgb=209,144;i=block/queue");
-        //Indicates whether frame accumulation is activated or not.
-        bool cumulate = default(true);
     gates:
 		//Input connection for the inter module data exchange within the gateway
         input in @label(InterConnectMsg);

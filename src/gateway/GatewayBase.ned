@@ -53,7 +53,7 @@ module GatewayBase
             @display("p=113,117");
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
-        messagedispatcher: MessageDispatcher {
+        buffering: MessageDispatcher {
 
             @display("p=74,43");
         }
@@ -64,5 +64,5 @@ module GatewayBase
         route.out --> transform.in;
         transform.out --> prebuff.in;
         prebuff.out --> iocom.in;
-        prebuff.moduleConnect <--> messagedispatcher.moduleConnect;
+        prebuff.moduleConnect <--> buffering.moduleConnect;
 }

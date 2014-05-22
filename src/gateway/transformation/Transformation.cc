@@ -49,8 +49,8 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
             source = element;
         }else if(strcmp(element->getTagName(), "destination") == 0){
             destination = element->getParentNode()->getChildrenByTagName("destination");
-        }else if(strcmp(element->getTagName(), "options") == 0){
-            options = element;
+        }else if(strcmp(element->getTagName(), "gatewayOptions") == 0){
+            gatewayOptions = element;
         }
     }
 
@@ -84,13 +84,33 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
-                            simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(options->getFirstChildWithTag("holdUpTime")->getNodeValue(), 10).c_str()));
-                            fieldSequence->setMaxWaitingTime(maxWaitingTime);
-                            newInterDataStructure->encapsulate(fieldSequence);
-                            int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("backboneCTID")->getNodeValue(), 10).c_str());
-                            EV << "CTID: " << ctID << endl;
-                            newInterDataStructure->setBackboneCTID(ctID);
-                            send(newInterDataStructure, "out");
+                            cXMLElementList backboneProperties;
+                            backboneProperties = element->getChildrenByTagName("backbone");
+                            for(auto &property : backboneProperties){
+                                simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("holdUpTime")->getNodeValue()).c_str()));
+                                fieldSequence->setMaxWaitingTime(maxWaitingTime);
+                                newInterDataStructure->encapsulate(fieldSequence);
+                                string backboneTransferType = property->getFirstChildWithTag("backboneTransferType")->getNodeValue();
+                                UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
+                                newInterDataStructure->setBackboneTransferType(backboneTransferType.c_str());
+                                string messageAccumulation = property->getFirstChildWithTag("messageAccumulation")->getNodeValue();
+                                UTLTY::Utility::stripNonAlphaNum(messageAccumulation);
+                                if(strcmp(messageAccumulation.c_str(), "true") == 0){
+                                    newInterDataStructure->setMessageAccumulation(true);
+                                }else{
+                                    newInterDataStructure->setMessageAccumulation(false);
+                                }
+                                if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
+                                    int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
+                                    EV << "CTID: " << ctID << endl;
+                                    newInterDataStructure->setBackboneCTID(ctID);
+                                }else if(strcmp(backboneTransferType.c_str(), "BG") == 0){
+                                    string macAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
+                                    UTLTY::Utility::stripNonAlphaNum(macAdress);
+                                    newInterDataStructure->setDirectMacAdress(macAdress.c_str());
+                                }
+                                send(newInterDataStructure, "out");
+                            }
                             stopLoop = true;
                         }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);

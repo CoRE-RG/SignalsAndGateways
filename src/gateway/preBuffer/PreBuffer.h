@@ -52,9 +52,7 @@ protected:
      * @param msg The incoming message
      */
     virtual void handleMessage(cMessage *msg);
-private:
-    //Indicates whether frame accumulation is activated or not.
-    bool cumulate;
+
 };
 
 #endif

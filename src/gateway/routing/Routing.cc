@@ -45,11 +45,11 @@ void Routing::handleMessage(cMessage *msg)
         for(auto &element : items){
             EV << "Cycle: " << i << endl;
             const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-            std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID, 10);
+            std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID);
             EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
             if(strcmp(str_sourceBusID.c_str(), canDataFrame->getNode()) == 0){
                 const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID, 10);
+                std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
                 if(atoi(str_sourceObjectID.c_str()) == canDataFrame->getCanID()){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());

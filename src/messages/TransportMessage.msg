@@ -15,7 +15,6 @@
 
 packet TransportMessage
 {
-	int ctID;
 	string backboneTransferType; 
 	simtime_t firstArrivalTimeOnCan;
 };
