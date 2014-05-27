@@ -23,6 +23,7 @@
 #include "IdentifierFieldElement.h"
 #include "Utility.h"
 #include "cxmlelement.h"
+#include "Ethernet.h"
 
 Define_Module(InOutComing);
 
@@ -42,8 +43,12 @@ void InOutComing::handleMessage(cMessage *msg)
         cPacket *delivery = transportMsg->decapsulate();
         if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
             interDataStructure->encapsulate(delivery);
-        }else if (dynamic_cast<EtherFrame*>(delivery) != NULL){
-            CoRE4INET::CTFrame *ethernetFrame = dynamic_cast<CoRE4INET::CTFrame*>(delivery);
+        }else if (dynamic_cast<CoRE4INET::CTFrame*>(delivery) != NULL){
+            CoRE4INET::CTFrame *ctFrame = dynamic_cast<CoRE4INET::CTFrame*>(delivery);
+            MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(ctFrame->decapsulate());
+            interDataStructure->encapsulate(multiFieldSequence);
+        }else if(dynamic_cast<EthernetIIFrame*>(delivery) != NULL){
+            EthernetIIFrame *ethernetFrame = dynamic_cast<EthernetIIFrame*>(delivery);
             MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(ethernetFrame->decapsulate());
             interDataStructure->encapsulate(multiFieldSequence);
         }
@@ -53,31 +58,13 @@ void InOutComing::handleMessage(cMessage *msg)
         TransportMessage *transportMsg = new TransportMessage;
         cPacket *delivery = interDataStructure->decapsulate();
 
-//        cXMLElementList destination;
-//        cXMLElement *currentDestination = NULL;
-//        for(auto &element : interDataStructure->getRoutingData()){
-//            if(strcmp(element->getTagName(), "destination") == 0){
-//                destination = element->getParentNode()->getChildrenByTagName("destination");
-//            }
-//        }
-//        int assignedDestinationCount = interDataStructure->getAssignedDestinationCount();
-//        int currentDestinationCount = 0;
-//        for(auto &element : destination){
-//            if(currentDestinationCount == assignedDestinationCount){
-//                currentDestination = element;
-//                break;
-//            }
-//            currentDestinationCount++;
-//        }
-
         if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
             transportMsg->encapsulate(delivery);
             send(transportMsg, "appInterface$o", 0);
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
-//            std::string backboneTransferType = currentDestination->getFirstChildWithTag("backboneTransferType")->getNodeValue();
-//            UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
+
             transportMsg->setBackboneTransferType(interDataStructure->getBackboneTransferType());
-            if(strcmp(interDataStructure->getBackboneTransferType(), "BG")){
+            if(strcmp(interDataStructure->getBackboneTransferType(), "BG") == 0){
                 EthernetIIFrame *bgFrame = new EthernetIIFrame();
                 MACAddress address(interDataStructure->getDirectMacAdress());
                 bgFrame->setDest(address);

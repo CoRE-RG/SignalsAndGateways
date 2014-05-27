@@ -3,6 +3,7 @@
 #define FIELDELEMENT_H_
 
 #include <string>
+#include <omnetpp.h>
 
 namespace dataStruct {
 
@@ -13,7 +14,7 @@ namespace dataStruct {
  *
  * @author Sebastian Mueller
  */
-class FieldElement {
+class FieldElement : public cObject{
 public:
     FieldElement();
     virtual ~FieldElement();

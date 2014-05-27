@@ -12,12 +12,12 @@ namespace dataStruct {
 
 DataFieldElement::DataFieldElement(int dataLength) {
     this->dataLength = dataLength;
-    this->data = (char*)malloc(sizeof(char)*dataLength);
-    this->setFieldID("dataField");
+    data = new char[dataLength];
+    setFieldID("dataField");
 }
 
 DataFieldElement::~DataFieldElement() {
-    free(data);
+    delete(data);
 }
 
 } /* namespace Transformation */

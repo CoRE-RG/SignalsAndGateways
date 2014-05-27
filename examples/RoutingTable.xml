@@ -69,11 +69,11 @@
 				can
 			</destinationType>
 			<backbone>
-				<backboneCTID>
-					40
-				</backboneCTID>
+				<directMacAdress>
+					0A-00-00-00-00-04
+				</directMacAdress>
 				<backboneTransferType>
-					TT
+					BG
 				</backboneTransferType>
 				<messageAccumulation>
 					true

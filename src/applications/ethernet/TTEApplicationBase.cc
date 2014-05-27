@@ -49,7 +49,14 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         }
     }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
-        if(strcmp(transFrame->getBackboneTransferType(), "TT")||strcmp(transFrame->getBackboneTransferType(), "RC")){
+        if(strcmp(transFrame->getBackboneTransferType(), "BG") == 0){
+            EthernetIIFrame *bgFrame = dynamic_cast<EthernetIIFrame*>(transFrame->decapsulate());
+            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
+                    buf != bgbuffers.end(); buf++) {
+                sendDirect(bgFrame->dup(), (*buf)->gate("in"));
+            }
+            delete bgFrame;
+        }else {
             CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
             for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin();
@@ -58,15 +65,6 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
                 sendDirect(ctFrame->dup(), in->gate("in"));
             }
             delete ctFrame;
-        }else if(strcmp(transFrame->getBackboneTransferType(), "BG")){
-            EthernetIIFrame *bgFrame = dynamic_cast<EthernetIIFrame*>(transFrame->decapsulate());
-            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
-                    buf != bgbuffers.end(); buf++) {
-                sendDirect(bgFrame, (*buf)->gate("in"));
-            }
-            delete bgFrame;
         }
-
     }
-    delete msg;
 }

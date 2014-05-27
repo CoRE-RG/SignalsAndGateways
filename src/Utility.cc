@@ -35,7 +35,7 @@ namespace UTLTY{
 
     std::string Utility::stripNonAlphaNum(const char *str)
     {
-        std::string *stringRepresentation = new std::string(str, 0, 35);
+        std::string *stringRepresentation = new std::string(str, 0, 55);
         stripNonAlphaNum(*stringRepresentation);
         return *stringRepresentation;
     }

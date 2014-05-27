@@ -29,6 +29,7 @@ public:
 
 private:
     simtime_t timestamp;
+
 };
 
 } /* namespace Transformation */
