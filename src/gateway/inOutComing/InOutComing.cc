@@ -69,7 +69,7 @@ void InOutComing::handleMessage(cMessage *msg)
                 MACAddress address(interDataStructure->getDirectMacAdress());
                 bgFrame->setDest(address);
                 bgFrame->encapsulate(delivery);
-                bgFrame->setByteLength(sizeof(delivery));
+                bgFrame->addByteLength(delivery->getByteLength());
                 //Padding
                 if (bgFrame->getByteLength() < MIN_ETHERNET_FRAME_BYTES) {
                     bgFrame->setByteLength(MIN_ETHERNET_FRAME_BYTES);

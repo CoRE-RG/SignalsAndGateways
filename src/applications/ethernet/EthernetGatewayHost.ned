@@ -15,7 +15,7 @@
 
 package signalsandgateways.applications.ethernet;
 
-import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
@@ -25,7 +25,7 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 // Represents the ethernet node in the ethernet backbone network with connection to the gateway.
 //
 // @author Sebastian Mueller
-module EthernetGatewayHost extends TTEEtherHost
+module EthernetGatewayHost extends TTEAVBEtherHost
 {
     parameters:
         int numberOfTT_Vlinks = default(0);

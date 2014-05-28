@@ -13,20 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+package signalsandgateways.applications.ethernet.AVB;
 
-import core4inet.applications.AS6802.CTApplicationBase;
+import core4inet.applications.trafficsource.avb.AVBTrafficSourceApp;
 
 //
-// Represents application base for the ethernet node in the gateway.
+// TODO auto-generated module
 //
-// @author Sebastian Mueller
-simple TTEApplicationBase extends CTApplicationBase like IEthernetGatewayApplication
+simple AVBGatewaySourceApplication extends AVBTrafficSourceApp
 {
-    @class(TTEApplicationBase);
-    gates:
-        //Connection to the gateway    
-        inout ethInterface @labels(TransportMessage);
-        //Input gate for the incoming best-effort messages
-        input in @directIn @labels(EtherFrame);
+    
 }

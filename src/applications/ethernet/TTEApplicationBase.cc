@@ -38,7 +38,7 @@ void TTEApplicationBase::initialize(){
 void TTEApplicationBase::handleMessage(cMessage *msg) {
     CTApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("TTin"))
+    if(msg->arrivedOn("TTin") || msg->arrivedOn("RCin") || msg->arrivedOn("in"))
     {
         TransportMessage *transFrame = new TransportMessage();
         EV << getFullName()<< ": TransportFrame created!";
@@ -56,6 +56,8 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
                 sendDirect(bgFrame->dup(), (*buf)->gate("in"));
             }
             delete bgFrame;
+        }else if(strcmp(transFrame->getBackboneTransferType(), "AVB") == 0){
+
         }else {
             CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
