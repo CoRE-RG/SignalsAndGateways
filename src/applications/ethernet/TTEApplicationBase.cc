@@ -19,6 +19,7 @@
 #include "buffer/AS6802/CTBuffer.h"
 #include "BGBuffer.h"
 #include "MultipleFieldSequenceMessage.h"
+#include "TTBufferEmpty_m.h"
 
 using namespace CoRE4INET;
 
@@ -38,8 +39,9 @@ void TTEApplicationBase::initialize(){
 void TTEApplicationBase::handleMessage(cMessage *msg) {
     CTApplicationBase::handleMessage(msg);
 
-    if(msg->arrivedOn("TTin") || msg->arrivedOn("RCin") || msg->arrivedOn("in"))
-    {
+    if(dynamic_cast<TTBufferEmpty*>(msg) != 0){
+            delete msg;
+    }else if(msg->arrivedOn("TTin") || msg->arrivedOn("RCin") || msg->arrivedOn("in")){
         TransportMessage *transFrame = new TransportMessage();
         EV << getFullName()<< ": TransportFrame created!";
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
