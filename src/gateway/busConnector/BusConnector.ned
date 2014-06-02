@@ -13,29 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.gateway.inOutComing;
+package signalsandgateways.gateway.busConnector;
+
 import signalsandgateways.gateway.IConnection;
 
 //
-// Receiving and forwarding messages from and to the network nodes.
+// TODO auto-generated module
 //
-// This module receives messages from the network nodes of the gateway and sends the messages further in the gateway logic.
-// In addition messages, which were handled by the gateway, are forwarded to the appropriate network node.
-// A network node can be an ethernet or a bus node.
-//
-// @author Sebastian Mueller
-//
-simple InOutComing like IConnection
+simple BusConnector like IConnection
 {
     parameters:
-    	@display("i=block/layer");
+  	  	int countOfCanBusses = default(1);
     gates:
         //Input connection for the inter module data exchange within the gateway
         input in @label (InterConnectMsg);
-        input busIn @label (InterConnectMsg);
         //Output connection for the inter module data exchange within the gateway
         output out @label (InterConnectMsg);
-        output busOut @label (InterConnectMsg);
-        //connection to the network nodes, which can be both bus network and ethernet networks
-    	inout appInterface[] @labels(TransportMessage);
+        inout busConnect[countOfCanBusses];
+        
 }

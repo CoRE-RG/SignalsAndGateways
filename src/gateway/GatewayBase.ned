@@ -20,6 +20,7 @@ import signalsandgateways.gateway.preBuffer.PreBuffer;
 import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
 import signalsandgateways.gateway.preBuffer.MessageDispatcher;
+import signalsandgateways.gateway.busConnector.BusConnector;
 
 //
 // Consilidation of all top level modules of the gateway
@@ -29,7 +30,9 @@ import signalsandgateways.gateway.preBuffer.MessageDispatcher;
 
 module GatewayBase
 {
-    @display("bgb=401,241;i=device/hub");
+    parameters:
+    	@display("bgb=401,241;i=device/hub");
+    	int countOfCanBusses = default(1);
     gates:
         //connection to the bus-systems
         inout busCon[];
@@ -39,6 +42,9 @@ module GatewayBase
         //module that transact the communication from and to the network- and bus-interfaces
         iocom: InOutComing {
             @display("p=198,43");
+        }
+        busConnector: BusConnector{
+            @display("p=308,43");
         }
         //module that handles the routing data
         route: Routing {
@@ -58,9 +64,13 @@ module GatewayBase
             @display("p=74,43");
         }
     connections:
-        busCon[0] <--> iocom.appInterface++;
+        for i=0..countOfCanBusses-1 {
+        	busCon[i] <--> busConnector.busConnect[i];
+        }
         ethCon[0] <--> iocom.appInterface++;
         iocom.out --> route.in;
+        iocom.busOut --> busConnector.in;
+        iocom.busIn <-- busConnector.out;
         route.out --> transform.in;
         transform.out --> prebuff.in;
         prebuff.out --> iocom.in;

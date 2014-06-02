@@ -28,7 +28,8 @@ network gateway_network
     parameters:
         @display("bgb=417,213,white");
         double measure_interval @unit(s) = default(1s);
-
+		int countOfCanBussesGW1 = default(1);
+		int countOfCanBussesGW2 = default(1);
     types:
         //
         // All links are configured with 100MBit per second and variable delay
@@ -69,8 +70,9 @@ network gateway_network
         //
         // The example uses a simple star topology
         //
-        gateway1.cang <--> cable {  delay = 50ns; } <--> canbus1.gatewayConnect;
+        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> canbus1.gatewayConnect;
+        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> canbus2.gatewayConnect;
+
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
         gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
-        gateway2.cang <--> cable {  delay = 50ns; } <--> canbus2.gatewayConnect;
 }

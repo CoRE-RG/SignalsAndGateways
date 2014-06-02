@@ -53,16 +53,25 @@ void InOutComing::handleMessage(cMessage *msg)
             interDataStructure->encapsulate(multiFieldSequence);
         }
         send(interDataStructure, "out");
+    }else if(msg->arrivedOn("busIn")){
+        TransportMessage *transportMsg = dynamic_cast<TransportMessage*>(msg);
+        InterConnectMsg *interDataStructure = new InterConnectMsg;
+        interDataStructure->setFirstArrivalTimeOnCan(transportMsg->getFirstArrivalTimeOnCan());
+
+        cPacket *delivery = transportMsg->decapsulate();
+        if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
+            interDataStructure->encapsulate(delivery);
+            send(interDataStructure, "out");
+        }
     }else if(msg->arrivedOn("in")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
-        TransportMessage *transportMsg = new TransportMessage;
         cPacket *delivery = interDataStructure->decapsulate();
 
         if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
-            transportMsg->encapsulate(delivery);
-            send(transportMsg, "appInterface$o", 0);
+            interDataStructure->encapsulate(delivery);
+            send(interDataStructure, "busOut");
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
-
+            TransportMessage *transportMsg = new TransportMessage;
             transportMsg->setBackboneTransferType(interDataStructure->getBackboneTransferType());
             if(strcmp(interDataStructure->getBackboneTransferType(), "BG") == 0){
                 EthernetIIFrame *bgFrame = new EthernetIIFrame();
@@ -82,9 +91,9 @@ void InOutComing::handleMessage(cMessage *msg)
                 ctFrame->encapsulate(delivery);
                 transportMsg->encapsulate(ctFrame);
             }
-
-            send(transportMsg, "appInterface$o", 1);
+            send(transportMsg, "appInterface$o", 0);
+            delete msg;
         }
     }
-    delete msg;
+
 }
