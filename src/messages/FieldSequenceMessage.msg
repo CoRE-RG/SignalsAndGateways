@@ -22,5 +22,5 @@ class noncobject FieldSequenceDataStructure;
 
 packet FieldSequenceMessage {
     FieldSequenceDataStructure transportFrame;
-    simtime_t maxWaitingTime;
+    string maxWaitingTime;
 }

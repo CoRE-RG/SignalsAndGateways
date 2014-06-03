@@ -19,15 +19,7 @@
 #include "FieldSequenceMessage_m.h"
 #include <cqueue.h>
 #include "CanDataFrame_m.h"
-
-/**
- * Type for comparison functions for cObject. Return value should be:
- * - less than zero if a < b
- * - greater than zero if a > b
- * - zero if a == b
- *
- */
-typedef int (*compareFunc)(cObject *a, cObject *b);
+#include "IdentifierFieldElement.h"
 
 /**
  * @brief Stores FieldSequenceMessages in a cQueue ordered by the IdentifierFieldElement.
@@ -78,11 +70,34 @@ private:
     //Queue to hold the FieldSequenceMessages
     cQueue timeQueue;
     /**
+     * Type for comparison functions for cObject. Return value should be:
+     * - less than zero if a < b
+     * - greater than zero if a > b
+     * - zero if a == b
+     *
+     */
+    typedef int (*compareFunc)(cObject *a, cObject *b);
+
+    /**
      * @brief Compare-Function to compare to Objects of the queue. This function defines the order of the queue.
      * @return less than zero if a < b OR greater than zero if a > b OR zero if a == b
      */
-    int compareFunc(cObject *a, cObject *b);
-    CompareFunc compare;
+    static int compareFieldSequenceMessage(cObject *a, cObject *b){
+        FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
+        FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
+        int returnValue = 0;
+        if(canA != NULL && canB != NULL){
+            FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
+            FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
+            returnValue = (canA_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier())-(canB_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier());
+        }else{
+            opp_error("Insertion of object in PreBuffer failed. Only FieldSequenceMessage-objects are supported!");
+        }
+        return returnValue;
+    }
+
+    compareFunc pCompare = &compareFieldSequenceMessage;
+
 };
 
 #endif /* FIELDSEQUENCEBUFFER_H_ */

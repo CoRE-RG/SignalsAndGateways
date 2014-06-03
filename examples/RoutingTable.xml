@@ -35,7 +35,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					300
+					300ms
 				</holdUpTime>
 			</backbone>
 		</destination>
@@ -79,7 +79,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-				120
+				120ms
 			</holdUpTime>
 			</backbone>
 		</destination>
@@ -123,7 +123,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					300
+					300ms
 			</holdUpTime>
 			</backbone>
 		</destination>
@@ -167,7 +167,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					0
+					0ms
 			</holdUpTime>
 			</backbone>
 		</destination>

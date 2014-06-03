@@ -14,6 +14,8 @@
 // 
 
 #include "TimeTriggeredBuffer.h"
+#include "simtime.h"
+#define MAX_FRAME_LENGTH 1500
 
 Define_Module(TimeTriggeredBuffer);
 
@@ -28,9 +30,10 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
     if(dynamic_cast<FieldSequenceMessage*>(msg) != NULL){
         dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
-        if(not(timerEvent->isScheduled()) || ((timerEvent->getTimestamp()-simTime()) > fieldSequence->getMaxWaitingTime())){
+        simtime_t maxWaitingTime = SimTime::parse(fieldSequence->getMaxWaitingTime());
+        if(not(timerEvent->isScheduled()) || ((timerEvent->getTimestamp()-simTime()) > maxWaitingTime)){
             cancelEvent(timerEvent);
-            simtime_t timerValue = simTime()+(fieldSequence->getMaxWaitingTime()/mili);
+            simtime_t timerValue = simTime()+maxWaitingTime;
             timerEvent->setTimestamp(timerValue);
 
             EV << "Max waiting time: " << fieldSequence->getMaxWaitingTime() << " timerValue: " << timerValue << endl;
@@ -42,10 +45,20 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
         while(not(buffer.isEmpty())){
             FieldSequenceMessage *fieldSequence = buffer.dequeue();
-            multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+            if(multiFieldSequence->getByteLength()+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
+                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+            }else{
+                sendDirect(multiFieldSequence->dup(), dispatcher, "triggerIn");
+                multiFieldSequence = new MultipleFieldSequenceMessage();
+                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+            }
+
             delete fieldSequence;
         }
         buffer.clear();
+        EV << "TimeTriggeredBuffer: Size of MultipleFieldSequenceMessage " << multiFieldSequence->getByteLength() << endl;
         sendDirect(multiFieldSequence, dispatcher, "triggerIn");
     }
 }

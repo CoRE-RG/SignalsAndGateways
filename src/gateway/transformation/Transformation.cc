@@ -87,8 +87,9 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             cXMLElementList backboneProperties;
                             backboneProperties = element->getChildrenByTagName("backbone");
                             for(auto &property : backboneProperties){
-                                simtime_t maxWaitingTime = SimTime(atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("holdUpTime")->getNodeValue()).c_str()));
-                                fieldSequence->setMaxWaitingTime(maxWaitingTime);
+                                string maxWaitingTime = property->getFirstChildWithTag("holdUpTime")->getNodeValue();
+                                UTLTY::Utility::stripNonAlphaNum(maxWaitingTime);
+                                fieldSequence->setMaxWaitingTime(maxWaitingTime.c_str());
                                 newInterDataStructure->encapsulate(fieldSequence);
                                 string backboneTransferType = property->getFirstChildWithTag("backboneTransferType")->getNodeValue();
                                 UTLTY::Utility::stripNonAlphaNum(backboneTransferType);

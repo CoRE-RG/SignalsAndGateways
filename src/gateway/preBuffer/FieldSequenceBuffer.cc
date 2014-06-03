@@ -14,10 +14,10 @@
 // 
 
 #include <FieldSequenceBuffer.h>
-#include "IdentifierFieldElement.h"
+
 
 FieldSequenceBuffer::FieldSequenceBuffer() {
-    timeQueue = cQueue("preBuffer", NULL);//compare);
+    timeQueue = cQueue("preBuffer", pCompare);
 }
 
 FieldSequenceBuffer::~FieldSequenceBuffer() {
@@ -38,20 +38,7 @@ FieldSequenceMessage* FieldSequenceBuffer::dequeue(){
     return fieldSequence;
 }
 
-int FieldSequenceBuffer::compareFunc(cObject *a, cObject *b){
-    FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
-    FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
-    int returnValue = 0;
-    if(canA == NULL || canB == NULL){
-        FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
-        FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
-        returnValue = (canA_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier())-(canB_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier());
-    }else{
-        opp_error("Insertion of object in PreBuffer failed. Only FieldSequenceMessage-objects are supported!");
-    }
-    return returnValue;
-}
-
 bool FieldSequenceBuffer::isEmpty(){
     return timeQueue.isEmpty();
 }
+
