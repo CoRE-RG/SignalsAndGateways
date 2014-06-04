@@ -104,7 +104,7 @@
 		</source>
 		<destination>
 			<destinationBusID>
-				canbus2
+				canbus1
 			</destinationBusID>
 			<destinationObjectID>
 				2
@@ -148,7 +148,7 @@
 		</source>
 		<destination>
 			<destinationBusID>
-				canbus2
+				canbus1
 			</destinationBusID>
 			<destinationObjectID>
 				3

@@ -18,6 +18,7 @@
 #include "TransportMessage_m.h"
 #include "Utility.h"
 #include "CanDataFrame_m.h"
+#include "GlobalGatewayInformation.h"
 
 Define_Module(BusConnector);
 
@@ -27,8 +28,10 @@ using namespace FiCo4OMNeT;
 void BusConnector::initialize()
 {
     for(int i = 0; i < gate("busConnect$i",0)->getVectorSize(); i++){
+        gatewayName = getParentModule()->getParentModule()->getName();
+        GlobalGatewayInformation::registerGateway(gatewayName);
         string busName = gate("busConnect$o",i)->getPathEndGate()->getOwnerModule()->getParentModule()->gate("gate$o")->getPathEndGate()->getOwnerModule()->getParentModule()->getParentModule()->getName();
-        this->nameGateMapping.insert(std::pair<std::string, cGate*>(busName, gate("busConnect$o",i)));
+        GlobalGatewayInformation::registerBusGate(gatewayName, busName, gate("busConnect$o",i));
     }
 }
 
@@ -50,13 +53,14 @@ void BusConnector::handleMessage(cMessage *msg)
                 UTLTY::Utility::stripNonAlphaNum(destinationType);
                 string destinationBusID = element->getFirstChildWithTag("destinationBusID")->getNodeValue();
                 UTLTY::Utility::stripNonAlphaNum(destinationBusID);
-                cGate *currentGate = getBusGate(destinationBusID);
+                cGate *currentGate = GlobalGatewayInformation::getBusGate(gatewayName, destinationBusID);
                 if((strcmp(destinationType.c_str(), "can") == 0) && currentGate != NULL){
                     TransportMessage *transportMsg = new TransportMessage;
                     transportMsg->encapsulate(canDataFrame->dup());
                     send(transportMsg, currentGate);
                 }else{
-                    opp_error("BusConnector could not resolve the destinationBusID for this CanDataFrame! Make sure that the values in the RoutingTable are correct!");
+                    string errMsg = "BusConnector could not resolve the destinationBusID '"+destinationBusID+"' for this CanDataFrame! Make sure that the values in the RoutingTable are correct!";
+                    opp_error(errMsg.c_str());
                 }
 
             }
@@ -67,16 +71,5 @@ void BusConnector::handleMessage(cMessage *msg)
     }else if(msg->arrivedOn("busConnect$i")){
         send(msg, "out");
     }
-}
-
-cGate *BusConnector::getBusGate(std::string gateName){
-    Map::const_iterator pos = this->nameGateMapping.find(gateName);
-    cGate *value = NULL;
-    if(pos == nameGateMapping.end()){
-        value = NULL;
-    }else{
-        value = pos->second;
-    }
-    return value;
 }
 

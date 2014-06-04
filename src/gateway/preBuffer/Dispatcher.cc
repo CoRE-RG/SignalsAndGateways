@@ -16,6 +16,7 @@
 #include "Dispatcher.h"
 #include "Utility.h"
 #include "InterConnectMsg_m.h"
+#include "GlobalGatewayInformation.h"
 
 Define_Module(Dispatcher);
 
@@ -23,9 +24,12 @@ void Dispatcher::initialize()
 {
     routingTable = par("routingTable").xmlValue();
     items = routingTable->getChildren();
+    gatewayName = getParentModule()->getParentModule()->getParentModule()->getName();
     int i = 0;
     for(auto &element : items){
         for(auto &destination : element->getChildrenByTagName("destination")){
+            std::string destinationBus = destination->getFirstChildWithTag("destinationBusID")->getNodeValue();
+            UTLTY::Utility::stripNonAlphaNum(destinationBus);
             cXMLElementList backboneProperties = destination->getChildrenByTagName("backbone");
             for(auto &property : backboneProperties){
                 cModule *msgBuffer = getParentModule()->getSubmodule("messageBuffers", i);
@@ -37,15 +41,21 @@ void Dispatcher::initialize()
                 if(strcmp(backboneTransferType.c_str(), "BG") == 0){
                     std::string directMacAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
                     UTLTY::Utility::stripNonAlphaNum(directMacAdress);
-                    currentBuffer->setDispatchedCTID(directMacAdress);
-                    timeBuffers.insert(ValuePair(directMacAdress, currentBuffer));
+                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, destinationBus)){
+                        currentBuffer->setDispatchedCTID(directMacAdress);
+                        GlobalGatewayInformation::registerTimeBuffer(gatewayName, directMacAdress, currentBuffer);
+                        i++;
+                    }
                 }else{
                     std::string backboneCTID = property->getFirstChildWithTag("backboneCTID")->getNodeValue();
                     UTLTY::Utility::stripNonAlphaNum(backboneCTID);
-                    currentBuffer->setDispatchedCTID(backboneCTID);
-                    timeBuffers.insert(ValuePair(backboneCTID, currentBuffer));
+                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, destinationBus)){
+                        currentBuffer->setDispatchedCTID(backboneCTID);
+                        GlobalGatewayInformation::registerTimeBuffer(gatewayName, backboneCTID, currentBuffer);
+                        i++;
+                    }
                 }
-                i++;
+
             }
         }
     }
@@ -61,11 +71,9 @@ void Dispatcher::handleMessage(cMessage *msg)
         }else{
             key = std::to_string(interDataStructure->getBackboneCTID());
         }
-        TTBufferMap::const_iterator bufferPosition = timeBuffers.find(key);
+        TimeTriggeredBuffer *foundBuffer = GlobalGatewayInformation::getTimeBuffer(gatewayName, key);
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
-        if(bufferPosition != timeBuffers.end()){
-            TimeTriggeredBuffer *foundBuffer =
-                    dynamic_cast<TimeTriggeredBuffer*>(bufferPosition->second);
+        if(foundBuffer != NULL){
             sendDirect(fieldSequence, foundBuffer, "bufferIn");
         }else{
             opp_error("Cannot find Pre-Buffer to specified backboneID in Message!");

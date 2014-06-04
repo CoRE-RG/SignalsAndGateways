@@ -29,10 +29,8 @@ class BusConnector : public cSimpleModule
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
   private:
-    typedef map<string, cGate*> Map;
-    //Predefined transformation list
-    Map nameGateMapping;
-    cGate *getBusGate(std::string gateName);
+    string gatewayName;
+
 };
 
 #endif

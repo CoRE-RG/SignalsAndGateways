@@ -21,9 +21,6 @@
 #include <map>
 #include <string>
 
-//Definition of the map to administrate the TimeTriggerdBuffers
-typedef std::map<std::string, TimeTriggeredBuffer*> TTBufferMap;
-typedef TTBufferMap::value_type ValuePair;
 /**
  * @brief Dispatches the incoming messages to the appropriate TimeTriggeredBuffer.
  *
@@ -42,8 +39,7 @@ private:
     cXMLElement *routingTable;
     //all items of the routing table
     cXMLElementList items;
-    //map to administrate TimeTriggerdBuffers
-    TTBufferMap timeBuffers;
+    std::string gatewayName;
 protected:
     /**
      * @brief For each virtual link, which are defined in the routing table, the appropriate TimeTriggeredBuffer is generated automatically and for administration purposes linked in a map.
