@@ -15,10 +15,10 @@ module CanBus2
         bus: CanBus {
             @display("i=abstract/bus");
         }
-        node[2]: CanNode;
+        node[3]: CanNode;
         
     connections:
-        for i=0..(1) {
+        for i=0..(2) {
             bus.gate++ <--> node[i].gate;
         }
         bus.gate++ <--> gatewayConnect;
