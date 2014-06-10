@@ -1,0 +1,54 @@
+package majorNetwork;
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+//package signalsandgateways.examples;
+
+import core4inet.nodes.ethernet.AS6802.TTEEtherSwitch;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
+
+//
+// switch1: configuration in switch1.ini
+// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
+//
+module RTSwitch extends TTEEtherSwitch
+{
+    int numTTvlink = default(0);
+    @display("bgb=457,311");
+    submodules:
+        TTvlinks[numTTvlink]: TTDoubleBuffer {
+            @display("p=366,30");
+        }
+        TTvlinks_ctc[numTTvlink]: TTIncoming {
+            @display("p=366,118");
+        }
+        //vl_101_ctc: TTIncoming {
+        //    parameters:
+        //        @display("p=170,200");
+        //}
+        //vl_101: TTDoubleBuffer {
+        //    parameters:
+        //        @display("p=240,200");
+        //}
+
+    connections:
+        for i=0..numTTvlink-1 {
+            TTvlinks_ctc[i].out --> TTvlinks[i].in;
+        }
+        //vl_101_ctc.out --> vl_101.in;
+}

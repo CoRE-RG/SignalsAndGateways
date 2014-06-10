@@ -17,7 +17,7 @@
 #define __SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
 
 #include <omnetpp.h>
-#include "CanTrafficSinkAppBase.h"
+#include "FiCo4OMNeT_CanTrafficSinkAppBase.h"
 
 /**
  * @brief Source-Application for the CAN-Node

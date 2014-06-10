@@ -25,23 +25,25 @@ void Dispatcher::initialize()
     routingTable = par("routingTable").xmlValue();
     items = routingTable->getChildren();
     gatewayName = getParentModule()->getParentModule()->getParentModule()->getName();
+
+
     int i = 0;
     for(auto &element : items){
+        cXMLElement *source = element->getFirstChildWithTag("source");
+        std::string sourceBusID = source->getFirstChildWithTag("sourceBusID")->getNodeValue();
+        UTLTY::Utility::stripNonAlphaNum(sourceBusID);
         for(auto &destination : element->getChildrenByTagName("destination")){
-            std::string destinationBus = destination->getFirstChildWithTag("destinationBusID")->getNodeValue();
-            UTLTY::Utility::stripNonAlphaNum(destinationBus);
             cXMLElementList backboneProperties = destination->getChildrenByTagName("backbone");
             for(auto &property : backboneProperties){
                 cModule *msgBuffer = getParentModule()->getSubmodule("messageBuffers", i);
                 TimeTriggeredBuffer *currentBuffer = dynamic_cast<TimeTriggeredBuffer*>(msgBuffer);
-
                 std::string backboneTransferType = property->getFirstChildWithTag("backboneTransferType")->getNodeValue();
                 UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
                 currentBuffer->setDispatchedBackboneTransferType(backboneTransferType);
                 if(strcmp(backboneTransferType.c_str(), "BG") == 0){
                     std::string directMacAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
                     UTLTY::Utility::stripNonAlphaNum(directMacAdress);
-                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, destinationBus)){
+                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, sourceBusID)){
                         currentBuffer->setDispatchedCTID(directMacAdress);
                         GlobalGatewayInformation::registerTimeBuffer(gatewayName, directMacAdress, currentBuffer);
                         i++;
@@ -49,7 +51,7 @@ void Dispatcher::initialize()
                 }else{
                     std::string backboneCTID = property->getFirstChildWithTag("backboneCTID")->getNodeValue();
                     UTLTY::Utility::stripNonAlphaNum(backboneCTID);
-                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, destinationBus)){
+                    if(GlobalGatewayInformation::checkBusRegistered(gatewayName, sourceBusID)){
                         currentBuffer->setDispatchedCTID(backboneCTID);
                         GlobalGatewayInformation::registerTimeBuffer(gatewayName, backboneCTID, currentBuffer);
                         i++;

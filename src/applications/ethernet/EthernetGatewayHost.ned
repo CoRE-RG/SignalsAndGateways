@@ -36,7 +36,7 @@ module EthernetGatewayHost extends TTEAVBEtherHost
     submodules:
         //Application for the ethernet node in the gateway
         gatewayApp: TTEApplicationBase {
-            @display("p=340,37");
+            @display("p=282,37");
         }
         //Vector of output buffers for timetriggered traffic(TT)
         TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {

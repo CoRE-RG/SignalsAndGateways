@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE routingTable SYSTEM "../src/gateway/routing/RoutingTable.dtd">
+<!DOCTYPE routingTable SYSTEM "../../src/gateway/routing/RoutingTable.dtd">
 
 <routingTable DTDversion="1.2">
 	<item>

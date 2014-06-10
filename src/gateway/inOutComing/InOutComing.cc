@@ -15,7 +15,7 @@
 
 #include "InOutComing.h"
 #include "CanDataFrame_m.h"
-#include "CTFrame.h"
+#include "CoRE4INET_CTFrame.h"
 #include "TransportMessage_m.h"
 #include "InterConnectMsg_m.h"
 #include "MultipleFieldSequenceMessage.h"

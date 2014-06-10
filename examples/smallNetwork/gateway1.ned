@@ -1,3 +1,4 @@
+package smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -12,30 +13,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-//package signalsandgateways.examples;
-
-import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import signalsandgateways.BusEthernetGateway;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
 
-
-//
-// unit1: configuration in unit1.ini.
-//
-// - Sends time-triggered messages at 1ms with VL-ID 100
-//
-module Node2 extends TTEEtherHost
+module Gateway1 extends BusEthernetGateway
 {
-    parameters:
-        int numTTvlink = default(0);
     @display("bgb=479,314");
     submodules:
-	    TTvlinks[numTTvlink]: TTDoubleBuffer {
-            @display("p=366,37");
-        }
-        TTvlinks_ctc[numTTvlink]: TTIncoming {
-            @display("p=366,99");
-        }
         //vl_102_ctc: TTIncoming {
         //    parameters:
         //        @display("p=350,160");
@@ -46,8 +31,5 @@ module Node2 extends TTEEtherHost
         //        @display("p=440,160");
         //}
     connections:
-        for i = 0..numTTvlink-1 {
-            TTvlinks_ctc[i].out-->TTvlinks[i].in;
-        }
         //vl_102_ctc.out --> vl_102.in;
 }

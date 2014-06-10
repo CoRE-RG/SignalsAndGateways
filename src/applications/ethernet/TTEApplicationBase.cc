@@ -14,10 +14,10 @@
 // 
 
 #include "TTEApplicationBase.h"
-#include "Incoming.h"
-#include "CTFrame.h"
-#include "buffer/AS6802/CTBuffer.h"
-#include "BGBuffer.h"
+#include "CoRE4INET_Incoming.h"
+#include "CoRE4INET_CTFrame.h"
+#include "CoRE4INET_CTBuffer.h"
+#include "CoRE4INET_BGBuffer.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "TTBufferEmpty_m.h"
 

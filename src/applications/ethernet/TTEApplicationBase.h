@@ -17,7 +17,7 @@
 #define TTEAPPLICATIONBASE_H_
 
 #include <omnetpp.h>
-#include "applications/AS6802/CTApplicationBase.h"
+#include "CoRE4INET_CTApplicationBase.h"
 #include "TransportMessage_m.h"
 
 /**

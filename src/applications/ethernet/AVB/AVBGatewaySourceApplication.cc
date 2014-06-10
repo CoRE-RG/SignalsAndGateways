@@ -14,15 +14,15 @@
 // 
 
 #include "AVBGatewaySourceApplication.h"
-#include "AVBTrafficSourceApp.h"
-#include "HelperFunctions.h"
+#include "CoRE4INET_AVBTrafficSourceApp.h"
+#include "CoRE4INET_HelperFunctions.h"
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
-#include <Timer.h>
+#include <CoRE4INET_Timer.h>
 #include <ModuleAccess.h>
-#include "CoRE4INETDefs.h"
+#include "CoRE4INET_Defs.h"
 
-#include "SRPTable.h"
+#include "CoRE4INET_SRPTable.h"
 
 Define_Module(AVBGatewaySourceApplication);
 using namespace CoRE4INET;

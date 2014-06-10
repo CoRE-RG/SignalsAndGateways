@@ -17,7 +17,7 @@
 #define __SIGNALSANDGATEWAYS_AVBGATEWAYSOURCEAPPLICATION_H_
 
 #include <omnetpp.h>
-#include "AVBTrafficSourceApp.h"
+#include "CoRE4INET_AVBTrafficSourceApp.h"
 
 /**
  * TODO - Generated class
