@@ -24,13 +24,14 @@ import signalsandgateways.BusEthernetGateway;
 // - Uses 5ms Cycletime
 // - 80ns Tick length
 //
-network gateway_network
+network major_gateway_network
 {
     parameters:
-        @display("bgb=417,213,white");
+        @display("bgb=653,376,white");
         double measure_interval @unit(s) = default(1s);
-		int countOfCanBussesGW1 = default(1);
-		int countOfCanBussesGW2 = default(1);
+        int countOfCanBussesGW1 = default(1);
+        int countOfCanBussesGW2 = default(1);
+        int countOfCanBussesGW3 = default(1);
     types:
         //
         // All links are configured with 100MBit per second and variable delay
@@ -45,26 +46,47 @@ network gateway_network
         }
     submodules:
         canbus1: CanBus1 {
-            @display("p=39,70");
+            @display("p=70,85");
         }
 
+        canbus2: CanBus2 {
+            @display("p=70,213");
+        }
+
+        canbus3: CanBus3 {
+            @display("p=70,303");
+        }
+
+
         gateway1: Gateway1 {
-            @display("p=115,158");
+            @display("p=196,85");
+        }
+
+        gateway2: Gateway2 {
+            @display("p=196,213");
         }
 
         rtswitch: RTSwitch {
             parameters:
-                @display("p=189,70");
+                @display("p=321,131");
             gates:
                 ethg[3];
         }
 
-        gateway2: Gateway2 {
-            @display("p=275,158");
+        gateway3: Gateway3 {
+            @display("p=432,131");
         }
 
-        canbus2: CanBus2 {
-            @display("p=365,70");
+        canbus4: CanBus4 {
+            @display("p=579,46");
+        }
+
+        canbus5: CanBus5 {
+            @display("p=579,131");
+        }
+
+        canbus6: CanBus6 {
+            @display("p=579,213");
         }
 
     connections:
@@ -73,7 +95,12 @@ network gateway_network
         //
         gateway1.cang[0] <--> cable {  delay = 50ns; } <--> canbus1.gatewayConnect;
         gateway2.cang[0] <--> cable {  delay = 50ns; } <--> canbus2.gatewayConnect;
+        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> canbus3.gatewayConnect;
+        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> canbus4.gatewayConnect;
+        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> canbus5.gatewayConnect;
+        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> canbus6.gatewayConnect;
 
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
         gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
+        gateway3.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[2];
 }

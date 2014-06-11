@@ -28,13 +28,13 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 //
 module RTSwitch extends TTEEtherSwitch
 {
-    int numTTvlink = default(0);
+    int numberOfTT_Vlinks = default(0);
     @display("bgb=457,311");
     submodules:
-        TTvlinks[numTTvlink]: TTDoubleBuffer {
+        TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {
             @display("p=366,30");
         }
-        TTvlinks_ctc[numTTvlink]: TTIncoming {
+        TTvlinks_ctc[numberOfTT_Vlinks]: TTIncoming {
             @display("p=366,118");
         }
         //vl_101_ctc: TTIncoming {
@@ -47,7 +47,7 @@ module RTSwitch extends TTEEtherSwitch
         //}
 
     connections:
-        for i=0..numTTvlink-1 {
+        for i=0..numberOfTT_Vlinks-1 {
             TTvlinks_ctc[i].out --> TTvlinks[i].in;
         }
         //vl_101_ctc.out --> vl_101.in;
