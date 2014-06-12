@@ -115,6 +115,7 @@ class Transformation : public cSimpleModule, ITransformation
     cXMLElementList destination;
     //options field of current item
     cXMLElement* gatewayOptions;
+    string gatewayName;
 };
 
 #endif

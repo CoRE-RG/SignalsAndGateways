@@ -20,6 +20,7 @@
 #include "TransportHeaderFieldElement.h"
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
+#include "GlobalGatewayInformation.h"
 
 
 using namespace dataStruct;
@@ -28,6 +29,7 @@ Define_Module(Transformation);
 
 void Transformation::initialize()
 {
+    gatewayName = getParentModule()->getParentModule()->getName();
     this->transformMap = new StaticTransformationIDList();
     routingTable = par("routingTable").xmlValue();
     items = routingTable->getChildren();
@@ -63,8 +65,14 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
     UTLTY::Utility::stripNonAlphaNum(to);
 
     bool stopLoop = false;
+    bool sendToOwnCanBus = false;
     int destinationCount = 0;
     for(auto &element : destination){
+        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+            if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
+                sendToOwnCanBus = true;
+            }
+        }
         string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
         UTLTY::Utility::stripNonAlphaNum(destinationType);
         EV << "destinationType: " << destinationType << endl;
@@ -137,6 +145,10 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
             }
         }
         destinationCount++;
+    }
+    //send CanDataFrame to own canbusses
+    if(sendToOwnCanBus){
+        send(interDataStructure->dup(), "out");
     }
     return interDataStructure;
 }

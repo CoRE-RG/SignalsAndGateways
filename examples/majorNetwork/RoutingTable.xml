@@ -110,7 +110,7 @@
 		</destination>
 		<destination>
 			<destinationBusID>
-				canbus6
+				canbus5
 			</destinationBusID>
 			<destinationObjectID>
 				2
@@ -176,6 +176,47 @@
 					300ms
 			</holdUpTime>
 			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus5
+			</sourceBusID>
+			<sourceObjectID>
+				3
+			</sourceObjectID>
+			<sourceType>
+				can
+			</sourceType>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus4
+			</destinationBusID>
+			<destinationObjectID>
+				3
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+		</destination>
+		<destination>
+			<destinationBusID>
+				canbus6
+			</destinationBusID>
+			<destinationObjectID>
+				3
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
 		</destination>
 		<gatewayOptions>
 			<allwaysSendOldAndNew>

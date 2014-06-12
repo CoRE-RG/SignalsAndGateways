@@ -58,9 +58,11 @@ void BusConnector::handleMessage(cMessage *msg)
                     TransportMessage *transportMsg = new TransportMessage;
                     transportMsg->encapsulate(canDataFrame->dup());
                     send(transportMsg, currentGate);
+                    EV << "CanDataFrame in "+gatewayName+" forwarded to "+destinationBusID << endl;
                 }else{
-                    string errMsg = "BusConnector could not resolve the destinationBusID '"+destinationBusID+"' for this CanDataFrame! Make sure that the values in the RoutingTable are correct!";
-                    opp_error(errMsg.c_str());
+                    string errMsg = "BusConnector of "+gatewayName+" could not resolve the destinationBusID '"+destinationBusID+"' for this CanDataFrame! Modification of that behavior can be made in the RoutingTable!";
+                    //opp_error(errMsg.c_str());
+                    EV << errMsg << endl;
                 }
 
             }

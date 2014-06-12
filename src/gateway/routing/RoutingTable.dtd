@@ -12,7 +12,7 @@
 <!ELEMENT sourceObjectID			(#PCDATA)>
 <!ELEMENT sourceType				(#PCDATA)>
 
-<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, (backbone)+)>
+<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, (backbone)*)>
 <!ELEMENT destinationBusID			(#PCDATA)>
 <!ELEMENT destinationObjectID		(#PCDATA)>
 <!ELEMENT destinationType			(#PCDATA)>
