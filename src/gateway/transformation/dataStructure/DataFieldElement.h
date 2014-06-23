@@ -18,7 +18,6 @@ public:
     DataFieldElement(int dataLength);
     virtual ~DataFieldElement();
 
-
     int getDataLength() const {
         return dataLength;
     }
@@ -27,7 +26,7 @@ public:
         return data[index];
     }
 
-    void setData(char data, int index) {
+    void setData(int index, char data) {
         this->data[index] = data;
     }
 

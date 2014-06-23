@@ -25,6 +25,7 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
         CanDataFrame *canDataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
         simtime_t timeDifference = simTime()-canDataFrame->getArrivalTime();
+        std::string canbusName = getParentModule()->gate("gate$o")->getPathEndGate()->getOwnerModule()->getParentModule()->getParentModule()->getName();
         char timeReport [85];
         sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
         bubble(timeReport);

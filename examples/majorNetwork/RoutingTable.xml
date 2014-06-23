@@ -173,7 +173,32 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					300ms
+					60ms
+			</holdUpTime>
+			</backbone>
+		</destination>
+		<destination>
+			<destinationBusID>
+				canbus6
+			</destinationBusID>
+			<destinationObjectID>
+				23
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+			<backbone>
+				<backboneCTID>
+					23
+				</backboneCTID>
+				<backboneTransferType>
+					RC
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					90ms
 			</holdUpTime>
 			</backbone>
 		</destination>

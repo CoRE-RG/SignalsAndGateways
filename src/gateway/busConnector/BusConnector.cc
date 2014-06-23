@@ -48,29 +48,36 @@ void BusConnector::handleMessage(cMessage *msg)
                     destinations = element->getParentNode()->getChildrenByTagName("destination");
                 }
             }
+            int destinationCount = 0;
             for(auto &element : destinations){
-                string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(destinationType);
-                string destinationBusID = element->getFirstChildWithTag("destinationBusID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(destinationBusID);
-                cGate *currentGate = GlobalGatewayInformation::getBusGate(gatewayName, destinationBusID);
-                if((strcmp(destinationType.c_str(), "can") == 0) && currentGate != NULL){
-                    TransportMessage *transportMsg = new TransportMessage;
-                    transportMsg->encapsulate(canDataFrame->dup());
-                    send(transportMsg, currentGate);
-                    EV << "CanDataFrame in "+gatewayName+" forwarded to "+destinationBusID << endl;
-                }else{
-                    string errMsg = "BusConnector of "+gatewayName+" could not resolve the destinationBusID '"+destinationBusID+"' for this CanDataFrame! Modification of that behavior can be made in the RoutingTable!";
-                    //opp_error(errMsg.c_str());
-                    EV << errMsg << endl;
+                if(destinationCount == interDataStructure->getAssignedDestinationCount()){
+                    string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
+                    UTLTY::Utility::stripNonAlphaNum(destinationType);
+                    string destinationBusID = element->getFirstChildWithTag("destinationBusID")->getNodeValue();
+                    UTLTY::Utility::stripNonAlphaNum(destinationBusID);
+                    cGate *currentGate = GlobalGatewayInformation::getBusGate(gatewayName, destinationBusID);
+                    if((strcmp(destinationType.c_str(), "can") == 0) && currentGate != NULL){
+                        TransportMessage *transportMsg = new TransportMessage;
+                        transportMsg->encapsulate(canDataFrame->dup());
+                        send(transportMsg, currentGate);
+                        EV << "CanDataFrame in "+gatewayName+" forwarded to "+destinationBusID << endl;
+                    }else{
+                        string errMsg = "BusConnector of "+gatewayName+" could not resolve the destinationBusID '"+destinationBusID+"' for this CanDataFrame! Modification of that behavior can be made in the RoutingTable!";
+                        //opp_error(errMsg.c_str());
+                        EV << errMsg << endl;
+                    }
                 }
-
+                destinationCount++;
             }
 //        }else{
 //            opp_error("BusConnector could not retrieve the RoutingData from InterConnectMessage!");
 //        }
         delete canDataFrame;
+        delete interDataStructure;
     }else if(msg->arrivedOn("busConnect$i")){
+        //Casts fuer Tests
+        TransportMessage *transframe = dynamic_cast<TransportMessage*>(msg);
+        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(transframe->getEncapsulatedPacket());
         send(msg, "out");
     }
 }

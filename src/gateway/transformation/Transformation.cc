@@ -21,6 +21,7 @@
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
+#include <algorithm>
 
 
 using namespace dataStruct;
@@ -64,14 +65,12 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
     string to = "To";
     UTLTY::Utility::stripNonAlphaNum(to);
 
-    bool stopLoop = false;
-    bool sendToOwnCanBus = false;
+    bool busRegistered = false;
     int destinationCount = 0;
+    list<string> registerBackboneCTID;
     for(auto &element : destination){
-        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
-            if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
-                sendToOwnCanBus = true;
-            }
+        if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
+            busRegistered = true;
         }
         string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
         UTLTY::Utility::stripNonAlphaNum(destinationType);
@@ -79,14 +78,16 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
 
         string tranformation = sourceTyp + to + destinationType;
 
-        EV << "tranformation: " << tranformation << endl;
-        if(not(stopLoop)){
-            switch (transformMap->getTransformationID(tranformation)) {
-                case 1://canTocan
-                    {//to declare the scope for the assigned variables
-                        InterConnectMsg *newInterDataStructure = new InterConnectMsg;
-                        newInterDataStructure->setRoutingData(interDataStructure->getRoutingData());
-                        if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+        switch (transformMap->getTransformationID(tranformation)) {
+            case 1://canTocan
+                {//to declare the scope for the assigned variables
+                    InterConnectMsg *newInterDataStructure = new InterConnectMsg;
+                    newInterDataStructure->setRoutingData(interDataStructure->getRoutingData());
+                    if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
+                        if(busRegistered){
+                            //send CanDataFrame to own canbusses
+                            send(interDataStructure->dup(), "out");
+                        }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
                             canDataFrame->setArrivalTime(interDataStructure->getFirstArrivalTimeOnCan());
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
@@ -109,19 +110,29 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                                 }else{
                                     newInterDataStructure->setMessageAccumulation(false);
                                 }
+                                string backboneID = NULL;
                                 if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
                                     int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
+                                    backboneID = std::to_string(ctID);
                                 }else if(strcmp(backboneTransferType.c_str(), "BG") == 0){
                                     string macAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
                                     UTLTY::Utility::stripNonAlphaNum(macAdress);
                                     newInterDataStructure->setDirectMacAdress(macAdress.c_str());
+                                    backboneID = macAdress;
+                                }else{
+                                    opp_error("BackboneTansferType specified in RoutingTable invalid!");
                                 }
-                                send(newInterDataStructure, "out");
+                                std::list<string>::iterator findIter = std::find(registerBackboneCTID.begin(), registerBackboneCTID.end(), backboneID);
+                                if(findIter == registerBackboneCTID.end()){
+                                    send(newInterDataStructure, "out");
+                                    registerBackboneCTID.push_back(backboneID);
+                                }
                             }
-                            stopLoop = true;
-                        }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+                        }
+                    }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
+                        if(busRegistered){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
                             FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
                             CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, element);
@@ -130,26 +141,24 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             send(newInterDataStructure, "out");
                         }
                     }
-                    break;
-                case 2://canToFlexray
+                }
+                break;
+            case 2://canToFlexray
 
-                    break;
-                case 3://flexrayToFlexray
+                break;
+            case 3://flexrayToFlexray
 
-                    break;
-                case 4://flexrayTocan
+                break;
+            case 4://flexrayTocan
 
-                    break;
-                default:
-                    opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
-            }
+                break;
+            default:
+                opp_error("Error when resolving transformation type. Please check the source and destination type in your Routing-Table");
         }
         destinationCount++;
+        busRegistered = false;
     }
-    //send CanDataFrame to own canbusses
-    if(sendToOwnCanBus){
-        send(interDataStructure->dup(), "out");
-    }
+
     return interDataStructure;
 }
 
@@ -163,9 +172,10 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     identifier->setIdentifier(msg->getCanID());
     std::shared_ptr<dataStruct::DataFieldElement> data (new DataFieldElement(msg->getDataArraySize()));
     data->setDataLength(msg->getDataArraySize());
-    for (unsigned int i=0; i<msg->getDataArraySize(); i++){
-        data->setData(msg->getData(i), i);
+    for (int i=0; i<msg->getDataArraySize(); i++){
+        data->setData(i, msg->getData(i));
     }
+
     std::shared_ptr<dataStruct::TimestampFieldElement>  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(msg->getArrivalTime());
     /*
@@ -198,8 +208,8 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         canDataFrame->setCanID(atoi(destinationCanID.c_str()));
 
         std::shared_ptr<DataFieldElement> dataElement = transportFrame.getField<DataFieldElement>();
-        for (int i = 0; dataElement->getDataLength() < i ; i++){
-            canDataFrame->setData(dataElement->getData(i), i);
+        for (int i = 0;  i < dataElement->getDataLength(); i++){
+            canDataFrame->setData(i, dataElement->getData(i));
         }
         canDataFrame->setLength(canDataFrame->getDataArraySize());
 

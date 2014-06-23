@@ -47,12 +47,12 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
             FieldSequenceMessage *fieldSequence = buffer.dequeue();
             if(multiFieldSequence->getByteLength()+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
-                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+                //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }else{
                 sendDirect(multiFieldSequence->dup(), dispatcher, "triggerIn");
                 multiFieldSequence = new MultipleFieldSequenceMessage();
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
-                multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
+                //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }
 
             delete fieldSequence;

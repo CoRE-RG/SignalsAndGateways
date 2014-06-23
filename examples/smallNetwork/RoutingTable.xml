@@ -29,13 +29,13 @@
 					100
 				</backboneCTID>
 				<backboneTransferType>
-					TT
+					RC
 				</backboneTransferType>
 				<messageAccumulation>
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					300ms
+					200ms
 				</holdUpTime>
 			</backbone>
 		</destination>
@@ -79,7 +79,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-				120ms
+					600ms
 			</holdUpTime>
 			</backbone>
 		</destination>
@@ -123,7 +123,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					300ms
+					600ms
 			</holdUpTime>
 			</backbone>
 		</destination>
@@ -167,7 +167,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					0ms
+					600ms
 			</holdUpTime>
 			</backbone>
 		</destination>

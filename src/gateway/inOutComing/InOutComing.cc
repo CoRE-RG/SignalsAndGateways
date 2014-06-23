@@ -60,6 +60,7 @@ void InOutComing::handleMessage(cMessage *msg)
 
         cPacket *delivery = transportMsg->decapsulate();
         if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
+            FiCo4OMNeT::CanDataFrame *canDataFrame = dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery);
             interDataStructure->encapsulate(delivery);
             send(interDataStructure, "out");
         }

@@ -28,6 +28,13 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         }
     } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
         int i = frame->getCanID();
+        for(int i = 0; i < frame->getDataArraySize(); i++){
+            std::string i_str = std::to_string(i);
+            frame->setData(i, *i_str.c_str());
+        }
+        //simtime_t currentTime = simTime();
+        //std::string currentTime_str = simtimeToStr(currentTime);
+
         currentFrameID = i;
         bufferMessageCounter--;
         TransportMessage *transFrame = new TransportMessage();
