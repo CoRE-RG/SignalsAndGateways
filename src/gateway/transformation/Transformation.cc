@@ -86,6 +86,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
                         if(busRegistered){
                             //send CanDataFrame to own canbusses
+                            interDataStructure->setAssignedDestinationCount(destinationCount);
                             send(interDataStructure->dup(), "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
@@ -110,7 +111,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                                 }else{
                                     newInterDataStructure->setMessageAccumulation(false);
                                 }
-                                string backboneID = NULL;
+                                string backboneID;
                                 if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
                                     int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
                                     EV << "CTID: " << ctID << endl;
