@@ -87,6 +87,11 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                         if(busRegistered){
                             //send CanDataFrame to own canbusses
                             interDataStructure->setAssignedDestinationCount(destinationCount);
+                            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
+                            string destinationCanID = element->getFirstChildWithTag("destinationObjectID")->getNodeValue();
+                            UTLTY::Utility::stripNonAlphaNum(destinationCanID);
+                            canDataFrame->setCanID(atoi(destinationCanID.c_str()));
+                            interDataStructure->encapsulate(canDataFrame);
                             send(interDataStructure->dup(), "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
