@@ -36,6 +36,7 @@ public:
     cGate *getBusGate(string busName);
     void registerTimeBuffer(string identifier, TimeTriggeredBuffer *timeBuffer);
     TimeTriggeredBuffer *getTimeBuffer(string identifier);
+    bool checkTimeBufferRegistered(string identifier);
 private:
     GateMap busGateMapping;
     //map to administrate TimeTriggerdBuffers

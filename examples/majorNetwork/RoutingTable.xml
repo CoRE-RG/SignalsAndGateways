@@ -52,6 +52,144 @@
 				canbus2
 			</sourceBusID>
 			<sourceObjectID>
+				54
+			</sourceObjectID>
+			<sourceType>
+				can
+			</sourceType>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus1
+			</destinationBusID>
+			<destinationObjectID>
+				54
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+			<backbone>
+				<backboneCTID>
+					20
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					100ms
+				</holdUpTime>
+			</backbone>
+		</destination>
+		<destination>
+			<destinationBusID>
+				canbus5
+			</destinationBusID>
+			<destinationObjectID>
+				54
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+			<backbone>
+				<backboneCTID>
+					20
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					100ms
+				</holdUpTime>
+			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus2
+			</sourceBusID>
+			<sourceObjectID>
+				14
+			</sourceObjectID>
+			<sourceType>
+				can
+			</sourceType>
+		</source>
+		<destination>
+			<destinationBusID>
+				canbus1
+			</destinationBusID>
+			<destinationObjectID>
+				14
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+			<backbone>
+				<backboneCTID>
+					20
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					110ms
+				</holdUpTime>
+			</backbone>
+		</destination>
+		<destination>
+			<destinationBusID>
+				canbus5
+			</destinationBusID>
+			<destinationObjectID>
+				14
+			</destinationObjectID>
+			<destinationType>
+				can
+			</destinationType>
+			<backbone>
+				<backboneCTID>
+					20
+				</backboneCTID>
+				<backboneTransferType>
+					TT
+				</backboneTransferType>
+				<messageAccumulation>
+					true
+				</messageAccumulation>
+				<holdUpTime>
+					60ms
+				</holdUpTime>
+			</backbone>
+		</destination>
+		<gatewayOptions>
+			<allwaysSendOldAndNew>
+				false
+			</allwaysSendOldAndNew>
+		</gatewayOptions>
+	</item>
+	
+	<item>
+		<source>
+			<sourceBusID>
+				canbus2
+			</sourceBusID>
+			<sourceObjectID>
 				2
 			</sourceObjectID>
 			<sourceType>
@@ -79,7 +217,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					80ms
+					60ms
 				</holdUpTime>
 			</backbone>
 		</destination>
@@ -104,7 +242,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					80ms
+					60ms
 				</holdUpTime>
 			</backbone>
 		</destination>
@@ -129,7 +267,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					80ms
+					60ms
 				</holdUpTime>
 			</backbone>
 		</destination>

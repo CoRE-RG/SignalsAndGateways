@@ -34,6 +34,7 @@ public:
     static cGate *getBusGate(string gatewayName, string busName);
     static void registerTimeBuffer(string gatewayName, string identifier, TimeTriggeredBuffer *timeBuffer);
     static TimeTriggeredBuffer *getTimeBuffer(string gatewayName, string identifier);
+    static bool checkTimeBufferRegistered(string gatewayName, string identifier);
 private:
     static GatewayMap gateways;
     static DedicatedGatewayMetaData *findGateway(string gatewayName);

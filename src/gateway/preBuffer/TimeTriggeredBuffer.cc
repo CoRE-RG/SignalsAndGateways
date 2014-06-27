@@ -31,7 +31,8 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
         simtime_t maxWaitingTime = SimTime::parse(fieldSequence->getMaxWaitingTime());
-        if(not(timerEvent->isScheduled()) || ((timerEvent->getTimestamp()-simTime()) > maxWaitingTime)){
+        simtime_t currentTimerValue = timerEvent->getTimestamp()-simTime();
+        if(((timerEvent->getTimestamp()-simTime()) > maxWaitingTime) || not(timerEvent->isScheduled())){
             cancelEvent(timerEvent);
             simtime_t timerValue = simTime()+maxWaitingTime;
             timerEvent->setTimestamp(timerValue);

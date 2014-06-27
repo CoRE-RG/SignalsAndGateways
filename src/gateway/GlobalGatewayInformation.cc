@@ -59,6 +59,15 @@ TimeTriggeredBuffer *GlobalGatewayInformation::getTimeBuffer(string gatewayName,
     return metaData->getTimeBuffer(identifier);
 }
 
+bool GlobalGatewayInformation::checkTimeBufferRegistered(string gatewayName, string identifier){
+    DedicatedGatewayMetaData *metaData = findGateway(gatewayName);
+    bool registered = false;
+    if(metaData->checkTimeBufferRegistered(identifier)){
+        registered = true;
+    }
+    return registered;
+}
+
 DedicatedGatewayMetaData *GlobalGatewayInformation::findGateway(string gatewayName){
     GatewayMap::iterator pos = gateways.find(gatewayName);
     DedicatedGatewayMetaData *value = NULL;

@@ -62,3 +62,12 @@ TimeTriggeredBuffer *DedicatedGatewayMetaData::getTimeBuffer(string identifier){
     }
     return value;
 }
+
+bool DedicatedGatewayMetaData::checkTimeBufferRegistered(string identifier){
+    bool registered = false;
+    TTBufferMap::const_iterator pos = timeBuffers.find(identifier);
+    if(pos != timeBuffers.end()){
+        registered = true;
+    }
+    return registered;
+}
