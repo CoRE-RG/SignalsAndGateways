@@ -18,6 +18,12 @@
 
 #include "InterConnectMsg_m.h"
 
+/**
+ * @brief Interface for the Transformation module.
+ *
+ *
+ * @author Sebastian Mueller
+ */
 class ITransformation {
 public:
     virtual InterConnectMsg *transform(cMessage *msg) = 0;

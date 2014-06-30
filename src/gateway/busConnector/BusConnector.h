@@ -19,14 +19,31 @@
 #include <omnetpp.h>
 
 /**
- * TODO - Generated class
+ * @brief Redirects the CanDataFrames from and to the gateway.
+ *
+ * Incoming CanDataFrames from the connected busses are forwarded to the gateway. Outgoing CanDataFrames from the gateway are redirected to the proper CAN-bus.
+ *
+ * @author Sebastian Mueller
  */
 using namespace std;
 
 class BusConnector : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Automated registration of the connected CAN-busses in an simulation wide index.
+     *
+     * Every CAN-bus is registered by gatewayName, busName and busGate-reference.
+     */
     virtual void initialize();
+    /**
+     * @brief Handles incoming messages
+     *
+     * Incoming CanDataFrames from the CAN-busses are unaffected forwarded to the gateway.
+     * Outgoing CanDataFrames are redirected to the proper CAN-bus by analyzing the routing Information of the enclosing InterConnectMsg.
+     *
+     * @param msg The incoming message
+     */
     virtual void handleMessage(cMessage *msg);
   private:
     string gatewayName;

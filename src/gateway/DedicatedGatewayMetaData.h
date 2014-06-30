@@ -26,18 +26,72 @@ typedef map<string, cGate*> GateMap;
 typedef map<string, TimeTriggeredBuffer*> TTBufferMap;
 typedef TTBufferMap::value_type ValuePair;
 
+/**
+ * @brief Data-structure to store and handle meta data of the appropriate gateway.
+ *
+ * @author Sebastian Mueller
+ */
 class DedicatedGatewayMetaData {
 public:
     DedicatedGatewayMetaData();
     virtual ~DedicatedGatewayMetaData();
 
+    /**
+     * @brief registration of a bus
+     *
+     * Mapping of busName and appropriate gate-reference.
+     *
+     * @param string busName, cGate* gate
+     */
     void registerBusGate(string busName, cGate *gate);
+    /**
+     * @brief checks registration of a bus
+     *
+     * Previously registered busNames will return true, while non registered busNames returns false.
+     *
+     * @param string busName
+     * @return bool registered
+     */
     bool checkBusRegistered(string busName);
+    /**
+     * @brief returns a gate-reference to the busName
+     *
+     * The gate-reference is returned only if the busName with corresponding gate was registered before.
+     * If the busName never was registered, NULL is returned.
+     *
+     * @param string busName
+     * @return cGate* gate-reference
+     */
     cGate *getBusGate(string busName);
-    void registerTimeBuffer(string identifier, TimeTriggeredBuffer *timeBuffer);
+    /**
+     * @brief registration of a TimeBuffer
+     *
+     * Mapping of identifier, which means in the majority of cases the virtual link identifier, and appropriate TimeBuffer-reference.
+     *
+     * @param string identifier, TimeTriggeredBuffer* identifier
+     */
+    void registerTimeBuffer(string identifier, TimeTriggeredBuffer *identifier);
+    /**
+     * @brief returns a TimeBuffer-reference to the identifier
+     *
+     * The gate-reference is returned only if the identifier with corresponding TimeBuffer-reference was registered before.
+     * If the identifier never was registered, NULL is returned.
+     *
+     * @param string identifier
+     * @return TimeTriggeredBuffer* TimeTriggeredBuffer-reference
+     */
     TimeTriggeredBuffer *getTimeBuffer(string identifier);
+    /**
+     * @brief checks registration of a TimeBuffer
+     *
+     * Previously registered TimeBuffer with appropriate identifier will return true, while non registered TimeBuffers returns false.
+     *
+     * @param string identifier
+     * @return bool registered
+     */
     bool checkTimeBufferRegistered(string identifier);
 private:
+    //map to assign busName to gate-reference
     GateMap busGateMapping;
     //map to administrate TimeTriggerdBuffers
     TTBufferMap timeBuffers;

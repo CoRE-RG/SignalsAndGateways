@@ -18,7 +18,10 @@ package signalsandgateways.gateway.busConnector;
 import signalsandgateways.gateway.IConnection;
 
 //
-// TODO auto-generated module
+// Redirects the CanDataFrames from and to the gateway.
+// Incoming CanDataFrames from the connected busses are forwarded to the gateway. Outgoing CanDataFrames from the gateway are redirected to the proper CAN-bus.
+//
+// @author Sebastian Mueller
 //
 simple BusConnector like IConnection
 {

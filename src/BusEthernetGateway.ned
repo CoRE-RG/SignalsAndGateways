@@ -49,31 +49,12 @@ module BusEthernetGateway
         }
     connections:
         for i=0..countOfCanBusses-1 {
-        	can[i].busInterface <--> gateway.busCon++;//can.busInterface <--> gateway.busCon++;
-            can[i].gate <--> cang[i]; //can.gate
+        	can[i].busInterface <--> gateway.busCon++;
+            can[i].gate <--> cang[i];
         }
         
         tte.ethInterface <--> gateway.ethCon++;
         tte.ethg <--> ethg;
 
-    //submodules:
-    //    routing: <lala> like IRouting {
-    //        parameters:
-    //            @display("p=100,50");
-    //        gates:
-    //            interface[numEthernetApps+numFlexRayApps];
-    //    }
-
-    //    ethernetApp[numEthernetApps]: <default("lala")> like IEthernetGatewayApplication {
-    //    //can_flexrayApp[numFlexRayApps]: <default("lala")> like IFlexrayGatewayApplication;
-    //        @display("p=255,50");
-    //    }
-    //connections:
-    //    for i=0..sizeof(ethernetApp)-1 {
-    //        ethernetApp[i].interface[0] <--> routing.interface[i];
-    //    }
-    //    //for i=0..sizeof(can_flexrayApp)-1 {
-    //    //    can_flexrayApp[i].interface <--> routing.interface[i+sizeof(ethernetApp)];
-    //    //}
 
 }

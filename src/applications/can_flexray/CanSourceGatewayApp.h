@@ -20,10 +20,9 @@
 #include "FiCo4OMNeT_CanTrafficSourceAppBase.h"
 
 /**
- * @brief Sink-Application for the CAN-Node
+ * @brief Source-Application for the CAN-Node
  *
- * This module receives the CanDataFrame and encapsulate it in a TransportMessage.
- * Then the TransportMessage is send to the gateway.
+ * This module receives TransportMessages from the gateway and forwards it to the CAN-bus.
  *
  * @author Sebastian Mueller
  */
@@ -34,9 +33,9 @@ class CanSourceGatewayApp : public CanTrafficSourceAppBase
 {
   protected:
     /**
-     * @brief Handles incoming CanDataFrames
+     * @brief Handles incoming TransportMessages
      *
-     * If the incoming message is a CanDataFrame, then the CanDataFrame is encapsulated in a TransportMessage and forwarded to the gateway.
+     * If the incoming message is a TransportMessage, then the CanDataFrame is decapsulated and forwarded to the CAN-bus.
      *
      * @param msg The incoming message
      */
