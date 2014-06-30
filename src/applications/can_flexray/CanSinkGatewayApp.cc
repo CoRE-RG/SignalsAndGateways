@@ -19,6 +19,13 @@
 
 Define_Module(CanSinkGatewayApp);
 
+template <typename T>
+std::string numberToString ( T number ){
+    std::ostringstream ss;
+    ss << number;
+    return ss.str();
+}
+
 void CanSinkGatewayApp::handleMessage(cMessage *msg) {
     std::string msgClass = msg->getClassName();
     if (msg->arrivedOn("controllerIn")) {
@@ -29,7 +36,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
     } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
         int i = frame->getCanID();
         for(int i = 0; i < frame->getDataArraySize(); i++){
-            std::string i_str = std::to_string(i);
+            std::string i_str = numberToString(i);
             frame->setData(i, *i_str.c_str());
         }
         //simtime_t currentTime = simTime();

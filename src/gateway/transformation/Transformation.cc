@@ -28,6 +28,13 @@ using namespace dataStruct;
 
 Define_Module(Transformation);
 
+template <typename T>
+std::string numberToString ( T number ){
+    std::ostringstream ss;
+    ss << number;
+    return ss.str();
+}
+
 void Transformation::initialize()
 {
     gatewayName = getParentModule()->getParentModule()->getName();
@@ -121,7 +128,7 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                                     int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
-                                    backboneID = std::to_string(ctID);
+                                    backboneID = numberToString(ctID);
                                 }else if(strcmp(backboneTransferType.c_str(), "BG") == 0){
                                     string macAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
                                     UTLTY::Utility::stripNonAlphaNum(macAdress);

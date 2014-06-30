@@ -20,6 +20,13 @@
 
 Define_Module(Dispatcher);
 
+template <typename T>
+std::string numberToString ( T number ){
+    std::ostringstream ss;
+    ss << number;
+    return ss.str();
+}
+
 void Dispatcher::initialize()
 {
     routingTable = par("routingTable").xmlValue();
@@ -73,7 +80,7 @@ void Dispatcher::handleMessage(cMessage *msg)
         if(strcmp(interDataStructure->getBackboneTransferType(), "BG") == 0){
             key = interDataStructure->getDirectMacAdress();
         }else{
-            key = std::to_string(interDataStructure->getBackboneCTID());
+            key = numberToString(interDataStructure->getBackboneCTID());
         }
         TimeTriggeredBuffer *foundBuffer = GlobalGatewayInformation::getTimeBuffer(gatewayName, key);
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(interDataStructure->decapsulate());
