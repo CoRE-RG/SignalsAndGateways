@@ -70,7 +70,7 @@ public:
      *
      * @param string identifier, TimeTriggeredBuffer* identifier
      */
-    void registerTimeBuffer(string identifier, TimeTriggeredBuffer *identifier);
+    void registerTimeBuffer(string identifier, TimeTriggeredBuffer *timeBuffer);
     /**
      * @brief returns a TimeBuffer-reference to the identifier
      *
