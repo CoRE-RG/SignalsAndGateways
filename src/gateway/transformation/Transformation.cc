@@ -48,23 +48,23 @@ void Transformation::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         transform(msg);
     }
-    delete msg;
 }
 
-InterConnectMsg *Transformation::transform(cMessage *msg){
+void Transformation::transform(cMessage *msg){
     InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
 
-    for(auto &element : interDataStructure->getRoutingData()){
-        if(strcmp(element->getTagName(), "source") == 0){
-            source = element;
-        }else if(strcmp(element->getTagName(), "destination") == 0){
-            destination = element->getParentNode()->getChildrenByTagName("destination");
-        }else if(strcmp(element->getTagName(), "gatewayOptions") == 0){
-            gatewayOptions = element;
+    cXMLElementList routingData = interDataStructure->getRoutingData();
+    for(cXMLElementList::iterator element = routingData.begin(); element != routingData.end(); ++element){
+        if(strcmp((*element)->getTagName(), "source") == 0){
+            source = (*element);
+        }else if(strcmp((*element)->getTagName(), "destination") == 0){
+            destination = (*element)->getParentNode()->getChildrenByTagName("destination");
+        }else if(strcmp((*element)->getTagName(), "gatewayOptions") == 0){
+            gatewayOptions = (*element);
         }
     }
 
-    cPacket *delivery = interDataStructure->getEncapsulatedPacket();
+    cPacket *delivery = interDataStructure->decapsulate();
 
     string sourceTyp = source->getFirstChildWithTag("sourceType")->getNodeValue();
     UTLTY::Utility::stripNonAlphaNum(sourceTyp);
@@ -75,11 +75,11 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
     bool busRegistered = false;
     int destinationCount = 0;
     list<string> registerBackboneCTID;
-    for(auto &element : destination){
-        if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum(element->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
+    for(cXMLElementList::iterator element = destination.begin(); element != destination.end(); ++element){
+        if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum((*element)->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
             busRegistered = true;
         }
-        string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
+        string destinationType = (*element)->getFirstChildWithTag("destinationType")->getNodeValue();
         UTLTY::Utility::stripNonAlphaNum(destinationType);
         EV << "destinationType: " << destinationType << endl;
 
@@ -90,16 +90,17 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                 {//to declare the scope for the assigned variables
                     InterConnectMsg *newInterDataStructure = new InterConnectMsg;
                     newInterDataStructure->setRoutingData(interDataStructure->getRoutingData());
+                    newInterDataStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
                         if(busRegistered){
                             //send CanDataFrame to own canbusses
-                            interDataStructure->setAssignedDestinationCount(destinationCount);
-                            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
-                            string destinationCanID = element->getFirstChildWithTag("destinationObjectID")->getNodeValue();
+                            newInterDataStructure->setAssignedDestinationCount(destinationCount);
+                            CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+                            string destinationCanID = (*element)->getFirstChildWithTag("destinationObjectID")->getNodeValue();
                             UTLTY::Utility::stripNonAlphaNum(destinationCanID);
                             canDataFrame->setCanID(atoi(destinationCanID.c_str()));
-                            interDataStructure->encapsulate(canDataFrame);
-                            send(interDataStructure->dup(), "out");
+                            newInterDataStructure->encapsulate(canDataFrame->dup());
+                            send(newInterDataStructure, "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
                             canDataFrame->setArrivalTime(interDataStructure->getFirstArrivalTimeOnCan());
@@ -107,16 +108,16 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
                             cXMLElementList backboneProperties;
-                            backboneProperties = element->getChildrenByTagName("backbone");
-                            for(auto &property : backboneProperties){
-                                string maxWaitingTime = property->getFirstChildWithTag("holdUpTime")->getNodeValue();
+                            backboneProperties = (*element)->getChildrenByTagName("backbone");
+                            for(cXMLElementList::iterator property = backboneProperties.begin(); property != backboneProperties.end(); ++property){
+                                string maxWaitingTime = (*property)->getFirstChildWithTag("holdUpTime")->getNodeValue();
                                 UTLTY::Utility::stripNonAlphaNum(maxWaitingTime);
                                 fieldSequence->setMaxWaitingTime(maxWaitingTime.c_str());
                                 newInterDataStructure->encapsulate(fieldSequence);
-                                string backboneTransferType = property->getFirstChildWithTag("backboneTransferType")->getNodeValue();
+                                string backboneTransferType = (*property)->getFirstChildWithTag("backboneTransferType")->getNodeValue();
                                 UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
                                 newInterDataStructure->setBackboneTransferType(backboneTransferType.c_str());
-                                string messageAccumulation = property->getFirstChildWithTag("messageAccumulation")->getNodeValue();
+                                string messageAccumulation = (*property)->getFirstChildWithTag("messageAccumulation")->getNodeValue();
                                 UTLTY::Utility::stripNonAlphaNum(messageAccumulation);
                                 if(strcmp(messageAccumulation.c_str(), "true") == 0){
                                     newInterDataStructure->setMessageAccumulation(true);
@@ -125,12 +126,12 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                                 }
                                 string backboneID;
                                 if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
-                                    int ctID = atoi(UTLTY::Utility::stripNonAlphaNum(property->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
+                                    int ctID = atoi(UTLTY::Utility::stripNonAlphaNum((*property)->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
                                     backboneID = numberToString(ctID);
                                 }else if(strcmp(backboneTransferType.c_str(), "BG") == 0){
-                                    string macAdress = property->getFirstChildWithTag("directMacAdress")->getNodeValue();
+                                    string macAdress = (*property)->getFirstChildWithTag("directMacAdress")->getNodeValue();
                                     UTLTY::Utility::stripNonAlphaNum(macAdress);
                                     newInterDataStructure->setDirectMacAdress(macAdress.c_str());
                                     backboneID = macAdress;
@@ -141,6 +142,8 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                                 if(findIter == registerBackboneCTID.end()){
                                     send(newInterDataStructure, "out");
                                     registerBackboneCTID.push_back(backboneID);
+                                }else{
+                                    delete newInterDataStructure;
                                 }
                             }
                         }
@@ -148,10 +151,12 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
                         if(busRegistered){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
                             FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, element);
+                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, (*element));
                             newInterDataStructure->encapsulate(canDataFrame);
                             newInterDataStructure->setAssignedDestinationCount(destinationCount);
                             send(newInterDataStructure, "out");
+                        }else{
+                            delete newInterDataStructure;
                         }
                     }
                 }
@@ -172,7 +177,8 @@ InterConnectMsg *Transformation::transform(cMessage *msg){
         busRegistered = false;
     }
 
-    return interDataStructure;
+    delete delivery;
+    delete interDataStructure;
 }
 
 FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame *msg){

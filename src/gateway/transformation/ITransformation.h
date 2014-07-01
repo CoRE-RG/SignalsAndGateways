@@ -26,7 +26,7 @@
  */
 class ITransformation {
 public:
-    virtual InterConnectMsg *transform(cMessage *msg) = 0;
+    virtual void transform(cMessage *msg) = 0;
 };
 
 #endif /* ITRANSFORMATION_H_ */

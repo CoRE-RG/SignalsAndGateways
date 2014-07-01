@@ -70,5 +70,6 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
             }
             delete ctFrame;
         }
+        delete transFrame;
     }
 }

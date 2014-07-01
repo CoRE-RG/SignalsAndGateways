@@ -42,18 +42,18 @@ void Routing::handleMessage(cMessage *msg)
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;
-        for(auto &element : items){
+        for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
             EV << "Cycle: " << i << endl;
-            const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+            const char* sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
             std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID);
             EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
             if(strcmp(str_sourceBusID.c_str(), canDataFrame->getNode()) == 0){
-                const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                const char* sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                 std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
                 if(atoi(str_sourceObjectID.c_str()) == canDataFrame->getCanID()){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
-                    newInterDateStructure->setRoutingData(element->getChildren());
+                    newInterDateStructure->setRoutingData((*element)->getChildren());
                     send(newInterDateStructure, "out");
                     EV << "RoutingData found!" << endl;
                     break;
@@ -67,19 +67,19 @@ void Routing::handleMessage(cMessage *msg)
             InterConnectMsg *newInterDateStructure = new InterConnectMsg;
             FieldSequenceDataStructure transportFrame = multiFieldSequence->popFieldSequence();
             int i = 0;
-            for(auto &element : items){
+            for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
                 EV << "Cycle: " << i << endl;
-                const char* sourceBusID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+                const char* sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
                 std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID);
                 EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
                 TransportHeaderFieldElement* transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
                 if(strcmp(str_sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
-                    const char* sourceObjectID = element->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                    const char* sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                     std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
                     EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
                     IdentifierFieldElement* identifierElement = transportFrame.getField<IdentifierFieldElement>();
                     if(atoi(str_sourceObjectID.c_str()) == identifierElement->getIdentifier()){
-                        newInterDateStructure->setRoutingData(element->getChildren());
+                        newInterDateStructure->setRoutingData((*element)->getChildren());
                         EV << "RoutingData found!" << endl;
                         break;
                     }
@@ -94,6 +94,7 @@ void Routing::handleMessage(cMessage *msg)
             }
 
         }
+        delete multiFieldSequence;
     }
 
     delete msg;

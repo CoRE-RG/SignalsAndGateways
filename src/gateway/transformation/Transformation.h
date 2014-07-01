@@ -65,9 +65,8 @@ class Transformation : public cSimpleModule, ITransformation
      * @see CanDataFrame, InterConnectMsg, StaticTransformationList
      *
      * @param msg The incoming message
-     * @return InterConnectMsg performed message by transformation process
      */
-    virtual InterConnectMsg *transform(cMessage *msg);
+    virtual void transform(cMessage *msg);
   private:
     //Predefined transformation list
     StaticTransformationIDList *transformMap;
