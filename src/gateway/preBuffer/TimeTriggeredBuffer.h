@@ -99,8 +99,7 @@ public:
     std::string dispatchedBackboneTransferType;
     //Module pointer to the dispatcher
     cModule *dispatcher;
-    //For calculation purposes
-    const int mili = 1000;
+    ~TimeTriggeredBuffer();
 };
 
 #endif

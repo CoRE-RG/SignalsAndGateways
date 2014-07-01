@@ -63,3 +63,8 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         sendDirect(multiFieldSequence, dispatcher, "triggerIn");
     }
 }
+
+TimeTriggeredBuffer::~TimeTriggeredBuffer(){
+    cancelEvent(timerEvent);
+    delete timerEvent;
+}
