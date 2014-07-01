@@ -8,7 +8,7 @@
 
 using namespace dataStruct;
 
-typedef std::vector<std::shared_ptr<FieldElement>> FieldSequence;
+typedef std::vector<FieldElement*> FieldSequence;
 
 /**
  * @brief Holds FieldElements in a vector of shared pointers.
@@ -48,12 +48,12 @@ class FieldSequenceDataStructure{
          * @return shared_ptr<T> shared pointer of T
          */
         template<typename T>
-        std::shared_ptr<T> getField(){
-            std::shared_ptr<T> specificElement = NULL;
+        T* getField(){
+            T* specificElement = NULL;
             for (int i = 0; i < fieldSequence.size(); i++) {
-                std::shared_ptr<FieldElement> element = fieldSequence.at(i);
-                if(std::dynamic_pointer_cast<T>(element) != NULL){
-                    specificElement  = std::dynamic_pointer_cast<T>(element);
+                FieldElement* element = fieldSequence.at(i);
+                if(dynamic_cast<T*>(element) != NULL){
+                    specificElement  = dynamic_cast<T*>(element);
                     break;
                 }
             }

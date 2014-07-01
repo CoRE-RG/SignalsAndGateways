@@ -180,21 +180,21 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      * Uebersetzungsprotokoll
      */
     FieldSequenceDataStructure protocolFieldSequence;
-    std::shared_ptr<dataStruct::IdentifierFieldElement> identifier (new IdentifierFieldElement());
+    dataStruct::IdentifierFieldElement* identifier (new IdentifierFieldElement());
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
-    std::shared_ptr<dataStruct::DataFieldElement> data (new DataFieldElement(msg->getDataArraySize()));
+    dataStruct::DataFieldElement* data (new DataFieldElement(msg->getDataArraySize()));
     data->setDataLength(msg->getDataArraySize());
     for (int i=0; i<msg->getDataArraySize(); i++){
         data->setData(i, msg->getData(i));
     }
 
-    std::shared_ptr<dataStruct::TimestampFieldElement>  timestamp (new TimestampFieldElement());
+    dataStruct::TimestampFieldElement*  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(msg->getArrivalTime());
     /*
      * Transportprotokollheader
      */
-    std::shared_ptr<dataStruct::TransportHeaderFieldElement>  transportHeader (new TransportHeaderFieldElement());
+    dataStruct::TransportHeaderFieldElement*  transportHeader (new TransportHeaderFieldElement());
     transportHeader->setStaticTranslationID(1);
     transportHeader->setStaticBusID(msg->getNode());
     transportHeader->setActualityFlag(true);
@@ -220,13 +220,13 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         UTLTY::Utility::stripNonAlphaNum(destinationCanID);
         canDataFrame->setCanID(atoi(destinationCanID.c_str()));
 
-        std::shared_ptr<DataFieldElement> dataElement = transportFrame.getField<DataFieldElement>();
+        DataFieldElement* dataElement = transportFrame.getField<DataFieldElement>();
         for (int i = 0;  i < dataElement->getDataLength(); i++){
             canDataFrame->setData(i, dataElement->getData(i));
         }
         canDataFrame->setLength(canDataFrame->getDataArraySize());
 
-        std::shared_ptr<TimestampFieldElement> timestampElement = transportFrame.getField<TimestampFieldElement>();
+        TimestampFieldElement* timestampElement = transportFrame.getField<TimestampFieldElement>();
         canDataFrame->setArrivalTime(timestampElement->getTimestamp());
     }catch(cException e){
         opp_error(e.what());
