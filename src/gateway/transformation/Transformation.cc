@@ -96,6 +96,7 @@ void Transformation::transform(cMessage *msg){
                             //send CanDataFrame to own canbusses
                             newInterDataStructure->setAssignedDestinationCount(destinationCount);
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
+
                             string destinationCanID = (*element)->getFirstChildWithTag("destinationObjectID")->getNodeValue();
                             UTLTY::Utility::stripNonAlphaNum(destinationCanID);
                             canDataFrame->setCanID(atoi(destinationCanID.c_str()));

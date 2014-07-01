@@ -42,17 +42,17 @@ void BusConnector::handleMessage(cMessage *msg)
         cXMLElementList routingData =  interDataStructure->getRoutingData();
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(interDataStructure->decapsulate());
         cXMLElementList destinations;
-        for(auto &element : routingData){
-            if(strcmp(element->getTagName(), "destination") == 0){
-                destinations = element->getParentNode()->getChildrenByTagName("destination");
+        for(cXMLElementList::iterator element = routingData.begin(); element != routingData.end(); ++element){
+            if(strcmp((*element)->getTagName(), "destination") == 0){
+                destinations = (*element)->getParentNode()->getChildrenByTagName("destination");
             }
         }
         int destinationCount = 0;
-        for(auto &element : destinations){
+        for(cXMLElementList::iterator element = destinations.begin(); element != destinations.end(); ++element){
             if(destinationCount == interDataStructure->getAssignedDestinationCount()){
-                string destinationType = element->getFirstChildWithTag("destinationType")->getNodeValue();
+                string destinationType = (*element)->getFirstChildWithTag("destinationType")->getNodeValue();
                 UTLTY::Utility::stripNonAlphaNum(destinationType);
-                string destinationBusID = element->getFirstChildWithTag("destinationBusID")->getNodeValue();
+                string destinationBusID = (*element)->getFirstChildWithTag("destinationBusID")->getNodeValue();
                 UTLTY::Utility::stripNonAlphaNum(destinationBusID);
                 cGate *currentGate = GlobalGatewayInformation::getBusGate(gatewayName, destinationBusID);
                 if((strcmp(destinationType.c_str(), "can") == 0) && currentGate != NULL){
