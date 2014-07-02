@@ -26,14 +26,15 @@ import unittest
 import csv
 
 core4inetRoot = os.path.abspath("../../../CoRE4INET")
-multiBusGatewayRoot = os.path.abspath("../..")
+multiBusGatewayRoot = os.path.abspath("../../")
 fico4omnetRoot = os.path.abspath("../../../FiCo4OMNeT")
 #TODO: Make test read paths from somewhere else
 inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
-nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + fico4omnetRoot + "/src" + sep + multiBusGatewayRoot + "/src"+ sep + multiBusGatewayRoot + "/examples"
+nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + fico4omnetRoot + "/src" + sep + multiBusGatewayRoot + "/src"+ sep + multiBusGatewayRoot + "examples"
 core4inetLib = core4inetRoot + "/src/CoRE4INET"
 inetLib = inetRoot + "/src/inet"
+fico4omnetLib = fico4omnetRoot + "src/FiCo4OMNeT"
 opp_run = "opp_run"
 cpuTimeLimit = "30s"
 logFile = "test.out"
@@ -186,11 +187,11 @@ class FingerprintTestCase(SimulationTestCase):
 
     def runTest(self):
         # CPU time limit is a safety guard: fingerprint checks shouldn't take forever
-        global core4inetRoot, opp_run, nedPath, cpuTimeLimit
+        global multiBusGatewayRoot, opp_run, nedPath, cpuTimeLimit
 
         # run the simulation
-        workingdir = _iif(self.wd.startswith('/'), core4inetRoot + "/" + self.wd, self.wd)
-        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -u Cmdenv " + self.args + \
+        workingdir = _iif(self.wd.startswith('/'), multiBusGatewayRoot + "/" + self.wd, self.wd)
+        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + inetLib + " -l " + fico4omnetLib + " -u Cmdenv " + self.args + \
             _iif(self.simtimelimit!="", " --sim-time-limit=" + self.simtimelimit, "") + \
             " --fingerprint=" + self.fingerprint + " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
@@ -355,7 +356,7 @@ if __name__ == "__main__":
     testRunner = unittest.TextTestRunner(stream=sys.stdout, verbosity=9, resultclass=SimulationTextTestResult)
 
     testRunner.run(testSuite)
-
+    
     print
     generator.writeUpdatedCSVFiles()
 

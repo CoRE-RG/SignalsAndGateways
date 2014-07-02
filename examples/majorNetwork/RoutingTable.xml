@@ -173,7 +173,7 @@
 					true
 				</messageAccumulation>
 				<holdUpTime>
-					60ms
+					110ms
 				</holdUpTime>
 			</backbone>
 		</destination>

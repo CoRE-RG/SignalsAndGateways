@@ -104,7 +104,7 @@ void Transformation::transform(cMessage *msg){
                             send(newInterDataStructure, "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
-                            canDataFrame->setArrivalTime(interDataStructure->getFirstArrivalTimeOnCan());
+                            canDataFrame->setTimestamp(interDataStructure->getFirstArrivalTimeOnCan());
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
@@ -197,7 +197,8 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     }
 
     dataStruct::TimestampFieldElement*  timestamp (new TimestampFieldElement());
-    timestamp->setTimestamp(msg->getArrivalTime());
+    timestamp->setTimestamp(msg->getTimestamp());
+    EV << "transformCanToTransport: firstCanArrivalTime: " << msg->getTimestamp() << endl;
     /*
      * Transportprotokollheader
      */
@@ -234,7 +235,8 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         canDataFrame->setLength(canDataFrame->getDataArraySize());
 
         TimestampFieldElement* timestampElement = transportFrame.getField<TimestampFieldElement>();
-        canDataFrame->setArrivalTime(timestampElement->getTimestamp());
+        canDataFrame->setTimestamp(timestampElement->getTimestamp());
+        EV << "transformTransportToCan: firstCanArrivalTime: " << timestampElement->getTimestamp() << endl;
     }catch(cException e){
         opp_error(e.what());
     }

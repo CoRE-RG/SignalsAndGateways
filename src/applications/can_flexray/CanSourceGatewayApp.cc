@@ -24,11 +24,12 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
     if(msg->arrivedOn("busInterfaceIn")){
         TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
         CanDataFrame *canDataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
-        simtime_t timeDifference = simTime()-canDataFrame->getArrivalTime();
+        EV << "CanSourceGatewayApp: firstCanArrivalTime: " << canDataFrame->getTimestamp() << endl;
+        simtime_t timeDifference = simTime()-canDataFrame->getTimestamp();
         std::string canbusName = getParentModule()->gate("gate$o")->getPathEndGate()->getOwnerModule()->getParentModule()->getParentModule()->getName();
         char timeReport [85];
         sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
-        bubble(timeReport);
+        EV << timeReport << endl;
         send(canDataFrame, "out");
         delete transFrame;
     }

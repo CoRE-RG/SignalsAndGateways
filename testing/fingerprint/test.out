@@ -1,12 +1,12 @@
 ------------------------------------------------------
 Running: /examples/small_network/ -f omnetpp.ini -c General -r 0
 
-$ cd /home/sebastian/OMNETPP_workspace/CoRE4INET//examples/small_network/
-$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=4ab3-5b98 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/small_network/
+$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGatewaysexamples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeTsrc/FiCo4OMNeT -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=4ab3-5b98 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
 
 ------------------------------------------------------
 Running: /examples/major_network/ -f omnetpp.ini -c General -r 0
 
-$ cd /home/sebastian/OMNETPP_workspace/CoRE4INET//examples/major_network/
-$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=9b24-5156 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/major_network/
+$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGatewaysexamples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeTsrc/FiCo4OMNeT -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=9b24-5156 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
 
