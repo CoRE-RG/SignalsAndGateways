@@ -27,9 +27,9 @@ using namespace FiCo4OMNeT;
 
 void BusConnector::initialize()
 {
+    gatewayName = getParentModule()->getParentModule()->getName();
+    GlobalGatewayInformation::registerGateway(gatewayName);
     for(int i = 0; i < gate("busConnect$i",0)->getVectorSize(); i++){
-        gatewayName = getParentModule()->getParentModule()->getName();
-        GlobalGatewayInformation::registerGateway(gatewayName);
         string busName = gate("busConnect$o",i)->getPathEndGate()->getOwnerModule()->getParentModule()->gate("gate$o")->getPathEndGate()->getOwnerModule()->getParentModule()->getParentModule()->getName();
         GlobalGatewayInformation::registerBusGate(gatewayName, busName, gate("busConnect$o",i));
     }

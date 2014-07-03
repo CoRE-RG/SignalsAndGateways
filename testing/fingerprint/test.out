@@ -1,12 +1,127 @@
 ------------------------------------------------------
-Running: /examples/small_network/ -f omnetpp.ini -c General -r 0
+Running: /examples/smallNetwork/ -f omnetpp.ini -c General -r 0
 
-$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/small_network/
-$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGatewaysexamples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeTsrc/FiCo4OMNeT -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=4ab3-5b98 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/smallNetwork/
+$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src/FiCo4OMNeT -l /home/sebastian/OMNETPP_workspace/SignalsAndGateways/src/SignalsAndGateways -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=15s --fingerprint=ea9f-9539 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+
+OMNeT++ Discrete Event Simulation  (C) 1992-2013 Andras Varga, OpenSim Ltd.
+Version: 4.4.1, build: 140307-1086eab, edition: Academic Public License -- NOT FOR COMMERCIAL USE
+See the license for distribution terms and warranty disclaimer
+Setting up Cmdenv...
+Loading NED files from /home/sebastian/OMNETPP_workspace/inet/src: 270
+Loading NED files from /home/sebastian/OMNETPP_workspace/CoRE4INET/src: 81
+Loading NED files from /home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src: 33
+Loading NED files from /home/sebastian/OMNETPP_workspace/SignalsAndGateways/src: 20
+Loading NED files from /home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples: 21
+
+Preparing for running configuration General, run #0...
+Scenario: $repetition=0
+Assigned runID=General-0-20140703-16:54:19-7784
+Recording eventlog to file `results/General-0.elog'...
+Setting up network `gateway_network'...
+Initializing...
+
+Running simulation...
+** Event #1   T=0   Elapsed: 0.000s (0m 00s)  0% completed
+     Speed:     ev/sec=0   simsec/sec=0   ev/simsec=0
+     Messages:  created: 71   present: 71   in FES: 12
+** Event #44195   T=15   Elapsed: 1.161s (0m 01s)  100% completed
+     Speed:     ev/sec=38065.5   simsec/sec=12.9199   ev/simsec=2946.27
+     Messages:  created: 28545   present: 147   in FES: 12
+
+<!> Simulation time limit reached -- simulation stopped at event #44195, t=15.
+
+
+Calling finish() at end of Run #0...
+busytime: 0.0555283
+simtime: 15
+busytime: 0.0187549
+simtime: 15
+
+<!> Fingerprint successfully verified: ea9f-9539
+
+undisposed object: (FiCo4OMNeT::CanDataFrame) gateway_network.gateway1.can[0].sourceApp.message -- check module destructor
+undisposed object: (FiCo4OMNeT::CanDataFrame) gateway_network.gateway1.can[0].sourceApp.message -- check module destructor
+undisposed object: (FiCo4OMNeT::CanDataFrame) gateway_network.gateway2.can[0].sourceApp.message -- check module destructor
+undisposed object: (FiCo4OMNeT::CanDataFrame) gateway_network.gateway2.can[0].sourceApp.message -- check module destructor
+
+End.
+
+Exit code: 0
+Elapsed time:  1.41s
 
 ------------------------------------------------------
-Running: /examples/major_network/ -f omnetpp.ini -c General -r 0
+Running: /examples/majorNetwork/ -f omnetpp.ini -c General -r 0
 
-$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/major_network/
-$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGatewaysexamples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeTsrc/FiCo4OMNeT -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=5s --fingerprint=9b24-5156 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+$ cd /home/sebastian/OMNETPP_workspace/SignalsAndGateways//examples/majorNetwork/
+$ opp_run -n /home/sebastian/OMNETPP_workspace/inet/src:/home/sebastian/OMNETPP_workspace/CoRE4INET/src:/home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/src:/home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples -l /home/sebastian/OMNETPP_workspace/CoRE4INET/src/CoRE4INET -l /home/sebastian/OMNETPP_workspace/inet/src/inet -l /home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src/FiCo4OMNeT -l /home/sebastian/OMNETPP_workspace/SignalsAndGateways/src/SignalsAndGateways -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=15s --fingerprint=5883-e3dc --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+
+OMNeT++ Discrete Event Simulation  (C) 1992-2013 Andras Varga, OpenSim Ltd.
+Version: 4.4.1, build: 140307-1086eab, edition: Academic Public License -- NOT FOR COMMERCIAL USE
+See the license for distribution terms and warranty disclaimer
+Setting up Cmdenv...
+Loading NED files from /home/sebastian/OMNETPP_workspace/inet/src: 270
+Loading NED files from /home/sebastian/OMNETPP_workspace/CoRE4INET/src: 81
+Loading NED files from /home/sebastian/OMNETPP_workspace/FiCo4OMNeT/src: 33
+Loading NED files from /home/sebastian/OMNETPP_workspace/SignalsAndGateways/src: 20
+Loading NED files from /home/sebastian/OMNETPP_workspace/SignalsAndGateways/examples: 21
+
+Preparing for running configuration General, run #0...
+Scenario: $repetition=0
+Assigned runID=General-0-20140703-16:54:20-7786
+Recording eventlog to file `results/General-0.elog'...
+Setting up network `major_gateway_network'...
+Initializing...
+
+Running simulation...
+** Event #1   T=0   Elapsed: 0.000s (0m 00s)  0% completed
+     Speed:     ev/sec=0   simsec/sec=0   ev/simsec=0
+     Messages:  created: 114   present: 114   in FES: 21
+** Event #71168   T=2.365034222714   Elapsed: 2.000s (0m 02s)  15% completed
+     Speed:     ev/sec=35584   simsec/sec=1.18252   ev/simsec=30091.7
+     Messages:  created: 60227   present: 132   in FES: 16
+** Event #142592   T=4.685001633873   Elapsed: 4.002s (0m 04s)  31% completed
+     Speed:     ev/sec=35694.2   simsec/sec=1.1594   ev/simsec=30786.6
+     Messages:  created: 120627   present: 151   in FES: 24
+** Event #212992   T=6.985004458084   Elapsed: 6.003s (0m 06s)  46% completed
+     Speed:     ev/sec=35182.4   simsec/sec=1.14943   ev/simsec=30608.7
+     Messages:  created: 180291   present: 136   in FES: 19
+** Event #283648   T=9.285001   Elapsed: 8.007s (0m 08s)  61% completed
+     Speed:     ev/sec=35275.1   simsec/sec=1.14828   ev/simsec=30720
+     Messages:  created: 240094   present: 139   in FES: 19
+** Event #354816   T=11.605014675836   Elapsed: 10.013s (0m 10s)  77% completed
+     Speed:     ev/sec=35495.3   simsec/sec=1.15711   ev/simsec=30675.7
+     Messages:  created: 300340   present: 131   in FES: 15
+** Event #425984   T=13.923000705064   Elapsed: 12.014s (0m 12s)  92% completed
+     Speed:     ev/sec=35566.2   simsec/sec=1.15841   ev/simsec=30702.5
+     Messages:  created: 360431   present: 148   in FES: 25
+** Event #458923   T=15   Elapsed: 12.947s (0m 12s)  100% completed
+     Speed:     ev/sec=35341.2   simsec/sec=1.15558   ev/simsec=30583.1
+     Messages:  created: 388302   present: 134   in FES: 14
+
+<!> Simulation time limit reached -- simulation stopped at event #458923, t=15.
+
+
+Calling finish() at end of Run #0...
+busytime: 0.07262775
+simtime: 15
+busytime: 0.492725
+simtime: 15
+busytime: 0
+simtime: 15
+busytime: 0.0231255
+simtime: 15
+busytime: 0.0351299
+simtime: 15
+busytime: 0.020863
+simtime: 15
+
+<!> Fingerprint successfully verified: 5883-e3dc
+
+undisposed object: (FiCo4OMNeT::CanDataFrame) major_gateway_network.canbus3.bus.canBusLogic. -- check module destructor
+
+End.
+
+Exit code: 0
+Elapsed time:  13.42s
 
