@@ -17,6 +17,8 @@ package majorNetwork;
 
 import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 import signalsandgateways.BusEthernetGateway;
+import fico4omnet.bus.can.CanBus;
+import fico4omnet.nodes.can.CanNode;
 
 //
 // Small sample network with three hosts and one switch that shows how to 
@@ -27,7 +29,7 @@ import signalsandgateways.BusEthernetGateway;
 network major_gateway_network
 {
     parameters:
-        @display("bgb=653,376,white");
+        @display("bgb=882,484,white");
         double measure_interval @unit(s) = default(1s);
         int countOfCanBussesGW1 = default(1);
         int countOfCanBussesGW2 = default(1);
@@ -45,60 +47,102 @@ network major_gateway_network
             per = 0;
         }
     submodules:
-        canbus1: CanBus1 {
-            @display("p=70,85");
+        canbus1: CanBus {
+            @display("i=abstract/bus;p=259,98");
         }
+        canbus1_nodes[3]: CanNode {
 
-        canbus2: CanBus2 {
-            @display("p=70,213");
+            @display("p=129,52");
         }
-
-        canbus3: CanBus3 {
-            @display("p=70,303");
+        canbus2: CanBus {
+            @display("i=abstract/bus;p=422,328");
         }
+        canbus2_nodes[3]: CanNode {
+
+            @display("p=422,424");
+        }
+        canbus3: CanBus {
+            @display("i=abstract/bus;p=220,302");
+        }
+        canbus3_nodes[3]: CanNode {
 
 
+            @display("p=129,385");
+        }
         gateway1: Gateway1 {
-            @display("p=196,85");
+            @display("p=324,149");
         }
 
         gateway2: Gateway2 {
-            @display("p=196,213");
+            @display("p=324,277");
         }
 
         rtswitch: RTSwitch {
             parameters:
-                @display("p=321,131");
+                @display("p=449,195");
             gates:
                 ethg[3];
         }
 
         gateway3: Gateway3 {
-            @display("p=432,131");
+            @display("p=560,195");
         }
 
-        canbus4: CanBus4 {
-            @display("p=579,46");
+        canbus4: CanBus {
+            @display("i=abstract/bus;p=613,110");
         }
+        canbus4_nodes[3]: CanNode {
 
-        canbus5: CanBus5 {
-            @display("p=579,131");
+            @display("p=696,79");
         }
-
-        canbus6: CanBus6 {
-            @display("p=579,213");
+        canbus5: CanBus {
+            @display("i=abstract/bus;p=644,195");
         }
+        canbus5_nodes[3]: CanNode {
 
+            @display("p=755,195");
+        }
+        canbus6: CanBus {
+            @display("i=abstract/bus;p=613,277");
+        }
+        canbus6_nodes[3]: CanNode {
+
+            @display("p=696,313");
+        }
     connections:
         //
         // The example uses a simple star topology
         //
-        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> canbus1.gatewayConnect;
-        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> canbus2.gatewayConnect;
-        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> canbus3.gatewayConnect;
-        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> canbus4.gatewayConnect;
-        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> canbus5.gatewayConnect;
-        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> canbus6.gatewayConnect;
+
+        for i=0..(2) {
+            canbus1.gate++ <--> canbus1_nodes[i].gate;
+        }
+        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> canbus1.gate++;
+
+        for i=0..(2) {
+            canbus2.gate++ <--> canbus2_nodes[i].gate;
+        }
+        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> canbus2.gate++;
+
+        for i=0..(2) {
+            canbus3.gate++ <--> canbus3_nodes[i].gate;
+        }
+        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> canbus3.gate++;
+
+        for i=0..(2) {
+            canbus4.gate++ <--> canbus4_nodes[i].gate;
+        }
+        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> canbus4.gate++;
+
+        for i=0..(2) {
+            canbus5.gate++ <--> canbus5_nodes[i].gate;
+        }
+        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> canbus5.gate++;
+
+        for i=0..(2) {
+            canbus6.gate++ <--> canbus6_nodes[i].gate;
+        }
+        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> canbus6.gate++;
 
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
         gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];

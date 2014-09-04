@@ -38,7 +38,7 @@ void Routing::handleMessage(cMessage *msg)
     cPacket *delivery = interDataStructure->decapsulate();
     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
-        canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getParentModule()->getName());
+        canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName());
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;
