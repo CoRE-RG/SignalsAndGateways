@@ -73,7 +73,7 @@
 					0A-00-00-00-00-04
 				</directMacAdress>
 				<backboneTransferType>
-					BG
+					BE
 				</backboneTransferType>
 				<messageAccumulation>
 					true

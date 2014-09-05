@@ -49,7 +49,7 @@ void Dispatcher::initialize()
                     std::string backboneTransferType = (*property)->getFirstChildWithTag("backboneTransferType")->getNodeValue();
                     UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
                     currentBuffer->setDispatchedBackboneTransferType(backboneTransferType);
-                    if(strcmp(backboneTransferType.c_str(), "BG") == 0){
+                    if(strcmp(backboneTransferType.c_str(), "BE") == 0){
                         std::string directMacAdress = (*property)->getFirstChildWithTag("directMacAdress")->getNodeValue();
                         UTLTY::Utility::stripNonAlphaNum(directMacAdress);
                         if(not(GlobalGatewayInformation::checkTimeBufferRegistered(gatewayName, directMacAdress))){
@@ -78,7 +78,7 @@ void Dispatcher::handleMessage(cMessage *msg)
     if(msg->arrivedOn("moduleConnect$i")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         std::string key;
-        if(strcmp(interDataStructure->getBackboneTransferType(), "BG") == 0){
+        if(strcmp(interDataStructure->getBackboneTransferType(), "BE") == 0){
             key = interDataStructure->getDirectMacAdress();
         }else{
             key = numberToString(interDataStructure->getBackboneCTID());
@@ -97,7 +97,7 @@ void Dispatcher::handleMessage(cMessage *msg)
         TimeTriggeredBuffer *sendBuffer = dynamic_cast<TimeTriggeredBuffer*>(msg->getSenderModule());
         std::string dispatchedBackboneTransferType = sendBuffer->getDispatchedBackboneTransferType();
         interDataStructure->setBackboneTransferType(dispatchedBackboneTransferType.c_str());
-        if(strcmp(dispatchedBackboneTransferType.c_str(), "BG") == 0){
+        if(strcmp(dispatchedBackboneTransferType.c_str(), "BE") == 0){
             interDataStructure->setDirectMacAdress((sendBuffer->getDispatchedCTID()).c_str());
         }else{
             interDataStructure->setBackboneCTID(atoi((sendBuffer->getDispatchedCTID()).c_str()));

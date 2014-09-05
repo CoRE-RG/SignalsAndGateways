@@ -1,4 +1,4 @@
-package majorNetwork;
+package majorNetwork.Archiv;
 
 import fico4omnet.bus.can.CanBus;
 import fico4omnet.nodes.can.CanNode;
@@ -6,7 +6,7 @@ import fico4omnet.nodes.can.CanNode;
 // Generic network configuration for CAN-Networks
 // 
 // Can be used for various number of CAN-Nodes, but the design of the network can't be changed. Used for all examples.
-module CanBus6
+module CanBus5
 {
 	@display("bgb=550,350,white");
 	gates:

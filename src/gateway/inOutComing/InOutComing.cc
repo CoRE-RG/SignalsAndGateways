@@ -76,7 +76,7 @@ void InOutComing::handleMessage(cMessage *msg)
         }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
             TransportMessage *transportMsg = new TransportMessage;
             transportMsg->setBackboneTransferType(interDataStructure->getBackboneTransferType());
-            if(strcmp(interDataStructure->getBackboneTransferType(), "BG") == 0){
+            if(strcmp(interDataStructure->getBackboneTransferType(), "BE") == 0){
                 EthernetIIFrame *bgFrame = new EthernetIIFrame();
                 MACAddress address(interDataStructure->getDirectMacAdress());
                 bgFrame->setDest(address);

@@ -131,7 +131,7 @@ void Transformation::transform(cMessage *msg){
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
                                     backboneID = numberToString(ctID);
-                                }else if(strcmp(backboneTransferType.c_str(), "BG") == 0){
+                                }else if(strcmp(backboneTransferType.c_str(), "BE") == 0){
                                     string macAdress = (*property)->getFirstChildWithTag("directMacAdress")->getNodeValue();
                                     UTLTY::Utility::stripNonAlphaNum(macAdress);
                                     newInterDataStructure->setDirectMacAdress(macAdress.c_str());

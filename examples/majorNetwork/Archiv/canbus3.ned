@@ -1,4 +1,4 @@
-package majorNetwork;
+package majorNetwork.Archiv;
 
 import fico4omnet.bus.can.CanBus;
 import fico4omnet.nodes.can.CanNode;
