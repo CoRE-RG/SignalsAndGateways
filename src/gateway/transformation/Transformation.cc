@@ -18,6 +18,7 @@
 #include "DataFieldElement.h"
 #include "TimestampFieldElement.h"
 #include "TransportHeaderFieldElement.h"
+#include "RTRFieldElement.h"
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
@@ -195,6 +196,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     for (int i=0; i<msg->getDataArraySize(); i++){
         data->setData(i, msg->getData(i));
     }
+    dataStruct::RTRFieldElement* rtr (new RTRFieldElement());
 
     dataStruct::TimestampFieldElement*  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(msg->getTimestamp());
@@ -211,6 +213,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      */
     protocolFieldSequence.pushField(transportHeader);
     protocolFieldSequence.pushField(timestamp);
+    protocolFieldSequence.pushField(rtr);
     protocolFieldSequence.pushField(data);
     protocolFieldSequence.pushField(identifier);
 
@@ -221,7 +224,6 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
 CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination){
     CanDataFrame *canDataFrame = new CanDataFrame();
     canDataFrame->setNode("CAN-TTE-Gateway");
-    canDataFrame->setRtr(false);
 
     try{
         string destinationCanID = routingDestination->getFirstChildWithTag("destinationObjectID")->getNodeValue();
@@ -233,6 +235,9 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
             canDataFrame->setData(i, dataElement->getData(i));
         }
         canDataFrame->setLength(canDataFrame->getDataArraySize());
+
+        RTRFieldElement* rtrElement = transportFrame.getField<RTRFieldElement>();
+        canDataFrame->setRtr(rtrElement->isRtr());
 
         TimestampFieldElement* timestampElement = transportFrame.getField<TimestampFieldElement>();
         canDataFrame->setTimestamp(timestampElement->getTimestamp());
