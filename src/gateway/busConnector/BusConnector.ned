@@ -26,6 +26,7 @@ import signalsandgateways.gateway.IConnection;
 simple BusConnector like IConnection
 {
     parameters:
+        @display("bgb=209,144;i=block/dispatch");
   	  	int countOfCanBusses = default(1);
     gates:
         //Input connection for the inter module data exchange within the gateway

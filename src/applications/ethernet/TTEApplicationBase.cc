@@ -47,7 +47,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         transFrame->encapsulate(dynamic_cast<cPacket*>(msg));
         if(transFrame){
             send(transFrame, "ethInterface$o");
-            EV << getFullName()<< ": Message send from gatewayApp to gateway functionality" << endl;
+            EV << getFullName()<< ": Message send from gatewayApp to gatewayBase" << endl;
         }
     }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);

@@ -29,7 +29,7 @@ import fico4omnet.nodes.can.CanNode;
 network major_gateway_network
 {
     parameters:
-        @display("bgb=882,484,white");
+        @display("bgb=936,484,white");
         double measure_interval @unit(s) = default(1s);
         int countOfCanBussesGW1 = default(1);
         int countOfCanBussesGW2 = default(1);
@@ -47,27 +47,27 @@ network major_gateway_network
             per = 0;
         }
     submodules:
-        canbus1: CanBus {
-            @display("i=abstract/bus;p=259,98");
+        Antrieb: CanBus {
+            @display("i=block/network;p=259,98");
         }
-        canbus1_nodes[3]: CanNode {
+        Antrieb_nodes[3]: CanNode {
 
-            @display("p=129,52");
+            @display("p=104,62");
         }
-        canbus2: CanBus {
-            @display("i=abstract/bus;p=422,328");
+        Infotainment: CanBus {
+            @display("i=block/network;p=422,328");
         }
-        canbus2_nodes[3]: CanNode {
+        Infotainment_nodes[3]: CanNode {
 
             @display("p=422,424");
         }
-        canbus3: CanBus {
-            @display("i=abstract/bus;p=220,302");
+        Fahrdynamik1: CanBus {
+            @display("i=block/network;p=220,302");
         }
-        canbus3_nodes[3]: CanNode {
+        Fahrdynamik1_nodes[3]: CanNode {
 
 
-            @display("p=129,385");
+            @display("p=86,302");
         }
         gateway1: Gateway1 {
             @display("p=324,149");
@@ -88,26 +88,26 @@ network major_gateway_network
             @display("p=560,195");
         }
 
-        canbus4: CanBus {
-            @display("i=abstract/bus;p=613,110");
+        Fahrdynamik2: CanBus {
+            @display("i=block/network;p=613,110");
         }
-        canbus4_nodes[3]: CanNode {
+        Fahrdynamik2_nodes[3]: CanNode {
 
-            @display("p=696,79");
+            @display("p=773,71");
         }
-        canbus5: CanBus {
-            @display("i=abstract/bus;p=644,195");
+        Komfort1: CanBus {
+            @display("i=block/network;p=700,195");
         }
-        canbus5_nodes[3]: CanNode {
+        Komfort1_nodes[3]: CanNode {
 
-            @display("p=755,195");
+            @display("p=848,195");
         }
-        canbus6: CanBus {
-            @display("i=abstract/bus;p=613,277");
+        Komfort2: CanBus {
+            @display("i=block/network;p=613,277");
         }
-        canbus6_nodes[3]: CanNode {
+        Komfort2_nodes[3]: CanNode {
 
-            @display("p=696,313");
+            @display("p=751,316");
         }
     connections:
         //
@@ -115,36 +115,36 @@ network major_gateway_network
         //
 
         for i=0..(2) {
-            canbus1.gate++ <--> canbus1_nodes[i].gate;
+            Antrieb.gate++ <--> Antrieb_nodes[i].gate;
         }
-        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> canbus1.gate++;
+        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> Antrieb.gate++;
 
         for i=0..(2) {
-            canbus2.gate++ <--> canbus2_nodes[i].gate;
+            Infotainment.gate++ <--> Infotainment_nodes[i].gate;
         }
-        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> canbus2.gate++;
+        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> Infotainment.gate++;
 
         for i=0..(2) {
-            canbus3.gate++ <--> canbus3_nodes[i].gate;
+            Fahrdynamik1.gate++ <--> Fahrdynamik1_nodes[i].gate;
         }
-        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> canbus3.gate++;
+        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> Fahrdynamik1.gate++;
 
         for i=0..(2) {
-            canbus4.gate++ <--> canbus4_nodes[i].gate;
+            Fahrdynamik2.gate++ <--> Fahrdynamik2_nodes[i].gate;
         }
-        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> canbus4.gate++;
+        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> Fahrdynamik2.gate++;
 
         for i=0..(2) {
-            canbus5.gate++ <--> canbus5_nodes[i].gate;
+            Komfort1.gate++ <--> Komfort1_nodes[i].gate;
         }
-        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> canbus5.gate++;
+        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> Komfort1.gate++;
 
         for i=0..(2) {
-            canbus6.gate++ <--> canbus6_nodes[i].gate;
+            Komfort2.gate++ <--> Komfort2_nodes[i].gate;
         }
-        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> canbus6.gate++;
+        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> Komfort2.gate++;
 
         gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
-        gateway2.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[1];
-        gateway3.ethg <--> cable {  delay = 50ns; } <--> rtswitch.ethg[2];
+        gateway2.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
+        gateway3.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
 }

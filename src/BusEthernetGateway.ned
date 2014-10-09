@@ -27,8 +27,8 @@ import signalsandgateways.applications.can_flexray.CanGatewayNode;
 module BusEthernetGateway
 {
     parameters:
-  	  	@display("bgb=243,216;i=device/router");
-  	  	int countOfCanBusses = default(1);
+        @display("bgb=281,189;i=device/router");
+        int countOfCanBusses = default(1);
     gates:
         //ethernet connection
         inout ethg;
@@ -49,10 +49,10 @@ module BusEthernetGateway
         }
     connections:
         for i=0..countOfCanBusses-1 {
-        	can[i].busInterface <--> gateway.busCon++;
+            can[i].busInterface <--> gateway.busCon++;
             can[i].gate <--> cang[i];
         }
-        
+
         tte.ethInterface <--> gateway.ethCon++;
         tte.ethg <--> ethg;
 
