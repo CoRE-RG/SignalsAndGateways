@@ -21,15 +21,7 @@ module Gateway3 extends BusEthernetGateway
 {
     @display("bgb=479,314");
     submodules:
-        //vl_102_ctc: TTIncoming {
-        //    parameters:
-        //        @display("p=350,160");
 
-        //}
-        //vl_102: TTDoubleBuffer {
-        //    parameters:
-        //        @display("p=440,160");
-        //}
     connections:
-        //vl_102_ctc.out --> vl_102.in;
+
 }
