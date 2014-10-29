@@ -1,4 +1,4 @@
-package smallNetwork;
+package deprecatedSmallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -25,13 +25,13 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 //
 // - Sends time-triggered messages at 1ms with VL-ID 100
 //
-module Node2 extends TTEEtherHost
+module Node1 extends TTEEtherHost
 {
     parameters:
         int numTTvlink = default(0);
     @display("bgb=479,314");
     submodules:
-	    TTvlinks[numTTvlink]: TTDoubleBuffer {
+        TTvlinks[numTTvlink]: TTDoubleBuffer {
             @display("p=366,37");
         }
         TTvlinks_ctc[numTTvlink]: TTIncoming {
@@ -47,7 +47,7 @@ module Node2 extends TTEEtherHost
         //        @display("p=440,160");
         //}
     connections:
-        for i = 0..numTTvlink-1 {
+      	for i = 0..numTTvlink-1 {
             TTvlinks_ctc[i].out-->TTvlinks[i].in;
         }
         //vl_102_ctc.out --> vl_102.in;

@@ -1,4 +1,4 @@
-package smallNetwork;
+package deprecatedSmallNetwork;
 
 import fico4omnet.bus.can.CanBus;
 import fico4omnet.nodes.can.CanNode;
