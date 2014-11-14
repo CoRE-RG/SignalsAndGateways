@@ -32,6 +32,8 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
         EV << timeReport << endl;
         send(canDataFrame, "out");
         delete transFrame;
+    } else {
+        delete msg;
     }
 
 }
