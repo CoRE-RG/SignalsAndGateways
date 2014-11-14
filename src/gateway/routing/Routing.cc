@@ -57,6 +57,8 @@ void Routing::handleMessage(cMessage *msg)
                     send(newInterDateStructure, "out");
                     EV << "RoutingData found!" << endl;
                     break;
+                } else {
+                    delete newInterDateStructure;//TODO darf ich das hier machen?!
                 }
             }
             i++;
@@ -91,6 +93,8 @@ void Routing::handleMessage(cMessage *msg)
                 fieldSequence->setTransportFrame(transportFrame);
                 newInterDateStructure->encapsulate(fieldSequence);
                 send(newInterDateStructure, "out");
+            } else {
+                delete newInterDateStructure; //TODO darf ich das hier machen?!
             }
 
         }

@@ -33,24 +33,29 @@ void PreBuffer::handleMessage(cMessage *msg)
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         cPacket *delivery = interDataStructure->decapsulate();
         if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
-            FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
             if(interDataStructure->getMessageAccumulation()){
                 interDataStructure->encapsulate(delivery);
                 send(interDataStructure, "moduleConnect$o");
             }else{
+                FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
                 MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage;
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 interDataStructure->encapsulate(multiFieldSequence);
                 send(interDataStructure, "out");
+                delete fieldSequence;
             }
 
         }else if(dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery) != NULL){
             interDataStructure->encapsulate(delivery);
             send(interDataStructure, "out");
+        } else {
+            delete delivery;
         }
 
     }else if(msg->arrivedOn("moduleConnect$i")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);
         send(interDataStructure, "out");
+    } else {
+        delete msg;
     }
 }

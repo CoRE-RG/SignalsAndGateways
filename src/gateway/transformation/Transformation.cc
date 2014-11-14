@@ -105,7 +105,7 @@ void Transformation::transform(cMessage *msg){
                             send(newInterDataStructure, "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
-                            canDataFrame->setTimestamp(interDataStructure->getFirstArrivalTimeOnCan());
+//                            canDataFrame->setTimestamp(interDataStructure->getFirstArrivalTimeOnCan()); // Timestamp of canDataFrame is already set in the source app of the original sender
                             FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
