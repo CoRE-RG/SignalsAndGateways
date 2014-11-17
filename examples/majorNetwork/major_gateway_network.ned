@@ -29,7 +29,7 @@ import fico4omnet.nodes.can.CanNode;
 network major_gateway_network
 {
     parameters:
-        @display("bgb=936,484,white");
+        @display("bgb=936,511,white");
         double measure_interval @unit(s) = default(1s);
         int countOfCanBussesGW1 = default(1);
         int countOfCanBussesGW2 = default(1);
@@ -48,26 +48,26 @@ network major_gateway_network
         }
     submodules:
         Antrieb: CanBus {
-            @display("i=block/network;p=259,98");
+            @display("i=block/network;p=220,62");
         }
         Antrieb_nodes[3]: CanNode {
 
-            @display("p=104,62");
+            @display("p=86,62,c,60");
         }
         Infotainment: CanBus {
-            @display("i=block/network;p=422,328");
+            @display("i=block/network;p=322,367");
         }
         Infotainment_nodes[3]: CanNode {
 
-            @display("p=422,424");
+            @display("p=322,463,r,80");
         }
         Fahrdynamik1: CanBus {
-            @display("i=block/network;p=220,302");
+            @display("i=block/network;p=220,277");
         }
         Fahrdynamik1_nodes[3]: CanNode {
 
 
-            @display("p=86,302");
+            @display("p=86,277,c,60");
         }
         gateway1: Gateway1 {
             @display("p=324,149");
@@ -79,35 +79,35 @@ network major_gateway_network
 
         rtswitch: RTSwitch {
             parameters:
-                @display("p=449,195");
+                @display("p=449,217");
             gates:
                 ethg[3];
         }
 
         gateway3: Gateway3 {
-            @display("p=560,195");
+            @display("p=560,217");
         }
 
         Fahrdynamik2: CanBus {
-            @display("i=block/network;p=613,110");
+            @display("i=block/network;p=652,122");
         }
         Fahrdynamik2_nodes[3]: CanNode {
 
-            @display("p=773,71");
+            @display("p=652,50,r,80");
         }
         Komfort1: CanBus {
-            @display("i=block/network;p=700,195");
+            @display("i=block/network;p=652,217");
         }
         Komfort1_nodes[3]: CanNode {
 
-            @display("p=848,195");
+            @display("p=778,157,c,60");
         }
         Komfort2: CanBus {
-            @display("i=block/network;p=613,277");
+            @display("i=block/network;p=652,328");
         }
         Komfort2_nodes[3]: CanNode {
 
-            @display("p=751,316");
+            @display("p=652,406,r,80");
         }
     connections:
         //
