@@ -32,6 +32,8 @@ module CanGatewayNode like IBusGatewayApplication
 {
     parameters:
         int numSourceApps = default(1);						// Number of source apps in this node
+        int numSinkApps = default(1);						// Number of source apps in this node
+        int numInputBuffer = default(1);					// Number of input buffer in this node
         int errorperc = default(0);							// If errors are enabled: percentage of errors
         string node = default("0");							// Name of the node
         @display("i=block/app2;bgb=298,222");
@@ -45,7 +47,7 @@ module CanGatewayNode like IBusGatewayApplication
             gates:
                 phygate;
         }
-        bufferIn: CanInputBuffer {
+        bufferIn[numInputBuffer]: CanInputBuffer {
             @display("p=233,102");
             gates:
                 in[1];
@@ -58,18 +60,18 @@ module CanGatewayNode like IBusGatewayApplication
         sourceApp[numSourceApps]: CanSourceGatewayApp {
             @display("p=98,32,row,70");
         }
-        sinkApp: CanSinkGatewayApp {
+        sinkApp[numInputBuffer]: CanSinkGatewayApp {
             @display("p=233,32");
         }
     connections:
         canNodePort.phygate <--> gate;
         canNodePort.upperLayerIn <-- bufferOut.out;
-        canNodePort.upperLayerOut --> bufferIn.in[0];
-        sinkApp.in <-- bufferIn.out;
+//        canNodePort.upperLayerOut --> bufferIn.in[0];
+//        sinkApp.in <-- bufferIn.out;
 
         for i=0..numSourceApps-1 {
             sourceApp[i].out --> bufferOut.in[i];
             busInterface$i --> sourceApp[i].busInterfaceIn;
         }
-        busInterface$o <-- sinkApp.busInterfaceOut;
+        busInterface$o <-- sinkApp[0].busInterfaceOut;
 }

@@ -53,10 +53,10 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
                   << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'"
                   << endl;
 
-        CanInputBuffer *buffer =
-                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
-        buffer->deleteFrame(currentFrameID);
-        idle = true;
+//        CanInputBuffer *buffer =  //TODO not needed with the current version of multiple sink apps
+//                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
+//        buffer->deleteFrame(currentFrameID);
+//        idle = true;
 
     } else if (msg->isSelfMessage()) {
         CanInputBuffer *buffer =
