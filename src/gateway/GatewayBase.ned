@@ -21,12 +21,34 @@ import signalsandgateways.gateway.routing.Routing;
 import signalsandgateways.gateway.transformation.Transformation;
 import signalsandgateways.gateway.preBuffer.MessageDispatcher;
 import signalsandgateways.gateway.busConnector.BusConnector;
+import ned.DatarateChannel;
 
 //
 // Consilidation of all top level modules of the gateway
 //
 // @author Sebastian Mueller
 //
+
+channel iocomDelay extends DatarateChannel
+{
+    double iocomdelay @unit(s) = default(0);
+    delay = iocomdelay;
+}
+channel routeDelay extends DatarateChannel
+{
+    double routedelay @unit(s) = default(0);
+    delay = routedelay;
+}
+channel transformDelay extends DatarateChannel
+{
+    double transformdelay @unit(s) = default(0);
+    delay = transformdelay;
+}
+channel prebuffDelay extends DatarateChannel
+{
+    double prebuffdelay @unit(s) = default(0);
+    delay = prebuffdelay;
+}
 
 module GatewayBase
 {
@@ -68,11 +90,11 @@ module GatewayBase
         	busCon[i] <--> busConnector.busConnect[i];
         }
         ethCon[0] <--> iocom.appInterface++;
-        iocom.out --> route.in;
+        iocom.out --> iocomDelay --> route.in;
         iocom.busOut --> busConnector.in;
         iocom.busIn <-- busConnector.out;
-        route.out --> transform.in;
-        transform.out --> prebuff.in;
-        prebuff.out --> iocom.in;
+        route.out --> routeDelay --> transform.in;
+        transform.out --> transformDelay --> prebuff.in;
+        prebuff.out --> prebuffDelay --> iocom.in;
         prebuff.moduleConnect <--> buffering.moduleConnect;
 }
