@@ -31,7 +31,7 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
         sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
         EV << timeReport << endl;
         send(canDataFrame, "out");
-        delete transFrame;
+        delete msg;
     } else {
         delete msg;
     }
