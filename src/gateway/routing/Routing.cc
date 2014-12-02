@@ -38,8 +38,9 @@ void Routing::handleMessage(cMessage *msg)
     cPacket *delivery = interDataStructure->decapsulate();
     if(dynamic_cast<CanDataFrame*>(delivery) != NULL){
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
-        const char* busname = canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName();
         canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName());
+        const char* busname = canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName();
+        int canID = canDataFrame->getCanID();
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;
@@ -52,14 +53,14 @@ void Routing::handleMessage(cMessage *msg)
                 const char* sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                 std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
-                if(atoi(str_sourceObjectID.c_str()) == canDataFrame->getCanID()){
+                if(atoi(str_sourceObjectID.c_str()) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData((*element)->getChildren());
                     send(newInterDateStructure, "out");
                     EV << "RoutingData found!" << endl;
                     break;
                 } else {
-                    delete newInterDateStructure;//TODO darf ich das hier machen?!
+//                    delete newInterDateStructure;//TODO darf ich das hier machen?! Ich glaube nicht!!
                 }
             }
             i++;
@@ -95,7 +96,7 @@ void Routing::handleMessage(cMessage *msg)
                 newInterDateStructure->encapsulate(fieldSequence);
                 send(newInterDateStructure, "out");
             } else {
-                delete newInterDateStructure; //TODO darf ich das hier machen?!
+                delete newInterDateStructure; //TODO darf ich das hier machen?! Hier ist das glaube ich okay
             }
 
         }

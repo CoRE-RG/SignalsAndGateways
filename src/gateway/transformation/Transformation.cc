@@ -197,6 +197,7 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
         data->setData(i, msg->getData(i));
     }
     dataStruct::RTRFieldElement* rtr (new RTRFieldElement());
+    rtr->setRtr(msg->getRtr());
 
     dataStruct::TimestampFieldElement*  timestamp (new TimestampFieldElement());
     timestamp->setTimestamp(msg->getTimestamp());
