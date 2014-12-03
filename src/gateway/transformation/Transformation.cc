@@ -235,7 +235,7 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         for (int i = 0;  i < dataElement->getDataLength(); i++){
             canDataFrame->setData(i, dataElement->getData(i));
         }
-        canDataFrame->setLength(canDataFrame->getDataArraySize());
+//        canDataFrame->setLength(canDataFrame->getDataArraySize()); //TODO das ist qutsch glaube ich
 
         RTRFieldElement* rtrElement = transportFrame.getField<RTRFieldElement>();
         canDataFrame->setRtr(rtrElement->isRtr());
