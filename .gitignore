@@ -7,4 +7,6 @@
 *.tkenvrc
 *.tkenvlog
 
-*.elog*.dll
+*.so
+*.dylib
+*.dll
