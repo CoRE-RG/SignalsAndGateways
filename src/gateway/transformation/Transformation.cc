@@ -191,9 +191,8 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     dataStruct::IdentifierFieldElement* identifier (new IdentifierFieldElement());
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
-    int payloadbytelength = (msg->getBitLength() - 47)/8; //TODO CAN Versions
+    int payloadbytelength = msg->getDataArraySize();
     dataStruct::DataFieldElement* data (new DataFieldElement(payloadbytelength));
-    data->setDataLength(payloadbytelength);
     for (int i=0; i<payloadbytelength; i++){
         data->setData(i, msg->getData(i));
     }
@@ -233,10 +232,10 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         canDataFrame->setCanID(atoi(destinationCanID.c_str()));
 
         DataFieldElement* dataElement = transportFrame.getField<DataFieldElement>();
+        canDataFrame->setDataArraySize(dataElement->getDataLength());
         for (int i = 0;  i < dataElement->getDataLength(); i++){
             canDataFrame->setData(i, dataElement->getData(i));
         }
-        canDataFrame->setBitLength(dataElement->getDataLength() * 8 + 47); //TODO CAN Versions
 
         RTRFieldElement* rtrElement = transportFrame.getField<RTRFieldElement>();
         canDataFrame->setRtr(rtrElement->isRtr());

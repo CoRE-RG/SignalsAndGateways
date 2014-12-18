@@ -30,7 +30,7 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
         char timeReport [85];
         sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
         EV << timeReport << endl;
-        //canDataFrame->setBitLength(calculateLength(canDataFrame->getByteLength()));
+        canDataFrame->setBitLength(calculateLength(canDataFrame->getDataArraySize()));
         send(canDataFrame, "out");
         delete transFrame;
     } else {
