@@ -4,6 +4,7 @@
 *.vec
 *.sca
 *.anf
+*.elog
 *.tkenvrc
 *.tkenvlog
 
