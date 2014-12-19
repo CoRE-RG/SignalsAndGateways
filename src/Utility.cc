@@ -35,15 +35,15 @@ namespace UTLTY{
 
     std::string Utility::stripNonAlphaNum(const char *str)
     {
-        std::string *stringRepresentation = new std::string(str, 0, 55);
-        stripNonAlphaNum(*stringRepresentation);
-        return *stringRepresentation;
+        std::string stringRepresentation;// = new std::string(str, 0, 55);
+        stripNonAlphaNum(stringRepresentation);
+        return stringRepresentation;
     }
 
     std::string Utility::stripNonAlphaNum(const char *str, int maxLength){
-        std::string *stringRepresentation = new std::string(str, findFirstAlphaNum(str), maxLength);
-        stripNonAlphaNum(*stringRepresentation);
-        return *stringRepresentation;
+        std::string stringRepresentation;// = new std::string(str, findFirstAlphaNum(str), maxLength);
+        stripNonAlphaNum(stringRepresentation);
+        return stringRepresentation;
     }
 }
 
