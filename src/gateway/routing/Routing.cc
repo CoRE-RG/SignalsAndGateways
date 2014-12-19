@@ -56,15 +56,14 @@ void Routing::handleMessage(cMessage *msg)
                 if(atoi(str_sourceObjectID.c_str()) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData((*element)->getChildren());
-                    send(newInterDateStructure, "out");
+                    send(newInterDateStructure->dup(), "out");
                     EV << "RoutingData found!" << endl;
                     break;
-                } else {
-//                    delete newInterDateStructure;//TODO darf ich das hier machen?! Ich glaube nicht!!
                 }
             }
             i++;
         }
+        delete newInterDateStructure;
     }else if(dynamic_cast<MultipleFieldSequenceMessage*>(delivery) != NULL){
         MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(delivery);
         while(multiFieldSequence->getFieldCount() > 0){

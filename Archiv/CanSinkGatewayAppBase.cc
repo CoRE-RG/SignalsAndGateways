@@ -42,7 +42,7 @@ void CanSinkGatewayAppBase::handleMessage(cMessage *msg) {
         //currentFrameID = i;
         //bufferMessageCounter--;
         //startWorkOnFrame(0); //TODO working time
-
+        throw cRuntimeError("Code below must be fixed, at the end of method encapsiulated frame is deleted");
         CanDataFrame *transDataFrame = dynamic_cast<CanDataFrame *>(msg);
         TransportMessage *transFrame = new TransportMessage();
         transFrame->encapsulate(transDataFrame);
