@@ -49,9 +49,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         EV << "CanSinkGatewayApp: firstCanArrivalTime: " << msg->getArrivalTime() << endl;
         transFrame->encapsulate(frame->dup());
         send(transFrame, "busInterfaceOut");
-        EV
-                  << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'"
-                  << endl;
+        EV << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'" << endl;
 
 //        CanInputBuffer *buffer =  //TODO not needed with the current version of multiple sink apps
 //                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
@@ -59,8 +57,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
 //        idle = true;
 
     } else if (msg->isSelfMessage()) {
-        CanInputBuffer *buffer =
-                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
+        CanInputBuffer *buffer = (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
         if (bufferMessageCounter > 0) {
             requestFrame();

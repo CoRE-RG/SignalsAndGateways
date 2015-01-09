@@ -53,18 +53,16 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
         if(strcmp(transFrame->getBackboneTransferType(), "BE") == 0){
             EthernetIIFrame *bgFrame = dynamic_cast<EthernetIIFrame*>(transFrame->decapsulate());
-            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin();
-                    buf != bgbuffers.end(); buf++) {
+            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
                 sendDirect(bgFrame->dup(), (*buf)->gate("in"));
             }
             delete bgFrame;
         }else if(strcmp(transFrame->getBackboneTransferType(), "AVB") == 0){
-
+            //TODO: AVB transfer
         }else {
             CTFrame *ctFrame = dynamic_cast<CTFrame*>(transFrame->decapsulate());
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
-            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin();
-                                   buf!=buffer.end();buf++){
+            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){
                 Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
                 sendDirect(ctFrame->dup(), in->gate("in"));
             }
