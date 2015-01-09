@@ -46,14 +46,14 @@ void Routing::handleMessage(cMessage *msg)
         int i = 0;
         for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
             EV << "Cycle: " << i << endl;
-            const char* sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-            std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID);
-            EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
-            if(strcmp(str_sourceBusID.c_str(), busname) == 0){
-                const char* sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
-                EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
-                if(atoi(str_sourceObjectID.c_str()) == canID){
+            std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+            UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+            EV << "sourceBusID: " << sourceBusID.c_str() << endl;
+            if(strcmp(sourceBusID.c_str(), busname) == 0){
+                std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
+                if(atoi(sourceObjectID.c_str()) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData((*element)->getChildren());
                     send(newInterDateStructure->dup(), "out");
@@ -72,16 +72,16 @@ void Routing::handleMessage(cMessage *msg)
             int i = 0;
             for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
                 EV << "Cycle: " << i << endl;
-                const char* sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-                std::string str_sourceBusID = UTLTY::Utility::stripNonAlphaNum(sourceBusID);
-                EV << "sourceBusID: " << str_sourceBusID.c_str() << endl;
+                std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
+                UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+                EV << "sourceBusID: " << sourceBusID.c_str() << endl;
                 TransportHeaderFieldElement* transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
-                if(strcmp(str_sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
-                    const char* sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                    std::string str_sourceObjectID = UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
-                    EV << "sourceObjectID: " << str_sourceObjectID.c_str() << endl;
+                if(strcmp(sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
+                    std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
+                    UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                    EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
                     IdentifierFieldElement* identifierElement = transportFrame.getField<IdentifierFieldElement>();
-                    if(atoi(str_sourceObjectID.c_str()) == identifierElement->getIdentifier()){
+                    if(atoi(sourceObjectID.c_str()) == identifierElement->getIdentifier()){
                         newInterDateStructure->setRoutingData((*element)->getChildren());
                         EV << "RoutingData found!" << endl;
                         break;
