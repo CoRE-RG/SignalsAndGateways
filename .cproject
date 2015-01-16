@@ -26,7 +26,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.765051259" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.include.paths.655679965" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/TTEthernetModel/src/applications/api/AS6802}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/examples}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2046689259" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -82,7 +81,6 @@
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-				<externalSettings containerId="BusModel;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
@@ -90,6 +88,7 @@
 						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
+				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 			</storageModule>
 		</cconfiguration>
 		<cconfiguration id="org.omnetpp.cdt.gnu.config.release.691127320">
@@ -121,6 +120,12 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1676755630" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
+								<option id="gnu.cpp.link.option.paths.679394934" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CORE4INET/emf4cpp-0.0.2/lib}&quot;"/>
+								</option>
+								<option id="gnu.cpp.link.option.libs.1272544862" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1928965246" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -137,7 +142,16 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/CORE4INET/emf4cpp-0.0.2/lib"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
