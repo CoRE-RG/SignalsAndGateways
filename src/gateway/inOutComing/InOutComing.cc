@@ -65,6 +65,8 @@ void InOutComing::handleMessage(cMessage *msg)
             FiCo4OMNeT::CanDataFrame *canDataFrame = dynamic_cast<FiCo4OMNeT::CanDataFrame*>(delivery);
             newInterDataStructure->encapsulate(canDataFrame);
             send(newInterDataStructure, "out");
+        }else{
+            delete newInterDataStructure;
         }
     }else if(msg->arrivedOn("in")){
         InterConnectMsg *interDataStructure = dynamic_cast<InterConnectMsg*>(msg);

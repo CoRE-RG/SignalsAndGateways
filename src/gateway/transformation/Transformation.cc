@@ -188,24 +188,24 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      * Uebersetzungsprotokoll
      */
     FieldSequenceDataStructure protocolFieldSequence;
-    dataStruct::IdentifierFieldElement* identifier (new IdentifierFieldElement());
+    dataStruct::IdentifierFieldElement* identifier = new IdentifierFieldElement();
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
     int payloadbytelength = msg->getDataArraySize();
-    dataStruct::DataFieldElement* data (new DataFieldElement(payloadbytelength));
+    dataStruct::DataFieldElement* data = new DataFieldElement(payloadbytelength);
     for (int i=0; i<payloadbytelength; i++){
         data->setData(i, msg->getData(i));
     }
-    dataStruct::RTRFieldElement* rtr (new RTRFieldElement());
+    dataStruct::RTRFieldElement* rtr = new RTRFieldElement();
     rtr->setRtr(msg->getRtr());
 
-    dataStruct::TimestampFieldElement*  timestamp (new TimestampFieldElement());
+    dataStruct::TimestampFieldElement*  timestamp = new TimestampFieldElement();
     timestamp->setTimestamp(msg->getTimestamp());
     EV << "transformCanToTransport: firstCanArrivalTime: " << msg->getTimestamp() << endl;
     /*
      * Transportprotokollheader
      */
-    dataStruct::TransportHeaderFieldElement*  transportHeader (new TransportHeaderFieldElement());
+    dataStruct::TransportHeaderFieldElement*  transportHeader = new TransportHeaderFieldElement();
     transportHeader->setStaticTranslationID(1);
     transportHeader->setStaticBusID(msg->getNode());
     transportHeader->setActualityFlag(true);

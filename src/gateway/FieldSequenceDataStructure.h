@@ -3,12 +3,11 @@
 #define FIELDSEQUENCE_H_
 
 #include <vector>
-#include "FieldElement.h"
 #include <memory>
 
-using namespace dataStruct;
+#include "FieldElement.h"
 
-typedef std::vector<FieldElement*> FieldSequence;
+using namespace dataStruct;
 
 /**
  * @brief Holds FieldElements in a vector of shared pointers.
@@ -20,14 +19,13 @@ typedef std::vector<FieldElement*> FieldSequence;
  */
 class FieldSequenceDataStructure{
     private:
-        FieldSequence fieldSequence;
+        std::vector<FieldElement*> fieldSequence;
     public:
         FieldSequenceDataStructure(){
-            fieldSequence = FieldSequence();
         }
 
         ~FieldSequenceDataStructure(){
-            fieldSequence.clear();
+            clear();
         }
 
         /**
@@ -50,7 +48,7 @@ class FieldSequenceDataStructure{
         template<typename T>
         T* getField(){
             T* specificElement = NULL;
-            for (int i = 0; i < fieldSequence.size(); i++) {
+            for (size_t i = 0; i < fieldSequence.size(); i++) {
                 FieldElement* element = fieldSequence.at(i);
                 if(dynamic_cast<T*>(element) != NULL){
                     specificElement  = dynamic_cast<T*>(element);
@@ -67,6 +65,12 @@ class FieldSequenceDataStructure{
          * @brief Deletes all Elements of the sequence.
          */
         void clear(){
+//            for (size_t i = 0; i < fieldSequence.size(); i++) {
+//                FieldElement* element = fieldSequence.at(i);
+//                if(element != NULL) {
+//                    delete element;
+//                }
+//            }
             fieldSequence.clear();
         }
 
@@ -84,7 +88,7 @@ class FieldSequenceDataStructure{
          *
          * @return object of current FieldSequenceList
          */
-        FieldSequence getFieldSequenceList(){
+        std::vector<FieldElement*> getFieldSequenceList(){
             return fieldSequence;
         }
 };

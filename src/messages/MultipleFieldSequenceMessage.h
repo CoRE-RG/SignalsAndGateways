@@ -13,12 +13,12 @@
 class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 {
 private:
-     FieldSequenceList fieldSequenceList;
-     int fieldCount;
-     void copy(const MultipleFieldSequenceMessage& other) {
-         fieldSequenceList = other.copyFiledSequenceList();
-         fieldCount = other.getFieldCount();
-     }
+    std::list<FieldSequenceDataStructure> fieldSequenceList;
+    int fieldCount;
+    void copy(const MultipleFieldSequenceMessage& other) {
+        fieldSequenceList = other.copyFiledSequenceList();
+        fieldCount = other.getFieldCount();
+    }
 public:
      MultipleFieldSequenceMessage(const char *name=NULL, int kind=0) : MultipleFieldSequenceMessage_Base(name,kind) {
          fieldSequenceList = FieldSequenceList();
@@ -67,7 +67,7 @@ public:
          return fieldSequenceList;
      }
 
-     void setFieldSequenceList(const FieldSequenceList& fieldSequenceList){
+     void setFieldSequenceList(const std::list<FieldSequenceDataStructure>& fieldSequenceList){
          this->fieldSequenceList = fieldSequenceList;
      }
 

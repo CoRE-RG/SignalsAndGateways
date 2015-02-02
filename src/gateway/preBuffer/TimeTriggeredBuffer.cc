@@ -50,12 +50,11 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }else{
-                sendDirect(multiFieldSequence->dup(), dispatcher, "triggerIn");
+                sendDirect(multiFieldSequence, dispatcher, "triggerIn");
                 multiFieldSequence = new MultipleFieldSequenceMessage();
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }
-
             delete fieldSequence;
         }
         buffer.clear();
