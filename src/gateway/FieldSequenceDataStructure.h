@@ -65,13 +65,12 @@ class FieldSequenceDataStructure{
          * @brief Deletes all Elements of the sequence.
          */
         void clear(){
-            for (size_t i = 0; i < fieldSequence.size(); i++) {
-                FieldElement* element = fieldSequence.at(i);
-                if(element != NULL) {
-                    std::cout << fieldSequence.size() << std::endl;
-                    //delete element;
-                }
-            }
+//            for (size_t i = 0; i < fieldSequence.size(); i++) {
+//                FieldElement* element = fieldSequence.at(i);
+//                if(element != NULL) {
+//                    delete element;
+//                }
+//            }
             fieldSequence.clear();
         }
 
