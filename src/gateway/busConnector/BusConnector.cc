@@ -70,9 +70,6 @@ void BusConnector::handleMessage(cMessage *msg)
         delete canDataFrame;
         delete interDataStructure;
     }else if(msg->arrivedOn("busConnect$i")){
-        //Casts fuer Tests
-        TransportMessage *transframe = dynamic_cast<TransportMessage*>(msg);
-        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(transframe->getEncapsulatedPacket());
         send(msg, "out");
     }
 }

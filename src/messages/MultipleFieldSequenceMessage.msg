@@ -26,5 +26,5 @@ class noncobject FieldSequenceList;
 packet MultipleFieldSequenceMessage {
     @customize(true);  // see the generated C++ header for more info
     abstract FieldSequenceList fieldSequenceList;
-    int backboneCTID;
+    uint16_t backboneCTID;
 }

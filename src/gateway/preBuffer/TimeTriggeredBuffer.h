@@ -40,7 +40,7 @@ public:
      *
      */
     std::string getDispatchedCTID() const {
-        return dispatchedCTID;
+        return dispatchedCTID_;
     }
 
     /**
@@ -49,16 +49,16 @@ public:
      * @param dispatchedCTID CTID which that TimeTriggeredBuffer shall be dedicated for
      */
     void setDispatchedCTID(std::string dispatchedCTID) {
-        this->dispatchedCTID = dispatchedCTID;
+        this->dispatchedCTID_ = dispatchedCTID;
     }
 
     const std::string& getDispatchedBackboneTransferType() const {
-        return dispatchedBackboneTransferType;
+        return dispatchedBackboneTransferType_;
     }
 
     void setDispatchedBackboneTransferType(
             const std::string& dispatchedBackboneTransferType) {
-        this->dispatchedBackboneTransferType = dispatchedBackboneTransferType;
+        this->dispatchedBackboneTransferType_ = dispatchedBackboneTransferType;
     }
 
   protected:
@@ -90,15 +90,15 @@ public:
     virtual void handleMessage(cMessage *msg);
   private:
     //Queue to store the FieldSequenceMessages
-    FieldSequenceBuffer buffer;
+    FieldSequenceBuffer buffer_;
     //Message which is used for the timer
-    cMessage *timerEvent;
+    cMessage *timerEvent_;
     //Dedicated CTID which that TimeTriggeredBuffer is assigned to
-    std::string dispatchedCTID;
+    std::string dispatchedCTID_;
     //BackboneTransferType to the corresponding dispatchedCTID
-    std::string dispatchedBackboneTransferType;
+    std::string dispatchedBackboneTransferType_;
     //Module pointer to the dispatcher
-    cModule *dispatcher;
+    cModule *dispatcher_;
     ~TimeTriggeredBuffer();
 };
 
