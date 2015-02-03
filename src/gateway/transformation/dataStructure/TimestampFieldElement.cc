@@ -10,7 +10,7 @@
 namespace dataStruct {
 
 TimestampFieldElement::TimestampFieldElement() {
-    this->setFieldID("TimestampField");
+    setFieldID("TimestampField");
 
 }
 

@@ -20,15 +20,15 @@ public:
     virtual ~TimestampFieldElement();
 
     simtime_t getTimestamp() const {
-        return timestamp;
+        return timestamp_;
     }
 
     void setTimestamp(simtime_t timestamp) {
-        this->timestamp = timestamp;
+        this->timestamp_ = timestamp;
     }
 
 private:
-    simtime_t timestamp;
+    simtime_t timestamp_;
 
 };
 

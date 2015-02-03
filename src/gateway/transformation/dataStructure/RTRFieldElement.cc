@@ -18,7 +18,7 @@
 namespace dataStruct {
 
 RTRFieldElement::RTRFieldElement() {
-    // TODO Auto-generated constructor stub
+    setFieldID("rtrField");
 
 }
 

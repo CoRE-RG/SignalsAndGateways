@@ -10,7 +10,7 @@
 namespace dataStruct {
 
 IdentifierFieldElement::IdentifierFieldElement() {
-    this->setFieldID("identifierField");
+    setFieldID("identifierField");
 
 }
 

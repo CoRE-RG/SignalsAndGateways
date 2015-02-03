@@ -22,7 +22,7 @@ public:
 protected:
     void setFieldID(std::string fieldID);
 private:
-    std::string fieldID;
+    std::string fieldID_;
 };
 
 } /* namespace Transformation */

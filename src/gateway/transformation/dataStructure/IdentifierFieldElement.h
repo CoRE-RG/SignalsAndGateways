@@ -19,15 +19,15 @@ public:
     virtual ~IdentifierFieldElement();
 
     int getIdentifier() const {
-        return identifier;
+        return identifier_;
     }
 
     void setIdentifier(int identifier) {
-        this->identifier = identifier;
+        this->identifier_ = identifier;
     }
 
 private:
-    int identifier;
+    int identifier_;
 };
 
 } /* namespace Transformation */

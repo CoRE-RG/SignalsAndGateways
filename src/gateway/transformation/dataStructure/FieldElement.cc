@@ -18,11 +18,11 @@ FieldElement::~FieldElement() {
 }
 
 void FieldElement::setFieldID(std::string fieldID){
-    this->fieldID = fieldID;
+    fieldID_ = fieldID;
 }
 
 std::string FieldElement::getFieldID(){
-    return this->fieldID;
+    return fieldID_;
 }
 
 } /* namespace Transformation */

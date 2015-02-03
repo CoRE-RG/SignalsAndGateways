@@ -24,34 +24,34 @@ public:
     virtual ~TransportHeaderFieldElement();
 
     bool isActualityFlag() const {
-        return actualityFlag;
+        return actualityFlag_;
     }
 
     void setActualityFlag(bool actualityFlag) {
-        this->actualityFlag = actualityFlag;
+        actualityFlag_ = actualityFlag;
     }
 
 
     int getStaticTranslationID() const {
-        return staticTranslationID;
+        return staticTranslationID_;
     }
 
     void setStaticTranslationID(int staticTranslationId) {
-        staticTranslationID = staticTranslationId;
+        staticTranslationID_ = staticTranslationId;
     }
 
     std::string getStaticBusID() const {
-        return staticBusID;
+        return staticBusID_;
     }
 
     void setStaticBusID(std::string staticBusId) {
-        staticBusID = staticBusId;
+        staticBusID_ = staticBusId;
     }
 
 private:
-    int staticTranslationID;
-    std::string staticBusID;
-    bool actualityFlag;
+    int staticTranslationID_;
+    std::string staticBusID_;
+    bool actualityFlag_;
 };
 
 } /* namespace Transformation */

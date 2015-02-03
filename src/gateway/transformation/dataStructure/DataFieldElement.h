@@ -19,24 +19,24 @@ public:
     virtual ~DataFieldElement();
 
     int getDataLength() const {
-        return dataLength;
+        return dataLength_;
     }
 
     const char getData(int index) const {
-        return data[index];
+        return data_[index];
     }
 
     void setData(int index, char data) {
-        this->data[index] = data;
+        data_[index] = data;
     }
 
     void setDataLength(int dataLength) {
-        this->dataLength = dataLength;
+        dataLength_ = dataLength;
     }
 
 private:
-    int dataLength;
-    char *data;
+    int dataLength_;
+    char *data_;
 };
 
 } /* namespace Transformation */

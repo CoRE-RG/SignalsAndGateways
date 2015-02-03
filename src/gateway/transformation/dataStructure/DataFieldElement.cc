@@ -11,13 +11,13 @@
 namespace dataStruct {
 
 DataFieldElement::DataFieldElement(int dataLength) {
-    this->dataLength = dataLength;
-    data = new char[dataLength];
+    dataLength_ = dataLength;
+    data_ = new char[dataLength];
     setFieldID("dataField");
 }
 
 DataFieldElement::~DataFieldElement() {
-    delete(data);
+    //delete(data_);
 }
 
 } /* namespace Transformation */

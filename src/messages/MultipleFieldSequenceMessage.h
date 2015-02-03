@@ -13,16 +13,16 @@
 class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 {
 private:
-    std::list<FieldSequenceDataStructure> fieldSequenceList;
-    int fieldCount;
+    std::list<FieldSequenceDataStructure> fieldSequenceList_;
+    int fieldCount_;
     void copy(const MultipleFieldSequenceMessage& other) {
-        fieldSequenceList = other.copyFiledSequenceList();
-        fieldCount = other.getFieldCount();
+        fieldSequenceList_ = other.copyFiledSequenceList();
+        fieldCount_ = other.getFieldCount();
     }
 public:
      MultipleFieldSequenceMessage(const char *name=NULL, int kind=0) : MultipleFieldSequenceMessage_Base(name,kind) {
-         fieldSequenceList = FieldSequenceList();
-         fieldCount = 0;
+         fieldSequenceList_ = FieldSequenceList();
+         fieldCount_ = 0;
      }
 
      MultipleFieldSequenceMessage(const MultipleFieldSequenceMessage& other) : MultipleFieldSequenceMessage_Base(other) {
@@ -40,35 +40,35 @@ public:
      }
 
      void pushFieldSequence(FieldSequenceDataStructure transportFrame){
-         fieldSequenceList.push_front(transportFrame);
+         fieldSequenceList_.push_front(transportFrame);
          addByteLength(sizeof(FieldSequenceDataStructure));
-         fieldCount++;
+         fieldCount_++;
          EV << "Field pushed to MultipleFieldSequenceMessage" << endl;
      }
 
      FieldSequenceDataStructure popFieldSequence(){
-         EV << "Length of List: " << fieldSequenceList.size() << endl;
-         FieldSequenceDataStructure element = fieldSequenceList.back();
-         fieldSequenceList.pop_back();
+         EV << "Length of List: " << fieldSequenceList_.size() << endl;
+         FieldSequenceDataStructure element = fieldSequenceList_.back();
+         fieldSequenceList_.pop_back();
          this->setByteLength(getByteLength()-sizeof(FieldSequenceDataStructure));
-         fieldCount--;
+         fieldCount_--;
          return element;
      }
 
      int getFieldCount() const{
-         return fieldCount;
+         return fieldCount_;
      }
 
      FieldSequenceList copyFiledSequenceList() const{
-         return fieldSequenceList;
+         return fieldSequenceList_;
      }
 
      FieldSequenceList& getFieldSequenceList() {
-         return fieldSequenceList;
+         return fieldSequenceList_;
      }
 
      void setFieldSequenceList(const std::list<FieldSequenceDataStructure>& fieldSequenceList){
-         this->fieldSequenceList = fieldSequenceList;
+         this->fieldSequenceList_ = fieldSequenceList;
      }
 
 };

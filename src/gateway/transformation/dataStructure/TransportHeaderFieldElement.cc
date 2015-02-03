@@ -10,7 +10,7 @@
 namespace dataStruct {
 
 TransportHeaderFieldElement::TransportHeaderFieldElement() {
-    this->setFieldID("TransportHeaderField");
+    setFieldID("TransportHeaderField");
 }
 
 TransportHeaderFieldElement::~TransportHeaderFieldElement() {

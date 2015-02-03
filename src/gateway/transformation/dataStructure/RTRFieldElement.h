@@ -26,15 +26,15 @@ public:
     virtual ~RTRFieldElement();
 
     bool isRtr() const {
-        return rtr;
+        return rtr_;
     }
 
     void setRtr(bool rtr) {
-        this->rtr = rtr;
+        this->rtr_ = rtr;
     }
 
 private:
-    bool rtr;
+    bool rtr_;
 };
 
 }
