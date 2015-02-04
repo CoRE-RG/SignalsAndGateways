@@ -5,7 +5,9 @@
  *      Author: sebastian
  */
 
-#include <TimestampFieldElement.h>
+#include "TimestampFieldElement.h"
+
+namespace SignalsAndGateways {
 
 TimestampFieldElement::TimestampFieldElement() {
     setFieldID("TimestampField");
@@ -13,5 +15,7 @@ TimestampFieldElement::TimestampFieldElement() {
 }
 
 TimestampFieldElement::~TimestampFieldElement() {
-    // TODO Auto-generated destructor stub
+
+}
+
 }

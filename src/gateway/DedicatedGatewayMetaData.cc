@@ -13,9 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <DedicatedGatewayMetaData.h>
+#include "DedicatedGatewayMetaData.h"
 
 using namespace std;
+
+namespace SignalsAndGateways {
 
 DedicatedGatewayMetaData::DedicatedGatewayMetaData() {
     busGateMapping = map<string, cGate*>();
@@ -72,4 +74,6 @@ bool DedicatedGatewayMetaData::checkTimeBufferRegistered(string identifier){
         registered = true;
     }
     return registered;
+}
+
 }

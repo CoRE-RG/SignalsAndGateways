@@ -21,7 +21,8 @@
 #include "DedicatedGatewayMetaData.h"
 
 using namespace std;
-typedef map<string, DedicatedGatewayMetaData> GatewayMap;
+
+namespace SignalsAndGateways {
 
 /**
  * @brief Operates as a registration interface for all gateways in the simulation.
@@ -107,7 +108,7 @@ public:
      */
     static bool checkTimeBufferRegistered(string gatewayName, string identifier);
 private:
-    static GatewayMap gateways;
+    static map<string, DedicatedGatewayMetaData> gateways;
     /**
      * @brief Returns the DedicatedGatewayMetaData-reference to a gatewayName
      *
@@ -118,5 +119,7 @@ private:
      */
     static DedicatedGatewayMetaData *findGateway(string gatewayName);
 };
+
+}
 
 #endif /* GLOBALGATEWAYINFORMATION_H_ */

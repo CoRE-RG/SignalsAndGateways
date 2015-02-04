@@ -15,7 +15,9 @@
 
 #include <GlobalGatewayInformation.h>
 
-GatewayMap GlobalGatewayInformation::gateways = GatewayMap();
+namespace SignalsAndGateways {
+
+map<string, DedicatedGatewayMetaData> GlobalGatewayInformation::gateways = map<string, DedicatedGatewayMetaData>();
 
 GlobalGatewayInformation::GlobalGatewayInformation() {
     // TODO Auto-generated constructor stub
@@ -69,7 +71,7 @@ bool GlobalGatewayInformation::checkTimeBufferRegistered(string gatewayName, str
 }
 
 DedicatedGatewayMetaData *GlobalGatewayInformation::findGateway(string gatewayName){
-    GatewayMap::iterator pos = gateways.find(gatewayName);
+    map<string, DedicatedGatewayMetaData>::iterator pos = gateways.find(gatewayName);
     DedicatedGatewayMetaData *value = NULL;
     if(pos == gateways.end()){
         throw cRuntimeError(("Gateway '"+gatewayName+"' is not registered! Please check your network setup!").c_str());
@@ -77,4 +79,6 @@ DedicatedGatewayMetaData *GlobalGatewayInformation::findGateway(string gatewayNa
         value = &(pos->second);
     }
     return value;
+}
+
 }

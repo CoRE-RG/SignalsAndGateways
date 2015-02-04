@@ -20,6 +20,8 @@
 #include "FieldSequenceBuffer.h"
 #include "MultipleFieldSequenceMessage.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Stores FieldSequenceMessages in a FieldSequenceBuffer according to a time strategy.
  *
@@ -101,5 +103,7 @@ public:
     cModule *dispatcher_;
     ~TimeTriggeredBuffer();
 };
+
+}
 
 #endif

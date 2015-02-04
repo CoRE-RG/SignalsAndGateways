@@ -4,6 +4,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the identifier
  *
@@ -27,5 +29,7 @@ public:
 private:
     int identifier_;
 };
+
+}
 
 #endif /* IDENTIFIERFIELDELEMENT_H_ */

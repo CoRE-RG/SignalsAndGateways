@@ -19,6 +19,8 @@
 #include <omnetpp.h>
 #include "FiCo4OMNeT_CanTrafficSinkAppBase.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Source-Application for the CAN-Node
  *
@@ -40,5 +42,7 @@ class CanSinkGatewayApp : public virtual FiCo4OMNeT::CanTrafficSinkAppBase
      */
     void handleMessage(cMessage *msg);
 };
+
+}
 
 #endif

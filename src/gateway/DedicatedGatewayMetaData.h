@@ -19,6 +19,8 @@
 #include "omnetpp.h"
 #include "TimeTriggeredBuffer.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Data-structure to store and handle meta data of the appropriate gateway.
  *
@@ -91,5 +93,7 @@ private:
     //map to administrate TimeTriggerdBuffers
     std::map<std::string, TimeTriggeredBuffer*> timeBuffers;
 };
+
+}
 
 #endif /* DEDICATEDGATEWAYMETADATA_H_ */

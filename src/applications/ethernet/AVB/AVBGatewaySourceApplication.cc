@@ -24,8 +24,11 @@
 
 #include "CoRE4INET_SRPTable.h"
 
-Define_Module(AVBGatewaySourceApplication);
 using namespace CoRE4INET;
+
+namespace SignalsAndGateways {
+
+Define_Module(AVBGatewaySourceApplication);
 
 void AVBGatewaySourceApplication::sendAVBFrame()
 {
@@ -56,4 +59,6 @@ void AVBGatewaySourceApplication::sendAVBFrame()
 //    event->setTimer((uint64_t) ceil(interval / tick));
 //    event->setDestinationGate(gate("schedulerIn"));
 //    getTimer()->registerEvent(event);
+}
+
 }

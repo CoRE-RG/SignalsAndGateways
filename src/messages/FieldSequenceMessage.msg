@@ -15,10 +15,10 @@
 cplusplus {{
 #include "FieldSequenceDataStructure.h"
 }}
-//
-// TODO generated message class
-//
+
 class noncobject FieldSequenceDataStructure;
+
+namespace SignalsAndGateways;
 
 packet FieldSequenceMessage {
     FieldSequenceDataStructure transportFrame;

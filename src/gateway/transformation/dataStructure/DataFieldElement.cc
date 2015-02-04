@@ -5,8 +5,11 @@
  *      Author: sebastian
  */
 
-#include <dataStructure/DataFieldElement.h>
+#include "DataFieldElement.h"
+
 #include <stdlib.h>
+
+namespace SignalsAndGateways {
 
 DataFieldElement::DataFieldElement(int dataLength) {
     dataLength_ = dataLength;
@@ -16,4 +19,6 @@ DataFieldElement::DataFieldElement(int dataLength) {
 
 DataFieldElement::~DataFieldElement() {
     //delete(data_);
+}
+
 }

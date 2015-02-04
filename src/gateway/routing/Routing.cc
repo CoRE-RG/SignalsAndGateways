@@ -23,8 +23,11 @@
 #include "TransportHeaderFieldElement.h"
 #include "Utility.h"
 
-Define_Module(Routing);
 using namespace FiCo4OMNeT;
+
+namespace SignalsAndGateways {
+
+Define_Module(Routing);
 
 void Routing::initialize()
 {
@@ -47,11 +50,11 @@ void Routing::handleMessage(cMessage *msg)
         for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
             EV << "Cycle: " << i << endl;
             std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-            UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+            Utility::stripNonAlphaNum(sourceBusID);
             EV << "sourceBusID: " << sourceBusID.c_str() << endl;
             if(strcmp(sourceBusID.c_str(), busname) == 0){
                 std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
                 if(atoi(sourceObjectID.c_str()) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
@@ -73,12 +76,12 @@ void Routing::handleMessage(cMessage *msg)
             for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
                 EV << "Cycle: " << i << endl;
                 std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+                Utility::stripNonAlphaNum(sourceBusID);
                 EV << "sourceBusID: " << sourceBusID.c_str() << endl;
                 TransportHeaderFieldElement* transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
                 if(strcmp(sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
                     std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                    UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                    Utility::stripNonAlphaNum(sourceObjectID);
                     EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
                     IdentifierFieldElement* identifierElement = transportFrame.getField<IdentifierFieldElement>();
                     if(atoi(sourceObjectID.c_str()) == identifierElement->getIdentifier()){
@@ -104,3 +107,6 @@ void Routing::handleMessage(cMessage *msg)
 
     delete msg;
 }
+
+}
+

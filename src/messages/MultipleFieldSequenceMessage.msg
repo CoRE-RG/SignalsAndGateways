@@ -15,13 +15,15 @@
 cplusplus {{
 #include <list>
 #include "FieldSequenceDataStructure.h"
-
-typedef std::list<FieldSequenceDataStructure> FieldSequenceList;
 }}
-//
-// TODO generated message class
-//
+
 class noncobject FieldSequenceList;
+
+namespace SignalsAndGateways;
+
+cplusplus{{
+typedef std::list<FieldSequenceDataStructure> FieldSequenceList;  
+}}
 
 packet MultipleFieldSequenceMessage {
     @customize(true);  // see the generated C++ header for more info

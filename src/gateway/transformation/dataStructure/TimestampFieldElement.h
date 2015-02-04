@@ -4,6 +4,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the timestamp
  *
@@ -28,5 +30,7 @@ private:
     simtime_t timestamp_;
 
 };
+
+}
 
 #endif /* TIMESTAMPFIELDELEMENT_H_ */

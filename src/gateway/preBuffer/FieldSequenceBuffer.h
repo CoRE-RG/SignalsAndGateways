@@ -21,6 +21,8 @@
 #include "CanDataFrame_m.h"
 #include "IdentifierFieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Stores FieldSequenceMessages in a cQueue ordered by the IdentifierFieldElement.
  *
@@ -99,5 +101,7 @@ private:
     compareFunc pCompare = &compareFieldSequenceMessage;
 
 };
+
+}
 
 #endif /* FIELDSEQUENCEBUFFER_H_ */

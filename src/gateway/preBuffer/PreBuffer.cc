@@ -20,6 +20,8 @@
 #include "CanDataFrame_m.h"
 #include "TransportHeaderFieldElement.h"
 
+namespace SignalsAndGateways {
+
 Define_Module(PreBuffer);
 
 void PreBuffer::initialize()
@@ -59,3 +61,6 @@ void PreBuffer::handleMessage(cMessage *msg)
         delete msg;
     }
 }
+
+}
+

@@ -13,7 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <dataStructure/RTRFieldElement.h>
+#include "RTRFieldElement.h"
+
+namespace SignalsAndGateways {
 
 RTRFieldElement::RTRFieldElement() {
     setFieldID("rtrField");
@@ -22,4 +24,6 @@ RTRFieldElement::RTRFieldElement() {
 
 RTRFieldElement::~RTRFieldElement() {
     // TODO Auto-generated destructor stub
+}
+
 }

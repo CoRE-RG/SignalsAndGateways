@@ -14,7 +14,10 @@
 // 
 
 #include "TimeTriggeredBuffer.h"
-#include "simtime.h"
+//#include "simtime.h"
+
+namespace SignalsAndGateways {
+
 #define MAX_FRAME_LENGTH 1500
 
 Define_Module(TimeTriggeredBuffer);
@@ -66,3 +69,6 @@ TimeTriggeredBuffer::~TimeTriggeredBuffer(){
     cancelEvent(timerEvent_);
     delete timerEvent_;
 }
+
+}
+

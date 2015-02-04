@@ -6,6 +6,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the transport header.
  * Following fields are included:
@@ -52,5 +54,7 @@ private:
     std::string staticBusID_;
     bool actualityFlag_;
 };
+
+}
 
 #endif /* TRANSPORTHEADERFIELDELEMENT_H_ */

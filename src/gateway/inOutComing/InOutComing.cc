@@ -25,6 +25,8 @@
 #include "cxmlelement.h"
 #include "Ethernet.h"
 
+namespace SignalsAndGateways {
+
 Define_Module(InOutComing);
 
 void InOutComing::initialize()
@@ -101,3 +103,6 @@ void InOutComing::handleMessage(cMessage *msg)
     }
     delete msg;
 }
+
+}
+

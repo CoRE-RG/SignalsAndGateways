@@ -18,6 +18,8 @@
 
 #include <omnetpp.h>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldSequenceMessage are redirected to a Buffer for accumulation of multiple Frames or optionally forwarded immediate. CanDataFrames are always forwarded immediate.
  *
@@ -54,5 +56,7 @@ protected:
     virtual void handleMessage(cMessage *msg);
 
 };
+
+}
 
 #endif

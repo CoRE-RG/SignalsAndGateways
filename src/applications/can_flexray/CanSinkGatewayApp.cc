@@ -19,6 +19,8 @@
 
 using namespace FiCo4OMNeT;
 
+namespace SignalsAndGateways {
+
 Define_Module(CanSinkGatewayApp);
 
 template <typename T>
@@ -67,4 +69,6 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         }
     }
     delete msg;
+}
+
 }

@@ -4,6 +4,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the payload
  *
@@ -36,5 +38,7 @@ private:
     int dataLength_;
     char *data_;
 };
+
+}
 
 #endif /* DATAFIELDELEMENT_H_ */

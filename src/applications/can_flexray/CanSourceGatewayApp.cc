@@ -19,6 +19,8 @@
 
 using namespace FiCo4OMNeT;
 
+namespace SignalsAndGateways {
+
 Define_Module(CanSourceGatewayApp);
 
 void CanSourceGatewayApp::handleMessage(cMessage *msg)
@@ -38,5 +40,7 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
     } else {
         delete msg;
     }
+
+}
 
 }

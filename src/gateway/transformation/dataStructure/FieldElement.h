@@ -5,6 +5,8 @@
 #include <string>
 #include <omnetpp.h>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief FieldElement which compose the base of all FieldElements.
  *
@@ -22,5 +24,7 @@ protected:
 private:
     std::string fieldID_;
 };
+
+}
 
 #endif /* FIELDELEMENT_H_ */

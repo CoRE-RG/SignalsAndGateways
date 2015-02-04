@@ -5,7 +5,9 @@
  *      Author: sebastian
  */
 
-#include <dataStructure/IdentifierFieldElement.h>
+#include "IdentifierFieldElement.h"
+
+namespace SignalsAndGateways {
 
 IdentifierFieldElement::IdentifierFieldElement() {
     setFieldID("identifierField");
@@ -13,5 +15,7 @@ IdentifierFieldElement::IdentifierFieldElement() {
 }
 
 IdentifierFieldElement::~IdentifierFieldElement() {
+
+}
 
 }

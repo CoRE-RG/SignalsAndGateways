@@ -10,6 +10,8 @@
 
 #include "MultipleFieldSequenceMessage_m.h"
 
+namespace SignalsAndGateways {
+
 class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 {
 private:
@@ -68,11 +70,13 @@ public:
      }
 
      void setFieldSequenceList(const std::list<FieldSequenceDataStructure>& fieldSequenceList){
-         this->fieldSequenceList_ = fieldSequenceList;
+         fieldSequenceList_ = fieldSequenceList;
      }
 
 };
 
 Register_Class(MultipleFieldSequenceMessage);
+
+}
 
 #endif /* MULTIPLEFIELDSEQUENCEMESSAGE_H_ */

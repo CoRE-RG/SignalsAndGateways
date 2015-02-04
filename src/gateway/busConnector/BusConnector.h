@@ -18,6 +18,8 @@
 
 #include <omnetpp.h>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Redirects the CanDataFrames from and to the gateway.
  *
@@ -49,5 +51,7 @@ class BusConnector : public cSimpleModule
     string gatewayName;
 
 };
+
+}
 
 #endif

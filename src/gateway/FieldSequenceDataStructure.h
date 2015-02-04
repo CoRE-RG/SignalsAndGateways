@@ -7,6 +7,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Holds FieldElements in a vector of shared pointers.
  *
@@ -91,5 +93,6 @@ class FieldSequenceDataStructure{
         }
 };
 
+}
 
 #endif /* FIELDSEQUENCE_H_ */

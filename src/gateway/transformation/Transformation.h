@@ -26,6 +26,8 @@
 
 using namespace FiCo4OMNeT;
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Transformation of bus messages in FieldSequenceMessages and vice versa.
  *
@@ -116,5 +118,7 @@ class Transformation : public cSimpleModule, ITransformation
     cXMLElement* gatewayOptions;
     string gatewayName;
 };
+
+}
 
 #endif

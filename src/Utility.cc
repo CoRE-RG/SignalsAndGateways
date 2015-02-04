@@ -13,9 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <Utility.h>
+#include "Utility.h"
 
-namespace UTLTY{
+namespace SignalsAndGateways {
+
     static bool isnotalnum(char c){
         return !isalnum(c);
     }

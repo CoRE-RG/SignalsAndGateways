@@ -20,7 +20,7 @@
 #include <algorithm>
 #include <functional>
 
-namespace UTLTY{
+namespace SignalsAndGateways {
 
 /**
  * @brief Utility class to offer functions over module borders

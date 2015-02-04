@@ -5,7 +5,9 @@
  *      Author: sebastian
  */
 
-#include <FieldElement.h>
+#include "FieldElement.h"
+
+namespace SignalsAndGateways {
 
 FieldElement::FieldElement() {
 
@@ -23,4 +25,4 @@ std::string FieldElement::getFieldID(){
     return fieldID_;
 }
 
-
+}

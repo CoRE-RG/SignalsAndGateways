@@ -5,12 +5,16 @@
  *      Author: sebastian
  */
 
-#include <TransportHeaderFieldElement.h>
+#include "TransportHeaderFieldElement.h"
+
+namespace SignalsAndGateways {
 
 TransportHeaderFieldElement::TransportHeaderFieldElement() {
     setFieldID("TransportHeaderField");
 }
 
 TransportHeaderFieldElement::~TransportHeaderFieldElement() {
+
+}
 
 }

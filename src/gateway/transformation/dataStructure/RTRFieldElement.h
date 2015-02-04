@@ -18,6 +18,8 @@
 
 #include "FieldElement.h"
 
+namespace SignalsAndGateways {
+
 class RTRFieldElement: public FieldElement {
 public:
     RTRFieldElement();
@@ -34,5 +36,7 @@ public:
 private:
     bool rtr_;
 };
+
+}
 
 #endif /* RTRFIELDELEMENT_H_ */
