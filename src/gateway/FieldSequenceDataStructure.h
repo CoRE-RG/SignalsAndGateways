@@ -79,7 +79,7 @@ class FieldSequenceDataStructure{
          *
          * @return int number of element within the FieldSequenceList
          */
-        int size(){
+        size_t size(){
             return fieldSequence.size();
         }
 

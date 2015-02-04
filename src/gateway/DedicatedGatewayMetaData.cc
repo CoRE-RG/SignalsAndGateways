@@ -25,7 +25,7 @@ DedicatedGatewayMetaData::DedicatedGatewayMetaData() {
 }
 
 DedicatedGatewayMetaData::~DedicatedGatewayMetaData() {
-    // TODO Auto-generated destructor stub
+
 }
 
 void DedicatedGatewayMetaData::registerBusGate(string busName, cGate *gate){

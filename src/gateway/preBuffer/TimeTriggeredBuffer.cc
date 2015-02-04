@@ -48,7 +48,7 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
         while(not(buffer_.isEmpty())){
             FieldSequenceMessage *fieldSequence = buffer_.dequeue();
-            if(multiFieldSequence->getByteLength()+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
+            if(static_cast<uint64_t>(multiFieldSequence->getByteLength())+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }else{

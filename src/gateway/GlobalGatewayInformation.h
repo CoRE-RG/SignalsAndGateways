@@ -20,8 +20,6 @@
 #include "TimeTriggeredBuffer.h"
 #include "DedicatedGatewayMetaData.h"
 
-using namespace std;
-
 namespace SignalsAndGateways {
 
 /**
@@ -38,19 +36,21 @@ public:
      *
      * Further registration of gates and buffers can only be made if the gateway was registered here.
      *
-     * @param string gatewayName
+     * @param gatewayName name of the gateway
      */
-    static void registerGateway(string gatewayName);
+    static void registerGateway(std::string gatewayName);
     /**
      * @brief registration of a bus
      *
      * Extending the gateways meta-data with the specified information by using an DedicatedGatewayMetaData-functions.
      *
-     * @param string gatewayName, string busName, cGate* gate
+     * @param gatewayName name of the gateway
+     * @param busName name of the bus
+     * @param gate cGate*
      *
      * @see DedicatedGatewayMetaData
      */
-    static void registerBusGate(string gatewayName, string busName, cGate *gate);
+    static void registerBusGate(std::string gatewayName, std::string busName, cGate *gate);
     /**
      * @brief checks registration of a bus
      *
@@ -58,10 +58,12 @@ public:
      * Uses the functions of DedicatedGatewayMetaData.
      * @see DedicatedGatewayMetaData
      *
-     * @param string gatewayName, string busName
+     * @param gatewayName name of the gateway
+     * @param busName name of the bus
+     *
      * @return bool registered
      */
-    static bool checkBusRegistered(string gatewayName, string busName);
+    static bool checkBusRegistered(std::string gatewayName, std::string busName);
     /**
      * @brief returns a gate-reference to the busName
      *
@@ -70,10 +72,11 @@ public:
      * Uses the functions of DedicatedGatewayMetaData.
      * @see DedicatedGatewayMetaData
      *
-     * @param string gatewayName, string busName
+     * @param gatewayName name of the gateway
+     * @param busName name of the bus
      * @return cGate* gate-reference
      */
-    static cGate *getBusGate(string gatewayName, string busName);
+    static cGate *getBusGate(std::string gatewayName, std::string busName);
     /**
      * @brief registration of a TimeBuffer
      *
@@ -81,9 +84,11 @@ public:
      * Uses the functions of DedicatedGatewayMetaData.
      * @see DedicatedGatewayMetaData
      *
-     * @param string gatewayName, string identifier, TimeTriggeredBuffer* identifier
+     * @param gatewayName name of the gateway
+     * @param identifier virtual link identifier
+     * @param timeBuffer TimeTriggeredBuffer*
      */
-    static void registerTimeBuffer(string gatewayName, string identifier, TimeTriggeredBuffer *timeBuffer);
+    static void registerTimeBuffer(std::string gatewayName, std::string identifier, TimeTriggeredBuffer *timeBuffer);
     /**
      * @brief returns a TimeBuffer-reference to the identifier
      *
@@ -92,10 +97,12 @@ public:
      * Uses the functions of DedicatedGatewayMetaData.
      * @see DedicatedGatewayMetaData
      *
-     * @param string gatewayName, string identifier
+     * @param gatewayName name of the gateway
+     * @param identifier virtual link identifier
+     *
      * @return TimeTriggeredBuffer* TimeTriggeredBuffer-reference
      */
-    static TimeTriggeredBuffer *getTimeBuffer(string gatewayName, string identifier);
+    static TimeTriggeredBuffer *getTimeBuffer(std::string gatewayName, std::string identifier);
     /**
      * @brief checks registration of a TimeBuffer
      *
@@ -103,21 +110,24 @@ public:
      * Uses the functions of DedicatedGatewayMetaData.
      * @see DedicatedGatewayMetaData
      *
-     * @param string gatewayName, string identifier
+     * @param gatewayName name of the gateway
+     * @param identifier virtual link identifier
+     *
      * @return bool registered
      */
-    static bool checkTimeBufferRegistered(string gatewayName, string identifier);
+    static bool checkTimeBufferRegistered(std::string gatewayName, std::string identifier);
 private:
-    static map<string, DedicatedGatewayMetaData> gateways;
+    static std::map<std::string, DedicatedGatewayMetaData> gateways;
     /**
      * @brief Returns the DedicatedGatewayMetaData-reference to a gatewayName
      *
      * If a gatewayName is not found in the map, then a cRuntimeError is thrown.
      *
-     * @param string gatewayName
+     * @param gatewayName name of the gateway
+     *
      * @return DedicatedGatewayMetaData* gatewayMetaData
      */
-    static DedicatedGatewayMetaData *findGateway(string gatewayName);
+    static DedicatedGatewayMetaData *findGateway(std::string gatewayName);
 };
 
 }

@@ -21,8 +21,8 @@ namespace SignalsAndGateways {
         return !isalnum(c);
     }
 
-    static int findFirstAlphaNum(const char *str){
-        int pos = 0;
+    static unsigned int findFirstAlphaNum(const char *str){
+        unsigned int pos = 0;
         for(pos = 0; !isalnum(*str);pos++){
             str++;
         }

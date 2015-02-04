@@ -37,9 +37,9 @@ public:
     /**
      * @brief Enqueues a FieldSequenceMessage ordered by the IdentifierFieldElement
      *
-     * @param FieldSequenceMessage to enqueue
+     * @param value FieldSequenceMessage to enqueue
      */
-    void enqueue(FieldSequenceMessage*);
+    void enqueue(FieldSequenceMessage* value);
     /**
      * @brief Dequeues a FieldSequenceMessage according to the order in the queue
      * @return Next FieldSequenceMessage of the queue

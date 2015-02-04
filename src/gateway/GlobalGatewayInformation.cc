@@ -15,17 +15,19 @@
 
 #include <GlobalGatewayInformation.h>
 
+using namespace std;
+
 namespace SignalsAndGateways {
 
 map<string, DedicatedGatewayMetaData> GlobalGatewayInformation::gateways = map<string, DedicatedGatewayMetaData>();
 
 GlobalGatewayInformation::GlobalGatewayInformation() {
-    // TODO Auto-generated constructor stub
+
 
 }
 
 GlobalGatewayInformation::~GlobalGatewayInformation() {
-    // TODO Auto-generated destructor stub
+
 }
 
 void GlobalGatewayInformation::registerGateway(string gatewayName){

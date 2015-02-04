@@ -25,6 +25,8 @@
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
 
+using namespace std;
+
 namespace SignalsAndGateways {
 
 Define_Module(Transformation);
@@ -128,7 +130,7 @@ void Transformation::transform(cMessage *msg){
                                 }
                                 string backboneID;
                                 if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
-                                    uint16_t ctID = ((uint16_t)atoi(Utility::stripNonAlphaNum((*property)->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str()));
+                                    uint16_t ctID = static_cast<uint16_t>(atoi(Utility::stripNonAlphaNum((*property)->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str()));
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
                                     backboneID = numberToString(ctID);

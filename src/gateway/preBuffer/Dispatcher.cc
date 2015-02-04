@@ -102,7 +102,7 @@ void Dispatcher::handleMessage(cMessage *msg)
         if(strcmp(dispatchedBackboneTransferType.c_str(), "BE") == 0){
             interDataStructure->setDirectMacAdress((sendBuffer->getDispatchedCTID()).c_str());
         }else{
-            interDataStructure->setBackboneCTID( ((uint16_t)atoi((sendBuffer->getDispatchedCTID()).c_str())) );
+            interDataStructure->setBackboneCTID( static_cast<uint16_t>(atoi((sendBuffer->getDispatchedCTID()).c_str())) );
         }
         interDataStructure->encapsulate(multiFieldSequence);
         send(interDataStructure, "moduleConnect$o");
