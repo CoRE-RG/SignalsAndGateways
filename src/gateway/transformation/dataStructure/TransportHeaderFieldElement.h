@@ -2,10 +2,9 @@
 #ifndef TRANSPORTHEADERFIELDELEMENT_H_
 #define TRANSPORTHEADERFIELDELEMENT_H_
 
-#include <FieldElement.h>
 #include <string>
 
-namespace dataStruct {
+#include "FieldElement.h"
 
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the transport header.
@@ -18,7 +17,7 @@ namespace dataStruct {
  *
  * @author Sebastian Mueller
  */
-class TransportHeaderFieldElement: public dataStruct::FieldElement {
+class TransportHeaderFieldElement: public FieldElement {
 public:
     TransportHeaderFieldElement();
     virtual ~TransportHeaderFieldElement();
@@ -53,7 +52,5 @@ private:
     std::string staticBusID_;
     bool actualityFlag_;
 };
-
-} /* namespace Transformation */
 
 #endif /* TRANSPORTHEADERFIELDELEMENT_H_ */

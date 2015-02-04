@@ -7,8 +7,6 @@
 
 #include <dataStructure/IdentifierFieldElement.h>
 
-namespace dataStruct {
-
 IdentifierFieldElement::IdentifierFieldElement() {
     setFieldID("identifierField");
 
@@ -17,5 +15,3 @@ IdentifierFieldElement::IdentifierFieldElement() {
 IdentifierFieldElement::~IdentifierFieldElement() {
 
 }
-
-} /* namespace Transformation */

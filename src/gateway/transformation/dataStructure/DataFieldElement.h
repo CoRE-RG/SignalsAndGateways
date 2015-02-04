@@ -2,9 +2,7 @@
 #ifndef DATAFIELDELEMENT_H_
 #define DATAFIELDELEMENT_H_
 
-#include <dataStructure/FieldElement.h>
-
-namespace dataStruct {
+#include "FieldElement.h"
 
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the payload
@@ -13,7 +11,7 @@ namespace dataStruct {
  *
  * @author Sebastian Mueller
  */
-class DataFieldElement: public dataStruct::FieldElement {
+class DataFieldElement: public FieldElement {
 public:
     DataFieldElement(int dataLength);
     virtual ~DataFieldElement();
@@ -38,7 +36,5 @@ private:
     int dataLength_;
     char *data_;
 };
-
-} /* namespace Transformation */
 
 #endif /* DATAFIELDELEMENT_H_ */

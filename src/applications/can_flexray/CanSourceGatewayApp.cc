@@ -17,6 +17,8 @@
 #include "TransportMessage_m.h"
 #include "CanDataFrame_m.h"
 
+using namespace FiCo4OMNeT;
+
 Define_Module(CanSourceGatewayApp);
 
 void CanSourceGatewayApp::handleMessage(cMessage *msg)

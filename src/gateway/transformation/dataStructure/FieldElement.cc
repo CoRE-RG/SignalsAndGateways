@@ -7,8 +7,6 @@
 
 #include <FieldElement.h>
 
-namespace dataStruct {
-
 FieldElement::FieldElement() {
 
 }
@@ -25,5 +23,4 @@ std::string FieldElement::getFieldID(){
     return fieldID_;
 }
 
-} /* namespace Transformation */
 

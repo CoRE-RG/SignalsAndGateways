@@ -7,8 +7,6 @@
 
 #include <TimestampFieldElement.h>
 
-namespace dataStruct {
-
 TimestampFieldElement::TimestampFieldElement() {
     setFieldID("TimestampField");
 
@@ -17,5 +15,3 @@ TimestampFieldElement::TimestampFieldElement() {
 TimestampFieldElement::~TimestampFieldElement() {
     // TODO Auto-generated destructor stub
 }
-
-} /* namespace Transformation */

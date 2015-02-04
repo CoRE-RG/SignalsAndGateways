@@ -13,6 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+#include <algorithm>
+
 #include "Transformation.h"
 #include "IdentifierFieldElement.h"
 #include "DataFieldElement.h"
@@ -22,10 +24,6 @@
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
-#include <algorithm>
-
-
-using namespace dataStruct;
 
 Define_Module(Transformation);
 
@@ -188,24 +186,24 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
      * Uebersetzungsprotokoll
      */
     FieldSequenceDataStructure protocolFieldSequence;
-    dataStruct::IdentifierFieldElement* identifier = new IdentifierFieldElement();
+    IdentifierFieldElement* identifier = new IdentifierFieldElement();
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
     int payloadbytelength = msg->getDataArraySize();
-    dataStruct::DataFieldElement* data = new DataFieldElement(payloadbytelength);
+    DataFieldElement* data = new DataFieldElement(payloadbytelength);
     for (int i=0; i<payloadbytelength; i++){
         data->setData(i, msg->getData(i));
     }
-    dataStruct::RTRFieldElement* rtr = new RTRFieldElement();
+    RTRFieldElement* rtr = new RTRFieldElement();
     rtr->setRtr(msg->getRtr());
 
-    dataStruct::TimestampFieldElement*  timestamp = new TimestampFieldElement();
+    TimestampFieldElement*  timestamp = new TimestampFieldElement();
     timestamp->setTimestamp(msg->getTimestamp());
     EV << "transformCanToTransport: firstCanArrivalTime: " << msg->getTimestamp() << endl;
     /*
      * Transportprotokollheader
      */
-    dataStruct::TransportHeaderFieldElement*  transportHeader = new TransportHeaderFieldElement();
+    TransportHeaderFieldElement*  transportHeader = new TransportHeaderFieldElement();
     transportHeader->setStaticTranslationID(1);
     transportHeader->setStaticBusID(msg->getNode());
     transportHeader->setActualityFlag(true);

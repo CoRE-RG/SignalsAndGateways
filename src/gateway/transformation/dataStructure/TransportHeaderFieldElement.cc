@@ -7,8 +7,6 @@
 
 #include <TransportHeaderFieldElement.h>
 
-namespace dataStruct {
-
 TransportHeaderFieldElement::TransportHeaderFieldElement() {
     setFieldID("TransportHeaderField");
 }
@@ -16,5 +14,3 @@ TransportHeaderFieldElement::TransportHeaderFieldElement() {
 TransportHeaderFieldElement::~TransportHeaderFieldElement() {
 
 }
-
-} /* namespace Transformation */

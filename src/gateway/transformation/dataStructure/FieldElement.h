@@ -5,8 +5,6 @@
 #include <string>
 #include <omnetpp.h>
 
-namespace dataStruct {
-
 /**
  * @brief FieldElement which compose the base of all FieldElements.
  *
@@ -24,7 +22,5 @@ protected:
 private:
     std::string fieldID_;
 };
-
-} /* namespace Transformation */
 
 #endif /* FIELDELEMENT_H_ */

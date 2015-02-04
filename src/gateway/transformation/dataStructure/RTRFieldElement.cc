@@ -15,8 +15,6 @@
 
 #include <dataStructure/RTRFieldElement.h>
 
-namespace dataStruct {
-
 RTRFieldElement::RTRFieldElement() {
     setFieldID("rtrField");
 
@@ -24,6 +22,4 @@ RTRFieldElement::RTRFieldElement() {
 
 RTRFieldElement::~RTRFieldElement() {
     // TODO Auto-generated destructor stub
-}
-
 }

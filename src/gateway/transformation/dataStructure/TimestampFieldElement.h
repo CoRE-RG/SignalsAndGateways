@@ -2,10 +2,7 @@
 #ifndef TIMESTAMPFIELDELEMENT_H_
 #define TIMESTAMPFIELDELEMENT_H_
 
-#include <FieldElement.h>
-#include <simtime_t.h>
-
-namespace dataStruct {
+#include "FieldElement.h"
 
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the timestamp
@@ -14,7 +11,7 @@ namespace dataStruct {
  *
  * @author Sebastian Mueller
  */
-class TimestampFieldElement: public dataStruct::FieldElement {
+class TimestampFieldElement: public FieldElement {
 public:
     TimestampFieldElement();
     virtual ~TimestampFieldElement();
@@ -31,7 +28,5 @@ private:
     simtime_t timestamp_;
 
 };
-
-} /* namespace Transformation */
 
 #endif /* TIMESTAMPFIELDELEMENT_H_ */

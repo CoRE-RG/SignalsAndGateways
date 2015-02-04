@@ -2,9 +2,7 @@
 #ifndef IDENTIFIERFIELDELEMENT_H_
 #define IDENTIFIERFIELDELEMENT_H_
 
-#include <dataStructure/FieldElement.h>
-
-namespace dataStruct {
+#include "FieldElement.h"
 
 /**
  * @brief FieldElement for the FieldSequenceMessages which stores the identifier
@@ -13,7 +11,7 @@ namespace dataStruct {
  *
  * @author Sebastian Mueller
  */
-class IdentifierFieldElement: public dataStruct::FieldElement {
+class IdentifierFieldElement: public FieldElement {
 public:
     IdentifierFieldElement();
     virtual ~IdentifierFieldElement();
@@ -29,7 +27,5 @@ public:
 private:
     int identifier_;
 };
-
-} /* namespace Transformation */
 
 #endif /* IDENTIFIERFIELDELEMENT_H_ */

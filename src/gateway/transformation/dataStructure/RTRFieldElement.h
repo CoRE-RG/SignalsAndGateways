@@ -16,11 +16,9 @@
 #ifndef RTRFIELDELEMENT_H_
 #define RTRFIELDELEMENT_H_
 
-#include <dataStructure/FieldElement.h>
+#include "FieldElement.h"
 
-namespace dataStruct {
-
-class RTRFieldElement: public dataStruct::FieldElement {
+class RTRFieldElement: public FieldElement {
 public:
     RTRFieldElement();
     virtual ~RTRFieldElement();
@@ -36,7 +34,5 @@ public:
 private:
     bool rtr_;
 };
-
-}
 
 #endif /* RTRFIELDELEMENT_H_ */

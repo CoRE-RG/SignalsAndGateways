@@ -15,9 +15,11 @@
 
 #include <DedicatedGatewayMetaData.h>
 
+using namespace std;
+
 DedicatedGatewayMetaData::DedicatedGatewayMetaData() {
-    busGateMapping = GateMap();
-    timeBuffers = TTBufferMap();
+    busGateMapping = map<string, cGate*>();
+    timeBuffers = map<string, TimeTriggeredBuffer*>();
 }
 
 DedicatedGatewayMetaData::~DedicatedGatewayMetaData() {
@@ -25,11 +27,11 @@ DedicatedGatewayMetaData::~DedicatedGatewayMetaData() {
 }
 
 void DedicatedGatewayMetaData::registerBusGate(string busName, cGate *gate){
-    busGateMapping.insert(std::pair<string, cGate*>(busName, gate));
+    busGateMapping.insert(pair<string, cGate*>(busName, gate));
 }
 
 cGate *DedicatedGatewayMetaData::getBusGate(string busName){
-    GateMap::const_iterator pos = busGateMapping.find(busName);
+    map<string, cGate*>::const_iterator pos = busGateMapping.find(busName);
     cGate *value = NULL;
     if(pos == busGateMapping.end()){
         value = NULL;
@@ -41,7 +43,7 @@ cGate *DedicatedGatewayMetaData::getBusGate(string busName){
 
 bool DedicatedGatewayMetaData::checkBusRegistered(string busName){
     bool registered = false;
-    GateMap::const_iterator pos = busGateMapping.find(busName);
+    map<string, cGate*>::const_iterator pos = busGateMapping.find(busName);
     if(pos != busGateMapping.end()){
         registered = true;
     }
@@ -49,11 +51,11 @@ bool DedicatedGatewayMetaData::checkBusRegistered(string busName){
 }
 
 void DedicatedGatewayMetaData::registerTimeBuffer(string identifier, TimeTriggeredBuffer *timeBuffer){
-    timeBuffers.insert(ValuePair(identifier, timeBuffer));
+    timeBuffers.insert(map<string, TimeTriggeredBuffer*>::value_type(identifier, timeBuffer));
 }
 
 TimeTriggeredBuffer *DedicatedGatewayMetaData::getTimeBuffer(string identifier){
-    TTBufferMap::const_iterator pos = timeBuffers.find(identifier);
+    map<string, TimeTriggeredBuffer*>::const_iterator pos = timeBuffers.find(identifier);
     TimeTriggeredBuffer *value = NULL;
     if(pos == timeBuffers.end()){
         value = NULL;
@@ -65,7 +67,7 @@ TimeTriggeredBuffer *DedicatedGatewayMetaData::getTimeBuffer(string identifier){
 
 bool DedicatedGatewayMetaData::checkTimeBufferRegistered(string identifier){
     bool registered = false;
-    TTBufferMap::const_iterator pos = timeBuffers.find(identifier);
+    map<string, TimeTriggeredBuffer*>::const_iterator pos = timeBuffers.find(identifier);
     if(pos != timeBuffers.end()){
         registered = true;
     }

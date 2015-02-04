@@ -7,8 +7,6 @@
 
 #include "FieldElement.h"
 
-using namespace dataStruct;
-
 /**
  * @brief Holds FieldElements in a vector of shared pointers.
  *

@@ -8,8 +8,6 @@
 #include <dataStructure/DataFieldElement.h>
 #include <stdlib.h>
 
-namespace dataStruct {
-
 DataFieldElement::DataFieldElement(int dataLength) {
     dataLength_ = dataLength;
     data_ = new char[dataLength];
@@ -19,5 +17,3 @@ DataFieldElement::DataFieldElement(int dataLength) {
 DataFieldElement::~DataFieldElement() {
     //delete(data_);
 }
-
-} /* namespace Transformation */
