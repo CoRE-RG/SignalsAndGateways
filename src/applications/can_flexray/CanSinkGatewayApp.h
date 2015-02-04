@@ -28,9 +28,7 @@
  * @author Sebastian Mueller
  */
 
-using namespace FiCo4OMNeT;
-
-class CanSinkGatewayApp : public virtual CanTrafficSinkAppBase
+class CanSinkGatewayApp : public virtual FiCo4OMNeT::CanTrafficSinkAppBase
 {
   protected:
     /**

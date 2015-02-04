@@ -17,6 +17,8 @@
 #include "TransportMessage_m.h"
 #include "CanDataFrame_m.h"
 
+using namespace FiCo4OMNeT;
+
 Define_Module(CanSinkGatewayApp);
 
 template <typename T>
@@ -56,7 +58,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
 //        idle = true;
 
     } else if (msg->isSelfMessage()) {
-        CanInputBuffer *buffer = (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
+        CanInputBuffer *buffer = dynamic_cast<CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
         if (bufferMessageCounter > 0) {
             requestFrame();

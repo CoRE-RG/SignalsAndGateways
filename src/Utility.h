@@ -34,23 +34,24 @@ class Utility {
          *
          * The operation is executed directly on the given string reference.
          *
-         * @param string string to strip
+         * @param str string to strip
          */
         static void stripNonAlphaNum(std::string & str);
         /**
          * @brief Strips all non alphanumeric characters from the char*.
          *
-         * @param char* to strip
-         * @return string string representation with all alphanumeric characters of the char*.
+         * @param str const char* to strip
+         * @return string representation with all alphanumeric characters of the char*.
          */
         static std::string stripNonAlphaNum(const char *str);
         /**
          * @brief Strips all non alphanumeric characters from the char*. MaxLength pretend the maximum length of the returning string.
          *
-         * @param char* to strip
-         * @return string string representation with alphanumeric characters of the char* with respect to the given maximum length.
+         * @param str const char* to strip
+         * @param maxLength max length of str
+         * @return string representation with alphanumeric characters of the char* with respect to the given maximum length.
          */
-        static std::string stripNonAlphaNum(const char *str, int maxLength);
+        static std::string stripNonAlphaNum(const char *str, unsigned int maxLength);
     };
 
 }
