@@ -23,7 +23,7 @@ RTRFieldElement::RTRFieldElement() {
 }
 
 RTRFieldElement::~RTRFieldElement() {
-    // TODO Auto-generated destructor stub
+
 }
 
 }
