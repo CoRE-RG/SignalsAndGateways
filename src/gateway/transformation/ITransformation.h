@@ -28,6 +28,7 @@ namespace SignalsAndGateways {
  */
 class ITransformation {
 public:
+
     virtual void transform(cMessage *msg) = 0;
 };
 

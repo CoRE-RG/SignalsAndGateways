@@ -11,7 +11,7 @@
 
 namespace SignalsAndGateways {
 
-DataFieldElement::DataFieldElement(int dataLength) {
+DataFieldElement::DataFieldElement(unsigned int dataLength) {
     dataLength_ = dataLength;
     data_ = new char[dataLength];
     setFieldID("dataField");

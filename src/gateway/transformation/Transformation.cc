@@ -26,6 +26,7 @@
 #include "GlobalGatewayInformation.h"
 
 using namespace std;
+using namespace FiCo4OMNeT;
 
 namespace SignalsAndGateways {
 
@@ -193,9 +194,9 @@ FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame 
     IdentifierFieldElement* identifier = new IdentifierFieldElement();
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
     identifier->setIdentifier(msg->getCanID());
-    int payloadbytelength = msg->getDataArraySize();
+    unsigned int payloadbytelength = msg->getDataArraySize();
     DataFieldElement* data = new DataFieldElement(payloadbytelength);
-    for (int i=0; i<payloadbytelength; i++){
+    for (unsigned int i=0; i<payloadbytelength; i++){
         data->setData(i, msg->getData(i));
     }
     RTRFieldElement* rtr = new RTRFieldElement();
@@ -235,7 +236,7 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
 
         DataFieldElement* dataElement = transportFrame.getField<DataFieldElement>();
         canDataFrame->setDataArraySize(dataElement->getDataLength());
-        for (int i = 0;  i < dataElement->getDataLength(); i++){
+        for (unsigned int i = 0;  i < dataElement->getDataLength(); i++){
             canDataFrame->setData(i, dataElement->getData(i));
         }
 
@@ -255,5 +256,3 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
 }
 
 }
-
-

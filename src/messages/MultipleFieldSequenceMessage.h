@@ -52,7 +52,7 @@ public:
          EV << "Length of List: " << fieldSequenceList_.size() << endl;
          FieldSequenceDataStructure element = fieldSequenceList_.back();
          fieldSequenceList_.pop_back();
-         this->setByteLength(getByteLength()-sizeof(FieldSequenceDataStructure));
+         this->setByteLength(getByteLength()-static_cast<int64_t>(sizeof(FieldSequenceDataStructure)));
          fieldCount_--;
          return element;
      }

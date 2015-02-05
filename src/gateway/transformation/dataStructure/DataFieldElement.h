@@ -15,27 +15,27 @@ namespace SignalsAndGateways {
  */
 class DataFieldElement: public FieldElement {
 public:
-    DataFieldElement(int dataLength);
+    DataFieldElement(unsigned int dataLength);
     virtual ~DataFieldElement();
 
-    int getDataLength() const {
+    unsigned int getDataLength() const {
         return dataLength_;
     }
 
-    const char getData(int index) const {
+    char getData(unsigned int index) const {
         return data_[index];
     }
 
-    void setData(int index, char data) {
+    void setData(unsigned int index, char data) {
         data_[index] = data;
     }
 
-    void setDataLength(int dataLength) {
+    void setDataLength(unsigned int dataLength) {
         dataLength_ = dataLength;
     }
 
 private:
-    int dataLength_;
+    unsigned int dataLength_;
     char *data_;
 };
 

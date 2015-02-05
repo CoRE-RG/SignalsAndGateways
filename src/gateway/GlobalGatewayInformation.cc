@@ -23,7 +23,6 @@ map<string, DedicatedGatewayMetaData> GlobalGatewayInformation::gateways = map<s
 
 GlobalGatewayInformation::GlobalGatewayInformation() {
 
-
 }
 
 GlobalGatewayInformation::~GlobalGatewayInformation() {
