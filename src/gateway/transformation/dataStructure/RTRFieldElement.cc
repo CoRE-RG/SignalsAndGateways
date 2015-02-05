@@ -23,7 +23,6 @@ RTRFieldElement::RTRFieldElement() {
 }
 
 RTRFieldElement::~RTRFieldElement() {
-
 }
 
 }
