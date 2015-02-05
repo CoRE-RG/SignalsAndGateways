@@ -48,8 +48,8 @@ void InOutComing::handleMessage(cMessage *msg)
             MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(ctFrame->decapsulate());
             newInterDataStructure->encapsulate(multiFieldSequence);
             delete ctFrame;
-        }else if(dynamic_cast<EthernetIIFrame*>(delivery) != NULL){
-            EthernetIIFrame *ethernetFrame = dynamic_cast<EthernetIIFrame*>(delivery);
+        }else if(dynamic_cast<inet::EthernetIIFrame*>(delivery) != NULL){
+            inet::EthernetIIFrame *ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(delivery);
             MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(ethernetFrame->decapsulate());
             newInterDataStructure->encapsulate(multiFieldSequence);
             delete ethernetFrame;
@@ -79,8 +79,8 @@ void InOutComing::handleMessage(cMessage *msg)
             TransportMessage *transportMsg = new TransportMessage;
             transportMsg->setBackboneTransferType(interDataStructure->getBackboneTransferType());
             if(strcmp(interDataStructure->getBackboneTransferType(), "BE") == 0){
-                EthernetIIFrame *bgFrame = new EthernetIIFrame();
-                MACAddress address(interDataStructure->getDirectMacAdress());
+                inet::EthernetIIFrame *bgFrame = new inet::EthernetIIFrame();
+                inet::MACAddress address(interDataStructure->getDirectMacAdress());
                 bgFrame->setDest(address);
                 bgFrame->encapsulate(delivery);
                 bgFrame->addByteLength(delivery->getByteLength());

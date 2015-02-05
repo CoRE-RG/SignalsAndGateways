@@ -52,7 +52,7 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
     }else if(msg->arrivedOn("ethInterface$i")){
         TransportMessage *transFrame = dynamic_cast<TransportMessage*>(msg);
         if(strcmp(transFrame->getBackboneTransferType(), "BE") == 0){
-            EthernetIIFrame *bgFrame = dynamic_cast<EthernetIIFrame*>(transFrame->decapsulate());
+            inet::EthernetIIFrame *bgFrame = dynamic_cast<inet::EthernetIIFrame*>(transFrame->decapsulate());
             for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
                 sendDirect(bgFrame->dup(), (*buf)->gate("in"));
             }
