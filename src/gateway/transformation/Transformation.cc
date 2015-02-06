@@ -16,11 +16,6 @@
 #include <algorithm>
 
 #include "Transformation.h"
-#include "IdentifierFieldElement.h"
-#include "DataFieldElement.h"
-#include "TimestampFieldElement.h"
-#include "TransportHeaderFieldElement.h"
-#include "RTRFieldElement.h"
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
