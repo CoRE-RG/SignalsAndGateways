@@ -14,7 +14,7 @@
 // 
 cplusplus {{
 #include <list>
-#include "FieldSequenceDataStructure.h"
+#include "BaseTransportStructure.h"
 }}
 
 class noncobject FieldSequenceList;
@@ -22,7 +22,7 @@ class noncobject FieldSequenceList;
 namespace SignalsAndGateways;
 
 cplusplus{{
-typedef std::list<FieldSequenceDataStructure> FieldSequenceList;  
+typedef std::list<BaseTransportStructure*> FieldSequenceList;  
 }}
 
 packet MultipleFieldSequenceMessage {

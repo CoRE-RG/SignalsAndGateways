@@ -13,14 +13,18 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 cplusplus {{
-#include "FieldSequenceDataStructure.h"
+#include "BaseTransportStructure.h"
 }}
 
-class noncobject FieldSequenceDataStructure;
+class noncobject BaseTransportStructureP;
 
 namespace SignalsAndGateways;
 
+cplusplus{{
+typedef BaseTransportStructure* BaseTransportStructureP;  
+}}
+
 packet FieldSequenceMessage {
-    FieldSequenceDataStructure transportFrame;
+    BaseTransportStructureP transportFrame;
     string maxWaitingTime;
 }

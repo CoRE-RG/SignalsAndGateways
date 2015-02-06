@@ -13,10 +13,10 @@
 
 namespace SignalsAndGateways {
 
-class StructureBase {
+class BaseTransportStructure {
 public:
-    StructureBase();
-    virtual ~StructureBase();
+    BaseTransportStructure();
+    virtual ~BaseTransportStructure();
 
     int getStaticTranslationID() const;
     void setStaticTranslationID(int newStaticTranslationId);

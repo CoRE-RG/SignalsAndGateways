@@ -19,10 +19,9 @@
 #include <omnetpp.h>
 #include "StaticTransformationIDList.h"
 #include "ITransformation.h"
-#include "FieldElement.h"
 #include "InterConnectMsg_m.h"
 #include "CanDataFrame_m.h"
-#include "FieldSequenceDataStructure.h"
+#include "CanTransportStructure.h"
 
 namespace SignalsAndGateways {
 
@@ -88,7 +87,7 @@ class Transformation : public cSimpleModule, ITransformation
      * @param msg CanDataFrame
      * @return FieldSequenceDataStructure performed data structure by transformation process
      */
-    FieldSequenceDataStructure transformCanToTransport(FiCo4OMNeT::CanDataFrame *msg);
+    CanTransportStructure* transformCanToTransport(FiCo4OMNeT::CanDataFrame *msg);
     /**
      * @brief Transforms a FieldSequenceDataStructure to a CanDataFrame
      *
@@ -105,7 +104,7 @@ class Transformation : public cSimpleModule, ITransformation
      * @return CanDataFrame new performed CanDataFrame
      *
      */
-    FiCo4OMNeT::CanDataFrame* transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination);
+    FiCo4OMNeT::CanDataFrame* transformTransportToCan(CanTransportStructure* transportFrame, cXMLElement* routingDestination);
     //entire routing table
     cXMLElement *routingTable;
     //all items of the routing table

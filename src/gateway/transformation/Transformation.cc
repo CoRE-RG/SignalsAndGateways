@@ -109,7 +109,7 @@ void Transformation::transform(cMessage *msg){
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
 //                            canDataFrame->setTimestamp(interDataStructure->getFirstArrivalTimeOnCan()); // Timestamp of canDataFrame is already set in the source app of the original sender
-                            FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
+                            BaseTransportStructure* transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
                             cXMLElementList backboneProperties;
@@ -155,8 +155,8 @@ void Transformation::transform(cMessage *msg){
                     }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
                         if(busRegistered){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-                            FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, (*element));
+                            BaseTransportStructure* transportFrame = fieldSequence->getTransportFrame();
+                            CanDataFrame *canDataFrame = transformTransportToCan(dynamic_cast<CanTransportStructure*>(transportFrame), (*element));
                             newInterDataStructure->encapsulate(canDataFrame);
                             newInterDataStructure->setAssignedDestinationCount(destinationCount);
                             send(newInterDataStructure, "out");
@@ -186,46 +186,33 @@ void Transformation::transform(cMessage *msg){
     delete interDataStructure;
 }
 
-FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame *msg){
+CanTransportStructure* Transformation::transformCanToTransport(CanDataFrame *msg){
     /*
      * Uebersetzungsprotokoll
      */
-    FieldSequenceDataStructure protocolFieldSequence;
-    IdentifierFieldElement* identifier = new IdentifierFieldElement();
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
-    identifier->setIdentifier(msg->getCanID());
-    unsigned int payloadbytelength = msg->getDataArraySize();
-    DataFieldElement* data = new DataFieldElement(payloadbytelength);
-    for (unsigned int i=0; i<payloadbytelength; i++){
-        data->setData(i, msg->getData(i));
-    }
-    RTRFieldElement* rtr = new RTRFieldElement();
-    rtr->setRtr(msg->getRtr());
 
-    TimestampFieldElement*  timestamp = new TimestampFieldElement();
-    timestamp->setTimestamp(msg->getTimestamp());
+    unsigned int payloadbytelength = msg->getDataArraySize();
+    CanTransportStructure* protocolFieldSequence = new CanTransportStructure(payloadbytelength);
+    for (unsigned int i=0; i<payloadbytelength; i++){
+        protocolFieldSequence->setData(i, msg->getData(i));
+    }
+    protocolFieldSequence->setIdentifier(msg->getCanID());
+    protocolFieldSequence->setRtr(msg->getRtr());
+    protocolFieldSequence->setTimestamp(msg->getTimestamp());
     EV << "transformCanToTransport: firstCanArrivalTime: " << msg->getTimestamp() << endl;
     /*
      * Transportprotokollheader
      */
-    TransportHeaderFieldElement*  transportHeader = new TransportHeaderFieldElement();
-    transportHeader->setStaticTranslationID(1);
-    transportHeader->setStaticBusID(msg->getNode());
-    transportHeader->setActualityFlag(true);
-    /*
-     * Create sequence
-     */
-    protocolFieldSequence.pushField(transportHeader);
-    protocolFieldSequence.pushField(timestamp);
-    protocolFieldSequence.pushField(rtr);
-    protocolFieldSequence.pushField(data);
-    protocolFieldSequence.pushField(identifier);
+    protocolFieldSequence->setStaticTranslationID(1);
+    protocolFieldSequence->setStaticBusID(msg->getNode());
+    protocolFieldSequence->setActualityFlag(true);
 
     return protocolFieldSequence;
 }
 
 
-CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination){
+CanDataFrame *Transformation::transformTransportToCan(CanTransportStructure* transportFrame, cXMLElement* routingDestination){
     CanDataFrame *canDataFrame = new CanDataFrame();
     canDataFrame->setNode("CAN-TTE-Gateway");
 
@@ -233,24 +220,18 @@ CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure
         string destinationCanID = routingDestination->getFirstChildWithTag("destinationObjectID")->getNodeValue();
         Utility::stripNonAlphaNum(destinationCanID);
         canDataFrame->setCanID(atoi(destinationCanID.c_str()));
-
-        DataFieldElement* dataElement = transportFrame.getField<DataFieldElement>();
-        canDataFrame->setDataArraySize(dataElement->getDataLength());
-        for (unsigned int i = 0;  i < dataElement->getDataLength(); i++){
-            canDataFrame->setData(i, dataElement->getData(i));
+        canDataFrame->setDataArraySize(transportFrame->getDataLength());
+        for (unsigned int i = 0;  i < transportFrame->getDataLength(); i++){
+            canDataFrame->setData(i, transportFrame->getData(i));
         }
-
-        RTRFieldElement* rtrElement = transportFrame.getField<RTRFieldElement>();
-        canDataFrame->setRtr(rtrElement->isRtr());
-
-        TimestampFieldElement* timestampElement = transportFrame.getField<TimestampFieldElement>();
-        canDataFrame->setTimestamp(timestampElement->getTimestamp());
-        EV << "transformTransportToCan: firstCanArrivalTime: " << timestampElement->getTimestamp() << endl;
+        canDataFrame->setRtr(transportFrame->isRtr());
+        canDataFrame->setTimestamp(transportFrame->getTimestamp());
+        EV << "transformTransportToCan: firstCanArrivalTime: " << transportFrame->getTimestamp() << endl;
     }catch(cException e){
         opp_error(e.what());
     }
 
-    transportFrame.clear();
+    //delete transportFrame;
 
     return canDataFrame;
 }

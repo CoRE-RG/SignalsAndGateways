@@ -19,8 +19,7 @@
 #include "CTFrame_m.h"
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
-#include "IdentifierFieldElement.h"
-#include "TransportHeaderFieldElement.h"
+#include "CanTransportStructure.h"
 #include "Utility.h"
 
 using namespace FiCo4OMNeT;
@@ -71,20 +70,18 @@ void Routing::handleMessage(cMessage *msg)
         MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(delivery);
         while(multiFieldSequence->getFieldCount() > 0){
             InterConnectMsg *newInterDateStructure = new InterConnectMsg;
-            FieldSequenceDataStructure transportFrame = multiFieldSequence->popFieldSequence();
+            BaseTransportStructure* transportFrame = multiFieldSequence->popFieldSequence();
             int i = 0;
             for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
                 EV << "Cycle: " << i << endl;
                 std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
                 Utility::stripNonAlphaNum(sourceBusID);
                 EV << "sourceBusID: " << sourceBusID.c_str() << endl;
-                TransportHeaderFieldElement* transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
-                if(strcmp(sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
+                if(strcmp(sourceBusID.c_str(), transportFrame->getStaticBusID().c_str()) == 0){
                     std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                     Utility::stripNonAlphaNum(sourceObjectID);
                     EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
-                    IdentifierFieldElement* identifierElement = transportFrame.getField<IdentifierFieldElement>();
-                    if(atoi(sourceObjectID.c_str()) == identifierElement->getIdentifier()){
+                    if(atoi(sourceObjectID.c_str()) == dynamic_cast<CanTransportStructure*>(transportFrame)->getIdentifier()){
                         newInterDateStructure->setRoutingData((*element)->getChildren());
                         EV << "RoutingData found!" << endl;
                         break;

@@ -16,10 +16,11 @@
 #ifndef FIELDSEQUENCEBUFFER_H_
 #define FIELDSEQUENCEBUFFER_H_
 
-#include "FieldSequenceMessage_m.h"
 #include <cqueue.h>
+
+#include "FieldSequenceMessage_m.h"
 #include "CanDataFrame_m.h"
-#include "IdentifierFieldElement.h"
+#include "CanTransportStructure.h"
 
 namespace SignalsAndGateways {
 
@@ -88,10 +89,14 @@ private:
         FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
         FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
         int returnValue = 0;
-        if(canA != NULL && canB != NULL){
-            FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
-            FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
-            returnValue = (canA_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier())-(canB_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier());
+        if(canA && canB){
+            CanTransportStructure* canA_fieldSequence = dynamic_cast<CanTransportStructure*>(canA->getTransportFrame());
+            CanTransportStructure* canB_fieldSequence = dynamic_cast<CanTransportStructure*>(canB->getTransportFrame());
+            if(canA_fieldSequence && canB_fieldSequence){
+                returnValue = (canA_fieldSequence->getIdentifier())-(canB_fieldSequence->getIdentifier());
+            }else{
+                opp_error("Insertion of object in PreBuffer failed. Only CAN-FieldSequenceMessage-objects are supported!");
+            }
         }else{
             opp_error("Insertion of object in PreBuffer failed. Only FieldSequenceMessage-objects are supported!");
         }
