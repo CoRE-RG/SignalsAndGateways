@@ -13,10 +13,10 @@
 
 namespace SignalsAndGateways {
 
-class SequenceStructureBase {
+class StructureBase {
 public:
-    SequenceStructureBase();
-    virtual ~SequenceStructureBase();
+    StructureBase();
+    virtual ~StructureBase();
 
     int getStaticTranslationID() const;
     void setStaticTranslationID(int newStaticTranslationId);

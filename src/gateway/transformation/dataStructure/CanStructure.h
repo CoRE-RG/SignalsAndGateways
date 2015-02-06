@@ -8,14 +8,14 @@
 #ifndef CANSEQUENCESTRUCTURE_H_
 #define CANSEQUENCESTRUCTURE_H_
 
-#include "SequenceStructureBase.h"
+#include "StructureBase.h"
 
 namespace SignalsAndGateways {
 
-class CanSequenceStructure : public SequenceStructureBase {
+class CanStructure : public StructureBase {
 public:
-    CanSequenceStructure(unsigned int dataLength);
-    virtual ~CanSequenceStructure();
+    CanStructure(unsigned int dataLength);
+    virtual ~CanStructure();
 
     int getIdentifier() const;
     void setIdentifier(int newIdentifier);
