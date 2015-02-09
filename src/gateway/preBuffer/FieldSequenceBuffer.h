@@ -93,7 +93,7 @@ private:
             CanTransportStructure* canA_fieldSequence = dynamic_cast<CanTransportStructure*>(canA->getTransportFrame());
             CanTransportStructure* canB_fieldSequence = dynamic_cast<CanTransportStructure*>(canB->getTransportFrame());
             if(canA_fieldSequence && canB_fieldSequence){
-                returnValue = (canA_fieldSequence->getIdentifier())-(canB_fieldSequence->getIdentifier());
+                returnValue = static_cast<int>((canA_fieldSequence->getIdentifier())) - static_cast<int>((canB_fieldSequence->getIdentifier()));
             }else{
                 opp_error("Insertion of object in PreBuffer failed. Only CAN-FieldSequenceMessage-objects are supported!");
             }

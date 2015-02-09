@@ -55,7 +55,7 @@ void Routing::handleMessage(cMessage *msg)
                 std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                 Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
-                if(atoi(sourceObjectID.c_str()) == canID){
+                if(static_cast<unsigned int>(atoi(sourceObjectID.c_str())) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData((*element)->getChildren());
                     send(newInterDateStructure->dup(), "out");
@@ -81,7 +81,7 @@ void Routing::handleMessage(cMessage *msg)
                     std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
                     Utility::stripNonAlphaNum(sourceObjectID);
                     EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
-                    if(atoi(sourceObjectID.c_str()) == dynamic_cast<CanTransportStructure*>(transportFrame)->getIdentifier()){
+                    if(static_cast<unsigned int>(atoi(sourceObjectID.c_str())) == dynamic_cast<CanTransportStructure*>(transportFrame)->getIdentifier()){
                         newInterDateStructure->setRoutingData((*element)->getChildren());
                         EV << "RoutingData found!" << endl;
                         break;
