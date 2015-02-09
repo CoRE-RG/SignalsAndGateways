@@ -15,14 +15,14 @@ CanTransportStructure::CanTransportStructure(unsigned int initDataLength) {
 }
 
 CanTransportStructure::~CanTransportStructure() {
-    delete(data);
+    delete[] data;
 }
 
-int CanTransportStructure::getIdentifier() const {
+unsigned int CanTransportStructure::getIdentifier() const {
     return identifier;
 }
 
-void CanTransportStructure::setIdentifier(int newIdentifier) {
+void CanTransportStructure::setIdentifier(unsigned int newIdentifier) {
     identifier = newIdentifier;
 }
 

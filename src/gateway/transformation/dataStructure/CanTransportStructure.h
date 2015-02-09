@@ -17,8 +17,8 @@ public:
     CanTransportStructure(unsigned int dataLength);
     virtual ~CanTransportStructure();
 
-    int getIdentifier() const;
-    void setIdentifier(int newIdentifier);
+    unsigned int getIdentifier() const;
+    void setIdentifier(unsigned int newIdentifier);
     bool isRtr() const;
     void setRtr(bool newRtr);
     unsigned int getDataLength() const;
@@ -26,7 +26,7 @@ public:
     char getData(unsigned int index) const;
     void setData(unsigned int index, char newData);
 private:
-    int identifier;
+    unsigned int identifier;
     bool rtr;
     unsigned int dataLength;
     char *data;

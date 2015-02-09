@@ -42,7 +42,7 @@ void Routing::handleMessage(cMessage *msg)
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
         canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName());
         const char* busname = canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName();
-        int canID = canDataFrame->getCanID();
+        unsigned int canID = canDataFrame->getCanID();
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;

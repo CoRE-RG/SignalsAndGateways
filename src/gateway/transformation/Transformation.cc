@@ -98,7 +98,7 @@ void Transformation::transform(cMessage *msg){
 
                             string destinationCanID = (*element)->getFirstChildWithTag("destinationObjectID")->getNodeValue();
                             Utility::stripNonAlphaNum(destinationCanID);
-                            canDataFrame->setCanID(atoi(destinationCanID.c_str()));
+                            canDataFrame->setCanID(static_cast<unsigned int>(atoi(destinationCanID.c_str())));
                             newInterDataStructure->encapsulate(canDataFrame->dup());
                             send(newInterDataStructure, "out");
                         }else{
@@ -214,7 +214,7 @@ CanDataFrame *Transformation::transformTransportToCan(CanTransportStructure* tra
     try{
         string destinationCanID = routingDestination->getFirstChildWithTag("destinationObjectID")->getNodeValue();
         Utility::stripNonAlphaNum(destinationCanID);
-        canDataFrame->setCanID(atoi(destinationCanID.c_str()));
+        canDataFrame->setCanID(static_cast<unsigned int>(atoi(destinationCanID.c_str())));
         canDataFrame->setDataArraySize(transportFrame->getDataLength());
         for (unsigned int i = 0;  i < transportFrame->getDataLength(); i++){
             canDataFrame->setData(i, transportFrame->getData(i));
