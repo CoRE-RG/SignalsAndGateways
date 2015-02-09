@@ -95,7 +95,8 @@ void Routing::handleMessage(cMessage *msg)
                 newInterDateStructure->encapsulate(fieldSequence);
                 send(newInterDateStructure, "out");
             } else {
-                delete newInterDateStructure; //TODO darf ich das hier machen?! Hier ist das glaube ich okay
+                delete newInterDateStructure;
+                delete transportFrame;
             }
 
         }

@@ -14,7 +14,6 @@ namespace SignalsAndGateways {
 
 class CanTransportStructure : public BaseTransportStructure {
 public:
-    CanTransportStructure();
     CanTransportStructure(unsigned int dataLength);
     virtual ~CanTransportStructure();
 

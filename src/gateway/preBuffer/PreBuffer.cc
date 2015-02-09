@@ -18,7 +18,6 @@
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "CanDataFrame_m.h"
-#include "TransportHeaderFieldElement.h"
 
 namespace SignalsAndGateways {
 

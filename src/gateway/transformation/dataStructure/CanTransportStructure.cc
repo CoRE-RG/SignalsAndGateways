@@ -9,11 +9,6 @@
 
 namespace SignalsAndGateways {
 
-CanTransportStructure::CanTransportStructure()
-{
-
-}
-
 CanTransportStructure::CanTransportStructure(unsigned int initDataLength) {
     dataLength = initDataLength;
     data = new char[initDataLength];

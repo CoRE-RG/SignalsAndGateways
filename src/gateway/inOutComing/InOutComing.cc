@@ -19,8 +19,6 @@
 #include "TransportMessage_m.h"
 #include "InterConnectMsg_m.h"
 #include "MultipleFieldSequenceMessage.h"
-#include "FieldElement.h"
-#include "IdentifierFieldElement.h"
 #include "Utility.h"
 #include "cxmlelement.h"
 #include "Ethernet.h"
