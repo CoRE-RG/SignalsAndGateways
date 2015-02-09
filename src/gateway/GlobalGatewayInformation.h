@@ -117,7 +117,7 @@ public:
      */
     static bool checkTimeBufferRegistered(std::string gatewayName, std::string identifier);
 private:
-    static std::map<std::string, DedicatedGatewayMetaData> gateways;
+    static std::map<std::string, DedicatedGatewayMetaData*> gateways;
     /**
      * @brief Returns the DedicatedGatewayMetaData-reference to a gatewayName
      *
