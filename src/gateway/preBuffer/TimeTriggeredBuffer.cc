@@ -14,7 +14,6 @@
 // 
 
 #include "TimeTriggeredBuffer.h"
-//#include "simtime.h"
 
 namespace SignalsAndGateways {
 
@@ -24,50 +23,50 @@ Define_Module(TimeTriggeredBuffer);
 
 void TimeTriggeredBuffer::initialize()
 {
-    buffer_ = FieldSequenceBuffer();
-    timerEvent_ = new cMessage("Timer");
+    //buffer = FieldSequenceBuffer();
+    timerEvent = new cMessage("Timer");
 }
 
 void TimeTriggeredBuffer::handleMessage(cMessage *msg)
 {
     if(dynamic_cast<FieldSequenceMessage*>(msg) != NULL){
-        dispatcher_ = msg->getSenderModule();
+        dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
         simtime_t maxWaitingTime = SimTime::parse(fieldSequence->getMaxWaitingTime());
-        if(((timerEvent_->getTimestamp()-simTime()) > maxWaitingTime) || not(timerEvent_->isScheduled())){
-            cancelEvent(timerEvent_);
+        if(((timerEvent->getTimestamp()-simTime()) > maxWaitingTime) || not(timerEvent->isScheduled())){
+            cancelEvent(timerEvent);
             simtime_t timerValue = simTime()+maxWaitingTime;
-            timerEvent_->setTimestamp(timerValue);
+            timerEvent->setTimestamp(timerValue);
 
             EV << "Max waiting time: " << fieldSequence->getMaxWaitingTime() << " timerValue: " << timerValue << endl;
-            scheduleAt(timerValue, timerEvent_);
+            scheduleAt(timerValue, timerEvent);
         }
-        buffer_.enqueue(fieldSequence);
+        buffer.enqueue(fieldSequence);
 
-    }else if(msg == timerEvent_){
+    }else if(msg == timerEvent){
         MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
-        while(not(buffer_.isEmpty())){
-            FieldSequenceMessage *fieldSequence = buffer_.dequeue();
+        while(not(buffer.isEmpty())){
+            FieldSequenceMessage *fieldSequence = buffer.dequeue();
             if(static_cast<uint64_t>(multiFieldSequence->getByteLength())+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }else{
-                sendDirect(multiFieldSequence, dispatcher_, "triggerIn");
+                sendDirect(multiFieldSequence, dispatcher, "triggerIn");
                 multiFieldSequence = new MultipleFieldSequenceMessage();
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }
             delete fieldSequence;
         }
-        buffer_.clear();
+        buffer.clear();
         EV << "TimeTriggeredBuffer: Size of MultipleFieldSequenceMessage " << multiFieldSequence->getByteLength() << endl;
-        sendDirect(multiFieldSequence, dispatcher_, "triggerIn");
+        sendDirect(multiFieldSequence, dispatcher, "triggerIn");
     }
 }
 
 TimeTriggeredBuffer::~TimeTriggeredBuffer(){
-    cancelEvent(timerEvent_);
-    delete timerEvent_;
+    cancelEvent(timerEvent);
+    delete timerEvent;
 }
 
 }
