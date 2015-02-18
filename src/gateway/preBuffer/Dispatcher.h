@@ -21,6 +21,8 @@
 #include <map>
 #include <string>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Dispatches the incoming messages to the appropriate TimeTriggeredBuffer.
  *
@@ -58,5 +60,7 @@ protected:
      */
     virtual void handleMessage(cMessage *msg);
 };
+
+}
 
 #endif

@@ -18,6 +18,8 @@
 
 #include <omnetpp.h>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Receiving and forwarding messages from and to the network nodes.
  *
@@ -46,5 +48,7 @@ class InOutComing : public cSimpleModule
      */
     virtual void handleMessage(cMessage *msg);
 };
+
+}
 
 #endif

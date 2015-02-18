@@ -19,12 +19,11 @@
 #include <omnetpp.h>
 #include "StaticTransformationIDList.h"
 #include "ITransformation.h"
-#include "FieldElement.h"
 #include "InterConnectMsg_m.h"
 #include "CanDataFrame_m.h"
-#include "FieldSequenceDataStructure.h"
+#include "CanTransportStructure.h"
 
-using namespace FiCo4OMNeT;
+namespace SignalsAndGateways {
 
 /**
  * @brief Transformation of bus messages in FieldSequenceMessages and vice versa.
@@ -88,7 +87,7 @@ class Transformation : public cSimpleModule, ITransformation
      * @param msg CanDataFrame
      * @return FieldSequenceDataStructure performed data structure by transformation process
      */
-    FieldSequenceDataStructure transformCanToTransport(CanDataFrame *msg);
+    CanTransportStructure* transformCanToTransport(FiCo4OMNeT::CanDataFrame *msg);
     /**
      * @brief Transforms a FieldSequenceDataStructure to a CanDataFrame
      *
@@ -99,11 +98,13 @@ class Transformation : public cSimpleModule, ITransformation
      *
      * @see FieldSequenceDataStructure, CanDataFrame, DataFieldElement, IdentifierFieldElement, TimestampFieldElement
      *
-     * @param FieldSequenceDataStructure FieldSequenceDataStructure, which will be transformed
+     * @param transportFrame FieldSequenceDataStructure, which will be transformed
+     * @param routingDestination cXMLElement*
+     *
      * @return CanDataFrame new performed CanDataFrame
      *
      */
-    CanDataFrame *transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination);
+    FiCo4OMNeT::CanDataFrame* transformTransportToCan(CanTransportStructure* transportFrame, cXMLElement* routingDestination);
     //entire routing table
     cXMLElement *routingTable;
     //all items of the routing table
@@ -116,5 +117,7 @@ class Transformation : public cSimpleModule, ITransformation
     cXMLElement* gatewayOptions;
     string gatewayName;
 };
+
+}
 
 #endif

@@ -18,7 +18,8 @@
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
 #include "CanDataFrame_m.h"
-#include "TransportHeaderFieldElement.h"
+
+namespace SignalsAndGateways {
 
 Define_Module(PreBuffer);
 
@@ -59,3 +60,6 @@ void PreBuffer::handleMessage(cMessage *msg)
         delete msg;
     }
 }
+
+}
+

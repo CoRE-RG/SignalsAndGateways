@@ -18,6 +18,8 @@
 
 #include <omnetpp.h>
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Based on the content of the incoming message the corresponding routing data is collected.
  *
@@ -61,5 +63,7 @@ protected:
      */
     virtual void handleMessage(cMessage *msg);
 };
+
+}
 
 #endif

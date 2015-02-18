@@ -19,12 +19,14 @@
 #include "CTFrame_m.h"
 #include "FieldSequenceMessage_m.h"
 #include "MultipleFieldSequenceMessage.h"
-#include "IdentifierFieldElement.h"
-#include "TransportHeaderFieldElement.h"
+#include "CanTransportStructure.h"
 #include "Utility.h"
 
-Define_Module(Routing);
 using namespace FiCo4OMNeT;
+
+namespace SignalsAndGateways {
+
+Define_Module(Routing);
 
 void Routing::initialize()
 {
@@ -40,20 +42,20 @@ void Routing::handleMessage(cMessage *msg)
         CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
         canDataFrame->setNode(canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName());
         const char* busname = canDataFrame->getSenderModule()->getParentModule()->gate("gate$i")->getPathStartGate()->getOwnerModule()->getParentModule()->getName();
-        int canID = canDataFrame->getCanID();
+        unsigned int canID = canDataFrame->getCanID();
         InterConnectMsg *newInterDateStructure = new InterConnectMsg;
         newInterDateStructure->encapsulate(canDataFrame);
         int i = 0;
         for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
             EV << "Cycle: " << i << endl;
             std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-            UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+            Utility::stripNonAlphaNum(sourceBusID);
             EV << "sourceBusID: " << sourceBusID.c_str() << endl;
             if(strcmp(sourceBusID.c_str(), busname) == 0){
                 std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                Utility::stripNonAlphaNum(sourceObjectID);
                 EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
-                if(atoi(sourceObjectID.c_str()) == canID){
+                if(static_cast<unsigned int>(atoi(sourceObjectID.c_str())) == canID){
                     newInterDateStructure->setFirstArrivalTimeOnCan(interDataStructure->getFirstArrivalTimeOnCan());
                     newInterDateStructure->setRoutingData((*element)->getChildren());
                     send(newInterDateStructure->dup(), "out");
@@ -68,20 +70,18 @@ void Routing::handleMessage(cMessage *msg)
         MultipleFieldSequenceMessage *multiFieldSequence = dynamic_cast<MultipleFieldSequenceMessage*>(delivery);
         while(multiFieldSequence->getFieldCount() > 0){
             InterConnectMsg *newInterDateStructure = new InterConnectMsg;
-            FieldSequenceDataStructure transportFrame = multiFieldSequence->popFieldSequence();
+            BaseTransportStructure* transportFrame = multiFieldSequence->popFieldSequence();
             int i = 0;
             for(cXMLElementList::iterator element = items.begin(); element != items.end(); ++element){
                 EV << "Cycle: " << i << endl;
                 std::string sourceBusID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceBusID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(sourceBusID);
+                Utility::stripNonAlphaNum(sourceBusID);
                 EV << "sourceBusID: " << sourceBusID.c_str() << endl;
-                TransportHeaderFieldElement* transportHeaderElement = transportFrame.getField<TransportHeaderFieldElement>();
-                if(strcmp(sourceBusID.c_str(), transportHeaderElement->getStaticBusID().c_str()) == 0){
+                if(strcmp(sourceBusID.c_str(), transportFrame->getStaticBusID().c_str()) == 0){
                     std::string sourceObjectID = (*element)->getFirstChildWithTag("source")->getFirstChildWithTag ("sourceObjectID")->getNodeValue();
-                    UTLTY::Utility::stripNonAlphaNum(sourceObjectID);
+                    Utility::stripNonAlphaNum(sourceObjectID);
                     EV << "sourceObjectID: " << sourceObjectID.c_str() << endl;
-                    IdentifierFieldElement* identifierElement = transportFrame.getField<IdentifierFieldElement>();
-                    if(atoi(sourceObjectID.c_str()) == identifierElement->getIdentifier()){
+                    if(static_cast<unsigned int>(atoi(sourceObjectID.c_str())) == dynamic_cast<CanTransportStructure*>(transportFrame)->getIdentifier()){
                         newInterDateStructure->setRoutingData((*element)->getChildren());
                         EV << "RoutingData found!" << endl;
                         break;
@@ -95,7 +95,8 @@ void Routing::handleMessage(cMessage *msg)
                 newInterDateStructure->encapsulate(fieldSequence);
                 send(newInterDateStructure, "out");
             } else {
-                delete newInterDateStructure; //TODO darf ich das hier machen?! Hier ist das glaube ich okay
+                delete newInterDateStructure;
+                delete transportFrame;
             }
 
         }
@@ -104,3 +105,6 @@ void Routing::handleMessage(cMessage *msg)
 
     delete msg;
 }
+
+}
+

@@ -14,17 +14,19 @@
 // 
 cplusplus {{
 #include <list>
-#include "FieldSequenceDataStructure.h"
-
-typedef std::list<FieldSequenceDataStructure> FieldSequenceList;
+#include "BaseTransportStructure.h"
 }}
-//
-// TODO generated message class
-//
+
 class noncobject FieldSequenceList;
+
+namespace SignalsAndGateways;
+
+cplusplus{{
+typedef std::list<BaseTransportStructure*> FieldSequenceList;  
+}}
 
 packet MultipleFieldSequenceMessage {
     @customize(true);  // see the generated C++ header for more info
     abstract FieldSequenceList fieldSequenceList;
-    int backboneCTID;
+    uint16_t backboneCTID;
 }

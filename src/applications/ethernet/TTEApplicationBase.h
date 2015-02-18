@@ -20,6 +20,7 @@
 #include "CoRE4INET_CTApplicationBase.h"
 #include "TransportMessage_m.h"
 
+namespace SignalsAndGateways {
 /**
  * @brief gateway application for the Ethernet-Node
  *
@@ -47,5 +48,6 @@ public:
     virtual ~TTEApplicationBase();
 };
 
+}
+
 #endif /* TTEAPPLICATIONBASE_H_ */
-Define_Module(TTEApplicationBase);

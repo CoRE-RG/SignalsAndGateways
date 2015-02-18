@@ -18,6 +18,8 @@
 
 #include "InterConnectMsg_m.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Interface for the Transformation module.
  *
@@ -26,7 +28,11 @@
  */
 class ITransformation {
 public:
+    virtual ~ITransformation(){}
+
     virtual void transform(cMessage *msg) = 0;
 };
+
+}
 
 #endif /* ITRANSFORMATION_H_ */

@@ -14,14 +14,16 @@
 // 
 
 #include "TimeTriggeredBuffer.h"
-#include "simtime.h"
+
+namespace SignalsAndGateways {
+
 #define MAX_FRAME_LENGTH 1500
 
 Define_Module(TimeTriggeredBuffer);
 
 void TimeTriggeredBuffer::initialize()
 {
-    buffer = FieldSequenceBuffer();
+    //buffer = FieldSequenceBuffer();
     timerEvent = new cMessage("Timer");
 }
 
@@ -31,7 +33,6 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         dispatcher = msg->getSenderModule();
         FieldSequenceMessage *fieldSequence = dynamic_cast<FieldSequenceMessage*>(msg);
         simtime_t maxWaitingTime = SimTime::parse(fieldSequence->getMaxWaitingTime());
-        simtime_t currentTimerValue = timerEvent->getTimestamp()-simTime();
         if(((timerEvent->getTimestamp()-simTime()) > maxWaitingTime) || not(timerEvent->isScheduled())){
             cancelEvent(timerEvent);
             simtime_t timerValue = simTime()+maxWaitingTime;
@@ -46,7 +47,7 @@ void TimeTriggeredBuffer::handleMessage(cMessage *msg)
         MultipleFieldSequenceMessage *multiFieldSequence = new MultipleFieldSequenceMessage();
         while(not(buffer.isEmpty())){
             FieldSequenceMessage *fieldSequence = buffer.dequeue();
-            if(multiFieldSequence->getByteLength()+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
+            if(static_cast<uint64_t>(multiFieldSequence->getByteLength())+sizeof(&fieldSequence) < MAX_FRAME_LENGTH){
                 multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
                 //multiFieldSequence->pushFieldSequence(fieldSequence->getTransportFrame());
             }else{
@@ -67,3 +68,6 @@ TimeTriggeredBuffer::~TimeTriggeredBuffer(){
     cancelEvent(timerEvent);
     delete timerEvent;
 }
+
+}
+

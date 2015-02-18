@@ -20,10 +20,12 @@
 #include "CanDataFrame_m.h"
 #include "GlobalGatewayInformation.h"
 
-Define_Module(BusConnector);
-
 using namespace std;
 using namespace FiCo4OMNeT;
+
+namespace SignalsAndGateways {
+
+Define_Module(BusConnector);
 
 void BusConnector::initialize()
 {
@@ -51,9 +53,9 @@ void BusConnector::handleMessage(cMessage *msg)
         for(cXMLElementList::iterator element = destinations.begin(); element != destinations.end(); ++element){
             if(destinationCount == interDataStructure->getAssignedDestinationCount()){
                 string destinationType = (*element)->getFirstChildWithTag("destinationType")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(destinationType);
+                Utility::stripNonAlphaNum(destinationType);
                 string destinationBusID = (*element)->getFirstChildWithTag("destinationBusID")->getNodeValue();
-                UTLTY::Utility::stripNonAlphaNum(destinationBusID);
+                Utility::stripNonAlphaNum(destinationBusID);
                 cGate *currentGate = GlobalGatewayInformation::getBusGate(gatewayName, destinationBusID);
                 if((strcmp(destinationType.c_str(), "can") == 0) && currentGate != NULL){
                     TransportMessage *transportMsg = new TransportMessage;
@@ -70,10 +72,9 @@ void BusConnector::handleMessage(cMessage *msg)
         delete canDataFrame;
         delete interDataStructure;
     }else if(msg->arrivedOn("busConnect$i")){
-        //Casts fuer Tests
-        TransportMessage *transframe = dynamic_cast<TransportMessage*>(msg);
-        CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(transframe->getEncapsulatedPacket());
         send(msg, "out");
     }
+}
+
 }
 

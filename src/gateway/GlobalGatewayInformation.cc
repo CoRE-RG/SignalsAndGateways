@@ -15,19 +15,22 @@
 
 #include <GlobalGatewayInformation.h>
 
-GatewayMap GlobalGatewayInformation::gateways = GatewayMap();
+using namespace std;
+
+namespace SignalsAndGateways {
+
+map<string, DedicatedGatewayMetaData*> GlobalGatewayInformation::gateways = map<string, DedicatedGatewayMetaData*>();
 
 GlobalGatewayInformation::GlobalGatewayInformation() {
-    // TODO Auto-generated constructor stub
 
 }
 
 GlobalGatewayInformation::~GlobalGatewayInformation() {
-    // TODO Auto-generated destructor stub
+
 }
 
 void GlobalGatewayInformation::registerGateway(string gatewayName){
-    gateways.insert(std::pair<string, DedicatedGatewayMetaData>(gatewayName, DedicatedGatewayMetaData()));
+    gateways.insert(std::pair<string, DedicatedGatewayMetaData*>(gatewayName, new DedicatedGatewayMetaData()));
 }
 
 void GlobalGatewayInformation::registerBusGate(string gatewayName, string busName, cGate *gate){
@@ -69,12 +72,14 @@ bool GlobalGatewayInformation::checkTimeBufferRegistered(string gatewayName, str
 }
 
 DedicatedGatewayMetaData *GlobalGatewayInformation::findGateway(string gatewayName){
-    GatewayMap::iterator pos = gateways.find(gatewayName);
+    map<string, DedicatedGatewayMetaData*>::iterator pos = gateways.find(gatewayName);
     DedicatedGatewayMetaData *value = NULL;
     if(pos == gateways.end()){
         throw cRuntimeError(("Gateway '"+gatewayName+"' is not registered! Please check your network setup!").c_str());
     }else{
-        value = &(pos->second);
+        value = pos->second;
     }
     return value;
+}
+
 }

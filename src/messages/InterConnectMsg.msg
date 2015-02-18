@@ -15,15 +15,15 @@
 cplusplus {{
 #include <cxmlelement.h>
 }}
-//
-// TODO generated message class
-//
+
 class noncobject cXMLElementList;
+
+namespace SignalsAndGateways;
 
 packet InterConnectMsg {
 	cXMLElementList routingData;
 	string backboneTransferType;
-	int backboneCTID;
+	uint16_t backboneCTID;
 	string directMacAdress;
 	bool messageAccumulation;
 	int assignedDestinationCount; 

@@ -20,6 +20,8 @@
 #include "FieldSequenceBuffer.h"
 #include "MultipleFieldSequenceMessage.h"
 
+namespace SignalsAndGateways {
+
 /**
  * @brief Stores FieldSequenceMessages in a FieldSequenceBuffer according to a time strategy.
  *
@@ -46,10 +48,10 @@ public:
     /**
      * @brief Assigns the CTID to that TimeTriggeredBuffer and should match with the corresponding virtual link.
      *
-     * @param dispatchedCTID CTID which that TimeTriggeredBuffer shall be dedicated for
+     * @param newDispatchedCTID CTID which that TimeTriggeredBuffer shall be dedicated for
      */
-    void setDispatchedCTID(std::string dispatchedCTID) {
-        this->dispatchedCTID = dispatchedCTID;
+    void setDispatchedCTID(std::string newDispatchedCTID) {
+        this->dispatchedCTID = newDispatchedCTID;
     }
 
     const std::string& getDispatchedBackboneTransferType() const {
@@ -57,8 +59,8 @@ public:
     }
 
     void setDispatchedBackboneTransferType(
-            const std::string& dispatchedBackboneTransferType) {
-        this->dispatchedBackboneTransferType = dispatchedBackboneTransferType;
+            const std::string& newDispatchedBackboneTransferType) {
+        this->dispatchedBackboneTransferType = newDispatchedBackboneTransferType;
     }
 
   protected:
@@ -101,5 +103,7 @@ public:
     cModule *dispatcher;
     ~TimeTriggeredBuffer();
 };
+
+}
 
 #endif

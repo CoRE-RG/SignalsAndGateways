@@ -13,19 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
+#include <algorithm>
+
 #include "Transformation.h"
-#include "IdentifierFieldElement.h"
-#include "DataFieldElement.h"
-#include "TimestampFieldElement.h"
-#include "TransportHeaderFieldElement.h"
-#include "RTRFieldElement.h"
 #include "FieldSequenceMessage_m.h"
 #include "Utility.h"
 #include "GlobalGatewayInformation.h"
-#include <algorithm>
 
+using namespace std;
+using namespace FiCo4OMNeT;
 
-using namespace dataStruct;
+namespace SignalsAndGateways {
 
 Define_Module(Transformation);
 
@@ -68,20 +66,20 @@ void Transformation::transform(cMessage *msg){
     cPacket *delivery = interDataStructure->decapsulate();
 
     string sourceTyp = source->getFirstChildWithTag("sourceType")->getNodeValue();
-    UTLTY::Utility::stripNonAlphaNum(sourceTyp);
+    Utility::stripNonAlphaNum(sourceTyp);
     EV << "sourceType: " << sourceTyp << endl;
     string to = "To";
-    UTLTY::Utility::stripNonAlphaNum(to);
+    Utility::stripNonAlphaNum(to);
 
     bool busRegistered = false;
     int destinationCount = 0;
     list<string> registerBackboneCTID;
     for(cXMLElementList::iterator element = destination.begin(); element != destination.end(); ++element){
-        if(GlobalGatewayInformation::checkBusRegistered(gatewayName, UTLTY::Utility::stripNonAlphaNum((*element)->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
+        if(GlobalGatewayInformation::checkBusRegistered(gatewayName, Utility::stripNonAlphaNum((*element)->getFirstChildWithTag("destinationBusID")->getNodeValue()))){
             busRegistered = true;
         }
         string destinationType = (*element)->getFirstChildWithTag("destinationType")->getNodeValue();
-        UTLTY::Utility::stripNonAlphaNum(destinationType);
+        Utility::stripNonAlphaNum(destinationType);
         EV << "destinationType: " << destinationType << endl;
 
         string tranformation = sourceTyp + to + destinationType;
@@ -99,28 +97,28 @@ void Transformation::transform(cMessage *msg){
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
 
                             string destinationCanID = (*element)->getFirstChildWithTag("destinationObjectID")->getNodeValue();
-                            UTLTY::Utility::stripNonAlphaNum(destinationCanID);
-                            canDataFrame->setCanID(atoi(destinationCanID.c_str()));
+                            Utility::stripNonAlphaNum(destinationCanID);
+                            canDataFrame->setCanID(static_cast<unsigned int>(atoi(destinationCanID.c_str())));
                             newInterDataStructure->encapsulate(canDataFrame->dup());
                             send(newInterDataStructure, "out");
                         }else{
                             CanDataFrame *canDataFrame = dynamic_cast<CanDataFrame*>(delivery);
 //                            canDataFrame->setTimestamp(interDataStructure->getFirstArrivalTimeOnCan()); // Timestamp of canDataFrame is already set in the source app of the original sender
-                            FieldSequenceDataStructure transportFrame = transformCanToTransport(canDataFrame);
+                            BaseTransportStructure* transportFrame = transformCanToTransport(canDataFrame);
                             FieldSequenceMessage *fieldSequence = new FieldSequenceMessage;
                             fieldSequence->setTransportFrame(transportFrame);
                             cXMLElementList backboneProperties;
                             backboneProperties = (*element)->getChildrenByTagName("backbone");
                             for(cXMLElementList::iterator property = backboneProperties.begin(); property != backboneProperties.end(); ++property){
                                 string maxWaitingTime = (*property)->getFirstChildWithTag("holdUpTime")->getNodeValue();
-                                UTLTY::Utility::stripNonAlphaNum(maxWaitingTime);
+                                Utility::stripNonAlphaNum(maxWaitingTime);
                                 fieldSequence->setMaxWaitingTime(maxWaitingTime.c_str());
                                 newInterDataStructure->encapsulate(fieldSequence);
                                 string backboneTransferType = (*property)->getFirstChildWithTag("backboneTransferType")->getNodeValue();
-                                UTLTY::Utility::stripNonAlphaNum(backboneTransferType);
+                                Utility::stripNonAlphaNum(backboneTransferType);
                                 newInterDataStructure->setBackboneTransferType(backboneTransferType.c_str());
                                 string messageAccumulation = (*property)->getFirstChildWithTag("messageAccumulation")->getNodeValue();
-                                UTLTY::Utility::stripNonAlphaNum(messageAccumulation);
+                                Utility::stripNonAlphaNum(messageAccumulation);
                                 if(strcmp(messageAccumulation.c_str(), "true") == 0){
                                     newInterDataStructure->setMessageAccumulation(true);
                                 }else{
@@ -128,13 +126,13 @@ void Transformation::transform(cMessage *msg){
                                 }
                                 string backboneID;
                                 if(strcmp(backboneTransferType.c_str(), "TT") == 0 || strcmp(backboneTransferType.c_str(), "RC") == 0 ){
-                                    int ctID = atoi(UTLTY::Utility::stripNonAlphaNum((*property)->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str());
+                                    uint16_t ctID = static_cast<uint16_t>(atoi(Utility::stripNonAlphaNum((*property)->getFirstChildWithTag("backboneCTID")->getNodeValue()).c_str()));
                                     EV << "CTID: " << ctID << endl;
                                     newInterDataStructure->setBackboneCTID(ctID);
                                     backboneID = numberToString(ctID);
                                 }else if(strcmp(backboneTransferType.c_str(), "BE") == 0){
                                     string macAdress = (*property)->getFirstChildWithTag("directMacAdress")->getNodeValue();
-                                    UTLTY::Utility::stripNonAlphaNum(macAdress);
+                                    Utility::stripNonAlphaNum(macAdress);
                                     newInterDataStructure->setDirectMacAdress(macAdress.c_str());
                                     backboneID = macAdress;
                                 }else{
@@ -152,8 +150,8 @@ void Transformation::transform(cMessage *msg){
                     }else if(dynamic_cast<FieldSequenceMessage*>(delivery) != NULL){
                         if(busRegistered){
                             FieldSequenceMessage* fieldSequence = dynamic_cast<FieldSequenceMessage*>(delivery);
-                            FieldSequenceDataStructure transportFrame = fieldSequence->getTransportFrame();
-                            CanDataFrame *canDataFrame = transformTransportToCan(transportFrame, (*element));
+                            BaseTransportStructure* transportFrame = fieldSequence->getTransportFrame();
+                            CanDataFrame *canDataFrame = transformTransportToCan(dynamic_cast<CanTransportStructure*>(transportFrame), (*element));
                             newInterDataStructure->encapsulate(canDataFrame);
                             newInterDataStructure->setAssignedDestinationCount(destinationCount);
                             send(newInterDataStructure, "out");
@@ -183,72 +181,54 @@ void Transformation::transform(cMessage *msg){
     delete interDataStructure;
 }
 
-FieldSequenceDataStructure Transformation::transformCanToTransport(CanDataFrame *msg){
+CanTransportStructure* Transformation::transformCanToTransport(CanDataFrame *msg){
     /*
      * Uebersetzungsprotokoll
      */
-    FieldSequenceDataStructure protocolFieldSequence;
-    dataStruct::IdentifierFieldElement* identifier = new IdentifierFieldElement();
     EV << "Transformation: getCanID(): " << msg->getCanID() << endl;
-    identifier->setIdentifier(msg->getCanID());
-    int payloadbytelength = msg->getDataArraySize();
-    dataStruct::DataFieldElement* data = new DataFieldElement(payloadbytelength);
-    for (int i=0; i<payloadbytelength; i++){
-        data->setData(i, msg->getData(i));
-    }
-    dataStruct::RTRFieldElement* rtr = new RTRFieldElement();
-    rtr->setRtr(msg->getRtr());
 
-    dataStruct::TimestampFieldElement*  timestamp = new TimestampFieldElement();
-    timestamp->setTimestamp(msg->getTimestamp());
+    unsigned int payloadbytelength = msg->getDataArraySize();
+    CanTransportStructure* protocolFieldSequence = new CanTransportStructure(payloadbytelength);
+    for (unsigned int i=0; i<payloadbytelength; i++){
+        protocolFieldSequence->setData(i, msg->getData(i));
+    }
+    protocolFieldSequence->setIdentifier(msg->getCanID());
+    protocolFieldSequence->setRtr(msg->getRtr());
+    protocolFieldSequence->setTimestamp(msg->getTimestamp());
     EV << "transformCanToTransport: firstCanArrivalTime: " << msg->getTimestamp() << endl;
     /*
      * Transportprotokollheader
      */
-    dataStruct::TransportHeaderFieldElement*  transportHeader = new TransportHeaderFieldElement();
-    transportHeader->setStaticTranslationID(1);
-    transportHeader->setStaticBusID(msg->getNode());
-    transportHeader->setActualityFlag(true);
-    /*
-     * Create sequence
-     */
-    protocolFieldSequence.pushField(transportHeader);
-    protocolFieldSequence.pushField(timestamp);
-    protocolFieldSequence.pushField(rtr);
-    protocolFieldSequence.pushField(data);
-    protocolFieldSequence.pushField(identifier);
+    protocolFieldSequence->setStaticTranslationID(1);
+    protocolFieldSequence->setStaticBusID(msg->getNode());
+    protocolFieldSequence->setActualityFlag(true);
 
     return protocolFieldSequence;
 }
 
 
-CanDataFrame *Transformation::transformTransportToCan(FieldSequenceDataStructure transportFrame, cXMLElement* routingDestination){
+CanDataFrame *Transformation::transformTransportToCan(CanTransportStructure* transportFrame, cXMLElement* routingDestination){
     CanDataFrame *canDataFrame = new CanDataFrame();
     canDataFrame->setNode("CAN-TTE-Gateway");
 
     try{
         string destinationCanID = routingDestination->getFirstChildWithTag("destinationObjectID")->getNodeValue();
-        UTLTY::Utility::stripNonAlphaNum(destinationCanID);
-        canDataFrame->setCanID(atoi(destinationCanID.c_str()));
-
-        DataFieldElement* dataElement = transportFrame.getField<DataFieldElement>();
-        canDataFrame->setDataArraySize(dataElement->getDataLength());
-        for (int i = 0;  i < dataElement->getDataLength(); i++){
-            canDataFrame->setData(i, dataElement->getData(i));
+        Utility::stripNonAlphaNum(destinationCanID);
+        canDataFrame->setCanID(static_cast<unsigned int>(atoi(destinationCanID.c_str())));
+        canDataFrame->setDataArraySize(transportFrame->getDataLength());
+        for (unsigned int i = 0;  i < transportFrame->getDataLength(); i++){
+            canDataFrame->setData(i, transportFrame->getData(i));
         }
-
-        RTRFieldElement* rtrElement = transportFrame.getField<RTRFieldElement>();
-        canDataFrame->setRtr(rtrElement->isRtr());
-
-        TimestampFieldElement* timestampElement = transportFrame.getField<TimestampFieldElement>();
-        canDataFrame->setTimestamp(timestampElement->getTimestamp());
-        EV << "transformTransportToCan: firstCanArrivalTime: " << timestampElement->getTimestamp() << endl;
+        canDataFrame->setRtr(transportFrame->isRtr());
+        canDataFrame->setTimestamp(transportFrame->getTimestamp());
+        EV << "transformTransportToCan: firstCanArrivalTime: " << transportFrame->getTimestamp() << endl;
     }catch(cException e){
         opp_error(e.what());
     }
 
-    transportFrame.clear();
+    //delete transportFrame;
 
     return canDataFrame;
 }
 
+}

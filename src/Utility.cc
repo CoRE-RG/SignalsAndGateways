@@ -13,15 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include <Utility.h>
+#include "Utility.h"
 
-namespace UTLTY{
+namespace SignalsAndGateways {
+
     static bool isnotalnum(char c){
         return !isalnum(c);
     }
 
-    int findFirstAlphaNum(const char *str){
-        int pos = 0;
+    static unsigned int findFirstAlphaNum(const char *str){
+        unsigned int pos = 0;
         for(pos = 0; !isalnum(*str);pos++){
             str++;
         }
@@ -40,7 +41,7 @@ namespace UTLTY{
         return stringRepresentation;
     }
 
-    std::string Utility::stripNonAlphaNum(const char *str, int maxLength){
+    std::string Utility::stripNonAlphaNum(const char *str, unsigned int maxLength){
         std::string stringRepresentation = std::string(str, findFirstAlphaNum(str), maxLength);
         stripNonAlphaNum(stringRepresentation);
         return stringRepresentation;

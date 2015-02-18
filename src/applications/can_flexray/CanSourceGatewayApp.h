@@ -17,7 +17,10 @@
 #define __SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
 
 #include <omnetpp.h>
+
 #include "FiCo4OMNeT_CanTrafficSourceAppBase.h"
+
+namespace SignalsAndGateways {
 
 /**
  * @brief Source-Application for the CAN-Node
@@ -27,9 +30,7 @@
  * @author Sebastian Mueller
  */
 
-using namespace FiCo4OMNeT;
-
-class CanSourceGatewayApp : public CanTrafficSourceAppBase
+class CanSourceGatewayApp : public FiCo4OMNeT::CanTrafficSourceAppBase
 {
   protected:
     /**
@@ -41,5 +42,7 @@ class CanSourceGatewayApp : public CanTrafficSourceAppBase
      */
     virtual void handleMessage(cMessage *msg);
 };
+
+}
 
 #endif

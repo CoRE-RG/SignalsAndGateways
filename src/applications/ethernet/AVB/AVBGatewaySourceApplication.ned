@@ -17,9 +17,6 @@ package signalsandgateways.applications.ethernet.AVB;
 
 import core4inet.applications.trafficsource.avb.AVBTrafficSourceApp;
 
-//
-// TODO auto-generated module
-//
 simple AVBGatewaySourceApplication extends AVBTrafficSourceApp
 {
     

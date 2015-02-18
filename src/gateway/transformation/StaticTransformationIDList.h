@@ -8,6 +8,8 @@
 using std::map;
 using std::string;
 
+namespace SignalsAndGateways {
+
 /**
  * @brief The StaticTransformationList is used to predefine transformation pattern.
  *
@@ -37,5 +39,7 @@ private:
     //Predefined transformation list
     Map transformationIDList;
 };
+
+}
 
 #endif /* STATICTRANSFORMATIONIDLIST_H_ */

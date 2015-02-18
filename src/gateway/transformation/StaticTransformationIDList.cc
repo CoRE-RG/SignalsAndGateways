@@ -5,7 +5,9 @@
  *      Author: sebastian
  */
 
-#include <StaticTransformationIDList.h>
+#include "StaticTransformationIDList.h"
+
+namespace SignalsAndGateways {
 
 StaticTransformationIDList::StaticTransformationIDList() {
     this->transformationIDList.insert(std::pair<std::string, int>("canTocan", 1));
@@ -15,7 +17,7 @@ StaticTransformationIDList::StaticTransformationIDList() {
 }
 
 StaticTransformationIDList::~StaticTransformationIDList() {
-    // TODO Auto-generated destructor stub
+
 }
 
 int StaticTransformationIDList::getTransformationID(std::string transformation){
@@ -27,4 +29,6 @@ int StaticTransformationIDList::getTransformationID(std::string transformation){
         value = pos->second;
     }
     return value;
+}
+
 }

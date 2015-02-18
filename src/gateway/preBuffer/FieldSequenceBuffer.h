@@ -16,10 +16,13 @@
 #ifndef FIELDSEQUENCEBUFFER_H_
 #define FIELDSEQUENCEBUFFER_H_
 
-#include "FieldSequenceMessage_m.h"
 #include <cqueue.h>
+
+#include "FieldSequenceMessage_m.h"
 #include "CanDataFrame_m.h"
-#include "IdentifierFieldElement.h"
+#include "CanTransportStructure.h"
+
+namespace SignalsAndGateways {
 
 /**
  * @brief Stores FieldSequenceMessages in a cQueue ordered by the IdentifierFieldElement.
@@ -35,9 +38,9 @@ public:
     /**
      * @brief Enqueues a FieldSequenceMessage ordered by the IdentifierFieldElement
      *
-     * @param FieldSequenceMessage to enqueue
+     * @param value FieldSequenceMessage to enqueue
      */
-    void enqueue(FieldSequenceMessage*);
+    void enqueue(FieldSequenceMessage* value);
     /**
      * @brief Dequeues a FieldSequenceMessage according to the order in the queue
      * @return Next FieldSequenceMessage of the queue
@@ -86,10 +89,14 @@ private:
         FieldSequenceMessage* canA = dynamic_cast<FieldSequenceMessage*>(a);
         FieldSequenceMessage* canB = dynamic_cast<FieldSequenceMessage*>(b);
         int returnValue = 0;
-        if(canA != NULL && canB != NULL){
-            FieldSequenceDataStructure canA_fieldSequence = canA->getTransportFrame();
-            FieldSequenceDataStructure canB_fieldSequence = canB->getTransportFrame();
-            returnValue = (canA_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier())-(canB_fieldSequence.getField<IdentifierFieldElement>()->getIdentifier());
+        if(canA && canB){
+            CanTransportStructure* canA_fieldSequence = dynamic_cast<CanTransportStructure*>(canA->getTransportFrame());
+            CanTransportStructure* canB_fieldSequence = dynamic_cast<CanTransportStructure*>(canB->getTransportFrame());
+            if(canA_fieldSequence && canB_fieldSequence){
+                returnValue = static_cast<int>((canA_fieldSequence->getIdentifier())) - static_cast<int>((canB_fieldSequence->getIdentifier()));
+            }else{
+                opp_error("Insertion of object in PreBuffer failed. Only CAN-FieldSequenceMessage-objects are supported!");
+            }
         }else{
             opp_error("Insertion of object in PreBuffer failed. Only FieldSequenceMessage-objects are supported!");
         }
@@ -99,5 +106,7 @@ private:
     compareFunc pCompare = &compareFieldSequenceMessage;
 
 };
+
+}
 
 #endif /* FIELDSEQUENCEBUFFER_H_ */

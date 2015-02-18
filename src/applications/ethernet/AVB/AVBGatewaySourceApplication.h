@@ -19,13 +19,14 @@
 #include <omnetpp.h>
 #include "CoRE4INET_AVBTrafficSourceApp.h"
 
-/**
- * TODO - Generated class
- */
+namespace SignalsAndGateways {
+
 class AVBGatewaySourceApplication : public CoRE4INET::AVBTrafficSourceApp
 {
   protected:
     void sendAVBFrame();
 };
+
+}
 
 #endif

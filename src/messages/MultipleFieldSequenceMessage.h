@@ -10,10 +10,12 @@
 
 #include "MultipleFieldSequenceMessage_m.h"
 
+namespace SignalsAndGateways {
+
 class MultipleFieldSequenceMessage : public MultipleFieldSequenceMessage_Base
 {
 private:
-    std::list<FieldSequenceDataStructure> fieldSequenceList;
+    std::list<BaseTransportStructure*> fieldSequenceList;
     int fieldCount;
     void copy(const MultipleFieldSequenceMessage& other) {
         fieldSequenceList = other.copyFiledSequenceList();
@@ -39,18 +41,18 @@ public:
          return new MultipleFieldSequenceMessage(*this);
      }
 
-     void pushFieldSequence(FieldSequenceDataStructure transportFrame){
+     void pushFieldSequence(BaseTransportStructure* transportFrame){
          fieldSequenceList.push_front(transportFrame);
-         addByteLength(sizeof(FieldSequenceDataStructure));
+         addByteLength(sizeof *transportFrame);
          fieldCount++;
          EV << "Field pushed to MultipleFieldSequenceMessage" << endl;
      }
 
-     FieldSequenceDataStructure popFieldSequence(){
+     BaseTransportStructure* popFieldSequence(){
          EV << "Length of List: " << fieldSequenceList.size() << endl;
-         FieldSequenceDataStructure element = fieldSequenceList.back();
+         BaseTransportStructure* element = fieldSequenceList.back();
          fieldSequenceList.pop_back();
-         this->setByteLength(getByteLength()-sizeof(FieldSequenceDataStructure));
+         this->setByteLength(getByteLength()-static_cast<int64_t>(sizeof *element));
          fieldCount--;
          return element;
      }
@@ -67,12 +69,14 @@ public:
          return fieldSequenceList;
      }
 
-     void setFieldSequenceList(const std::list<FieldSequenceDataStructure>& fieldSequenceList){
-         this->fieldSequenceList = fieldSequenceList;
+     void setFieldSequenceList(const std::list<BaseTransportStructure*>& newFieldSequenceList){
+         fieldSequenceList = newFieldSequenceList;
      }
 
 };
 
 Register_Class(MultipleFieldSequenceMessage);
+
+}
 
 #endif /* MULTIPLEFIELDSEQUENCEMESSAGE_H_ */

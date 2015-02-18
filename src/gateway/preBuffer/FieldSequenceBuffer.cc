@@ -15,6 +15,7 @@
 
 #include <FieldSequenceBuffer.h>
 
+namespace SignalsAndGateways {
 
 FieldSequenceBuffer::FieldSequenceBuffer() {
     timeQueue = cQueue("preBuffer", pCompare);
@@ -42,3 +43,4 @@ bool FieldSequenceBuffer::isEmpty(){
     return timeQueue.isEmpty();
 }
 
+}

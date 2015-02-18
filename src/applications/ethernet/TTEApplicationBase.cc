@@ -23,13 +23,16 @@
 
 using namespace CoRE4INET;
 
+namespace SignalsAndGateways {
+
+Define_Module(TTEApplicationBase);
+
 TTEApplicationBase::TTEApplicationBase() {
-    // TODO Auto-generated constructor stub
 
 }
 
 TTEApplicationBase::~TTEApplicationBase() {
-    // TODO Auto-generated destructor stub
+
 }
 
 void TTEApplicationBase::initialize(){
@@ -70,4 +73,6 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         }
         delete transFrame;
     }
+}
+
 }
