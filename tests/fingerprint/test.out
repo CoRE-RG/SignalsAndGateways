@@ -20,7 +20,7 @@ Loading NED files from C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/exam
 
 Preparing for running configuration General, run #0...
 Scenario: $repetition=0
-Assigned runID=General-0-20150224-16:25:04-6692
+Assigned runID=General-0-20150302-15:11:45-4236
 Recording eventlog to file `results\General-0.elog'...
 Setting up network `major_gateway_network'...
 Initializing...
@@ -29,8 +29,8 @@ Running simulation...
 ** Event #1   T=0   Elapsed: 0.000s (0m 00s)  0% completed
      Speed:     ev/sec=0   simsec/sec=0   ev/simsec=0
      Messages:  created: 116   present: 116   in FES: 24
-** Event #17821   T=1   Elapsed: 0.480s (0m 00s)  100% completed
-     Speed:     ev/sec=37125   simsec/sec=2.08333   ev/simsec=17820
+** Event #17821   T=1   Elapsed: 0.542s (0m 00s)  100% completed
+     Speed:     ev/sec=32878.2   simsec/sec=1.84502   ev/simsec=17820
      Messages:  created: 11746   present: 133   in FES: 22
 
 <!> Simulation time limit reached -- simulation stopped at event #17821, t=1.
@@ -56,5 +56,5 @@ simtime: 1
 End.
 
 Exit code: 0
-Elapsed time:  1.0s
+Elapsed time:  1.27s
 
