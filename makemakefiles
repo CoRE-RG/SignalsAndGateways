@@ -1,0 +1,15 @@
+#
+# Usage:
+#    make -f makemakefiles
+# or, for Microsoft Visual C++:
+#    nmake -f makemakefiles MMOPT=-n
+#
+
+MAKEMAKE=opp_makemake $(MMOPT)
+
+CORE4INET_PROJ=../CoRE4INET
+INET_PROJ=../inet
+FICO4OMNET_PROJ=../FiCo4OMNeT
+
+all:
+	cd src && $(MAKEMAKE) -f --deep --make-so -O out -I../../inet/src/linklayer/ethernet -I../../inet/src/linklayer/ieee80211/radio -I../../inet/src/world/obstacles -I../../inet/src/networklayer/contract -I../../inet/src/networklayer/autorouting/ipv4 -I../../inet/src/util -I../../inet/src/linklayer/common -I../../inet/src/linklayer/radio/propagation -I../../CoRE4INET/src/utilities/classes -I../../CoRE4INET/src/linklayer/ethernet/AS6802 -I../../inet/src/util/headerserializers/tcp -I../../inet/src/networklayer/ipv4 -I../../inet/src/mobility/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/util/headerserializers -I../../CoRE4INET/src/scheduler/oscillator -I../../inet/src/world/radio -I../../inet/src/linklayer/ieee80211/mac -I../../inet/src/transport/sctp -I../../inet/src/networklayer/ipv6 -I../../inet/src/networklayer/ipv6tunneling -I../../CoRE4INET/src/buffer/base -I../../inet/src/util/headerserializers/ipv6 -I../../inet/src/applications/pingapp -I../../inet/src/util/headerserializers/sctp -I../../inet/src/networklayer/arp -I../../inet/src/transport/tcp_common -I../../CoRE4INET/src/buffer/AS6802 -I../../inet/src/transport/udp -I../../CoRE4INET/src/applications/base -I../../CoRE4INET/src/base/AS6802 -I../../inet/src/networklayer/routing/aodv -I../../inet/src/networklayer/common -I../../inet/src/networklayer/icmpv6 -I../../inet/src -I../../inet/src/networklayer/xmipv6 -I../../inet/src/transport/contract -I../../inet/src/status -I../../CoRE4INET/src/scheduler/timer -I../../CoRE4INET/src/scheduler -I../../inet/src/linklayer/ieee80211/radio/errormodel -I../../CoRE4INET/src/base/avb -I../../inet/src/linklayer/radio -I../../CoRE4INET/src/incoming/base -I../../CoRE4INET/src/utilities -I../../inet/src/base -I../../CoRE4INET/src/scheduler/period -I../../inet/src/util/headerserializers/udp -I../../CoRE4INET/src -I../../inet/src/battery/models -I../../inet/src/linklayer/contract -I../../CoRE4INET/src/applications/AS6802 -I../../CoRE4INET/src/base -I../../FiCo4OMNeT/src/linklayer/can/messages -I../../CoRE4INET/src/linklayer/contract -I../../CoRE4INET/src/services/avb/SRP -I../../CoRE4INET/src/applications/trafficsource/base -I../../CoRE4INET/src/linklayer/ethernet/base -I../../CoRE4INET/src/linklayer/ethernet/avb -I../../CoRE4INET/src/applications/trafficsource/avb -I../../FiCo4OMNeT/src/buffer -I../../FiCo4OMNeT/src/applications/can/source -I../../FiCo4OMNeT/src/scheduler/can -I../../FiCo4OMNeT/src/utilities -I../../FiCo4OMNeT/src/linklayer/can -I../../FiCo4OMNeT/src/buffer/can -I../../FiCo4OMNeT/src/bus/can -I../../FiCo4OMNeT/src/linklayer/flexray/messages -I../../FiCo4OMNeT/src/bus -I../../FiCo4OMNeT/src/applications/can/sink -L../../CoRE4INET/out/$$\(CONFIGNAME\)/src -L../../inet/out/$$\(CONFIGNAME\)/src -L../../FiCo4OMNeT/out/$$\(CONFIGNAME\)/src -lCoRE4INET -linet -lFiCo4OMNeT -DINET_IMPORT -KCORE4INET_PROJ=../../CoRE4INET -KINET_PROJ=../../inet -KFICO4OMNET_PROJ=../../FiCo4OMNeT
