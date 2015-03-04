@@ -21,6 +21,7 @@ import fico4omnet.buffer.can.CanOutputBuffer;
 import fico4omnet.applications.ISourceApplication;
 import fico4omnet.applications.can.source.CanTrafficSourceAppBase;
 import fico4omnet.applications.can.sink.CanTrafficSinkAppBase;
+import fico4omnet.scheduler.can.CanClock;
 
 //
 // Participants in the network. 
@@ -62,6 +63,9 @@ module CanGatewayNode like IBusGatewayApplication
         }
         sinkApp[numInputBuffer]: CanSinkGatewayApp {
             @display("p=233,32");
+        }
+        canClock: CanClock {
+            @display("p=149,102");
         }
     connections:
         canNodePort.phygate <--> gate;

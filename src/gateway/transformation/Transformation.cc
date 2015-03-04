@@ -221,6 +221,7 @@ CanDataFrame *Transformation::transformTransportToCan(CanTransportStructure* tra
         }
         canDataFrame->setRtr(transportFrame->isRtr());
         canDataFrame->setTimestamp(transportFrame->getTimestamp());
+        canDataFrame->setMessageSource(SOURCE_GW);
         EV << "transformTransportToCan: firstCanArrivalTime: " << transportFrame->getTimestamp() << endl;
     }catch(cException e){
         opp_error(e.what());

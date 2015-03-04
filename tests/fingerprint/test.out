@@ -1,22 +1,26 @@
 ------------------------------------------------------
-Running: /examples/majorNetwork/ -f omnetpp.ini -c General -r 0
+Running: /examples/majorNetwork/ 		                              -f omnetpp.ini -c General -r 0
 
-$ cd c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways//examples/majorNetwork/
-$ opp_run -n c:\Users\Buschmann\workspaceOmnet\inet/src;c:\Users\Buschmann\workspaceOmnet\CoRE4INET/src;c:\Users\Buschmann\workspaceOmnet\FiCo4OMNeT/src;c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways/src;c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways/examples -l c:\Users\Buschmann\workspaceOmnet\CoRE4INET/src/CoRE4INET -l c:\Users\Buschmann\workspaceOmnet\inet/src/inet -l c:\Users\Buschmann\workspaceOmnet\FiCo4OMNeT/src/FiCo4OMNeT -l c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways/src/SignalsAndGateways -u Cmdenv -f omnetpp.ini -c General -r 0 --sim-time-limit=10s --fingerprint=2066-8946 --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
+$ cd C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways//examples/majorNetwork/
+$ opp_run -n C:/Users/Buschmann/workspaceOmnet/inet/src;C:/Users/Buschmann/workspaceOmnet/CoRE4INET/src;C:/Users/Buschmann/workspaceOmnet/FiCo4OMNeT/src;C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/src;C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/examples -l C:/Users/Buschmann/workspaceOmnet/CoRE4INET/src/CoRE4INET -l C:/Users/Buschmann/workspaceOmnet/inet/src/inet -l C:/Users/Buschmann/workspaceOmnet/FiCo4OMNeT/src/FiCo4OMNeT -l C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/src/SignalsAndGateways -u Cmdenv 		                              -f omnetpp.ini -c General -r 0 --sim-time-limit=1s --fingerprint=40cb-3bbc --cpu-time-limit=30s --vector-recording=false --scalar-recording=false
 
-OMNeT++ Discrete Event Simulation  (C) 1992-2013 Andras Varga, OpenSim Ltd.
-Version: 4.5, build: 140714-c6b1772, edition: Academic Public License -- NOT FOR COMMERCIAL USE
+<!> Warning: opp_run: Cannot check library C:/Users/Buschmann/workspaceOmnet/CoRE4INET/src/CoRE4INET: Das angegebene Modul wurde nicht gefunden
+
+<!> Warning: opp_run: Cannot check library C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/src/SignalsAndGateways: Das angegebene Modul wurde nicht gefunden
+
+OMNeT++ Discrete Event Simulation  (C) 1992-2014 Andras Varga, OpenSim Ltd.
+Version: 4.6, build: 141202-f785492, edition: Academic Public License -- NOT FOR COMMERCIAL USE
 See the license for distribution terms and warranty disclaimer
 Setting up Cmdenv...
-Loading NED files from c:\Users\Buschmann\workspaceOmnet\inet/src: 282
-Loading NED files from c:\Users\Buschmann\workspaceOmnet\CoRE4INET/src: 82
-Loading NED files from c:\Users\Buschmann\workspaceOmnet\FiCo4OMNeT/src: 33
-Loading NED files from c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways/src: 20
-Loading NED files from c:\Users\Buschmann\workspaceOmnet\SignalsAndGateways/examples: 21
+Loading NED files from C:/Users/Buschmann/workspaceOmnet/inet/src: 284
+Loading NED files from C:/Users/Buschmann/workspaceOmnet/CoRE4INET/src: 89
+Loading NED files from C:/Users/Buschmann/workspaceOmnet/FiCo4OMNeT/src: 33
+Loading NED files from C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/src: 20
+Loading NED files from C:/Users/Buschmann/workspaceOmnet/SignalsAndGateways/examples: 22
 
 Preparing for running configuration General, run #0...
 Scenario: $repetition=0
-Assigned runID=General-0-20141119-14:17:02-5804
+Assigned runID=General-0-20150302-15:11:45-4236
 Recording eventlog to file `results\General-0.elog'...
 Setting up network `major_gateway_network'...
 Initializing...
@@ -24,43 +28,33 @@ Initializing...
 Running simulation...
 ** Event #1   T=0   Elapsed: 0.000s (0m 00s)  0% completed
      Speed:     ev/sec=0   simsec/sec=0   ev/simsec=0
-     Messages:  created: 125   present: 125   in FES: 27
-** Event #65024   T=3.370000460629   Elapsed: 2.008s (0m 02s)  33% completed
-     Speed:     ev/sec=32382.5   simsec/sec=1.67829   ev/simsec=19295
-     Messages:  created: 41925   present: 134   in FES: 19
-** Event #126208   T=6.558991350696   Elapsed: 4.011s (0m 04s)  65% completed
-     Speed:     ev/sec=30546.2   simsec/sec=1.59211   ev/simsec=19186
-     Messages:  created: 81299   present: 135   in FES: 19
-** Event #189696   T=9.860001   Elapsed: 6.016s (0m 06s)  98% completed
-     Speed:     ev/sec=31664.8   simsec/sec=1.64639   ev/simsec=19232.9
-     Messages:  created: 122174   present: 136   in FES: 19
-** Event #192229   T=10   Elapsed: 6.121s (0m 06s)  100% completed
-     Speed:     ev/sec=24114.3   simsec/sec=1.33332   ev/simsec=18085.8
-     Messages:  created: 123803   present: 137   in FES: 21
+     Messages:  created: 116   present: 116   in FES: 24
+** Event #17821   T=1   Elapsed: 0.542s (0m 00s)  100% completed
+     Speed:     ev/sec=32878.2   simsec/sec=1.84502   ev/simsec=17820
+     Messages:  created: 11746   present: 133   in FES: 22
 
-<!> Simulation time limit reached -- simulation stopped at event #192229, t=10.
+<!> Simulation time limit reached -- simulation stopped at event #17821, t=1.
 
 
 Calling finish() at end of Run #0...
-busytime: 0.08650635
-simtime: 10
-busytime: 0.05212565
-simtime: 10
-busytime: 0.09527665
-simtime: 10
-busytime: 0.048613
-simtime: 10
-busytime: 0.05505235
-simtime: 10
-busytime: 0.0814565
-simtime: 10
+busytime: 0.014978
+simtime: 1
+busytime: 0.00935288
+simtime: 1
+busytime: 0.01362488
+simtime: 1
+busytime: 0.011156
+simtime: 1
+busytime: 0.00556712
+simtime: 1
+busytime: 0.008218
+simtime: 1
 
-<!> Fingerprint mismatch! calculated: ba97-befe, expected: 2066-8946
+<!> Fingerprint successfully verified: 40cb-3bbc
 
-undisposed object: (FiCo4OMNeT::CanDataFrame) major_gateway_network.gateway2.can[1].bufferOut. -- check module destructor
 
 End.
 
 Exit code: 0
-Elapsed time:  6.69s
+Elapsed time:  1.27s
 
