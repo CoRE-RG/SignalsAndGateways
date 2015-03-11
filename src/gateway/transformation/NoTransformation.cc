@@ -26,7 +26,7 @@ void NoTransformation::initialize()
 
 void NoTransformation::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    send(msg, gate("out"));
 }
 
 } //namespace

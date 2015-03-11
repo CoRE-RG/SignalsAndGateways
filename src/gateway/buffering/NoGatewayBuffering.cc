@@ -26,7 +26,7 @@ void NoGatewayBuffering::initialize()
 
 void NoGatewayBuffering::handleMessage(cMessage *msg)
 {
-    // TODO - Generated method body
+    send(msg, gate("out"));
 }
 
 } //namespace
