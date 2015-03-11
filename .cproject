@@ -120,10 +120,10 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1676755630" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.679394934" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+								<option id="gnu.cpp.link.option.paths.679394934" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CORE4INET/emf4cpp-0.0.2/lib}&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.libs.1272544862" superClass="gnu.cpp.link.option.libs" valueType="libs">
+								<option id="gnu.cpp.link.option.libs.1272544862" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1928965246" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">

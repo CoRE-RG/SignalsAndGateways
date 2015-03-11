@@ -49,8 +49,8 @@ module BusEthernetGateway
         }
     connections:
         for i=0..countOfCanBusses-1 {
-            can[i].busInterface <--> gateway.busCon++;
-            can[i].gate <--> cang[i];
+            can[i].upperLayerOut --> gateway.lowerLayerIn++;
+            can[i].upperLayerIn <-- gateway.lowerLayerOut++;
         }
 
         tte.ethInterface <--> gateway.ethCon++;
