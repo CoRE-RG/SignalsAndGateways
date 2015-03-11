@@ -23,5 +23,5 @@ simple CanSinkGatewayApp extends CanTrafficSinkAppBase
         @class(CanSinkGatewayApp);
     gates:     
         //Connection to the gateway    
-        output out @labels(TransportFrame);
+        output out @labels(DataFrame);
 }

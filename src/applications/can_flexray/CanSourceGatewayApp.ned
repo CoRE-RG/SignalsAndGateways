@@ -27,5 +27,5 @@ simple CanSourceGatewayApp extends CanTrafficSourceAppBase
         @class(CanSourceGatewayApp);
     gates:
     	//Connection to the gateway   
-        input in;
+        input in @labels(DataFrame);
 }

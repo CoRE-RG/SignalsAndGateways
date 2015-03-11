@@ -18,7 +18,6 @@
 
 #include <omnetpp.h>
 #include "CoRE4INET_CTApplicationBase.h"
-#include "TransportMessage_m.h"
 
 namespace SignalsAndGateways {
 /**

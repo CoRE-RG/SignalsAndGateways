@@ -35,7 +35,6 @@ module CanGatewayNode extends CanNode
         output upperLayerOut;
         input upperLayerIn;
 
-    submodules:
     connections:
         sinkApp[0].out --> upperLayerOut;
         sourceApp[0].in <-- upperLayerIn;

@@ -14,7 +14,6 @@
 // 
 
 #include "CanSourceGatewayApp.h"
-#include "TransportMessage_m.h"
 #include "CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;
@@ -25,18 +24,8 @@ Define_Module(CanSourceGatewayApp);
 
 void CanSourceGatewayApp::handleMessage(cMessage *msg)
 {
-    if(msg->arrivedOn("busInterfaceIn")){
-        TransportMessage *transFrame = check_and_cast<TransportMessage*>(msg);
-        CanDataFrame *canDataFrame = check_and_cast<CanDataFrame *>(transFrame->decapsulate());
-        EV << "CanSourceGatewayApp: firstCanArrivalTime: " << canDataFrame->getTimestamp() << endl;
-        simtime_t timeDifference = simTime()-canDataFrame->getTimestamp();
-        std::string canbusName = getParentModule()->gate("gate$o")->getPathEndGate()->getOwnerModule()->getParentModule()->getParentModule()->getName();
-        char timeReport [85];
-        sprintf(timeReport, "Time difference source- and dest. gateway: %s", timeDifference.str().c_str());
-        EV << timeReport << endl;
-        canDataFrame->setBitLength(calculateLength(canDataFrame->getDataArraySize()));
-        send(canDataFrame, "out");
-        delete transFrame;
+    if(msg->arrivedOn("in")){
+        send(msg, "out");
     } else {
         delete msg;
     }

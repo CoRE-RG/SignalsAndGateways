@@ -21,19 +21,15 @@ namespace SignalsAndGateways {
 Define_Module(CanSinkGatewayApp);
 
 void CanSinkGatewayApp::handleMessage(cMessage *msg) {
-    std::string msgClass = msg->getClassName();
     if (msg->arrivedOn("controllerIn")) {
         bufferMessageCounter++;
         if (idle) {
             requestFrame();
         }
-    } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
-        currentFrameID = frame->getCanID();
-
-        send(transFrame, "out");
-        EV << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'" << endl;
+    } else if (FiCo4OMNeT::CanDataFrame *frame = dynamic_cast<FiCo4OMNeT::CanDataFrame *>(msg)) {
+        send(frame, "out");
     } else if (msg->isSelfMessage()) {
-        CanInputBuffer *buffer = dynamic_cast<CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
+        FiCo4OMNeT::CanInputBuffer *buffer = dynamic_cast<FiCo4OMNeT::CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
         if (bufferMessageCounter > 0) {
             requestFrame();
