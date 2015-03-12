@@ -15,6 +15,7 @@
 
 package signalsandgateways.applications.ethernet;
 
+import signalsandgateways.applications.ethernet.AS6802.TTEGatewayApplication;
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
@@ -33,10 +34,11 @@ module EthernetGatewayHost extends TTEAVBEtherHost
         int numberOfBG_Vlinks = default(0);
         @display("bgb=688,409");
     gates:
-        inout ethInterface @labels(TransportMessage);
+        output upperLayerOut;
+        input upperLayerIn;
     submodules:
         //Application for the ethernet node in the gateway
-        gatewayApp: TTEApplicationBase {
+        gatewayApp: TTEGatewayApplication {
             @display("p=282,37");
         }
         //Vector of output buffers for timetriggered traffic(TT)
@@ -58,7 +60,8 @@ module EthernetGatewayHost extends TTEAVBEtherHost
                 @display("p=561,349");
         }
     connections:
-        ethInterface <--> gatewayApp.ethInterface;
+        gatewayApp.upperLayerOut --> upperLayerOut;
+        gatewayApp.upperLayerIn <-- upperLayerIn;
         for i=0..numberOfTT_Vlinks-1 {
             TTvlinks_ctc[i].out --> TTvlinks[i].in;
         }

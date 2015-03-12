@@ -13,20 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.applications.ethernet;
+package signalsandgateways.applications.ethernet.AS6802;
 
+import signalsandgateways.applications.ethernet.IEthernetGatewayApplication;
 import core4inet.applications.AS6802.CTApplicationBase;
 
 //
 // Represents application base for the ethernet node in the gateway.
 //
 // @author Sebastian Mueller
-simple TTEApplicationBase extends CTApplicationBase like IEthernetGatewayApplication
+simple TTEGatewayApplication extends CTApplicationBase like IEthernetGatewayApplication
 {
-    @class(TTEApplicationBase);
+    @class(TTEGatewayApplication);
     gates:
         //Connection to the gateway    
-        inout ethInterface @labels(TransportMessage);
+        output upperLayerOut;
+        input upperLayerIn;
         //Input gate for the incoming best-effort messages
         input in @directIn @labels(EtherFrame);
 }
