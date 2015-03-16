@@ -20,4 +20,6 @@ package signalsandgateways.gateway.buffering;
 //
 simple NoGatewayBuffering like IGatewayBuffering
 {
+    parameters:
+        string configXML = default("");
 }
