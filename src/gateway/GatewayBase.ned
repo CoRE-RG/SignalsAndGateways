@@ -29,7 +29,9 @@ module GatewayBase
         output lowerLayerOut[numPorts];
     submodules:
         //module that handles the routing data
-        router: <default("BaseGatewayRouter")> like IGatewayRouter;
+        router: <default("BaseGatewayRouter")> like IGatewayRouter {
+            @display("p=313,117");
+        }
         //module that performs the transformations in all directions
         transform[numPorts]: <default("NoGatewayTransformation")> like ITransformation {
             @display("p=63,117");

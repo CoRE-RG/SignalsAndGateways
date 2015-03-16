@@ -47,8 +47,20 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
         send(msg, "upperLayerOut");
     }else if(msg->arrivedOn("upperLayerIn")){
         //TODO if BE
+            //EthernetIIFrame *bgFrame
+            //for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
+                //sendDirect(bgFrame->dup(), (*buf)->gate("in"));
+            //}
+            //delete bgFrame;
         //TODO if AVB
         //TODO if CT
+            //CTFrame *ctFrame
+            //std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
+            //for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){
+                //Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
+                //sendDirect(ctFrame->dup(), in->gate("in"));
+            //}
+            //delete ctFrame;
     }else{
         delete msg;
     }

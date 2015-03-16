@@ -27,9 +27,10 @@ module CanGatewayNode extends CanNode
 {
     parameters:
         numSourceApps=1;
+        numSinkApps=1;
         numInputBuffer=1;
-        sourceApp[0].typename="CanSourceGatewayApp";
-        sinkApp[0].typename="CanSinkGatewayApp";
+        sourceApp[0].typename = "CanSourceGatewayApp";
+        sinkApp[0].typename = "CanSinkGatewayApp";
 
     gates:
         output upperLayerOut;
