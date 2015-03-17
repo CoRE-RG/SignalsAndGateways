@@ -24,7 +24,7 @@ module GatewayBase
     parameters:
         @display("bgb=401,241;i=device/hub");
         int numPorts;
-        string configXML = default("");//TODO: better default
+        string configXML = default("");
     gates:
         input lowerLayerIn[numPorts];
         output lowerLayerOut[numPorts];
@@ -32,6 +32,9 @@ module GatewayBase
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
             @display("p=313,117");
+            gates:
+                in[numPorts];
+            	out[numPorts];
         }
         //module that performs the transformations in all directions
         transform[numPorts]: <default("NoGatewayTransformation")> like ITransformation {
@@ -39,7 +42,6 @@ module GatewayBase
         }
         //module that coordinates the preBuffer behaivior
         buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
-
             @display("p=193,117");
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer

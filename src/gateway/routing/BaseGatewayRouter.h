@@ -18,16 +18,23 @@
 
 #include <omnetpp.h>
 
+#include <string>
+#include <map>
+#include <list>
+#include <vector>
+
 namespace SignalsAndGateways {
 
-/**
- * TODO - Generated class
- */
 class BaseGatewayRouter : public cSimpleModule
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    private:
+        std::map<int, std::map<int, std::list<std::string> > > routing;
+    protected:
+        virtual void initialize();
+        virtual void handleMessage(cMessage *msg);
+    private:
+        void readConfigXML();
+        std::vector<int> getDestinationGateIndices(int sourceIndex, std::string messageID);
 };
 
 } //namespace

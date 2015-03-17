@@ -15,6 +15,7 @@
 
 #include "TTEGatewayApplication.h"
 #include "CoRE4INET_Incoming.h"
+#include "AVBFrame_m.h"
 #include "CoRE4INET_CTFrame.h"
 #include "CoRE4INET_CTBuffer.h"
 #include "CoRE4INET_BGBuffer.h"
@@ -46,21 +47,21 @@ void TTEApplicationBase::handleMessage(cMessage *msg) {
     }else if(msg->arrivedOn("TTin") || msg->arrivedOn("RCin") || msg->arrivedOn("in")){
         send(msg, "upperLayerOut");
     }else if(msg->arrivedOn("upperLayerIn")){
-        //TODO if BE
-            //EthernetIIFrame *bgFrame
-            //for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
-                //sendDirect(bgFrame->dup(), (*buf)->gate("in"));
-            //}
-            //delete bgFrame;
-        //TODO if AVB
-        //TODO if CT
-            //CTFrame *ctFrame
-            //std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
-            //for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){
-                //Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
-                //sendDirect(ctFrame->dup(), in->gate("in"));
-            //}
-            //delete ctFrame;
+        if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg)){
+            //TODO AVB transfer
+        }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
+            std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
+            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){
+                Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
+                sendDirect(ctFrame->dup(), in->gate("in"));
+            }
+            delete ctFrame;
+        }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
+            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
+                sendDirect(ethernetFrame->dup(), (*buf)->gate("in"));
+            }
+            delete ethernetFrame;
+        }
     }else{
         delete msg;
     }
