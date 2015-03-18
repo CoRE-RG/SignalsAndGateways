@@ -13,11 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package signalsandgateways.gateway.transformation;
+#ifndef __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
+#define __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
 
-//
-// TODO auto-generated module
-//
-simple NoTransformation like ITransformation
+#include <omnetpp.h>
+
+namespace SignalsAndGateways {
+
+class NoGatewayTransformation : public cSimpleModule
 {
-}
+  protected:
+    virtual void initialize();
+    virtual void handleMessage(cMessage *msg);
+};
+
+} //namespace
+
+#endif

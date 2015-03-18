@@ -27,8 +27,8 @@ simple TTEGatewayApplication extends CTApplicationBase like IEthernetGatewayAppl
     @class(TTEGatewayApplication);
     gates:
         //Connection to the gateway    
-        output upperLayerOut;
-        input upperLayerIn;
+        output upperLayerOut @labels(EtherFrame);
+        input upperLayerIn @labels(EtherFrame);
         //Input gate for the incoming best-effort messages
         input in @directIn @labels(EtherFrame);
 }

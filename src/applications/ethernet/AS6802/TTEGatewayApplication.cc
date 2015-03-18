@@ -25,21 +25,21 @@ using namespace CoRE4INET;
 
 namespace SignalsAndGateways {
 
-Define_Module(TTEApplicationBase);
+Define_Module(TTEGatewayApplication);
 
-TTEApplicationBase::TTEApplicationBase() {
-
-}
-
-TTEApplicationBase::~TTEApplicationBase() {
+TTEGatewayApplication::TTEGatewayApplication() {
 
 }
 
-void TTEApplicationBase::initialize(){
+TTEGatewayApplication::~TTEGatewayApplication() {
+
+}
+
+void TTEGatewayApplication::initialize(){
     CTApplicationBase::initialize();
 }
 
-void TTEApplicationBase::handleMessage(cMessage *msg) {
+void TTEGatewayApplication::handleMessage(cMessage *msg) {
     CTApplicationBase::handleMessage(msg);
 
     if(dynamic_cast<TTBufferEmpty*>(msg) != 0){

@@ -45,7 +45,7 @@ module CanGatewayNode
             gates:
                 phygate;
         }
-        bufferIn: CanInputBuffer {
+        bufferIn[1]: CanInputBuffer {
             @display("p=203,102");
             gates:
                 in[1];
@@ -55,10 +55,10 @@ module CanGatewayNode
             gates:
                 in[1];
         }
-        sourceApp: CanSourceGatewayApp {
+        sourceApp[1]: CanSourceGatewayApp {
             @display("p=98,32,row,70");
         }
-        sinkApp: CanSourceGatewayApp {
+        sinkApp[1]: CanSinkGatewayApp {
             @display("p=203,32");
         }
         canClock: CanClock {
@@ -67,8 +67,8 @@ module CanGatewayNode
     connections:
         canNodePort.phygate <--> gate;
         canNodePort.upperLayerIn <-- bufferOut.out;
-        sourceApp.out --> bufferOut.in[0];
+        sourceApp[0].out --> bufferOut.in[0];
         
-        sinkApp.out --> upperLayerOut;
-        sourceApp.in <-- upperLayerIn;
+        sinkApp[0].out --> upperLayerOut;
+        sourceApp[0].in <-- upperLayerIn;
 }

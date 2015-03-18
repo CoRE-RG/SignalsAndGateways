@@ -13,20 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "NoTransformation.h"
+package signalsandgateways.gateway.transformation;
 
-namespace SignalsAndGateways {
-
-Define_Module(NoTransformation);
-
-void NoTransformation::initialize()
+//
+// TODO auto-generated module
+//
+simple NoGatewayTransformation like IGatewayTransformation
 {
-    // TODO - Generated method body
+    parameters:
+        xml configXML;
+    gates:
+        input in;
+        output out;
 }
-
-void NoTransformation::handleMessage(cMessage *msg)
-{
-    send(msg, gate("out"));
-}
-
-} //namespace

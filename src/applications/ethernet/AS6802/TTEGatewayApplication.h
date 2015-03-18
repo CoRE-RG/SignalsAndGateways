@@ -27,7 +27,7 @@ namespace SignalsAndGateways {
  *
  * @author Sebastian Mueller
  */
-class TTEApplicationBase: public virtual CoRE4INET::CTApplicationBase {
+class TTEGatewayApplication: public virtual CoRE4INET::CTApplicationBase {
 private:
     /**
      * @brief calls the inherited initialize-method
@@ -43,8 +43,8 @@ private:
      */
     void handleMessage(cMessage *msg);
 public:
-    TTEApplicationBase();
-    virtual ~TTEApplicationBase();
+    TTEGatewayApplication();
+    virtual ~TTEGatewayApplication();
 };
 
 }

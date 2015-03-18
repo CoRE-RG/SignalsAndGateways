@@ -13,23 +13,20 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
-#define __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
-
-#include <omnetpp.h>
+#include "NoGatewayTransformation.h"
 
 namespace SignalsAndGateways {
 
-/**
- * TODO - Generated class
- */
-class NoTransformation : public cSimpleModule
+Define_Module(NoGatewayTransformation);
+
+void NoGatewayTransformation::initialize()
 {
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
+    // TODO - Generated method body
+}
+
+void NoGatewayTransformation::handleMessage(cMessage *msg)
+{
+    send(msg, gate("out"));
+}
 
 } //namespace
-
-#endif

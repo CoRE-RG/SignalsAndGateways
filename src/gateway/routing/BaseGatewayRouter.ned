@@ -21,5 +21,8 @@ package signalsandgateways.gateway.routing;
 simple BaseGatewayRouter like IGatewayRouter
 {
     parameters:
-        @class(BaseGatewayRouter);
+        xml configXML;
+    gates:
+        input in[];
+        output out[];
 }

@@ -18,7 +18,7 @@ package signalsandgateways.gateway.transformation;
 //
 // TODO auto-generated module
 //
-moduleinterface ITransformation
+moduleinterface IGatewayTransformation
 {
     parameters:
         xml configXML;

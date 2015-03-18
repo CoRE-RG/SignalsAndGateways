@@ -25,6 +25,6 @@ moduleinterface IEthernetGatewayApplication extends IApplication
 {
     gates:
         //Connection to the gateway functionality
-    	input in @labels(EtherFrame);
-    	output out @labels(EtherFrame);
+        output upperLayerOut @labels(EtherFrame);
+    	input upperLayerIn @labels(EtherFrame);   	
 }

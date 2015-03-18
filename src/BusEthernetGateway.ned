@@ -47,6 +47,7 @@ module BusEthernetGateway
         //gateway module
         gateway: GatewayBase {
             @display("p=120,135");
+            numPorts = countOfCanBusses + countOfEthernetPorts;
         }
     connections:
         for i=0..countOfCanBusses-1 {

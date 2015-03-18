@@ -16,7 +16,7 @@
 package signalsandgateways.gateway;
 
 import signalsandgateways.gateway.routing.IGatewayRouter;
-import signalsandgateways.gateway.transformation.ITransformation;
+import signalsandgateways.gateway.transformation.IGatewayTransformation;
 import signalsandgateways.gateway.buffering.IGatewayBuffering;
 
 module GatewayBase
@@ -24,7 +24,8 @@ module GatewayBase
     parameters:
         @display("bgb=401,241;i=device/hub");
         int numPorts;
-        xml configXML;
+        xml configXML = default(xmldoc("GatewayConfig.xml"));
+        xml defaultConfigXML = configXML;
     gates:
         input lowerLayerIn[numPorts];
         output lowerLayerOut[numPorts];
@@ -32,17 +33,20 @@ module GatewayBase
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
             @display("p=313,117");
+            configXML = default(defaultConfigXML);
             gates:
                 in[numPorts];
             	out[numPorts];
         }
         //module that performs the transformations in all directions
-        transform[numPorts]: <default("NoGatewayTransformation")> like ITransformation {
+        transform[numPorts]: <default("NoGatewayTransformation")> like IGatewayTransformation {
             @display("p=63,117");
+            configXML = default(defaultConfigXML);
         }
         //module that coordinates the preBuffer behaivior
         buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
             @display("p=193,117");
+            configXML = default(defaultConfigXML);
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
     connections:
