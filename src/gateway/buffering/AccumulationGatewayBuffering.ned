@@ -20,4 +20,9 @@ package signalsandgateways.gateway.buffering;
 //
 simple AccumulationGatewayBuffering like IGatewayBuffering
 {
+    parameters:
+    	xml configXML;
+    gates:
+        input in;
+        output out;
 }

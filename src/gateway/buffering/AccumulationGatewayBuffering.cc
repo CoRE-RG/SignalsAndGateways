@@ -33,9 +33,9 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
         // bei self message ist eine abgelaufen und es muss herausgefunden werden für wlchen pool die Zeit abgelaufen ist... x_x
         //
     } else if(CanDataFrame* dataFrame = dynamic_cast<CanDataFrame*> (msg)) {
-        if(std::list<cMessage*> poolList = getPoolList(dataFrame->getCanID())){
-
-        }
+//        if(std::list<cMessage*> poolList = getPoolList(dataFrame->getCanID())){
+//
+//        }
         // Pool Liste herausfinden
         // wenn es liste gibt: an Liste anhängen & ggf holuptime anpassen
         //
