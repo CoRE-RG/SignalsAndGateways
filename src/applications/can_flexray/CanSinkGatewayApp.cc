@@ -28,6 +28,7 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         if (idle) {
             requestFrame();
         }
+        delete msg;
     } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
         currentFrameID = frame->getCanID();
         bufferMessageCounter--;
@@ -40,8 +41,8 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         } else {
             idle = true;
         }
+        delete msg;
     }
-    delete msg;
 }
 
 }
