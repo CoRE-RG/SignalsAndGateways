@@ -1,4 +1,4 @@
-package signalsandgateways.examples.deprecatedSmallNetwork;
+package signalsandgateways.examples.smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -13,23 +13,25 @@ package signalsandgateways.examples.deprecatedSmallNetwork;
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-import signalsandgateways.BusEthernetGateway;
+
+//package signalsandgateways.examples;
+
+import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
-module Gateway1 extends BusEthernetGateway
+//
+// switch1: configuration in switch1.ini
+// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
+//
+module Switch extends TTEAVBEtherSwitch
 {
-    @display("bgb=479,314");
+    parameters:
+        @display("bgb=457,311");
     submodules:
-        //vl_102_ctc: TTIncoming {
-        //    parameters:
-        //        @display("p=350,160");
 
-        //}
-        //vl_102: TTDoubleBuffer {
-        //    parameters:
-        //        @display("p=440,160");
-        //}
     connections:
-        //vl_102_ctc.out --> vl_102.in;
+
 }
