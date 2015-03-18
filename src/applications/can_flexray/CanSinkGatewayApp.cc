@@ -16,6 +16,8 @@
 #include "CanSinkGatewayApp.h"
 #include "CanDataFrame_m.h"
 
+using namespace FiCo4OMNeT;
+
 namespace SignalsAndGateways {
 
 Define_Module(CanSinkGatewayApp);
@@ -26,18 +28,21 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         if (idle) {
             requestFrame();
         }
-    } else if (FiCo4OMNeT::CanDataFrame *frame = dynamic_cast<FiCo4OMNeT::CanDataFrame *>(msg)) {
+        delete msg;
+    } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
+        currentFrameID = frame->getCanID();
+        bufferMessageCounter--;
         send(frame, "out");
     } else if (msg->isSelfMessage()) {
-        FiCo4OMNeT::CanInputBuffer *buffer = dynamic_cast<FiCo4OMNeT::CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
+        CanInputBuffer *buffer = dynamic_cast<CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
         if (bufferMessageCounter > 0) {
             requestFrame();
         } else {
             idle = true;
         }
+        delete msg;
     }
-    delete msg;
 }
 
 }
