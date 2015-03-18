@@ -34,7 +34,9 @@ class AccumulationGatewayBuffering : public cSimpleModule
 
   private:
     std::map<unsigned int,std::list<cMessage*>> poolMap;
-    std::map<unsigned int,time_t> holdUpTimes;
+    std::map<unsigned int,simtime_t> holdUpTimes;
+    std::map<std::list<cMessage*>*,cMessage*> scheduledHoldUpTimes;
+    std::map<cMessage*,simtime_t> scheduledTimes;
 
     /**
      *
@@ -44,12 +46,21 @@ class AccumulationGatewayBuffering : public cSimpleModule
     /**
      *
      */
-    std::list<cMessage*> getPoolList(unsigned int canID);
+    std::list<cMessage*>* getPoolList(unsigned int canID);
 
     /**
      *
      */
-    time_t getHoldUpTimeListForPool();
+    std::list<cMessage*>* getPoolList(cMessage* holdUpTimeEvent);
+
+    /**
+     *
+     */
+    simtime_t getIDHoldUpTime(unsigned int canID);
+
+    cMessage* getPoolHoldUpTimeEvent(std::list<cMessage*>* poolList);
+
+    simtime_t getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent);
 };
 
 } //namespace

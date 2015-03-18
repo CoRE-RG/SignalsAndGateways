@@ -29,13 +29,24 @@ void AccumulationGatewayBuffering::initialize()
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
+        std::list<cMessage*>* poolList = getPoolList(msg);
         // jeder pool hat eine eigene hold up time
-        // bei self message ist eine abgelaufen und es muss herausgefunden werden für wlchen pool die Zeit abgelaufen ist... x_x
+        // bei self message ist eine abgelaufen und es muss herausgefunden werden für welchen pool die Zeit abgelaufen ist... x_x
         //
     } else if(CanDataFrame* dataFrame = dynamic_cast<CanDataFrame*> (msg)) {
-//        if(std::list<cMessage*> poolList = getPoolList(dataFrame->getCanID())){
-//
-//        }
+        unsigned int canID = dataFrame->getCanID();
+        std::list<cMessage*>* poolList = getPoolList(canID);
+        if(poolList != NULL){
+            poolList->push_back(dataFrame);
+            cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
+            simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
+            if (IDHoldUpTime < getCurrentPoolHoldUpTime(poolHoldUpTimeEvent)) {
+                simtime_t eventTime = IDHoldUpTime + simTime();
+                cancelEvent(poolHoldUpTimeEvent);
+                scheduleAt(eventTime,poolHoldUpTimeEvent);
+                scheduledTimes.at(poolHoldUpTimeEvent) = eventTime;
+            }
+        }
         // Pool Liste herausfinden
         // wenn es liste gibt: an Liste anhängen & ggf holuptime anpassen
         //
@@ -44,17 +55,34 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
     } else if(dynamic_cast<EthernetIIFrame*>(msg)) {
         send(msg, gate("out"));
     }
-
-
-
 }
 
-std::list<cMessage*> AccumulationGatewayBuffering::getPoolList(unsigned int canID){
-
+std::list<cMessage*>* AccumulationGatewayBuffering::getPoolList(unsigned int canID){
+    return & poolMap.at(canID);
 }
 
-time_t AccumulationGatewayBuffering::getHoldUpTimeListForPool(){
+std::list<cMessage*>* AccumulationGatewayBuffering::getPoolList(cMessage* holdUpTimeEvent){
+    std::map<std::list<cMessage*>*,cMessage*>::iterator it;
+    for (it = scheduledHoldUpTimes.begin(); it != scheduledHoldUpTimes.end(); it++)
+    {
+        if (it->second == holdUpTimeEvent) {
+            return it->first;
+        }
+    }
+    return NULL;
+}
 
+simtime_t AccumulationGatewayBuffering::getIDHoldUpTime(unsigned int canID){
+    return holdUpTimes.at(canID);
+}
+
+cMessage* AccumulationGatewayBuffering::getPoolHoldUpTimeEvent(std::list<cMessage*>* poolList){
+    return scheduledHoldUpTimes.at(poolList);
+}
+
+simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent){
+    simtime_t scheduledTime = scheduledTimes.at(poolHoldUpTimeEvent);
+    return scheduledTime - simTime();
 }
 
 
