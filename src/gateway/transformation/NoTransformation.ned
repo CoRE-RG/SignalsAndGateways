@@ -20,6 +20,4 @@ package signalsandgateways.gateway.transformation;
 //
 simple NoTransformation like ITransformation
 {
-    parameters:
-        string configXML = default("");
 }

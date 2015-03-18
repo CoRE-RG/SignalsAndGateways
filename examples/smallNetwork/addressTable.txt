@@ -1,0 +1,5 @@
+#Syntax of the file goes as:
+#VLAN ID, address in hexadecimal representation, portno
+0    0A-00-00-00-00-03    0
+0    0A-00-00-00-00-04    1
+

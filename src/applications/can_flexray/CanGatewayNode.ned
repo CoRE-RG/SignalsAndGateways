@@ -15,7 +15,12 @@
 
 package signalsandgateways.applications.can_flexray;
 
-import fico4omnet.nodes.can.CanNode;
+import fico4omnet.linklayer.can.CanNodePort;
+import fico4omnet.buffer.can.CanInputBuffer;
+import fico4omnet.buffer.can.CanOutputBuffer;
+import fico4omnet.applications.ISourceApplication;
+import fico4omnet.applications.ISinkApplication;
+import fico4omnet.scheduler.can.CanClock;
 
 //
 // Participants in the network. 
@@ -23,20 +28,47 @@ import fico4omnet.nodes.can.CanNode;
 // Generates data, remote and error frames.
 //
 //
-module CanGatewayNode extends CanNode
+module CanGatewayNode
 {
     parameters:
-        numSourceApps=1;
-        numSinkApps=1;
-        numInputBuffer=1;
-        sourceApp[0].typename = "CanSourceGatewayApp";
-        sinkApp[0].typename = "CanSinkGatewayApp";
+        int errorperc = default(0);							// If errors are enabled: percentage of errors
+        @display("i=block/app2;bgb=248,222");
 
     gates:
+        inout gate;
         output upperLayerOut;
         input upperLayerIn;
 
+    submodules:
+        canNodePort: CanNodePort {
+            @display("p=149,168");
+            gates:
+                phygate;
+        }
+        bufferIn: CanInputBuffer {
+            @display("p=203,102");
+            gates:
+                in[1];
+        }
+        bufferOut: CanOutputBuffer {
+            @display("p=98,102");
+            gates:
+                in[1];
+        }
+        sourceApp: CanSourceGatewayApp {
+            @display("p=98,32,row,70");
+        }
+        sinkApp: CanSourceGatewayApp {
+            @display("p=203,32");
+        }
+        canClock: CanClock {
+            @display("p=149,102");
+        }
     connections:
-        sinkApp[0].out --> upperLayerOut;
-        sourceApp[0].in <-- upperLayerIn;
+        canNodePort.phygate <--> gate;
+        canNodePort.upperLayerIn <-- bufferOut.out;
+        sourceApp.out --> bufferOut.in[0];
+        
+        sinkApp.out --> upperLayerOut;
+        sourceApp.in <-- upperLayerIn;
 }

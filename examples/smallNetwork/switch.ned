@@ -29,7 +29,7 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 module Switch extends TTEAVBEtherSwitch
 {
     parameters:
-        @display("bgb=457,311");
+        @display("bgb=627,384");
     submodules:
 
     connections:

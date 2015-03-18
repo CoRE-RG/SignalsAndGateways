@@ -24,7 +24,7 @@ module GatewayBase
     parameters:
         @display("bgb=401,241;i=device/hub");
         int numPorts;
-        string configXML = default("");
+        xml configXML;
     gates:
         input lowerLayerIn[numPorts];
         output lowerLayerOut[numPorts];
