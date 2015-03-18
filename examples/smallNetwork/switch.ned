@@ -1,4 +1,4 @@
-package signalsandgateways.examples.deprecatedSmallNetwork;
+package signalsandgateways.examples.smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -13,42 +13,25 @@ package signalsandgateways.examples.deprecatedSmallNetwork;
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+
 //package signalsandgateways.examples;
 
-import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
+import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
-
 //
-// unit1: configuration in unit1.ini.
+// switch1: configuration in switch1.ini
+// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
 //
-// - Sends time-triggered messages at 1ms with VL-ID 100
-//
-module Node2 extends TTEEtherHost
+module Switch extends TTEAVBEtherSwitch
 {
     parameters:
-        int numTTvlink = default(0);
-    @display("bgb=479,314");
+        @display("bgb=627,384");
     submodules:
-	    TTvlinks[numTTvlink]: TTDoubleBuffer {
-            @display("p=366,37");
-        }
-        TTvlinks_ctc[numTTvlink]: TTIncoming {
-            @display("p=366,99");
-        }
-        //vl_102_ctc: TTIncoming {
-        //    parameters:
-        //        @display("p=350,160");
 
-        //}
-        //vl_102: TTDoubleBuffer {
-        //    parameters:
-        //        @display("p=440,160");
-        //}
     connections:
-        for i = 0..numTTvlink-1 {
-            TTvlinks_ctc[i].out-->TTvlinks[i].in;
-        }
-        //vl_102_ctc.out --> vl_102.in;
+
 }

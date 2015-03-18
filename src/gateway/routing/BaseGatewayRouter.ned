@@ -22,5 +22,4 @@ simple BaseGatewayRouter like IGatewayRouter
 {
     parameters:
         @class(BaseGatewayRouter);
-        string configXML = default("");
 }

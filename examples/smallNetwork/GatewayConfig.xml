@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+	<gateway id="gateway1">
+		<routing>
+			<route source="0" destination="1">
+				<canframe id="1"/>
+			</route>
+		</routing>
+		<buffering>
+		</buffering>
+		<transformation>
+			<canToEthernet>
+				<canFrame id="1"/>
+				<ethernet dst="0A-00-00-00-00-04"/>
+			</canToEthernet>
+		</transformation>
+	</gateway>
+	
+	<gateway id="gateway2">
+		<routing>
+			<route source="1" destination="0">
+				<ethernet dst="0A-00-00-00-00-04"/>
+			</route>
+		</routing>
+		<buffering>
+		</buffering>
+		<transformation>
+			<ethernetToCan>
+				<ethernet dst="0A-00-00-00-00-04"/>
+				<canFrame id="1"/>
+			</ethernetToCan>
+		</transformation>
+	</gateway>
+	
+</config>

@@ -20,6 +20,8 @@ package signalsandgateways.gateway.transformation;
 //
 moduleinterface ITransformation
 {
+    parameters:
+        xml configXML;
     gates:
         input in;
         output out;

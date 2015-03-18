@@ -20,6 +20,8 @@ package signalsandgateways.gateway.routing;
 //
 moduleinterface IGatewayRouter
 {
+    parameters:
+        xml configXML;
     gates:
         input in[];
         output out[];

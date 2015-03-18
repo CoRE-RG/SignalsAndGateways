@@ -1,4 +1,4 @@
-package signalsandgateways.examples.deprecatedSmallNetwork;
+package signalsandgateways.examples.smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -21,25 +21,7 @@ module Gateway2 extends BusEthernetGateway
 {
     @display("bgb=479,314");
     submodules:
-//        vl_100_ctc: TTIncoming {
-//            parameters:
-//                @display("p=350,100");
-//
-//        }
-//        vl_100: TTDoubleBuffer {
-//            parameters:
-//                @display("p=440,100");
-//        }
-        //vl_102_ctc: TTIncoming {
-        //    parameters:
-        //        @display("p=350,160");
 
-        //}
-        //vl_102: TTDoubleBuffer {
-        //    parameters:
-        //        @display("p=440,160");
-        //}
     connections:
-        //vl_100_ctc.out --> vl_100.in;
-        //vl_102_ctc.out --> vl_102.in;
+        
 }
