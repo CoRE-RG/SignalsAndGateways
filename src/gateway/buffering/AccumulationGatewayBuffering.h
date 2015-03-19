@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include "CanDataFrame_m.h"
 #include "EtherFrame_m.h"
+#include "PoolMessage_m.h"
 
 
 namespace SignalsAndGateways {
@@ -33,9 +34,9 @@ class AccumulationGatewayBuffering : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   private:
-    std::map<unsigned int,std::list<cMessage*>> poolMap;
+    std::map<unsigned int,cMessagePointerList> poolMap;
     std::map<unsigned int,simtime_t> holdUpTimes;
-    std::map<std::list<cMessage*>*,cMessage*> scheduledHoldUpTimes;
+    std::map<cMessagePointerList,cMessage*> scheduledHoldUpTimes;
     std::map<cMessage*,simtime_t> scheduledTimes;
 
     /**
@@ -46,19 +47,19 @@ class AccumulationGatewayBuffering : public cSimpleModule
     /**
      *
      */
-    std::list<cMessage*>* getPoolList(unsigned int canID);
+    cMessagePointerList getPoolList(unsigned int canID);
 
     /**
      *
      */
-    std::list<cMessage*>* getPoolList(cMessage* holdUpTimeEvent);
+    cMessagePointerList getPoolList(cMessage* holdUpTimeEvent);
 
     /**
      *
      */
     simtime_t getIDHoldUpTime(unsigned int canID);
 
-    cMessage* getPoolHoldUpTimeEvent(std::list<cMessage*>* poolList);
+    cMessage* getPoolHoldUpTimeEvent(cMessagePointerList poolList);
 
     simtime_t getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent);
 };

@@ -15,9 +15,10 @@
 
 #include "AccumulationGatewayBuffering.h"
 
-using namespace SignalsAndGateways;
 using namespace FiCo4OMNeT;
 //using namespace CoRE4INET;
+
+namespace SignalsAndGateways {
 
 Define_Module(AccumulationGatewayBuffering);
 
@@ -29,15 +30,17 @@ void AccumulationGatewayBuffering::initialize()
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
-        std::list<cMessage*>* poolList = getPoolList(msg);
+        PoolMessage* pool = new PoolMessage();
+        pool->setPool(getPoolList(msg));
+        send(pool, gate("out"));
         // jeder pool hat eine eigene hold up time
         // bei self message ist eine abgelaufen und es muss herausgefunden werden für welchen pool die Zeit abgelaufen ist... x_x
         //
     } else if(CanDataFrame* dataFrame = dynamic_cast<CanDataFrame*> (msg)) {
         unsigned int canID = dataFrame->getCanID();
-        std::list<cMessage*>* poolList = getPoolList(canID);
-        if(poolList != NULL){
-            poolList->push_back(dataFrame);
+        cMessagePointerList poolList = getPoolList(canID);
+        if(!poolList.empty()){
+            poolList.push_back(dataFrame);
             cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
             simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
             if (IDHoldUpTime < getCurrentPoolHoldUpTime(poolHoldUpTimeEvent)) {
@@ -57,26 +60,28 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
     }
 }
 
-std::list<cMessage*>* AccumulationGatewayBuffering::getPoolList(unsigned int canID){
-    return & poolMap.at(canID);
+cMessagePointerList AccumulationGatewayBuffering::getPoolList(unsigned int canID){
+    return poolMap.at(canID);
 }
 
-std::list<cMessage*>* AccumulationGatewayBuffering::getPoolList(cMessage* holdUpTimeEvent){
-    std::map<std::list<cMessage*>*,cMessage*>::iterator it;
+cMessagePointerList AccumulationGatewayBuffering::getPoolList(cMessage* holdUpTimeEvent){
+    std::map<cMessagePointerList,cMessage*>::iterator it;
     for (it = scheduledHoldUpTimes.begin(); it != scheduledHoldUpTimes.end(); it++)
     {
         if (it->second == holdUpTimeEvent) {
             return it->first;
         }
     }
-    return NULL;
+    throw 0;
+//    cMessagePointerList emptyList;
+//    return emptyList;
 }
 
 simtime_t AccumulationGatewayBuffering::getIDHoldUpTime(unsigned int canID){
     return holdUpTimes.at(canID);
 }
 
-cMessage* AccumulationGatewayBuffering::getPoolHoldUpTimeEvent(std::list<cMessage*>* poolList){
+cMessage* AccumulationGatewayBuffering::getPoolHoldUpTimeEvent(cMessagePointerList poolList){
     return scheduledHoldUpTimes.at(poolList);
 }
 
@@ -85,7 +90,7 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(cMessage* poolH
     return scheduledTime - simTime();
 }
 
-
+} //namespace
 
 
 
