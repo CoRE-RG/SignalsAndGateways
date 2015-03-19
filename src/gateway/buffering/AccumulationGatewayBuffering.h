@@ -17,6 +17,8 @@
 #define __SIGNALSANDGATEWAYS_ACCUMULATIONGATEWAYBUFFERING_H_
 
 #include <omnetpp.h>
+#include <string>
+#include <map>
 #include "CanDataFrame_m.h"
 #include "EtherFrame_m.h"
 #include "PoolMessage_m.h"

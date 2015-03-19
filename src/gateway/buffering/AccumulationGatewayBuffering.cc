@@ -16,6 +16,7 @@
 #include "AccumulationGatewayBuffering.h"
 
 using namespace FiCo4OMNeT;
+using namespace std;
 //using namespace CoRE4INET;
 
 namespace SignalsAndGateways {
@@ -24,7 +25,33 @@ Define_Module(AccumulationGatewayBuffering);
 
 void AccumulationGatewayBuffering::initialize()
 {
-    // TODO - Generated method body
+    readConfigXML();
+}
+
+void AccumulationGatewayBuffering::readConfigXML(){
+    cXMLElement* xmlDoc = par("configXML").xmlValue();
+    string gatewayName = this->getParentModule()->getParentModule()->getName();
+    string xpath = "/config/gateway[@id='" + gatewayName + "']/buffering";
+    cXMLElement* xmlBuffering = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
+    if(xmlBuffering){
+        cXMLElementList xmlPools = xmlBuffering->getChildrenByTagName("pool");
+        for(size_t i=0; i<xmlPools.size(); i++){
+            cMessagePointerList poolList;
+            cMessage holdUpTimeEvent;
+            scheduledHoldUpTimes.emplace(poolList,holdUpTimeEvent);
+            scheduledTimes.emplace(holdUpTimeEvent,0);
+            cXMLElementList xmlHoldUpTimes = xmlPools[i]->getChildren();
+            for (size_t j= 0; j < xmlHoldUpTimes.size(); j++) {
+                simtime_t holdUpTime = atoi(xmlHoldUpTimes[j]->getAttribute("time"));
+                cXMLElementList xmlPoolMessages = xmlHoldUpTimes[j]->getChildren();
+                for (size_t k= 0; k < xmlPoolMessages.size(); k++) {
+                    unsigned int canID = atoi(xmlPoolMessages[k]->getAttribute("canId"));
+                    poolMap.emplace(canID,poolList);
+                    holdUpTimes.emplace(canID,holdUpTime);
+                }
+            }
+        }
+    }
 }
 
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
@@ -38,17 +65,29 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
         //
     } else if(CanDataFrame* dataFrame = dynamic_cast<CanDataFrame*> (msg)) {
         unsigned int canID = dataFrame->getCanID();
-        cMessagePointerList poolList = getPoolList(canID);
-        if(!poolList.empty()){
-            poolList.push_back(dataFrame);
-            cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
-            simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
-            if (IDHoldUpTime < getCurrentPoolHoldUpTime(poolHoldUpTimeEvent)) {
-                simtime_t eventTime = IDHoldUpTime + simTime();
-                cancelEvent(poolHoldUpTimeEvent);
-                scheduleAt(eventTime,poolHoldUpTimeEvent);
-                scheduledTimes.at(poolHoldUpTimeEvent) = eventTime;
-            }
+        cMessagePointerList poolList;
+        try {
+            poolList = getPoolList(canID);
+//            poolList.push_back(dataFrame);
+//            cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
+//            simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
+//            if (IDHoldUpTime < getCurrentPoolHoldUpTime(poolHoldUpTimeEvent)) {
+//                simtime_t eventTime = IDHoldUpTime + simTime();
+//                cancelEvent(poolHoldUpTimeEvent);
+//                scheduleAt(eventTime, poolHoldUpTimeEvent);
+//                scheduledTimes.at(poolHoldUpTimeEvent) = eventTime;
+//            }
+        } catch (const out_of_range e) { //canID not specified in any pool
+            send(msg, gate("out"));
+        }
+        poolList.push_back(dataFrame);
+        cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
+        simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
+        if (poolList.empty() || (IDHoldUpTime < getCurrentPoolHoldUpTime(poolHoldUpTimeEvent))) {
+            simtime_t eventTime = IDHoldUpTime + simTime();
+            cancelEvent(poolHoldUpTimeEvent);
+            scheduleAt(eventTime, poolHoldUpTimeEvent);
+            scheduledTimes.at(poolHoldUpTimeEvent) = eventTime;
         }
         // Pool Liste herausfinden
         // wenn es liste gibt: an Liste anhängen & ggf holuptime anpassen
@@ -65,7 +104,7 @@ cMessagePointerList AccumulationGatewayBuffering::getPoolList(unsigned int canID
 }
 
 cMessagePointerList AccumulationGatewayBuffering::getPoolList(cMessage* holdUpTimeEvent){
-    std::map<cMessagePointerList,cMessage*>::iterator it;
+    map<cMessagePointerList,cMessage*>::iterator it;
     for (it = scheduledHoldUpTimes.begin(); it != scheduledHoldUpTimes.end(); it++)
     {
         if (it->second == holdUpTimeEvent) {
