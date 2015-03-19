@@ -32,7 +32,7 @@ module GatewayBase
     submodules:
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
-            @display("p=63,100");
+            @display("p=63,100;i=block/routing");
             configXML = default(defaultConfigXML);
             gates:
                 in[numPorts];
