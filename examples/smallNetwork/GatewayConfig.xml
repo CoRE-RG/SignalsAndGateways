@@ -13,7 +13,7 @@
 		<transformation>
 			<canToEthernet>
 				<canFrame canId="1"/>
-				<ethernet dst="0A-00-00-00-00-04"/>
+				<ethernetframe dst="0A-00-00-00-00-04"/>
 			</canToEthernet>
 		</transformation>
 	</gateway>
@@ -21,14 +21,14 @@
 	<gateway id="gateway2">
 		<routing>
 			<route source="1" destination="0">
-				<ethernet dst="0A-00-00-00-00-04"/>
+				<ethernetframe dst="0A-00-00-00-00-04"/>
 			</route>
 		</routing>
 		<buffering>
 		</buffering>
 		<transformation>
 			<ethernetToCan>
-				<ethernet dst="0A-00-00-00-00-04"/>
+				<ethernetframe dst="0A-00-00-00-00-04"/>
 				<canFrame canId="1"/>
 			</ethernetToCan>
 		</transformation>

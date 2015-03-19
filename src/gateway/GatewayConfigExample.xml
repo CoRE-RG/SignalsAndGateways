@@ -10,7 +10,10 @@
 			<canframe canId="45"/>
 		</route>
 		<route source="2" destination="0">
-			<ethernet dst="EE-AA-AA-AA-AA-01"/>
+			<ethernetframe dst="EE-AA-AA-AA-AA-01"/>
+			<ttframe ctId="0FB7"/>
+			<rcframe ctId="0FB6"/>
+			<avbframe streamId="50"/>
 		</route>
 	</routing>
 	<buffering>
@@ -28,11 +31,11 @@
 		<canToBEEthernet>
 			<canFrame canId="43"/>
 			<canframe canId="45"/>
-			<ethernet dst="EE-AA-AA-AA-AA-01"/>
+			<ethernetframe dst="EE-AA-AA-AA-AA-01"/>
 		</canToEthernet>
 		<canToBEEthernet>
 			<canFrame canId="47"/>
-			<ethernet dst="EE-AA-AA-AA-AA-02"/>
+			<ethernetframe dst="EE-AA-AA-AA-AA-02"/>
 		</canToEthernet>
 	</transformation>
 </gateway>

@@ -39,13 +39,13 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         vector<int> destinationGateIndices;
         if(CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), to_string(canFrame->getCanID()));
+            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), "can_" + to_string(canFrame->getCanID()));
         }else if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), to_string(avbFrame->getStreamID()));
+            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), "avb_" + to_string(avbFrame->getStreamID()));
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), to_string(ctFrame->getCtID()));
+            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), "tte_" + to_string(ctFrame->getCtID()));
         }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ethernetFrame->getDest().str());
+            destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), "eth_" + ethernetFrame->getDest().str());
         }
         for(size_t i=0; i<destinationGateIndices.size(); i++){
             if(destinationGateIndices[i] < gateSize("out")){
@@ -68,14 +68,26 @@ void BaseGatewayRouter::readConfigXML(){
             int destination = atoi(xmlRoutes[i]->getAttribute("destination"));
             cXMLElementList xmlRouteMessages = xmlRoutes[i]->getChildren();
             for(size_t j=0; j<xmlRouteMessages.size(); j++){
-                const char* messageID;
-                messageID = xmlRouteMessages[j]->getAttribute("canId");
-                if(messageID){
-                    routing[source][destination].push_back(messageID);
+                const char* xmlMessageId;
+                xmlMessageId = xmlRouteMessages[j]->getAttribute("canId");
+                if(xmlMessageId){
+                    string messageID = xmlMessageId;
+                    routing[source][destination].push_back("can_" + messageID);
                 }
-                messageID = xmlRouteMessages[j]->getAttribute("dst");
-                if(messageID){
-                    routing[source][destination].push_back(messageID);
+                xmlMessageId = xmlRouteMessages[j]->getAttribute("streamId");
+                if(xmlMessageId){
+                    string messageID = xmlMessageId;
+                    routing[source][destination].push_back("avb_" + messageID);
+                }
+                xmlMessageId = xmlRouteMessages[j]->getAttribute("ctId");
+                if(xmlMessageId){
+                    string messageID = xmlMessageId;
+                    routing[source][destination].push_back("tte_" + messageID);
+                }
+                xmlMessageId = xmlRouteMessages[j]->getAttribute("dst");
+                if(xmlMessageId){
+                    string messageID = xmlMessageId;
+                    routing[source][destination].push_back("eth_" + messageID);
                 }
             }
         }
