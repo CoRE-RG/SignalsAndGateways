@@ -2,12 +2,12 @@
 <gateway id="Infotainment">
 	<routing>
 		<route source="0" destination="1">
-			<canframe id="43"/>
-			<canframe id="47"/>
+			<canframe canId="43"/>
+			<canframe canId="47"/>
 		</route>
 		<route source="0" destination="2">
-			<canframe id="43"/>
-			<canframe id="45"/>
+			<canframe canId="43"/>
+			<canframe canId="45"/>
 		</route>
 		<route source="2" destination="0">
 			<ethernet dst="EE-AA-AA-AA-AA-01"/>
@@ -16,22 +16,22 @@
 	<buffering>
 		<pool>
 			<holdup time="100us">
-				<canFrame id="43"/>
-				<canFrame id="47"/>
+				<canFrame canId="43"/>
+				<canFrame canId="47"/>
 			</holdup>
 			<holdup time="200us">
-				<canframe id="45"/>
+				<canframe canId="45"/>
 			</holdup>
 		</pool>
 	</buffering>
 	<transformation>
 		<canToBEEthernet>
-			<canFrame id="43"/>
-			<canframe id="45"/>
+			<canFrame canId="43"/>
+			<canframe canId="45"/>
 			<ethernet dst="EE-AA-AA-AA-AA-01"/>
 		</canToEthernet>
 		<canToBEEthernet>
-			<canFrame id="47"/>
+			<canFrame canId="47"/>
 			<ethernet dst="EE-AA-AA-AA-AA-02"/>
 		</canToEthernet>
 	</transformation>

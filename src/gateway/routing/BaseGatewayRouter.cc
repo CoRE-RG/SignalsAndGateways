@@ -39,11 +39,11 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         vector<int> destinationGateIndices;
         if(CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), "" + canFrame->getCanID());
+            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), to_string(canFrame->getCanID()));
         }else if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), "" + avbFrame->getStreamID());
+            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), to_string(avbFrame->getStreamID()));
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), "" + ctFrame->getCtID());
+            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), to_string(ctFrame->getCtID()));
         }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
             destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ethernetFrame->getDest().str());
         }
@@ -57,16 +57,37 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
 }
 
 void BaseGatewayRouter::readConfigXML(){
-
+    cXMLElement* xmlDoc = par("configXML").xmlValue();
+    string gatewayName = this->getParentModule()->getParentModule()->getName();
+    string xpath = "/config/gateway[@id='" + gatewayName + "']/routing";
+    cXMLElement* xmlRouting = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
+    if(xmlRouting){
+        cXMLElementList xmlRoutes = xmlRouting->getChildrenByTagName("route");
+        for(size_t i=0; i<xmlRoutes.size(); i++){
+            int source = atoi(xmlRoutes[i]->getAttribute("source"));
+            int destination = atoi(xmlRoutes[i]->getAttribute("destination"));
+            cXMLElementList xmlRouteMessages = xmlRoutes[i]->getChildren();
+            for(size_t j=0; j<xmlRouteMessages.size(); j++){
+                const char* messageID;
+                messageID = xmlRouteMessages[j]->getAttribute("canId");
+                if(messageID){
+                    routing[source][destination].push_back(messageID);
+                }
+                messageID = xmlRouteMessages[j]->getAttribute("dst");
+                if(messageID){
+                    routing[source][destination].push_back(messageID);
+                }
+            }
+        }
+    }
 }
 
 vector<int> BaseGatewayRouter::getDestinationGateIndices(int sourceIndex, string messageID){
     vector<int> destinationGateIndices;
-    int i = 0;
     for(map<int, list<string> >::iterator it = routing[sourceIndex].begin(); it != routing[sourceIndex].end(); ++it)
     {
         if(find(it->second.begin(), it->second.end(), messageID) != it->second.end()){
-            destinationGateIndices[i++] = it->first;
+            destinationGateIndices.push_back(it->first);
         }
     }
     return destinationGateIndices;
