@@ -22,7 +22,7 @@ import signalsandgateways.gateway.buffering.IGatewayBuffering;
 module GatewayBase
 {
     parameters:
-        @display("bgb=401,241;i=device/hub");
+        @display("bgb=406,639;i=device/hub");
         int numPorts;
         xml configXML = default(xmldoc("GatewayConfig.xml"));
         xml defaultConfigXML = configXML;
@@ -32,20 +32,20 @@ module GatewayBase
     submodules:
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
-            @display("p=313,117");
+            @display("p=63,100;i=block/routing");
             configXML = default(defaultConfigXML);
             gates:
                 in[numPorts];
-            	out[numPorts];
+                out[numPorts];
         }
         //module that performs the transformations in all directions
         transform[numPorts]: <default("NoGatewayTransformation")> like IGatewayTransformation {
-            @display("p=63,117");
+            @display("p=338,100,c,130");
             configXML = default(defaultConfigXML);
         }
         //module that coordinates the preBuffer behaivior
         buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
-            @display("p=193,117");
+            @display("p=200,100,c,130");
             configXML = default(defaultConfigXML);
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
