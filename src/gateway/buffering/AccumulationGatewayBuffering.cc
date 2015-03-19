@@ -37,17 +37,25 @@ void AccumulationGatewayBuffering::readConfigXML(){
         cXMLElementList xmlPools = xmlBuffering->getChildrenByTagName("pool");
         for(size_t i=0; i<xmlPools.size(); i++){
             cMessagePointerList poolList;
-            cMessage holdUpTimeEvent;
-            scheduledHoldUpTimes.emplace(poolList,holdUpTimeEvent);
-            scheduledTimes.emplace(holdUpTimeEvent,0);
+            cMessage* holdUpTimeEvent;
+//            scheduledHoldUpTimes[poolList][holdUpTimeEvent];
+//            scheduledTimes[holdUpTimeEvent][0];
+//            scheduledHoldUpTimes.emplace(poolList,holdUpTimeEvent);
+//            scheduledTimes.emplace(holdUpTimeEvent,0);
+            scheduledHoldUpTimes.insert(pair<cMessagePointerList,cMessage*>(poolList, holdUpTimeEvent));
+            scheduledTimes.insert(pair<cMessage*,simtime_t>(holdUpTimeEvent,0));
             cXMLElementList xmlHoldUpTimes = xmlPools[i]->getChildren();
             for (size_t j= 0; j < xmlHoldUpTimes.size(); j++) {
                 simtime_t holdUpTime = atoi(xmlHoldUpTimes[j]->getAttribute("time"));
                 cXMLElementList xmlPoolMessages = xmlHoldUpTimes[j]->getChildren();
                 for (size_t k= 0; k < xmlPoolMessages.size(); k++) {
                     unsigned int canID = atoi(xmlPoolMessages[k]->getAttribute("canId"));
-                    poolMap.emplace(canID,poolList);
-                    holdUpTimes.emplace(canID,holdUpTime);
+//                    poolMap[canID][poolList];
+//                    holdUpTimes[canID][holdUpTime];
+                    //                    poolMap.emplace(canID,poolList);
+                    //                    holdUpTimes.emplace(canID,holdUpTime);
+                    poolMap.insert(pair<unsigned int,cMessagePointerList>(canID, poolList));
+                    holdUpTimes.insert(pair<unsigned int,simtime_t>(canID, holdUpTime));
                 }
             }
         }
