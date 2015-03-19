@@ -29,6 +29,11 @@ namespace SignalsAndGateways {
 
 Define_Module(BaseGatewayRouter);
 
+const std::string BaseGatewayRouter::CANPREFIX = "can_";
+const std::string BaseGatewayRouter::AVBPREFIX = "avb_";
+const std::string BaseGatewayRouter::TTEPREFIX = "tte_";
+const std::string BaseGatewayRouter::ETHPREFIX = "eth_";
+
 void BaseGatewayRouter::initialize()
 {
     readConfigXML();
@@ -39,13 +44,13 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
     if(msg->arrivedOn("in")){
         vector<int> destinationGateIndices;
         if(CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), "can_" + to_string(canFrame->getCanID()));
+            destinationGateIndices = getDestinationGateIndices(canFrame->getArrivalGate()->getIndex(), CANPREFIX + to_string(canFrame->getCanID()));
         }else if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), "avb_" + to_string(avbFrame->getStreamID()));
+            destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), AVBPREFIX + to_string(avbFrame->getStreamID()));
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), "tte_" + to_string(ctFrame->getCtID()));
+            destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), TTEPREFIX + to_string(ctFrame->getCtID()));
         }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
-            destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), "eth_" + ethernetFrame->getDest().str());
+            destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ETHPREFIX + ethernetFrame->getDest().str());
         }
         for(size_t i=0; i<destinationGateIndices.size(); i++){
             if(destinationGateIndices[i] < gateSize("out")){
@@ -72,22 +77,22 @@ void BaseGatewayRouter::readConfigXML(){
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("canId");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
-                    routing[source][destination].push_back("can_" + messageID);
+                    routing[source][destination].push_back(CANPREFIX + messageID);
                 }
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("streamId");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
-                    routing[source][destination].push_back("avb_" + messageID);
+                    routing[source][destination].push_back(AVBPREFIX + messageID);
                 }
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("ctId");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
-                    routing[source][destination].push_back("tte_" + messageID);
+                    routing[source][destination].push_back(TTEPREFIX + messageID);
                 }
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("dst");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
-                    routing[source][destination].push_back("eth_" + messageID);
+                    routing[source][destination].push_back(ETHPREFIX + messageID);
                 }
             }
         }

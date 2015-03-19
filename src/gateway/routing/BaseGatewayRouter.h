@@ -28,6 +28,11 @@ namespace SignalsAndGateways {
 class BaseGatewayRouter : public cSimpleModule
 {
     private:
+        static const std::string CANPREFIX;
+        static const std::string AVBPREFIX;
+        static const std::string TTEPREFIX;
+        static const std::string ETHPREFIX;
+    private:
         std::map<int, std::map<int, std::list<std::string> > > routing;
     protected:
         virtual void initialize();
