@@ -20,13 +20,12 @@
 				</holdup>
 			</pool>
 		</buffering>
-		<transformation>
-			<canToEthernet>
+		<transformation destination="1" type="canToBEEthernet">
+			<ethernetframe dst="0A-00-00-00-00-04">
 				<canFrame canId="1"/>
 				<canframe canId="2"/>
 				<canframe canId="3"/>
-				<ethernetframe dst="0A-00-00-00-00-04"/>
-			</canToEthernet>
+			</ethernetframe>
 		</transformation>
 	</gateway>
 	
@@ -38,13 +37,8 @@
 		</routing>
 		<buffering>
 		</buffering>
-		<transformation>
-			<ethernetToCan>
-				<ethernetframe dst="0A-00-00-00-00-04"/>
-				<canFrame canId="1"/>
-				<canframe canId="2"/>
-				<canframe canId="3"/>
-			</ethernetToCan>
+		<transformation destination="0" type="beEthernetToCan">
+			<ethernetframe dst="0A-00-00-00-00-04"/>
 		</transformation>
 	</gateway>
 	

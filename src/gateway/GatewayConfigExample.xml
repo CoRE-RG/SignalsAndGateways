@@ -20,22 +20,26 @@
 		<pool>
 			<holdup time="100us">
 				<canFrame canId="43"/>
-				<canFrame canId="47"/>
+				<canFrame canId="45"/>
 			</holdup>
 			<holdup time="200us">
-				<canframe canId="45"/>
+				<canframe canId="47"/>
 			</holdup>
 		</pool>
 	</buffering>
-	<transformation>
-		<canToBEEthernet>
+	<transformation destination="0" type="canToBEEthernet">
+		<ethernetFrame dst="EE-AA-AA-AA-AA-01">
 			<canFrame canId="43"/>
-			<canframe canId="45"/>
-			<ethernetframe dst="EE-AA-AA-AA-AA-01"/>
-		</canToEthernet>
-		<canToBEEthernet>
-			<canFrame canId="47"/>
-			<ethernetframe dst="EE-AA-AA-AA-AA-02"/>
-		</canToEthernet>
+			<canFrame canId="50"/>
+			<canFrame canId="100"/>
+		</ethernetFrame>
+		<ethernetFrame dst="EE-AA-AA-AA-AA-02">
+			<canFrame canId="43"/>
+			<canFrame canId="70"/>
+			<canFrame canId="8	00"/>
+		</ethernetFrame>
+	</transformation>	
+	<transformation port="1" type="beEthernetToCan">	
+		<ethernetframe dst="EE-AA-AA-AA-AA-03"/>
 	</transformation>
 </gateway>

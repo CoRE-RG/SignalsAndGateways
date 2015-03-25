@@ -19,6 +19,7 @@ namespace SignalsAndGateways;
 // TODO generated message class
 //
 packet GatewayAggregationMessage {
+    @customize(true);
     uint8_t units;
     uint8_t sequence_number;
     uint8_t fragments;

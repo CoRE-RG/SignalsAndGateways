@@ -29,28 +29,33 @@
 
 #include "PoolMessage_m.h"
 #include "UnitMessage_m.h"
-#include "GatewayAggregationMessage_m.h"
+#include "GatewayAggregationMessage.h"
 
 namespace SignalsAndGateways {
 
-/**
- * TODO - Generated class
- */
 class GatewayTransformation : public cSimpleModule
 {
     private:
-        std::vector< std::map< std::string, std::vector<int> > > canToBEEthernet;
-        //...
+        static const int CANCRCBYTELENGTH;
+    private:
+        std::map<int, std::list<std::string> > canToBEEthernet;
+        std::list<std::string> beEthernetToCan;
+        //TODO ...
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
     private:
         void readConfigXML();
-        EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame*);
-        EthernetIIFrame* transformCanToBEEthernet(PoolMessage*);
-        //...
-        std::list<FiCo4OMNeT::CanDataFrame*> transformBEEthernetToCan(EthernetIIFrame*);
-        GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*>);
+        std::list<cMessage*> transformCanFrame(FiCo4OMNeT::CanDataFrame* canFrame);
+        std::list<cMessage*> transformPoolMessage(PoolMessage* poolMessage);
+        std::list<cMessage*> transformEthernetFrame(EthernetIIFrame* ethernetFrame);
+        EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+        std::list<FiCo4OMNeT::CanDataFrame*> transformBEEthernetToCan(EthernetIIFrame* ethernetFrame);
+        //TODO ...
+        void setEthernetFrameSize(EthernetIIFrame* ethernetFrame);
+        UnitMessage* generateUnitMessage(FiCo4OMNeT::CanDataFrame* canFrame);
+        GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*> units);
 
 };
 
