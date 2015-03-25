@@ -6,13 +6,25 @@
 		<routing>
 			<route source="0" destination="1">
 				<canframe canId="1"/>
+				<canframe canId="2"/>
+				<canframe canId="3"/>
 			</route>
 		</routing>
 		<buffering>
+			<pool>
+				<holdup time="5ms">
+					<canFrame canId="1"/>
+				</holdup>
+				<holdup time="10ms">
+					<canframe canId="2"/>
+				</holdup>
+			</pool>
 		</buffering>
 		<transformation>
 			<canToEthernet>
 				<canFrame canId="1"/>
+				<canframe canId="2"/>
+				<canframe canId="3"/>
 				<ethernetframe dst="0A-00-00-00-00-04"/>
 			</canToEthernet>
 		</transformation>
@@ -30,6 +42,8 @@
 			<ethernetToCan>
 				<ethernetframe dst="0A-00-00-00-00-04"/>
 				<canFrame canId="1"/>
+				<canframe canId="2"/>
+				<canframe canId="3"/>
 			</ethernetToCan>
 		</transformation>
 	</gateway>

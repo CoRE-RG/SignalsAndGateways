@@ -18,6 +18,7 @@ package signalsandgateways.gateway;
 import signalsandgateways.gateway.routing.IGatewayRouter;
 import signalsandgateways.gateway.transformation.IGatewayTransformation;
 import signalsandgateways.gateway.buffering.IGatewayBuffering;
+import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
 module GatewayBase
 {

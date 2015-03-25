@@ -16,12 +16,18 @@ package signalsandgateways.examples.smallNetwork;
 import signalsandgateways.BusEthernetGateway;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTDoubleBuffer;
+import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
 module Gateway1 extends BusEthernetGateway
 {
-    @display("bgb=479,314");
+    parameters:
+        @display("bgb=479,314");
     submodules:
-
+		//module that coordinates the preBuffer behaivior
+//        buffering[numPorts]: AccumulationGatewayBuffering {
+//            @display("p=200,100,c,130");
+//            configXML = default(defaultConfigXML);
+//        }
     connections:
 
 }
