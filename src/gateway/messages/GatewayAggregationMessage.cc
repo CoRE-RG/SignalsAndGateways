@@ -15,7 +15,17 @@
 
 #include <GatewayAggregationMessage.h>
 
+using namespace std;
+
 namespace SignalsAndGateways {
+
+void GatewayAggregationMessage::copy(const GatewayAggregationMessage& other){
+    for(list<UnitMessage*>::const_iterator it = other.units.begin(); it != other.units.end(); ++it){
+        UnitMessage* unit = (*it)->dup();
+        take(unit);
+        this->units.push_back(unit);
+    }
+}
 
 void GatewayAggregationMessage::encapUnit(UnitMessage* unit){
     take(unit);

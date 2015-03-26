@@ -15,6 +15,8 @@
 
 #include "GatewayTransformation.h"
 
+#include <algorithm>
+
 using namespace std;
 using namespace FiCo4OMNeT;
 using namespace CoRE4INET;
@@ -23,7 +25,7 @@ namespace SignalsAndGateways {
 
 Define_Module(GatewayTransformation);
 
-const int GatewayTransformation::CANCRCBYTELENGTH = 2;
+const int GatewayTransformation::CANCRCBITLENGTH = 16;
 
 void GatewayTransformation::initialize()
 {
@@ -56,7 +58,7 @@ void GatewayTransformation::readConfigXML(){
     cXMLElement* xmlTransformation = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
     if(xmlTransformation){
         string type = xmlTransformation->getAttribute("type");
-        if(type.compare("canToBEEthernet") == 0){
+        if(type.compare("canToEthernet") == 0){
             cXMLElementList xmlEthernetFrames = xmlTransformation->getChildrenByTagName("ethernetFrame");
             for(cXMLElementList::iterator it = xmlEthernetFrames.begin(); it != xmlEthernetFrames.end(); ++it){
                 string xmlDst = (*it)->getAttribute("dst");
@@ -65,8 +67,12 @@ void GatewayTransformation::readConfigXML(){
                     canToBEEthernet[atoi((*it2)->getAttribute("canId"))].push_back(xmlDst);
                 }
             }
-        }else if(type.compare("beEthernetToCan") == 0){
-
+        }else if(type.compare("ethernetToCan") == 0){
+            cXMLElementList xmlEthernetFrames = xmlTransformation->getChildrenByTagName("ethernetFrame");
+            for(cXMLElementList::iterator it = xmlEthernetFrames.begin(); it != xmlEthernetFrames.end(); ++it){
+                string xmlDst = (*it)->getAttribute("dst");
+                beEthernetToCan.push_back(xmlDst);
+            }
         }
     }
 }
@@ -108,11 +114,16 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
 list<cMessage*> GatewayTransformation::transformEthernetFrame(EthernetIIFrame* ethernetFrame){
     list<cMessage*> transformedMsgs;
     if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(ethernetFrame)){
-
+        //TODO
     }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(ethernetFrame)){
-
+        //TODO
     }else{
-
+        if(find(beEthernetToCan.begin(), beEthernetToCan.end(), ethernetFrame->getDest().str()) != beEthernetToCan.end()){
+            list<CanDataFrame*> canFrames = transformBEEthernetToCan(ethernetFrame);
+            for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
+                transformedMsgs.push_back(dynamic_cast<cMessage*>(*it));
+            }
+        }
     }
     return transformedMsgs;
 }
@@ -144,7 +155,7 @@ list<CanDataFrame*> GatewayTransformation::transformBEEthernetToCan(EthernetIIFr
     GatewayAggregationMessage* gatewayAggregationMessage = dynamic_cast<GatewayAggregationMessage*>(ethernetFrame->decapsulate());
     while(UnitMessage* unitMessage = gatewayAggregationMessage->decapUnit()){
         CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(unitMessage->decapsulate());
-        canFrame->setByteLength(canFrame->getByteLength() + CANCRCBYTELENGTH);
+        canFrame->setBitLength(canFrame->getBitLength() + CANCRCBITLENGTH);
         canFrames.push_back(canFrame);
         delete unitMessage;
     }
@@ -162,7 +173,7 @@ void GatewayTransformation::setEthernetFrameSize(EthernetIIFrame* ethernetFrame)
 
 UnitMessage* GatewayTransformation::generateUnitMessage(FiCo4OMNeT::CanDataFrame* canFrame){
     UnitMessage* unitMessage = new UnitMessage();
-    canFrame->setByteLength(canFrame->getByteLength() - CANCRCBYTELENGTH);
+    canFrame->setBitLength(canFrame->getBitLength() - CANCRCBITLENGTH);
     unitMessage->setLength(static_cast<uint16_t>(canFrame->getByteLength()));
     unitMessage->encapsulate(canFrame);
     return unitMessage;
@@ -171,7 +182,7 @@ UnitMessage* GatewayTransformation::generateUnitMessage(FiCo4OMNeT::CanDataFrame
 GatewayAggregationMessage* GatewayTransformation::generateGatewayAggregationMessage(list<UnitMessage*> units){
     GatewayAggregationMessage* gatewayAggregationMessage = new GatewayAggregationMessage();
     for(list<UnitMessage*>::iterator it = units.begin(); it != units.end(); ++it){
-        gatewayAggregationMessage->encapUnit(dynamic_cast<UnitMessage*>(*it));
+        gatewayAggregationMessage->encapUnit((*it));
     }
     gatewayAggregationMessage->setUnits(static_cast<uint8_t>(gatewayAggregationMessage->getUnitCnt()));
     return gatewayAggregationMessage;

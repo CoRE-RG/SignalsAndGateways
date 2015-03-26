@@ -19,25 +19,22 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
 {
     private:
         std::list<UnitMessage*> units;
+        void copy(const GatewayAggregationMessage& other);
     public:
-//        GatewayAggregationMessage() :
-//            GatewayAggregationMessage_Base()
-//        {
-//        }
-
-        GatewayAggregationMessage(const GatewayAggregationMessage& other) :
-            GatewayAggregationMessage_Base(other)
+        GatewayAggregationMessage(const char *name=NULL, int kind=0) : GatewayAggregationMessage_Base(name,kind)
         {
         }
 
-        GatewayAggregationMessage(const char *name = nullptr, short kind = 0) :
-            GatewayAggregationMessage_Base(name, kind)
+        GatewayAggregationMessage(const GatewayAggregationMessage& other) : GatewayAggregationMessage_Base(other)
         {
+            copy(other);
         }
 
         GatewayAggregationMessage& operator=(const GatewayAggregationMessage& other)
         {
+            if (this==&other) return *this;
             GatewayAggregationMessage_Base::operator=(other);
+            copy(other);
             return *this;
         }
 

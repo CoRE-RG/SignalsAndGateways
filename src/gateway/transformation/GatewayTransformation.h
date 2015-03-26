@@ -36,7 +36,7 @@ namespace SignalsAndGateways {
 class GatewayTransformation : public cSimpleModule
 {
     private:
-        static const int CANCRCBYTELENGTH;
+        static const int CANCRCBITLENGTH;
     private:
         std::map<int, std::list<std::string> > canToBEEthernet;
         std::list<std::string> beEthernetToCan;

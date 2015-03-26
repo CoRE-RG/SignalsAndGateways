@@ -30,7 +30,7 @@ network smallNetwork
 {
     parameters:
         @display("bgb=604,114,white");
-        gateway1.gateway.buffering[*].typename = "AccumulationGatewayBuffering";
+        **.gateway.buffering[*].typename = "AccumulationGatewayBuffering";
         **.gateway.transform[*].typename = "GatewayTransformation";
     types:
         //

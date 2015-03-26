@@ -41,12 +41,12 @@ module GatewayBase
         }
         //module that performs the transformations in all directions
         transform[numPorts]: <default("NoGatewayTransformation")> like IGatewayTransformation {
-            @display("p=338,100,c,130");
+            @display("p=338,100,c,130;i=block/segm");
             configXML = default(defaultConfigXML);
         }
         //module that coordinates the preBuffer behaivior
         buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
-            @display("p=200,100,c,130");
+            @display("p=200,100,c,130;i=block/subqueue");
             configXML = default(defaultConfigXML);
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
