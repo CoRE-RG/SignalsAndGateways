@@ -49,7 +49,7 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
             destinationGateIndices = getDestinationGateIndices(avbFrame->getArrivalGate()->getIndex(), AVBPREFIX + to_string(avbFrame->getStreamID()));
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
             destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), TTEPREFIX + to_string(ctFrame->getCtID()));
-        }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
+        }else if(inet::EthernetIIFrame* ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(msg)){
             destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ETHPREFIX + ethernetFrame->getDest().str());
         }
         for(size_t i=0; i<destinationGateIndices.size(); i++){

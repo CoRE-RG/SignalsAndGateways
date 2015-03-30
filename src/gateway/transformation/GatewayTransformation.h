@@ -48,12 +48,12 @@ class GatewayTransformation : public cSimpleModule
         void readConfigXML();
         std::list<cMessage*> transformCanFrame(FiCo4OMNeT::CanDataFrame* canFrame);
         std::list<cMessage*> transformPoolMessage(PoolMessage* poolMessage);
-        std::list<cMessage*> transformEthernetFrame(EthernetIIFrame* ethernetFrame);
-        EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
-        EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
-        std::list<FiCo4OMNeT::CanDataFrame*> transformBEEthernetToCan(EthernetIIFrame* ethernetFrame);
+        std::list<cMessage*> transformEthernetFrame(inet::EthernetIIFrame* ethernetFrame);
+        inet::EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        inet::EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+        std::list<FiCo4OMNeT::CanDataFrame*> transformBEEthernetToCan(inet::EthernetIIFrame* ethernetFrame);
         //TODO ...
-        void setEthernetFrameSize(EthernetIIFrame* ethernetFrame);
+        void setEthernetFrameSize(inet::EthernetIIFrame* ethernetFrame);
         UnitMessage* generateUnitMessage(FiCo4OMNeT::CanDataFrame* canFrame);
         GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*> units);
 
