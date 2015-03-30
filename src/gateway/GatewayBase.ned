@@ -15,86 +15,46 @@
 
 package signalsandgateways.gateway;
 
-import signalsandgateways.gateway.inOutComing.InOutComing;
-import signalsandgateways.gateway.preBuffer.PreBuffer;
-import signalsandgateways.gateway.routing.Routing;
-import signalsandgateways.gateway.transformation.Transformation;
-import signalsandgateways.gateway.preBuffer.MessageDispatcher;
-import signalsandgateways.gateway.busConnector.BusConnector;
-import ned.DatarateChannel;
-
-//
-// Consilidation of all top level modules of the gateway
-//
-// @author Sebastian Mueller
-//
-
-channel iocomDelay extends DatarateChannel
-{
-    double iocomdelay @unit(s) = default(0);
-    delay = iocomdelay;
-}
-channel routeDelay extends DatarateChannel
-{
-    double routedelay @unit(s) = default(0);
-    delay = routedelay;
-}
-channel transformDelay extends DatarateChannel
-{
-    double transformdelay @unit(s) = default(0);
-    delay = transformdelay;
-}
-channel prebuffDelay extends DatarateChannel
-{
-    double prebuffdelay @unit(s) = default(0);
-    delay = prebuffdelay;
-}
+import signalsandgateways.gateway.routing.IGatewayRouter;
+import signalsandgateways.gateway.transformation.IGatewayTransformation;
+import signalsandgateways.gateway.buffering.IGatewayBuffering;
+import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
 module GatewayBase
 {
     parameters:
-    	@display("bgb=401,241;i=device/hub");
-    	int countOfCanBusses = default(1);
+        @display("bgb=406,639;i=device/hub");
+        int numPorts;
+        xml configXML = default(xmldoc("GatewayConfig.xml"));
+        xml defaultConfigXML = configXML;
     gates:
-        //connection to the bus-systems
-        inout busCon[];
-        //connection to the ethernet networks
-        inout ethCon[];
+        input lowerLayerIn[numPorts];
+        output lowerLayerOut[numPorts];
     submodules:
-        //module that transact the communication from and to the network- and bus-interfaces
-        iocom: InOutComing {
-            @display("p=198,43");
-        }
-        busConnector: BusConnector{
-            @display("p=308,43");
-        }
         //module that handles the routing data
-        route: Routing {
-            @display("p=288,117");
+        router: <default("BaseGatewayRouter")> like IGatewayRouter {
+            @display("p=63,100;i=block/routing");
+            configXML = default(defaultConfigXML);
+            gates:
+                in[numPorts];
+                out[numPorts];
         }
         //module that performs the transformations in all directions
-        transform: Transformation {
-            @display("p=198,192");
+        transform[numPorts]: <default("NoGatewayTransformation")> like IGatewayTransformation {
+            @display("p=338,100,c,130;i=block/segm");
+            configXML = default(defaultConfigXML);
         }
         //module that coordinates the preBuffer behaivior
-        prebuff: PreBuffer {
-            @display("p=113,117");
+        buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
+            @display("p=200,100,c,130;i=block/subqueue");
+            configXML = default(defaultConfigXML);
         }
         //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
-        buffering: MessageDispatcher {
-
-            @display("p=74,43");
-        }
     connections:
-        for i=0..countOfCanBusses-1 {
-        	busCon[i] <--> busConnector.busConnect[i];
+        for i=0..numPorts-1 {
+            lowerLayerIn[i] --> router.in[i];
+            router.out[i] --> buffering[i].in;
+            buffering[i].out --> transform[i].in;
+            transform[i].out --> lowerLayerOut[i];
         }
-        ethCon[0] <--> iocom.appInterface++;
-        iocom.out --> iocomDelay --> route.in;
-        iocom.busOut --> busConnector.in;
-        iocom.busIn <-- busConnector.out;
-        route.out --> routeDelay --> transform.in;
-        transform.out --> transformDelay --> prebuff.in;
-        prebuff.out --> prebuffDelay --> iocom.in;
-        prebuff.moduleConnect <--> buffering.moduleConnect;
 }

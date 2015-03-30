@@ -13,23 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
+package signalsandgateways.applications.ethernet.AS6802;
 
-using namespace FiCo4OMNeT;
+import signalsandgateways.applications.ethernet.IEthernetGatewayApplication;
+import core4inet.applications.AS6802.CTApplicationBase;
 
-namespace SignalsAndGateways {
-
-Define_Module(CanSourceGatewayApp);
-
-void CanSourceGatewayApp::handleMessage(cMessage *msg)
+//
+// Represents application base for the ethernet node in the gateway.
+//
+// @author Sebastian Mueller
+simple TTEGatewayApplication extends CTApplicationBase like IEthernetGatewayApplication
 {
-    if(msg->arrivedOn("in")){
-        send(msg, "out");
-    } else {
-        delete msg;
-    }
-
-}
-
+    @class(TTEGatewayApplication);
+    gates:
+        //Connection to the gateway    
+        output upperLayerOut @labels(EtherFrame);
+        input upperLayerIn @labels(EtherFrame);
+        //Input gate for the incoming best-effort messages
+        input in @directIn @labels(EtherFrame);
 }

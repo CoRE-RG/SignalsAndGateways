@@ -27,34 +27,37 @@ import signalsandgateways.applications.can_flexray.CanGatewayNode;
 module BusEthernetGateway
 {
     parameters:
-        @display("bgb=281,189;i=device/router");
+        @display("bgb=437,647;i=device/router");
         int countOfCanBusses = default(1);
+        int countOfEthernetPorts = default(1);
     gates:
         //ethernet connection
-        inout ethg;
+        inout ethg[countOfEthernetPorts];
         //bus connection
         inout cang[countOfCanBusses];
     submodules:
         //bus module
         can[countOfCanBusses]: CanGatewayNode {
-            @display("p=192,50");
+            @display("p=369,100,c,130");
         }
         //ethernet module
-        tte: EthernetGatewayHost {
-            @display("p=38,50");
+        tte[countOfEthernetPorts]: EthernetGatewayHost {
+            @display("p=74,100,c,130");
         }
         //gateway module
         gateway: GatewayBase {
-            @display("p=120,135");
+            @display("p=224,100");
+            numPorts = countOfCanBusses + countOfEthernetPorts;
         }
     connections:
         for i=0..countOfCanBusses-1 {
-            can[i].busInterface <--> gateway.busCon++;
-            can[i].gate <--> cang[i];
+            can[i].upperLayerOut --> gateway.lowerLayerIn++;
+            can[i].upperLayerIn <-- gateway.lowerLayerOut++;
+            can[i].gate <--> cang++;
         }
-
-        tte.ethInterface <--> gateway.ethCon++;
-        tte.ethg <--> ethg;
-
-
+        for i=0..countOfEthernetPorts-1 {
+            tte[i].upperLayerOut --> gateway.lowerLayerIn++;
+            tte[i].upperLayerIn <-- gateway.lowerLayerOut++;
+            tte[i].ethg <--> ethg++;
+        }
 }

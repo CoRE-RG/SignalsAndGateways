@@ -144,7 +144,7 @@ network major_gateway_network
         }
         gateway3.cang[2] <--> cable {  delay = 50ns; } <--> Komfort2.gate++;
 
-        gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
-        gateway2.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
-        gateway3.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
+//        gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
+//        gateway2.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
+//        gateway3.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
 }

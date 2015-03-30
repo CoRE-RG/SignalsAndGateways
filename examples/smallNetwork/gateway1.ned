@@ -1,3 +1,4 @@
+package signalsandgateways.examples.smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -12,24 +13,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
+import signalsandgateways.BusEthernetGateway;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
+import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
-
-using namespace FiCo4OMNeT;
-
-namespace SignalsAndGateways {
-
-Define_Module(CanSourceGatewayApp);
-
-void CanSourceGatewayApp::handleMessage(cMessage *msg)
+module Gateway1 extends BusEthernetGateway
 {
-    if(msg->arrivedOn("in")){
-        send(msg, "out");
-    } else {
-        delete msg;
-    }
-
-}
+    parameters:
+        @display("bgb=479,314");
+    submodules:
+		//module that coordinates the preBuffer behaivior
+//        buffering[numPorts]: AccumulationGatewayBuffering {
+//            @display("p=200,100,c,130");
+//            configXML = default(defaultConfigXML);
+//        }
+    connections:
 
 }

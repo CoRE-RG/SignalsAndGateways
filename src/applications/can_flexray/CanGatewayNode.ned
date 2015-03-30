@@ -19,8 +19,7 @@ import fico4omnet.linklayer.can.CanNodePort;
 import fico4omnet.buffer.can.CanInputBuffer;
 import fico4omnet.buffer.can.CanOutputBuffer;
 import fico4omnet.applications.ISourceApplication;
-import fico4omnet.applications.can.source.CanTrafficSourceAppBase;
-import fico4omnet.applications.can.sink.CanTrafficSinkAppBase;
+import fico4omnet.applications.ISinkApplication;
 import fico4omnet.scheduler.can.CanClock;
 
 //
@@ -29,40 +28,38 @@ import fico4omnet.scheduler.can.CanClock;
 // Generates data, remote and error frames.
 //
 //
-module CanGatewayNode like IBusGatewayApplication
+module CanGatewayNode
 {
     parameters:
-        int numSourceApps = default(1);						// Number of source apps in this node
-        int numSinkApps = default(1);						// Number of source apps in this node
-        int numInputBuffer = default(1);					// Number of input buffer in this node
         int errorperc = default(0);							// If errors are enabled: percentage of errors
-        string node = default("0");							// Name of the node
-        @display("i=block/app2;bgb=298,222");
+        @display("i=block/app2;bgb=248,222");
 
     gates:
         inout gate;
-        inout busInterface;
+        output upperLayerOut;
+        input upperLayerIn;
+
     submodules:
         canNodePort: CanNodePort {
             @display("p=149,168");
             gates:
                 phygate;
         }
-        bufferIn[numInputBuffer]: CanInputBuffer {
-            @display("p=233,102");
+        bufferIn[1]: CanInputBuffer {
+            @display("p=203,102");
             gates:
                 in[1];
         }
         bufferOut: CanOutputBuffer {
             @display("p=98,102");
             gates:
-                in[numSourceApps];
+                in[1];
         }
-        sourceApp[numSourceApps]: CanSourceGatewayApp {
+        sourceApp[1]: CanSourceGatewayApp {
             @display("p=98,32,row,70");
         }
-        sinkApp[numInputBuffer]: CanSinkGatewayApp {
-            @display("p=233,32");
+        sinkApp[1]: CanSinkGatewayApp {
+            @display("p=203,32");
         }
         canClock: CanClock {
             @display("p=149,102");
@@ -70,12 +67,8 @@ module CanGatewayNode like IBusGatewayApplication
     connections:
         canNodePort.phygate <--> gate;
         canNodePort.upperLayerIn <-- bufferOut.out;
-//        canNodePort.upperLayerOut --> bufferIn.in[0];
-//        sinkApp.in <-- bufferIn.out;
-
-        for i=0..numSourceApps-1 {
-            sourceApp[i].out --> bufferOut.in[i];
-            busInterface$i --> sourceApp[i].busInterfaceIn;
-        }
-        busInterface$o <-- sinkApp[0].busInterfaceOut;
+        sourceApp[0].out --> bufferOut.in[0];
+        
+        sinkApp[0].out --> upperLayerOut;
+        sourceApp[0].in <-- upperLayerIn;
 }

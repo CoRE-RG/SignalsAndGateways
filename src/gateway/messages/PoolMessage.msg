@@ -13,23 +13,14 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
+namespace SignalsAndGateways;
 
-using namespace FiCo4OMNeT;
+cplusplus {{
+typedef std::list<cMessage*> cMessagePointerList;
+}}
 
-namespace SignalsAndGateways {
+class noncobject cMessagePointerList;
 
-Define_Module(CanSourceGatewayApp);
-
-void CanSourceGatewayApp::handleMessage(cMessage *msg)
-{
-    if(msg->arrivedOn("in")){
-        send(msg, "out");
-    } else {
-        delete msg;
-    }
-
-}
-
+packet PoolMessage {
+    cMessagePointerList pool;
 }

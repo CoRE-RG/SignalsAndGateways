@@ -1,3 +1,4 @@
+package signalsandgateways.examples.smallNetwork;
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -13,23 +14,24 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
+//package signalsandgateways.examples;
 
-using namespace FiCo4OMNeT;
+import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
+import core4inet.incoming.AS6802.TTIncoming;
+import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.incoming.AS6802.RCIncoming;
+import core4inet.buffer.AS6802.RCQueueBuffer;
 
-namespace SignalsAndGateways {
-
-Define_Module(CanSourceGatewayApp);
-
-void CanSourceGatewayApp::handleMessage(cMessage *msg)
+//
+// switch1: configuration in switch1.ini
+// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
+//
+module Switch extends TTEAVBEtherSwitch
 {
-    if(msg->arrivedOn("in")){
-        send(msg, "out");
-    } else {
-        delete msg;
-    }
+    parameters:
+        @display("bgb=627,384");
+    submodules:
 
-}
+    connections:
 
 }

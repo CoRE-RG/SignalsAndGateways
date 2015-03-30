@@ -13,23 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
+package signalsandgateways.gateway.buffering;
 
-using namespace FiCo4OMNeT;
-
-namespace SignalsAndGateways {
-
-Define_Module(CanSourceGatewayApp);
-
-void CanSourceGatewayApp::handleMessage(cMessage *msg)
+//
+// TODO auto-generated module
+//
+simple AccumulationGatewayBuffering like IGatewayBuffering
 {
-    if(msg->arrivedOn("in")){
-        send(msg, "out");
-    } else {
-        delete msg;
-    }
-
-}
-
+    parameters:
+    	xml configXML;
+    gates:
+        input in;
+        output out;
 }

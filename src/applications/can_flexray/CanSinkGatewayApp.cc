@@ -14,7 +14,6 @@
 // 
 
 #include "CanSinkGatewayApp.h"
-#include "TransportMessage_m.h"
 #include "CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;
@@ -23,42 +22,17 @@ namespace SignalsAndGateways {
 
 Define_Module(CanSinkGatewayApp);
 
-template <typename T>
-std::string numberToString ( T number ){
-    std::ostringstream ss;
-    ss << number;
-    return ss.str();
-}
-
 void CanSinkGatewayApp::handleMessage(cMessage *msg) {
-    std::string msgClass = msg->getClassName();
     if (msg->arrivedOn("controllerIn")) {
         bufferMessageCounter++;
         if (idle) {
             requestFrame();
         }
+        delete msg;
     } else if (CanDataFrame *frame = dynamic_cast<CanDataFrame *>(msg)) {
         currentFrameID = frame->getCanID();
-        for(unsigned int i = 0; i < frame->getDataArraySize(); i++){
-            std::string i_str = numberToString(i);
-            frame->setData(i, *i_str.c_str());
-        }
-        //simtime_t currentTime = simTime();
-        //std::string currentTime_str = simtimeToStr(currentTime);
-
         bufferMessageCounter--;
-        TransportMessage *transFrame = new TransportMessage();
-        transFrame->setFirstArrivalTimeOnCan(msg->getArrivalTime());
-        EV << "CanSinkGatewayApp: firstCanArrivalTime: " << msg->getArrivalTime() << endl;
-        transFrame->encapsulate(frame->dup());
-        send(transFrame, "busInterfaceOut");
-        EV << "TransportMessage with encapsulated 'CanDataFrame' send to 'busInterfaceOut'" << endl;
-
-//        CanInputBuffer *buffer =  //TODO not needed with the current version of multiple sink apps
-//                (CanInputBuffer*) (getParentModule()->getSubmodule("bufferIn"));
-//        buffer->deleteFrame(currentFrameID);
-//        idle = true;
-
+        send(frame, "out");
     } else if (msg->isSelfMessage()) {
         CanInputBuffer *buffer = dynamic_cast<CanInputBuffer *>(getParentModule()->getSubmodule("bufferIn"));
         buffer->deleteFrame(currentFrameID);
@@ -67,8 +41,8 @@ void CanSinkGatewayApp::handleMessage(cMessage *msg) {
         } else {
             idle = true;
         }
+        delete msg;
     }
-    delete msg;
 }
 
 }
