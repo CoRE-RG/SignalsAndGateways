@@ -22,6 +22,9 @@ simple AccumulationGatewayBuffering like IGatewayBuffering
 {
     parameters:
     	xml configXML;
+    	
+    	@signal[poolSizeSignal](type=unsigned long);
+    	@statistic[poolMessageSize](title="pool size"; source=poolSizeSignal; record=count,sum,min,max, "vector(last)"; interpolationmode=linear);
     gates:
         input in;
         output out;
