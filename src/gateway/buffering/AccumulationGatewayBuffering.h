@@ -42,6 +42,11 @@ class AccumulationGatewayBuffering : public cSimpleModule
     std::map<cMessage*,simtime_t> scheduledTimes;
 
     /**
+     * @brief Simsignal for the pool size.
+     */
+    simsignal_t poolSizeSignal;
+
+    /**
      *
      */
     void readConfigXML();

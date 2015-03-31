@@ -25,6 +25,7 @@ Define_Module(AccumulationGatewayBuffering);
 
 void AccumulationGatewayBuffering::initialize()
 {
+    poolSizeSignal = registerSignal("poolSizeSignal");
     readConfigXML();
 }
 
@@ -62,6 +63,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
         cMessagePointerList* poolList;
         poolList=getPoolList(msg);
         EV<<"poolsize: "<<poolList->size() << "\n";
+        emit(poolSizeSignal, poolList->size());
         pool->setPool(*poolList);
         poolList->clear();
         send(pool, gate("out"));
