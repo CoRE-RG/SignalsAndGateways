@@ -27,9 +27,16 @@ module GatewayBase
         int numPorts;
         xml configXML = default(xmldoc("GatewayConfig.xml"));
         xml defaultConfigXML = configXML;
+        double routingDelay @unit(s) = default(0s);
+        double bufferingDelay @unit(s) = default(0s);
+        double transformDelay @unit(s) = default(0s);
     gates:
         input lowerLayerIn[numPorts];
         output lowerLayerOut[numPorts];
+    types:
+        channel ProcessingDelay extends ned.DelayChannel
+        {
+        }   
     submodules:
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
@@ -53,8 +60,8 @@ module GatewayBase
     connections:
         for i=0..numPorts-1 {
             lowerLayerIn[i] --> router.in[i];
-            router.out[i] --> buffering[i].in;
-            buffering[i].out --> transform[i].in;
-            transform[i].out --> lowerLayerOut[i];
+            router.out[i] --> ProcessingDelay{ delay = routingDelay; } --> buffering[i].in;
+            buffering[i].out --> ProcessingDelay{ delay = bufferingDelay; } --> transform[i].in;
+            transform[i].out --> ProcessingDelay{ delay = transformDelay; } --> lowerLayerOut[i];
         }
 }
