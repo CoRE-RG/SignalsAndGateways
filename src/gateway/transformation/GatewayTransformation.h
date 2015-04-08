@@ -26,6 +26,8 @@
 #include "CanDataFrame_m.h"
 #include "AVBFrame_m.h"
 #include "CoRE4INET_CTFrame.h"
+#include "RCFrame_m.h"
+#include "TTFrame_m.h"
 
 #include "PoolMessage_m.h"
 #include "UnitMessage_m.h"
@@ -40,6 +42,9 @@ class GatewayTransformation : public cSimpleModule
     private:
         std::map<int, std::list<std::string> > canToBEEthernet;
         std::list<std::string> beEthernetToCan;
+        std::map<int, std::list<uint16_t> > canToRCEthernet;
+        std::map<int, std::list<uint16_t> > canToTTEthernet;
+        std::list<uint16_t> ctEthernetToCan;
         //TODO ...
     protected:
         virtual void initialize();
@@ -49,10 +54,18 @@ class GatewayTransformation : public cSimpleModule
         std::list<cMessage*> transformCanFrame(FiCo4OMNeT::CanDataFrame* canFrame);
         std::list<cMessage*> transformPoolMessage(PoolMessage* poolMessage);
         std::list<cMessage*> transformEthernetFrame(EthernetIIFrame* ethernetFrame);
+
         EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
         EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
-        std::list<FiCo4OMNeT::CanDataFrame*> transformBEEthernetToCan(EthernetIIFrame* ethernetFrame);
-        //TODO ...
+        CoRE4INET::RCFrame* transformCanToRCEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        CoRE4INET::RCFrame* transformCanToRCEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+        CoRE4INET::TTFrame* transformCanToTTEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        CoRE4INET::TTFrame* transformCanToTTEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+        //transformCanToAVBEthernet...
+
+        std::list<FiCo4OMNeT::CanDataFrame*> transformEthernetToCan(EthernetIIFrame* ethernetFrame);
+        //transformEthernetToFlexRay...
+
         void setEthernetFrameSize(EthernetIIFrame* ethernetFrame);
         UnitMessage* generateUnitMessage(FiCo4OMNeT::CanDataFrame* canFrame);
         GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*> units);

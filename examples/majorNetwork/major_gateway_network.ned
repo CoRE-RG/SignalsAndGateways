@@ -117,34 +117,34 @@ network major_gateway_network
         for i=0..(2) {
             Antrieb.gate++ <--> Antrieb_nodes[i].gate;
         }
-        gateway1.cang[0] <--> cable {  delay = 50ns; } <--> Antrieb.gate++;
+        gateway1.cang[0] <--> Antrieb.gate++;
 
         for i=0..(2) {
             Infotainment.gate++ <--> Infotainment_nodes[i].gate;
         }
-        gateway2.cang[0] <--> cable {  delay = 50ns; } <--> Infotainment.gate++;
+        gateway2.cang[0] <-->  Infotainment.gate++;
 
         for i=0..(2) {
             Fahrdynamik1.gate++ <--> Fahrdynamik1_nodes[i].gate;
         }
-        gateway2.cang[1] <--> cable {  delay = 50ns; } <--> Fahrdynamik1.gate++;
+        gateway2.cang[1] <--> Fahrdynamik1.gate++;
 
         for i=0..(2) {
             Fahrdynamik2.gate++ <--> Fahrdynamik2_nodes[i].gate;
         }
-        gateway3.cang[0] <--> cable {  delay = 50ns; } <--> Fahrdynamik2.gate++;
+        gateway3.cang[0] <--> Fahrdynamik2.gate++;
 
         for i=0..(2) {
             Komfort1.gate++ <--> Komfort1_nodes[i].gate;
         }
-        gateway3.cang[1] <--> cable {  delay = 50ns; } <--> Komfort1.gate++;
+        gateway3.cang[1] <--> Komfort1.gate++;
 
         for i=0..(2) {
             Komfort2.gate++ <--> Komfort2_nodes[i].gate;
         }
-        gateway3.cang[2] <--> cable {  delay = 50ns; } <--> Komfort2.gate++;
+        gateway3.cang[2] <--> Komfort2.gate++;
 
-//        gateway1.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
-//        gateway2.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
-//        gateway3.ethg <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
+		gateway1.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
+        gateway2.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
+        gateway3.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
 }
