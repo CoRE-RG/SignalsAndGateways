@@ -31,9 +31,6 @@ network major_gateway_network
     parameters:
         @display("bgb=936,484,white");
         double measure_interval @unit(s) = default(1s);
-        int countOfCanBussesGW1 = default(1);
-        int countOfCanBussesGW2 = default(1);
-        int countOfCanBussesGW3 = default(1);
     types:
         //
         // All links are configured with 100MBit per second and variable delay

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<gateway id="gateway1">
+		<routing>
+			<route source="0" destination="1">
+
+			</route>
+			<route source="1" destination="0">
+
+			</route>
+		</routing>
+		<transformation destination="1" type="canToEthernet">
+
+		</transformation>
+		<transformation destination="0" type="ethernetToCan">
+
+		</transformation>
+	</gateway>
+</config>
