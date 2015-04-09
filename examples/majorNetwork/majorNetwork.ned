@@ -26,7 +26,7 @@ import fico4omnet.nodes.can.CanNode;
 // - Uses 5ms Cycletime
 // - 80ns Tick length
 //
-network major_gateway_network
+network majorNetwork
 {
     parameters:
         @display("bgb=936,484,white");
@@ -74,7 +74,7 @@ network major_gateway_network
             @display("p=324,277");
         }
 
-        rtswitch: RTSwitch {
+        switch: Switch {
             parameters:
                 @display("p=449,195");
             gates:
@@ -141,7 +141,7 @@ network major_gateway_network
         }
         gateway3.cang[2] <--> Komfort2.gate++;
 
-		gateway1.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[0];
-        gateway2.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[1];
-        gateway3.ethg[0] <--> cable {  delay = 100ns; } <--> rtswitch.ethg[2];
+		gateway1.ethg[0] <--> cable {  delay = 100ns; } <--> switch.ethg[0];
+        gateway2.ethg[0] <--> cable {  delay = 100ns; } <--> switch.ethg[1];
+        gateway3.ethg[0] <--> cable {  delay = 100ns; } <--> switch.ethg[2];
 }
