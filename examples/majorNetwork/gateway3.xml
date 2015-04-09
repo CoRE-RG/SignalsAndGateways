@@ -2,18 +2,38 @@
 <config>
 	<gateway id="gateway3">
 		<routing>
-			<route source="0" destination="1">
-
+			<route source="0" destination="3">
+				<canframe canId="32"/>
 			</route>
-			<route source="1" destination="0">
-
+			<route source="1" destination="2">
+				<canframe canId="13"/>
+			</route>
+			<route source="2" destination="1">
+				<canframe canId="24"/>
+			</route>
+			<route source="3" destination="0">
+				<rcframe ctId="20"/>
 			</route>
 		</routing>
-		<transformation destination="1" type="canToEthernet">
-
-		</transformation>
+		
 		<transformation destination="0" type="ethernetToCan">
+			<rcframe ctId="20"/>
+			<
+			<canframe Canid=23
+		</transformation>
 
+		<transformation destination="1" type="canToCan">
+			<canframe canId="24"/>
+		</transformation>
+		
+		<transformation destination="2" type="canToCan">
+			<canframe canId="13"/>
+		</transformation>
+		
+		<transformation destination="3" type="canToEthernet">
+			<rcframe ctId="300">
+				<canframe canId="32"/>
+			</rcframe>
 		</transformation>
 	</gateway>
 </config>

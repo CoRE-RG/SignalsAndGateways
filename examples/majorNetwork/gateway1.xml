@@ -3,17 +3,23 @@
 	<gateway id="gateway1">
 		<routing>
 			<route source="0" destination="1">
-
+				<canframe canId="2"/>
 			</route>
 			<route source="1" destination="0">
-
+				<rcframe ctId="30"/>
+				<rcframe ctId="300"/>
 			</route>
 		</routing>
-		<transformation destination="1" type="canToEthernet">
-
-		</transformation>
+		
 		<transformation destination="0" type="ethernetToCan">
+			<rcframe ctId="30"/>
+			<rcframe ctId="300"/>
+		</transformation>
 
+		<transformation destination="1" type="canToEthernet">
+			<rcframe ctId="33">
+				<canframe canId="2"/>
+			</rcframe>
 		</transformation>
 	</gateway>
 </config>
