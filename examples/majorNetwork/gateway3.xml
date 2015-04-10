@@ -12,12 +12,12 @@
 				<canframe canId="24"/>
 			</route>
 			<route source="3" destination="0">
-				<rcframe ctId="20"/>
+				<ttframe ctId="20"/>
 			</route>
 		</routing>
 		
 		<transformation destination="0" type="toCan">
-			<rcframe ctId="20"/>
+			<ttframe ctId="20"/>
 		</transformation>
 
 		<transformation destination="1" type="toCan">
@@ -29,9 +29,9 @@
 		</transformation>
 		
 		<transformation destination="3" type="toEthernet">
-			<rcframe ctId="300">
+			<ttframe ctId="300">
 				<canframe canId="32"/>
-			</rcframe>
+			</ttframe>
 		</transformation>
 	</gateway>
 </config>

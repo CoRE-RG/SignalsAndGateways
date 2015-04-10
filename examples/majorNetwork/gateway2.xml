@@ -9,28 +9,28 @@
 				<canframe canId="12"/>
 			</route>
 			<route source="2" destination="0">
-				<rcframe ctId="33"/>
+				<ttframe ctId="33"/>
 			</route>
 			<route source="2" destination="1">
-				<rcframe ctId="300"/>
+				<ttframe ctId="300"/>
 			</route>
 		</routing>
 		
 		<transformation destination="0" type="toCan">
-			<rcframe ctId="33"/>
+			<ttframe ctId="33"/>
 		</transformation>
 
 		<transformation destination="1" type="toCan">
-			<rcframe ctId="300"/>
+			<ttframe ctId="300"/>
 		</transformation>
 		
 		<transformation destination="2" type="toEthernet">
-			<rcframe ctId="30">
+			<ttframe ctId="30">
 				<canframe canId="2"/>
-			</rcframe>
-			<rcframe ctId="20">
+			</ttframe>
+			<ttframe ctId="20">
 				<canframe canId="12"/>
-			</rcframe>
+			</ttframe>
 		</transformation>
 	</gateway>
 </config>
