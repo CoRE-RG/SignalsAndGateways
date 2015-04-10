@@ -11,12 +11,12 @@
 			</route>
 		</routing>
 		
-		<transformation destination="0" type="ethernetToCan">
+		<transformation destination="0" type="toCan">
 			<rcframe ctId="30"/>
 			<rcframe ctId="300"/>
 		</transformation>
 
-		<transformation destination="1" type="canToEthernet">
+		<transformation destination="1" type="toEthernet">
 			<rcframe ctId="33">
 				<canframe canId="2"/>
 			</rcframe>

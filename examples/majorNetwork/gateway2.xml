@@ -16,15 +16,15 @@
 			</route>
 		</routing>
 		
-		<transformation destination="0" type="ethernetToCan">
+		<transformation destination="0" type="toCan">
 			<rcframe ctId="33"/>
 		</transformation>
 
-		<transformation destination="1" type="ethernetToCan">
+		<transformation destination="1" type="toCan">
 			<rcframe ctId="300"/>
 		</transformation>
 		
-		<transformation destination="2" type="canToEthernet">
+		<transformation destination="2" type="toEthernet">
 			<rcframe ctId="30">
 				<canframe canId="2"/>
 			</rcframe>

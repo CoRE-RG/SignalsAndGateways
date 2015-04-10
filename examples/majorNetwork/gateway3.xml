@@ -16,21 +16,19 @@
 			</route>
 		</routing>
 		
-		<transformation destination="0" type="ethernetToCan">
+		<transformation destination="0" type="toCan">
 			<rcframe ctId="20"/>
-			<
-			<canframe Canid=23
 		</transformation>
 
-		<transformation destination="1" type="canToCan">
+		<transformation destination="1" type="toCan">
 			<canframe canId="24"/>
 		</transformation>
 		
-		<transformation destination="2" type="canToCan">
+		<transformation destination="2" type="toCan">
 			<canframe canId="13"/>
 		</transformation>
 		
-		<transformation destination="3" type="canToEthernet">
+		<transformation destination="3" type="toEthernet">
 			<rcframe ctId="300">
 				<canframe canId="32"/>
 			</rcframe>
