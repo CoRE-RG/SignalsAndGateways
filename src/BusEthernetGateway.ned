@@ -27,7 +27,7 @@ import signalsandgateways.applications.can_flexray.CanGatewayNode;
 module BusEthernetGateway
 {
     parameters:
-        @display("bgb=437,647;i=device/router");
+        @display("i=device/router");
         int countOfCanBusses = default(1);
         int countOfEthernetPorts = default(1);
     gates:

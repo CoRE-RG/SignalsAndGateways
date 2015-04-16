@@ -23,7 +23,7 @@ import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 module GatewayBase
 {
     parameters:
-        @display("bgb=406,639;i=device/hub");
+        @display("i=device/hub");
         int numPorts;
         xml configXML = default(xmldoc("GatewayConfig.xml"));
         xml defaultConfigXML = configXML;
