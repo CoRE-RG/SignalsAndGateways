@@ -64,7 +64,7 @@ void GatewayTransformation::readConfigXML(){
                 string xmlDst = (*it)->getAttribute("dst");
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
-                    canToBEEthernet[atoi((*it2)->getAttribute("canId"))].push_back(xmlDst);
+                    canToBEEthernet[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(xmlDst);
                 }
             }
             cXMLElementList xmlRCFrames = xmlTransformation->getChildrenByTagName("rcframe");
@@ -72,7 +72,7 @@ void GatewayTransformation::readConfigXML(){
                 uint16_t xmlCTID = static_cast<uint16_t>(atoi((*it)->getAttribute("ctId")));
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
-                    canToRCEthernet[atoi((*it2)->getAttribute("canId"))].push_back(xmlCTID);
+                    canToRCEthernet[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(xmlCTID);
                 }
             }
             cXMLElementList xmlTTFrames = xmlTransformation->getChildrenByTagName("ttframe");
@@ -80,13 +80,13 @@ void GatewayTransformation::readConfigXML(){
                 uint16_t xmlCTID = static_cast<uint16_t>(atoi((*it)->getAttribute("ctId")));
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
-                    canToTTEthernet[atoi((*it2)->getAttribute("canId"))].push_back(xmlCTID);
+                    canToTTEthernet[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(xmlCTID);
                 }
             }
         }else if(type.compare("toCan") == 0){
             cXMLElementList xmlCANFrames = xmlTransformation->getChildrenByTagName("canframe");
             for(cXMLElementList::iterator it = xmlCANFrames.begin(); it != xmlCANFrames.end(); ++it){
-                unsigned int xmlCANID = atoi((*it)->getAttribute("canId"));
+                unsigned int xmlCANID = static_cast<unsigned int>(atoi((*it)->getAttribute("canId")));
                 canToCan.push_back(xmlCANID);
             }
             cXMLElementList xmlEthernetFrames = xmlTransformation->getChildrenByTagName("ethernetframe");

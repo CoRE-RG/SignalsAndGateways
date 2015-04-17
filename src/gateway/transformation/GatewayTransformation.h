@@ -41,10 +41,10 @@ class GatewayTransformation : public cSimpleModule
         static const int CANCRCBITLENGTH;
     private:
         std::list<unsigned int> canToCan;
-        std::map<int, std::list<std::string> > canToBEEthernet;
+        std::map<unsigned int, std::list<std::string> > canToBEEthernet;
         std::list<std::string> beEthernetToCan;
-        std::map<int, std::list<uint16_t> > canToRCEthernet;
-        std::map<int, std::list<uint16_t> > canToTTEthernet;
+        std::map<unsigned int, std::list<uint16_t> > canToRCEthernet;
+        std::map<unsigned int, std::list<uint16_t> > canToTTEthernet;
         std::list<uint16_t> ctEthernetToCan;
         //TODO ...
     protected:
