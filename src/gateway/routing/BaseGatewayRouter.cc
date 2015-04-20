@@ -36,6 +36,7 @@ const std::string BaseGatewayRouter::ETHPREFIX = "eth_";
 
 void BaseGatewayRouter::initialize()
 {
+    droppedFramesSignal = registerSignal("droppedFramesSignal");
     readConfigXML();
 }
 
@@ -51,6 +52,9 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
             destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), TTEPREFIX + to_string(ctFrame->getCtID()));
         }else if(inet::EthernetIIFrame* ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(msg)){
             destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ETHPREFIX + ethernetFrame->getDest().str());
+        }
+        if (destinationGateIndices.empty()) {
+            emit(droppedFramesSignal,static_cast<unsigned long>(1));
         }
         for(size_t i=0; i<destinationGateIndices.size(); i++){
             if(destinationGateIndices[i] < gateSize("out")){

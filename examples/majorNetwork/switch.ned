@@ -26,7 +26,7 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 // switch1: configuration in switch1.ini
 // Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
 //
-module RTSwitch extends TTEEtherSwitch
+module Switch extends TTEEtherSwitch
 {
     parameters:
         int numberOfTT_Vlinks = default(0);

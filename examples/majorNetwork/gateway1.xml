@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<gateway id="gateway1">
+		<routing>
+			<route source="0" destination="1">
+				<canframe canId="2"/>
+			</route>
+			<route source="1" destination="0">
+				<ttframe ctId="30"/>
+				<ttframe ctId="300"/>
+			</route>
+		</routing>
+		
+		<transformation destination="0" type="toCan">
+			<ttframe ctId="30"/>
+			<ttframe ctId="300"/>
+		</transformation>
+
+		<transformation destination="1" type="toEthernet">
+			<ttframe ctId="33">
+				<canframe canId="2"/>
+			</ttframe>
+		</transformation>
+	</gateway>
+</config>

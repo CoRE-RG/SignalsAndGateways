@@ -34,6 +34,11 @@ class BaseGatewayRouter : public cSimpleModule
         static const std::string ETHPREFIX;
     private:
         std::map<int, std::map<int, std::list<std::string> > > routing;
+
+        /**
+         * @brief Simsignal for the number of dropped frames.
+         */
+        simsignal_t droppedFramesSignal;
     protected:
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);

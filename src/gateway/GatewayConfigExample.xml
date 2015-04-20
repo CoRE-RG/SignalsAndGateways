@@ -36,8 +36,11 @@
 		<ethernetFrame dst="EE-AA-AA-AA-AA-02">
 			<canFrame canId="43"/>
 			<canFrame canId="70"/>
-			<canFrame canId="8	00"/>
+			<canFrame canId="800"/>
 		</ethernetFrame>
+		<ttframe ctId="0FB7"/>
+			<canFrame canId="801"/>
+		</ttframe>
 	</transformation>	
 	<transformation port="1" type="EthernetToCan">	
 		<ethernetframe dst="EE-AA-AA-AA-AA-03"/>

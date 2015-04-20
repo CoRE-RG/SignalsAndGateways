@@ -47,7 +47,7 @@ void AccumulationGatewayBuffering::readConfigXML(){
                 EV<< "holduptime: " <<holdUpTime<<"\n";
                 cXMLElementList xmlPoolMessages = xmlHoldUpTimes[j]->getChildren();
                 for (size_t k= 0; k < xmlPoolMessages.size(); k++) {
-                    unsigned int canID = atoi(xmlPoolMessages[k]->getAttribute("canId"));
+                    unsigned int canID = static_cast<unsigned int>(atoi(xmlPoolMessages[k]->getAttribute("canId")));
                     poolMap.insert(pair<unsigned int,cMessagePointerList*>(canID, poolList));
                     holdUpTimes.insert(pair<unsigned int,simtime_t>(canID, holdUpTime));
                 }
