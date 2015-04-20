@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT routingTable				((item)*)>
-<!ATTLIST routingTable
-	DTDversion		CDATA #REQUIRED
+<!ELEMENT config				((gateway)+)>
+
+<!ELEMENT gateway				((routing)?, (buffering)?, (transformation)?)>
+<!ATTLIST gateway
+	id			CDATA	#REQUIRED
 >
-<!-- DTD version: 1.2 -->
 
-<!ELEMENT item						((source), (destination)+, gatewayOptions)>
+<!ELEMENT routing				((route)+)>
+<!ELEMENT route					((canframe)+ | (ethernetframe)+)>
+<!ATTLIST route
+	source		CDATA	#REQUIRED
+	destination CDATA	#REQUIRED
+>
+<!ELEMENT canframe>
+<!ATTLIST canframe
+	canId		CDATA	#REQUIRED
+>
+<!ELEMENT ethernetframe>
+<!ATTLIST ethernetframe
+	dst			CDATA	#REQUIRED
+>
 
-<!ELEMENT source (sourceBusID, sourceObjectID, sourceType)>
-<!ELEMENT sourceBusID				(#PCDATA)>
-<!ELEMENT sourceObjectID			(#PCDATA)>
-<!ELEMENT sourceType				(#PCDATA)>
+<!ELEMENT buffering				((pool)+)>
+<!ELEMENT pool					((holdup)+)>
+<!ELEMENT holdup				((canframe)+)>
+<!ATTLIST holdup
+	time		CDATA	#REQUIRED
+>
+<!ELEMENT canframe>
+<!ATTLIST canframe
+	canId		CDATA	#REQUIRED
+>
 
-<!ELEMENT destination (destinationBusID, destinationObjectID, destinationType, (backbone)*)>
-<!ELEMENT destinationBusID			(#PCDATA)>
-<!ELEMENT destinationObjectID		(#PCDATA)>
-<!ELEMENT destinationType			(#PCDATA)>
-
-<!ELEMENT backbone ((backboneCTID | directMacAdress), backboneTransferType, messageAccumulation, holdUpTime)>
-<!ELEMENT backboneCTID				(#PCDATA)>
-<!ELEMENT directMacAdress			(#PCDATA)>
-<!ELEMENT backboneTransferType		(#PCDATA)>
-<!ELEMENT messageAccumulation		(#PCDATA)>
-<!ELEMENT holdUpTime				(#PCDATA)>
-
-<!ELEMENT gatewayOptions (allwaysSendOldAndNew)>
-<!ELEMENT allwaysSendOldAndNew		(#PCDATA)>
+<!ELEMENT transformation		((ethernetframe)+)>
+<!ATTLIST transformation
+	destination	CDATA				#REQUIRED
+	type		(toEthernet|toCan)	#REQUIRED
+>
+<!ELEMENT ethernetframe			((canframe)*)>
+<!ATTLIST ethernetframe
+	dst			CDATA				#REQUIRED
+>
+<!ELEMENT canframe>
+<!ATTLIST canframe
+	canId		CDATE				#REQUIRED
+>

@@ -13,7 +13,7 @@
 		<buffering>
 			<pool>
 				<holdup time="5ms">
-					<canFrame canId="1"/>
+					<canframe canId="1"/>
 				</holdup>
 				<holdup time="10ms">
 					<canframe canId="2"/>
