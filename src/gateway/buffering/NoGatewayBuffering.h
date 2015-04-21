@@ -21,7 +21,11 @@
 namespace SignalsAndGateways {
 
 /**
- * TODO - Generated class
+ * @brief This buffering module forwards incoming frames to the transformation module.
+ *
+ * This module doesn't have any buffering features. Its only functionality is the forwarding of an incoming frame to the next module.
+ *
+ *
  */
 class NoGatewayBuffering : public cSimpleModule
 {

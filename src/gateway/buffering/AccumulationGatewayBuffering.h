@@ -27,12 +27,23 @@
 namespace SignalsAndGateways {
 
 /**
- * TODO - Generated class
+ * @brief This buffering module accumulates incoming can frames according to the configuration in the XML files.
+ *
+ * According to the XML files incoming can frames are grouped. Every frame has a specific hold up time and as soon as the timer of a frame reaches zero the whole group is forwarded to the transformation module.
+ *
  */
 class AccumulationGatewayBuffering : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Initialization of the module.
+     */
     virtual void initialize();
+    /**
+     * @brief Self messages represent the end of a pool-hold-up time. Messages from the routing module are processed.
+     *
+     * @param msg Message from the routing module or self message from a pool.
+     */
     virtual void handleMessage(cMessage *msg);
 
   private:
