@@ -49,6 +49,7 @@ void TTEGatewayApplication::handleMessage(cMessage *msg) {
     }else if(msg->arrivedOn("upperLayerIn")){
         if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(msg)){
             //TODO AVB transfer
+            delete avbFrame;
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
             for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){

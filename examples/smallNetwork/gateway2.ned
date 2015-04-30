@@ -19,7 +19,6 @@ import core4inet.buffer.AS6802.TTDoubleBuffer;
 
 module Gateway2 extends BusEthernetGateway
 {
-    @display("bgb=479,314");
     submodules:
 
     connections:

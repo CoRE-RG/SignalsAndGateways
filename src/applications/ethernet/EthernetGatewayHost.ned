@@ -32,7 +32,7 @@ module EthernetGatewayHost extends TTEAVBEtherHost
         int numberOfTT_Vlinks = default(0);
         int numberOfRC_Vlinks = default(0);
         int numberOfBG_Vlinks = default(0);
-        @display("bgb=688,409");
+        //@display("bgb=688,409");
     gates:
         output upperLayerOut;
         input upperLayerIn;
@@ -43,21 +43,21 @@ module EthernetGatewayHost extends TTEAVBEtherHost
         }
         //Vector of output buffers for timetriggered traffic(TT)
         TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {
-            @display("p=561,37");
+            @display("p=561,37,r,70");
         }
         //Vector of input buffers for timetriggered traffic(TT)
         TTvlinks_ctc[numberOfTT_Vlinks]: TTIncoming {
-            @display("p=561,154");
+            @display("p=561,154,r,70");
         }
         //Vector of output buffers for rate constrained traffic(RC)
         RCvlinks[numberOfRC_Vlinks]: RCQueueBuffer {
             parameters:
-                @display("p=561,232");
+                @display("p=561,232,r,70");
         }
         //Vector of input buffers for rate constrained traffic(RC)
         RCvlinks_ctc[numberOfRC_Vlinks]: RCIncoming {
             parameters:
-                @display("p=561,349");
+                @display("p=561,349,r,70");
         }
     connections:
         gatewayApp.upperLayerOut --> upperLayerOut;
