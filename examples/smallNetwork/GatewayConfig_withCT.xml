@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "../../src/gateway/GatewayConfig.dtd">
+<config>
+
+	<gateway id="gateway1">
+		<routing>
+			<route source="0" destination="1">
+				<canframe canId="1"/>
+				<canframe canId="2"/>
+				<canframe canId="3"/>
+			</route>
+		</routing>
+		<buffering>
+			<pool>
+				<holdup time="5ms">
+					<canframe canId="1"/>
+				</holdup>
+				<holdup time="10ms">
+					<canframe canId="2"/>
+				</holdup>
+			</pool>
+		</buffering>
+		<transformation destination="1" type="toEthernet">
+			<ttframe ctId="1">
+				<canframe canId="1"/>
+				<canframe canId="2"/>
+				<canframe canId="3"/>
+			</ttframe>
+		</transformation>
+	</gateway>
+	
+	<gateway id="gateway2">
+		<routing>
+			<route source="1" destination="0">
+				<ttframe ctId="1"/>
+			</route>
+		</routing>
+		<transformation destination="0" type="toCan">
+			<ttframe ctId="1"/>
+		</transformation>
+	</gateway>
+	
+</config>

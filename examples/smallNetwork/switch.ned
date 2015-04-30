@@ -31,7 +31,12 @@ module Switch extends TTEAVBEtherSwitch
     parameters:
         @display("bgb=627,384");
     submodules:
-
+        TTvlinks[1]: TTDoubleBuffer {
+            @display("p=567,41");
+        }
+        TTvlinks_ctc[1]: TTIncoming {
+            @display("p=567,150");
+        }
     connections:
-
+        TTvlinks_ctc[0].out --> TTvlinks[0].in;
 }
