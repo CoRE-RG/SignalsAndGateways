@@ -48,9 +48,15 @@ class GatewayTransformation : public cSimpleModule
         std::list<uint16_t> ctEthernetToCan;
         //TODO ...
     protected:
+        /**
+         * @brief Initialization of the module.
+         */
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
     private:
+        /**
+         * @brief Gateway configuration using information from assigned XML file.
+         */
         void readConfigXML();
         std::list<cMessage*> transformCanFrame(FiCo4OMNeT::CanDataFrame* canFrame);
         std::list<cMessage*> transformPoolMessage(PoolMessage* poolMessage);

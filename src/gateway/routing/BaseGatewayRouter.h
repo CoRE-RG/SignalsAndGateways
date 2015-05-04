@@ -40,10 +40,17 @@ class BaseGatewayRouter : public cSimpleModule
          */
         simsignal_t droppedFramesSignal;
     protected:
+        /**
+         * @brief Initialization of the module.
+         */
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
     private:
+        /**
+         * @brief Gateway configuration using information from assigned XML file.
+         */
         void readConfigXML();
+
         std::vector<int> getDestinationGateIndices(int sourceIndex, std::string messageID);
 };
 
