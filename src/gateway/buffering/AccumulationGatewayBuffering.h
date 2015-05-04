@@ -47,9 +47,21 @@ class AccumulationGatewayBuffering : public cSimpleModule
     virtual void handleMessage(cMessage *msg);
 
   private:
+    /**
+     * @brief This map holds pointer to the lists which contain all messages which are currently in the pool. The canIDs serve as the keys.
+     */
     std::map<unsigned int,cMessagePointerList*> poolMap;
+    /**
+     * @brief This map holds the maximum hold up time for the given canID.
+     */
     std::map<unsigned int,simtime_t> holdUpTimes;
+    /**
+     * @brief This map holds the hold up time events for every pool.
+     */
     std::map<cMessagePointerList*,cMessage*> scheduledHoldUpTimes;
+    /**
+     * @brief This maps holds the scheduled times for all pools of the gateway.
+     */
     std::map<cMessage*,simtime_t> scheduledTimes;
 
     /**
@@ -58,27 +70,33 @@ class AccumulationGatewayBuffering : public cSimpleModule
     simsignal_t poolSizeSignal;
 
     /**
-     *
+     * @brief Gateway configuration using information from assigned XML file.
      */
     void readConfigXML();
 
     /**
-     *
+     * @brief Returns a list with all messages which are currently in the pool based on a canID.
      */
     cMessagePointerList* getPoolList(unsigned int canID);
 
     /**
-     *
+     * @brief Returns a list with all messages which are currently in the pool based on a holdUpTimeEvnet.
      */
     cMessagePointerList* getPoolList(cMessage* holdUpTimeEvent);
 
     /**
-     *
+     * @brief Returns the hold up time for the given canID.
      */
     simtime_t getIDHoldUpTime(unsigned int canID);
 
+    /**
+     * @brief Returns the event which can be used to get the remaining hold up time for the given pool.
+     */
     cMessage* getPoolHoldUpTimeEvent(cMessagePointerList* poolList);
 
+    /**
+     * @brief Returns the remaining hold up time for a specific pool to which the event is assigned.
+     */
     simtime_t getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent);
 };
 
