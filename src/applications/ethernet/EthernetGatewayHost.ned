@@ -31,7 +31,6 @@ module EthernetGatewayHost extends TTEAVBEtherHost
     parameters:
         int numberOfTT_Vlinks = default(0);
         int numberOfRC_Vlinks = default(0);
-        int numberOfBG_Vlinks = default(0);
         //@display("bgb=688,409");
     gates:
         output upperLayerOut;
