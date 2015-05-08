@@ -14,8 +14,6 @@ package signalsandgateways.examples.majorNetwork;
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 import signalsandgateways.BusEthernetGateway;
-import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
 
 module Gateway2 extends BusEthernetGateway
 {

@@ -18,7 +18,7 @@ package signalsandgateways.applications.ethernet;
 import signalsandgateways.applications.ethernet.AS6802.TTEGatewayApplication;
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.buffer.AS6802.TTQueueBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
 import core4inet.buffer.AS6802.RCQueueBuffer;
 
@@ -41,7 +41,7 @@ module EthernetGatewayHost extends TTEAVBEtherHost
             @display("p=282,37");
         }
         //Vector of output buffers for timetriggered traffic(TT)
-        TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {
+        TTvlinks[numberOfTT_Vlinks]: TTQueueBuffer {
             @display("p=561,37,r,70");
         }
         //Vector of input buffers for timetriggered traffic(TT)

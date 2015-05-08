@@ -18,7 +18,7 @@ package signalsandgateways.examples.smallNetwork;
 
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
 import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.buffer.AS6802.TTQueueBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
 import core4inet.buffer.AS6802.RCQueueBuffer;
 
@@ -30,7 +30,7 @@ module Switch extends TTEAVBEtherSwitch
     parameters:
         @display("bgb=627,384");
     submodules:
-        TTvlinks[1]: TTDoubleBuffer {
+        TTvlinks[1]: TTQueueBuffer {
             @display("p=567,41");
         }
         TTvlinks_ctc[1]: TTIncoming {

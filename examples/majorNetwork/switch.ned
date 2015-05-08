@@ -18,7 +18,7 @@ package signalsandgateways.examples.majorNetwork;
 
 import core4inet.nodes.ethernet.AS6802.TTEEtherSwitch;
 import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.buffer.AS6802.TTQueueBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
 import core4inet.buffer.AS6802.RCQueueBuffer;
 
@@ -35,7 +35,7 @@ module Switch extends TTEEtherSwitch
         @display("bgb=457,311");
     submodules:
         //Vector of output buffers for timetriggered traffic(TT)
-        TTvlinks[numberOfTT_Vlinks]: TTDoubleBuffer {
+        TTvlinks[numberOfTT_Vlinks]: TTQueueBuffer {
             @display("p=517,37");
         }
         //Vector of input buffers for timetriggered traffic(TT)

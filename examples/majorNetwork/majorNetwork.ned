@@ -19,6 +19,7 @@ import core4inet.nodes.ethernet.AS6802.TTEEtherHost;
 import signalsandgateways.BusEthernetGateway;
 import fico4omnet.bus.can.CanBus;
 import fico4omnet.nodes.can.CanNode;
+import core4inet.utilities.modules.MessageNumProfiler;
 
 //
 // Small sample network with three hosts and one switch that shows how to 
@@ -44,6 +45,7 @@ network majorNetwork
             per = 0;
         }
     submodules:
+        Profiler: MessageNumProfiler{}
         Antrieb: CanBus {
             @display("i=block/network;p=259,98");
         }
