@@ -16,7 +16,7 @@
 namespace SignalsAndGateways;
 
 //
-// TODO generated message class
+// This packet holds the original CAN frame.
 //
 packet UnitMessage {
     uint32_t type;

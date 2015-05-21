@@ -16,8 +16,8 @@
 namespace SignalsAndGateways;
 
 //
-// TODO generated message class
-//
+// This packet holds all Unit Messages which are going to be sent within an ethernet frame.
+// 
 packet GatewayAggregationMessage {
     @customize(true);
     uint8_t units;

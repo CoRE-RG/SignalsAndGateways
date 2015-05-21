@@ -51,6 +51,9 @@ class BaseGatewayRouter : public cSimpleModule
          */
         void readConfigXML();
 
+        /**
+         * @brief This method returns a vector with all gates to which a frame has to be forwarded.
+         */
         std::vector<int> getDestinationGateIndices(int sourceIndex, std::string messageID);
 };
 
