@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.buffering;
 
 //
-// TODO auto-generated module
+// This module buffers incoming frames and groups incoming frames corresponding to the xml configuration. 
 //
 simple AccumulationGatewayBuffering like IGatewayBuffering
 {

@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.transformation;
 
 //
-// TODO auto-generated module
+// This module receives single frames or pool messages from the buffering module. Corresponding to the xml configuration all frames are processed and forwarded to the right destination.
 //
 simple GatewayTransformation like IGatewayTransformation
 {

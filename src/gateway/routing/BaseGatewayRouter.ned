@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.routing;
 
 //
-// TODO auto-generated module
+// This module decides to which destinations incoming frames will be forwarded.
 //
 simple BaseGatewayRouter like IGatewayRouter
 {
