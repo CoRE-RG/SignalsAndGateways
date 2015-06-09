@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.transformation;
 
 //
-// TODO auto-generated module
+// A transformation module with no functionallity besides forwarding incoming frames.
 //
 simple NoGatewayTransformation like IGatewayTransformation
 {

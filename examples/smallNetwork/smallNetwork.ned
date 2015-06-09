@@ -76,7 +76,7 @@ network smallNetwork
             parameters:
                 @display("p=295,62");
             gates:
-                ethg[3];
+                ethg[2];
         }
 
     connections:

@@ -21,22 +21,22 @@
 			</pool>
 		</buffering>
 		<transformation destination="1" type="toEthernet">
-			<ethernetframe dst="0A-00-00-00-00-04">
+			<ttframe ctId="1">
 				<canframe canId="1"/>
 				<canframe canId="2"/>
 				<canframe canId="3"/>
-			</ethernetframe>
+			</ttframe>
 		</transformation>
 	</gateway>
 	
 	<gateway id="gateway2">
 		<routing>
 			<route source="1" destination="0">
-				<ethernetframe dst="0A-00-00-00-00-04"/>
+				<ttframe ctId="1"/>
 			</route>
 		</routing>
 		<transformation destination="0" type="toCan">
-			<ethernetframe dst="0A-00-00-00-00-04"/>
+			<ttframe ctId="1"/>
 		</transformation>
 	</gateway>
 	

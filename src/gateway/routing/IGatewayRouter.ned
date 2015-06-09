@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.routing;
 
 //
-// TODO auto-generated module
+// Interface for the routing module.
 //
 moduleinterface IGatewayRouter
 {

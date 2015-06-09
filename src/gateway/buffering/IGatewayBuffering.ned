@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.buffering;
 
 //
-// TODO auto-generated module
+// Interface for the buffering module.
 //
 moduleinterface IGatewayBuffering
 {

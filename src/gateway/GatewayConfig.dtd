@@ -1,24 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT config				((gateway)+)>
 
-<!ELEMENT gateway				((routing)?, (buffering)?, (transformation)?)>
+<!ELEMENT gateway				((routing)?, (buffering)?, (transformation)*)>
 <!ATTLIST gateway
 	id			CDATA	#REQUIRED
 >
 
 <!ELEMENT routing				((route)+)>
-<!ELEMENT route					((canframe)+ | (ethernetframe)+)>
+<!ELEMENT route					((canframe)+ | (ethernetframe)+ | (ctframe)+ | (ttframe)+)>
 <!ATTLIST route
 	source		CDATA	#REQUIRED
 	destination CDATA	#REQUIRED
 >
-<!ELEMENT canframe>
+<!ELEMENT canframe		EMPTY>
 <!ATTLIST canframe
 	canId		CDATA	#REQUIRED
 >
-<!ELEMENT ethernetframe>
+<!ELEMENT ethernetframe	((canframe)*)>
 <!ATTLIST ethernetframe
 	dst			CDATA	#REQUIRED
+>
+<!ELEMENT rcframe		((canframe)*)>
+<!ATTLIST rcframe
+	ctId		CDATA	#REQUIRED
+>
+<!ELEMENT ttframe		((canframe)*)>
+<!ATTLIST ttframe
+	ctId		CDATA	#REQUIRED
 >
 
 <!ELEMENT buffering				((pool)+)>
@@ -27,21 +34,13 @@
 <!ATTLIST holdup
 	time		CDATA	#REQUIRED
 >
-<!ELEMENT canframe>
+<!ELEMENT canframe		EMPTY>
 <!ATTLIST canframe
 	canId		CDATA	#REQUIRED
 >
 
-<!ELEMENT transformation		((ethernetframe)+)>
+<!ELEMENT transformation		((canframe)+ | (ethernetframe)+ | (ctframe)+ | (ttframe)+)>
 <!ATTLIST transformation
 	destination	CDATA				#REQUIRED
 	type		(toEthernet|toCan)	#REQUIRED
->
-<!ELEMENT ethernetframe			((canframe)*)>
-<!ATTLIST ethernetframe
-	dst			CDATA				#REQUIRED
->
-<!ELEMENT canframe>
-<!ATTLIST canframe
-	canId		CDATE				#REQUIRED
 >

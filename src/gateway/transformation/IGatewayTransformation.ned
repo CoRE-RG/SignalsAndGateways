@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.transformation;
 
 //
-// TODO auto-generated module
+// Interface for the transformation module.
 //
 moduleinterface IGatewayTransformation
 {

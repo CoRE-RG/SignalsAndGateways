@@ -16,7 +16,7 @@
 package signalsandgateways.gateway.buffering;
 
 //
-// TODO auto-generated module
+// A buffering module with no functionallity besides forwarding incoming frames to the next module.
 //
 simple NoGatewayBuffering like IGatewayBuffering
 {

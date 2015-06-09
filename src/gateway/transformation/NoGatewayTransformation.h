@@ -23,6 +23,9 @@ namespace SignalsAndGateways {
 class NoGatewayTransformation : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Initialization of the module.
+     */
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 };

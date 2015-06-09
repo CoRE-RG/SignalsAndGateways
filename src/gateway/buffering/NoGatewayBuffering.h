@@ -30,6 +30,9 @@ namespace SignalsAndGateways {
 class NoGatewayBuffering : public cSimpleModule
 {
   protected:
+    /**
+     * @brief Initialization of the module.
+     */
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 };

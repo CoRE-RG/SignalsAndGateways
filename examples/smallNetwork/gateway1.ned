@@ -20,14 +20,8 @@ import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
 module Gateway1 extends BusEthernetGateway
 {
-    parameters:
-        @display("bgb=479,314");
     submodules:
-		//module that coordinates the preBuffer behaivior
-//        buffering[numPorts]: AccumulationGatewayBuffering {
-//            @display("p=200,100,c,130");
-//            configXML = default(defaultConfigXML);
-//        }
+
     connections:
 
 }

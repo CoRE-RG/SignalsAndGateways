@@ -20,6 +20,9 @@ import signalsandgateways.gateway.transformation.IGatewayTransformation;
 import signalsandgateways.gateway.buffering.IGatewayBuffering;
 import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 
+//
+// Basic gateway which forwards messages from the source to the desired destination.
+//
 module GatewayBase
 {
     parameters:

@@ -18,20 +18,24 @@ package signalsandgateways.examples.smallNetwork;
 
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherSwitch;
 import core4inet.incoming.AS6802.TTIncoming;
-import core4inet.buffer.AS6802.TTDoubleBuffer;
+import core4inet.buffer.AS6802.TTQueueBuffer;
 import core4inet.incoming.AS6802.RCIncoming;
 import core4inet.buffer.AS6802.RCQueueBuffer;
 
 //
 // switch1: configuration in switch1.ini
-// Forwards time-triggered messages with VL-ID 100 and rate-constrained messages with VL-ID 101
 //
 module Switch extends TTEAVBEtherSwitch
 {
     parameters:
         @display("bgb=627,384");
     submodules:
-
+        TTvlinks[1]: TTQueueBuffer {
+            @display("p=567,41");
+        }
+        TTvlinks_ctc[1]: TTIncoming {
+            @display("p=567,150");
+        }
     connections:
-
+        TTvlinks_ctc[0].out --> TTvlinks[0].in;
 }
