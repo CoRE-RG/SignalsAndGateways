@@ -25,6 +25,12 @@ simple AccumulationGatewayBuffering like IGatewayBuffering
     	
     	@signal[poolSizeSignal](type=unsigned long);
     	@statistic[poolMessageSize](title="pool size"; source=poolSizeSignal; record=count,sum,min,max, "vector(last)"; interpolationmode=linear);
+    	
+    	@signal[totalHoldUpTimeSignal](type=simtime_t);
+    	@statistic[totalHoldUpTime](source=totalHoldUpTimeSignal;record=mean,min,max,vector?);
+    	
+    	@signal[pool*HoldUpTime](type=simtime_t);
+    	@statisticTemplate[poolHoldUpTime](title="Pool-Hold-Up-Time ($name)"; record=mean,max,min,vector; interpolationmode=sample-hold);
     gates:
         input in;
         output out;
