@@ -57,7 +57,7 @@ void TTEGatewayApplication::handleMessage(cMessage *msg) {
                 sendDirect(ctFrame->dup(), in->gate("in"));
             }
             delete ctFrame;
-        }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
+        }else if(inet::EthernetIIFrame* ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(msg)){
             for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
                 sendDirect(ethernetFrame->dup(), (*buf)->gate("in"));
             }

@@ -81,7 +81,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
         } else {
             send(msg, gate("out"));
         }
-    } else if(dynamic_cast<EthernetIIFrame*>(msg)) {
+    } else if(dynamic_cast<inet::EthernetIIFrame*>(msg)) {
         send(msg, gate("out"));
     }
 }

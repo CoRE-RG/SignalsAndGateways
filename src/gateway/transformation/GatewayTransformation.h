@@ -87,22 +87,24 @@ class GatewayTransformation : public cSimpleModule
          * @brief CAN frames are extracted from pool message and transformed into the proper ethernet, RC or TT frame.
          */
         std::list<cMessage*> transformPoolMessage(PoolMessage* poolMessage);
+
         /**
          * @brief Transform CAN frames from an ethernet frame.
          */
-        std::list<cMessage*> transformEthernetFrame(EthernetIIFrame* ethernetFrame);
+        std::list<cMessage*> transformEthernetFrame(inet::EthernetIIFrame* ethernetFrame);
 
         /**
          * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a best effort ethernet frame.
          */
-        EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        inet::EthernetIIFrame* transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
         /**
          * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a best effort ethernet frame.
          */
-        EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+        inet::EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
         /**
          * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a RC ethernet frame.
          */
+
         CoRE4INET::RCFrame* transformCanToRCEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
         /**
          * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a RC ethernet frame.
@@ -121,16 +123,18 @@ class GatewayTransformation : public cSimpleModule
         /**
          * @brief Decapsulate the GatewayAggregationMessage from the ethernetFrame and extract all CAN frames from it.
          */
-        std::list<FiCo4OMNeT::CanDataFrame*> transformEthernetToCan(EthernetIIFrame* ethernetFrame);
+        std::list<FiCo4OMNeT::CanDataFrame*> transformEthernetToCan(inet::EthernetIIFrame* ethernetFrame);
+
         //transformEthernetToFlexRay...
 
         /**
          * @brief Based on the size of the encapsulated package, the size of the ethernetFrame is set at least to the ethernet min size.
          */
-        void setEthernetFrameSize(EthernetIIFrame* ethernetFrame);
+        void setEthernetFrameSize(inet::EthernetIIFrame* ethernetFrame);
         /**
          * @brief Encapsulate canFrame in a UnitMessage.
          */
+
         UnitMessage* generateUnitMessage(FiCo4OMNeT::CanDataFrame* canFrame);
         /**
          * @brief Generate GatewayAggregationMessage containing all elements from the UnitMessages.
