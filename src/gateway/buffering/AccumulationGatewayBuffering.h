@@ -46,10 +46,6 @@ class AccumulationGatewayBuffering : public cSimpleModule
      */
     virtual void handleMessage(cMessage *msg);
 
-    /**
-     * @brief Signals that are emitted when a pool is forwarded to the next module.
-     */
-    std::vector<simsignal_t> poolHoldUpTimeSignals;
   private:
     /**
      * @brief This map holds pointer to the lists which contain all messages which are currently in the pool. The canIDs serve as the keys.
@@ -67,7 +63,9 @@ class AccumulationGatewayBuffering : public cSimpleModule
      * @brief This maps holds the scheduled times for all pools of the gateway.
      */
     std::map<cMessage*,simtime_t> scheduledTimes;
-
+    /**
+     * @brief This map holds the arrival times of the messages which are currently buffered.
+     */
     std::map<cMessagePointerList*,std::list<simtime_t>*> poolArrivalTimes;
 
     /**
@@ -79,6 +77,11 @@ class AccumulationGatewayBuffering : public cSimpleModule
      * @brief Simsignal for the hold up time.
      */
     simsignal_t totalHoldUpTimeSignal;
+
+    /**
+     * @brief Signals that are emitted when a pool is forwarded to the next module.
+     */
+    std::vector<simsignal_t> poolHoldUpTimeSignals;
 
     /**
      * @brief Gateway configuration using information from assigned XML file.
@@ -110,6 +113,9 @@ class AccumulationGatewayBuffering : public cSimpleModule
      */
     simtime_t getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent);
 
+    /**
+     * @brief Emits the arrival times of the messages which are forwarded to the transformation module.
+     */
     void emitArrivalTimes(cMessagePointerList* poolList);
 };
 
