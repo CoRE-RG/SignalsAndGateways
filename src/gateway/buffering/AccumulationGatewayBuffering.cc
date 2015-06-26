@@ -25,7 +25,22 @@ Define_Module(AccumulationGatewayBuffering);
 void AccumulationGatewayBuffering::initialize()
 {
     poolSizeSignal = registerSignal("poolSizeSignal");
+    totalHoldUpTimeSignal = registerSignal("totalHoldUpTimeSignal");
     readConfigXML();
+
+    unsigned int numPools = scheduledHoldUpTimes.size();
+    for (unsigned int i = 0; i < numPools; i++) {
+        char strBuf[32];
+        snprintf(strBuf, 32, "pool%dHoldUpTime", i);
+
+        simsignal_t signal = registerSignal(strBuf);
+
+        cProperty *statisticTemplate = getProperties()->get("statisticTemplate",
+                "poolHoldUpTime");
+        ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
+
+        poolHoldUpTimeSignals.push_back(signal);
+    }
 }
 
 void AccumulationGatewayBuffering::readConfigXML(){
@@ -40,6 +55,8 @@ void AccumulationGatewayBuffering::readConfigXML(){
             cMessage* holdUpTimeEvent = new cMessage();
             scheduledHoldUpTimes.insert(pair<cMessagePointerList*,cMessage*>(poolList, holdUpTimeEvent));
             scheduledTimes.insert(pair<cMessage*,simtime_t>(holdUpTimeEvent,0));
+            list<simtime_t>* arrivalTimes = new list<simtime_t>();
+            poolArrivalTimes.insert(pair<cMessagePointerList*,list<simtime_t>*>(poolList, arrivalTimes));
             cXMLElementList xmlHoldUpTimes = xmlPools[i]->getChildren();
             for (size_t j= 0; j < xmlHoldUpTimes.size(); j++) {
                 simtime_t holdUpTime = STR_SIMTIME(xmlHoldUpTimes[j]->getAttribute("time"));
@@ -57,13 +74,14 @@ void AccumulationGatewayBuffering::readConfigXML(){
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
-        PoolMessage* pool = new PoolMessage();
+        PoolMessage* poolMsg = new PoolMessage();
         cMessagePointerList* poolList;
         poolList=getPoolList(msg);
         emit(poolSizeSignal, poolList->size());
-        pool->setPool(*poolList);
+        emitArrivalTimes(poolList);
+        poolMsg->setPool(*poolList);
         poolList->clear();
-        send(pool, gate("out"));
+        send(poolMsg, gate("out"));
     } else if(CanDataFrame* dataFrame = dynamic_cast<CanDataFrame*> (msg)) {
         unsigned int canID = dataFrame->getCanID();
         cMessagePointerList* poolList;
@@ -78,6 +96,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
                 scheduledTimes[poolHoldUpTimeEvent] = eventTime;
             }
             poolList->push_back(dataFrame);
+            poolArrivalTimes[poolList]->push_back(simTime());
         } else {
             send(msg, gate("out"));
         }
@@ -112,6 +131,25 @@ cMessage* AccumulationGatewayBuffering::getPoolHoldUpTimeEvent(cMessagePointerLi
 simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(cMessage* poolHoldUpTimeEvent){
     simtime_t scheduledTime = scheduledTimes[poolHoldUpTimeEvent];
     return scheduledTime - simTime();
+}
+
+void AccumulationGatewayBuffering::emitArrivalTimes(cMessagePointerList* poolList){
+    map<cMessagePointerList*,cMessage*>::iterator it1;
+    unsigned int poolNumber = 0;
+    for (it1= scheduledHoldUpTimes.begin(); it1 != scheduledHoldUpTimes.end(); ++it1){
+        if (it1->first == poolList) {
+            break;
+        }
+        poolNumber++;
+    }
+    list<simtime_t>* arrivalTimes = poolArrivalTimes[poolList];
+    list<simtime_t>::iterator it;
+    for (it = arrivalTimes->begin(); it != arrivalTimes->end(); ++it) {
+        simtime_t holdUpTime = simTime()-*it;
+        emit(totalHoldUpTimeSignal, holdUpTime);
+        emit(poolHoldUpTimeSignals[poolNumber], holdUpTime);
+    }
+    arrivalTimes->clear();
 }
 
 } //namespace
