@@ -1,4 +1,5 @@
 #note that the fingerprints provided may not match your architecture. Thus the test may fail although everything is ok
 # workingdir,                                                     args,                                                  simtimelimit,    fingerprint
-/examples/majorNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              3f5c-1ebd
-/examples/smallNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              c2fc-defd
+/examples/majorNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              5ae2-e2cb
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              875f-e54d
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c WithCT  -r 0,                        1s,              6912-9650
