@@ -19,7 +19,7 @@
 #include <SRPFrame_m.h>
 #include <AVBFrame_m.h>
 #include <CoRE4INET_Timer.h>
-#include <ModuleAccess.h>
+#include <FixedModuleAccess.h>
 #include "CoRE4INET_Defs.h"
 
 #include "CoRE4INET_SRPTable.h"
