@@ -28,8 +28,8 @@ void AccumulationGatewayBuffering::initialize()
     totalHoldUpTimeSignal = registerSignal("totalHoldUpTimeSignal");
     readConfigXML();
 
-    unsigned int numPools = scheduledHoldUpTimes.size();
-    for (unsigned int i = 0; i < numPools; i++) {
+    size_t numPools = scheduledHoldUpTimes.size();
+    for (size_t i = 0; i < numPools; i++) {
         char strBuf[32];
         snprintf(strBuf, 32, "pool%dHoldUpTime", i);
 
