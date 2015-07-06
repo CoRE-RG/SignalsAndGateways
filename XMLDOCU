@@ -1,0 +1,57 @@
+XML Documentation
+=================
+
+GENERAL
+-------
+Standard file name: GatewayConfig.xml
+Exact XML file can be individually configured in the ini-files for each module.
+
+STRUCTURE OF THE XML:
+---------------------
+	Introduced with: <config>
+	Each gateway of the simulation has its own section and is represented as follows:
+		<gateway id=“gateway name“>
+			…
+		</gateway>
+	Each gateway can contain tags for the routing module, for the buffering module and for all transformation modules. The exact order does not matter here.
+	
+	Routing:
+	--------
+	The configuration of the routing module starts with the tag <routing>. From this point all different routes are defined that run through this gateway. Each route is displayed as follows:
+		<route source=“source port number“ destination=“destination port number“>
+			…
+		</route>
+	Under each route it’s determine which messages are forwarded. For each route only one type of message can be sent. There are the following options:
+		<canframe canId=““/>
+		<ethernetframe dst=““/>
+		<rcframe ctId=““/>
+		<ttframe ctId=““/>
+		
+	Transformation:
+	---------------
+	The transformation module contains the parameters for the destination port and the target technology (Ethernet or Can). It is configured as follows:
+		<transformation destination=“ destination port number “ type=“toEthernet/toCan“>
+			…
+		</transformation>
+	The items within the transformation tag contain information about the messages that should be forwarded to the appropriate destination.
+	If the source is a Can network and the destination a best-effort-ethernet the underlying elements are configured like this:
+		<ethernetframe dst=“Ethernet destination address“>
+				<canframe canId=“ID can frame“/>
+				…
+		</ethernetframe>
+	RC and TT messages are initiated with the tags <rcframe ctId = ""> or <ttframe ctId = "">.
+	If messages are forwarded to Can, the source ethernet frames and their address or ctId are given:
+		<ethernetframe dst=““/>
+		<rcframe ctId=““/>
+		<ttframe ctId=““/>
+	
+	Buffering:
+	----------
+	The buffering module is used to determine which messages should be grouped together in a frame and how long each message will be delayed for buffering. Each buffering module within a gateway uses the same configuration. The configuration starts with the tag <buffering>.
+	It follows the tag <pool> which represents a set of messages that are grouped together. Then each message with the appropriate hold-up times can be configured:
+		<Holdup time = "">
+			<Canframe canid = "" />
+			...
+		</ Holdup>
+	
+---
