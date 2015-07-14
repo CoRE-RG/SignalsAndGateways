@@ -24,7 +24,7 @@ simple BaseGatewayRouter like IGatewayRouter
         xml configXML;
         
         @signal[droppedFramesSignal](type=unsigned long);
-    	@statistic[droppedFrames](title="dropped frames"; source=droppedFramesSignal; record=count; interpolationmode=none);
+    	@statistic[dropped](title="dropped frames"; source=droppedFramesSignal; record=count; interpolationmode=none);
     gates:
         input in[];
         output out[];
