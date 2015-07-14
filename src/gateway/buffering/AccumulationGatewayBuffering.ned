@@ -24,7 +24,7 @@ simple AccumulationGatewayBuffering like IGatewayBuffering
     	xml configXML;
     	
     	@signal[pool*MessageSize](type=unsigned long);
-    	@statisticTemplate[poolMessageSize](title="pool size ($name)"; record=count,sum,min,max, "vector(last)"; interpolationmode=linear);
+    	@statisticTemplate[poolMessageSize](title="pool size ($name)"; record=count,sum,mean,min,max, "vector(last)"; interpolationmode=linear);
     	
     	@signal[pool*HoldUpTime](type=simtime_t);
     	@statisticTemplate[poolHoldUpTime](title="Pool-Hold-Up-Time ($name)"; record=mean,max,min,vector; interpolationmode=sample-hold);
