@@ -25,7 +25,11 @@ Define_Module(CanSourceGatewayApp);
 void CanSourceGatewayApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){
-        send(msg, "out");
+        //quick & dirty for new statistics
+        CanDataFrame* df = dynamic_cast<CanDataFrame*> (msg);
+        df->setTimestamp(simTime());
+        df->setMessageSource(SOURCE_GW);
+        send(df, "out");
     } else {
         delete msg;
     }
