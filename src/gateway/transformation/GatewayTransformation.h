@@ -141,6 +141,11 @@ class GatewayTransformation : public cSimpleModule
          */
         GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*> units);
 
+        /*
+         *
+         */
+        std::string createMessageName(const char* poolMessageName);
+
 };
 
 } //namespace

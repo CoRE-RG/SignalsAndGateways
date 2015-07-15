@@ -74,11 +74,14 @@ void AccumulationGatewayBuffering::readConfigXML(){
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
-        PoolMessage* poolMsg = new PoolMessage();
         cMessagePointerList* poolList;
         poolList=getPoolList(msg);
+        unsigned int poolID = getPoolID(poolList);
         emit(poolSizeSignal, poolList->size());
         emitArrivalTimes(poolList);
+        char strBuf[32];
+        snprintf(strBuf, 32, "Pool %d", poolID);
+        PoolMessage* poolMsg = new PoolMessage(strBuf);
         poolMsg->setPool(*poolList);
         poolList->clear();
         send(poolMsg, gate("out"));
@@ -135,21 +138,27 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(cMessage* poolH
 
 void AccumulationGatewayBuffering::emitArrivalTimes(cMessagePointerList* poolList){
     map<cMessagePointerList*,cMessage*>::iterator it1;
-    unsigned int poolNumber = 0;
-    for (it1= scheduledHoldUpTimes.begin(); it1 != scheduledHoldUpTimes.end(); ++it1){
-        if (it1->first == poolList) {
-            break;
-        }
-        poolNumber++;
-    }
+    unsigned int poolID = getPoolID(poolList);
     list<simtime_t>* arrivalTimes = poolArrivalTimes[poolList];
     list<simtime_t>::iterator it;
     for (it = arrivalTimes->begin(); it != arrivalTimes->end(); ++it) {
         simtime_t holdUpTime = simTime()-*it;
         emit(totalHoldUpTimeSignal, holdUpTime);
-        emit(poolHoldUpTimeSignals[poolNumber], holdUpTime);
+        emit(poolHoldUpTimeSignals[poolID], holdUpTime);
     }
     arrivalTimes->clear();
+}
+
+unsigned int AccumulationGatewayBuffering::getPoolID(cMessagePointerList* poolList){
+    map<cMessagePointerList*,cMessage*>::iterator it1;
+    unsigned int poolID = 0;
+    for (it1= scheduledHoldUpTimes.begin(); it1 != scheduledHoldUpTimes.end(); ++it1){
+        if (it1->first == poolList) {
+            break;
+        }
+        poolID++;
+    }
+    return poolID;
 }
 
 } //namespace

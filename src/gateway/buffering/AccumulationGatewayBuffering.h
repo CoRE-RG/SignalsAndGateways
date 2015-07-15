@@ -117,6 +117,11 @@ class AccumulationGatewayBuffering : public cSimpleModule
      * @brief Emits the arrival times of the messages which are forwarded to the transformation module.
      */
     void emitArrivalTimes(cMessagePointerList* poolList);
+
+    /**
+     * @brief Returns the id of a pool.
+     */
+    unsigned int getPoolID(cMessagePointerList* poolList);
 };
 
 } //namespace
