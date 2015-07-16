@@ -31,7 +31,7 @@ void AccumulationGatewayBuffering::initialize()
     size_t numPools = scheduledHoldUpTimes.size();
     for (size_t i = 0; i < numPools; i++) {
         char strBuf[32];
-        snprintf(strBuf, 32, "pool%dHoldUpTime", i);
+        snprintf(strBuf, 32, "pool%dHoldUpTime", static_cast<int>(i));
 
         simsignal_t signal = registerSignal(strBuf);
 
@@ -114,7 +114,7 @@ cMessagePointerList* AccumulationGatewayBuffering::getPoolList(unsigned int canI
 
 cMessagePointerList* AccumulationGatewayBuffering::getPoolList(cMessage* holdUpTimeEvent){
     map<cMessagePointerList*,cMessage*>::iterator it;
-    for (it = scheduledHoldUpTimes.begin(); it != scheduledHoldUpTimes.end(); it++)
+    for (it = scheduledHoldUpTimes.begin(); it != scheduledHoldUpTimes.end(); ++it)
     {
         if (it->second == holdUpTimeEvent) {
             return it->first;

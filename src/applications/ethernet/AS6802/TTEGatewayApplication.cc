@@ -52,13 +52,13 @@ void TTEGatewayApplication::handleMessage(cMessage *msg) {
             delete avbFrame;
         }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(msg)){
             std::list<CoRE4INET::CTBuffer*> buffer = ctbuffers[ctFrame->getCtID()];
-            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); buf++){
+            for(std::list<CoRE4INET::CTBuffer*>::iterator buf = buffer.begin(); buf!=buffer.end(); ++buf){
                 Incoming *in = dynamic_cast<Incoming *>((*buf)->gate("in")->getPathStartGate()->getOwner());
                 sendDirect(ctFrame->dup(), in->gate("in"));
             }
             delete ctFrame;
         }else if(inet::EthernetIIFrame* ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(msg)){
-            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); buf++) {
+            for (std::list<BGBuffer*>::iterator buf = bgbuffers.begin(); buf != bgbuffers.end(); ++buf) {
                 sendDirect(ethernetFrame->dup(), (*buf)->gate("in"));
             }
             delete ethernetFrame;
