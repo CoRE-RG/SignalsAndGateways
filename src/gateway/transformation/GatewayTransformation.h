@@ -56,6 +56,14 @@ class GatewayTransformation : public cSimpleModule
          */
         std::list<std::string> beEthernetToCan;
         /**
+         * @brief Holds the information to which IEEE802.1Q ethernet destination CAN frames with the corresponding ID should be forwarded.
+         */
+        std::map<unsigned int, std::list<std::string> > canToQEthernet;
+        /**
+         * @brief Holds the information from which destination IEEE802.1Q ethernet frames should be forwarded to CAN.
+         */
+        std::list<std::string> qEthernetToCan;
+        /**
          * @brief Holds the information to which RC ethernet destination CAN frames with the corresponding ID should be forwarded.
          */
         std::map<unsigned int, std::list<uint16_t> > canToRCEthernet;
@@ -67,7 +75,6 @@ class GatewayTransformation : public cSimpleModule
          * @brief Holds the information which frames with the corresponding CT IDs should be forwarded to CAN.
          */
         std::list<uint16_t> ctEthernetToCan;
-        //TODO ...
     protected:
         /**
          * @brief Initialization of the module.
@@ -101,10 +108,19 @@ class GatewayTransformation : public cSimpleModule
          * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a best effort ethernet frame.
          */
         inet::EthernetIIFrame* transformCanToBEEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+
+        /**
+         * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a IEEE802.1Q ethernet frame.
+         */
+        CoRE4INET::EthernetIIFrameWithQTag* transformCanToQEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
+        /**
+         * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a IEEE802.1Q ethernet frame.
+         */
+        CoRE4INET::EthernetIIFrameWithQTag* transformCanToQEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+
         /**
          * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a RC ethernet frame.
          */
-
         CoRE4INET::RCFrame* transformCanToRCEthernet(FiCo4OMNeT::CanDataFrame* canFrame);
         /**
          * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a RC ethernet frame.
