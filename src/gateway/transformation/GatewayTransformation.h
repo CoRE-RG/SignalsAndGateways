@@ -58,7 +58,12 @@ class GatewayTransformation : public cSimpleModule
         /**
          * @brief Holds the information to which IEEE802.1Q ethernet destination CAN frames with the corresponding ID should be forwarded.
          */
-        std::map<unsigned int, std::list<std::string> > canToQEthernet;
+        struct qInfo{
+            std::string mac;
+            uint16_t vid;
+            uint8_t pcp;
+        };
+        std::map<unsigned int, std::list<qInfo> > canToQEthernet;
         /**
          * @brief Holds the information from which destination IEEE802.1Q ethernet frames should be forwarded to CAN.
          */

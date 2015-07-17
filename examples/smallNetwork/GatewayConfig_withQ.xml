@@ -21,7 +21,7 @@
 			</pool>
 		</buffering>
 		<transformation destination="1" type="toEthernet">
-			<ethernetqframe vid="0" dst="0A-00-00-00-00-04" pcp="7">
+			<ethernetqframe dst="0A-00-00-00-00-04" vid="0" pcp="7">
 				<canframe canId="1"/>
 				<canframe canId="2"/>
 				<canframe canId="3"/>
@@ -32,7 +32,7 @@
 	<gateway id="gateway2">
 		<routing>
 			<route source="1" destination="0">
-				<ethernetqframe dst="0A-00-00-00-00-04"/>
+				<ethernetqframe dst="0A-00-00-00-00-04" vid="0"/>
 			</route>
 		</routing>
 		<transformation destination="0" type="toCan">
