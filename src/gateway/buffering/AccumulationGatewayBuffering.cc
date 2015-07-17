@@ -24,22 +24,28 @@ Define_Module(AccumulationGatewayBuffering);
 
 void AccumulationGatewayBuffering::initialize()
 {
-    poolSizeSignal = registerSignal("poolSizeSignal");
-    totalHoldUpTimeSignal = registerSignal("totalHoldUpTimeSignal");
     readConfigXML();
 
     size_t numPools = scheduledHoldUpTimes.size();
     for (size_t i = 0; i < numPools; i++) {
-        char strBuf[32];
-        snprintf(strBuf, 32, "pool%dHoldUpTime", static_cast<int>(i));
+        char strBufHoldUpTime[32];
+        char strBufPoolSize[32];
+        snprintf(strBufHoldUpTime, 32, "pool%dHoldUpTime", i);
+        snprintf(strBufPoolSize, 32, "pool%dMessageSize", i);
 
-        simsignal_t signal = registerSignal(strBuf);
+        simsignal_t signalHoldUpTime = registerSignal(strBufHoldUpTime);
+        cProperty *statisticTemplateHoldUpTime = getProperties()->get(
+                "statisticTemplate", "poolHoldUpTime");
+        ev.addResultRecorders(this, signalHoldUpTime, strBufHoldUpTime,
+                statisticTemplateHoldUpTime);
+        poolHoldUpTimeSignals.push_back(signalHoldUpTime);
 
-        cProperty *statisticTemplate = getProperties()->get("statisticTemplate",
-                "poolHoldUpTime");
-        ev.addResultRecorders(this, signal, strBuf, statisticTemplate);
-
-        poolHoldUpTimeSignals.push_back(signal);
+        simsignal_t signalPoolSize = registerSignal(strBufPoolSize);
+        cProperty *statisticTemplatePoolSize = getProperties()->get(
+                "statisticTemplate", "poolMessageSize");
+        ev.addResultRecorders(this, signalPoolSize, strBufPoolSize,
+                statisticTemplatePoolSize);
+        poolSizeSignals.push_back(signalPoolSize);
     }
 }
 
@@ -74,11 +80,9 @@ void AccumulationGatewayBuffering::readConfigXML(){
 void AccumulationGatewayBuffering::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
-        cMessagePointerList* poolList;
-        poolList=getPoolList(msg);
+        cMessagePointerList* poolList = getPoolList(msg);
         unsigned int poolID = getPoolID(poolList);
-        emit(poolSizeSignal, poolList->size());
-        emitArrivalTimes(poolList);
+        emitSignals(poolList);
         char strBuf[32];
         snprintf(strBuf, 32, "Pool %d", poolID);
         PoolMessage* poolMsg = new PoolMessage(strBuf);
@@ -136,17 +140,17 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(cMessage* poolH
     return scheduledTime - simTime();
 }
 
-void AccumulationGatewayBuffering::emitArrivalTimes(cMessagePointerList* poolList){
+void AccumulationGatewayBuffering::emitSignals(cMessagePointerList* poolList){
     map<cMessagePointerList*,cMessage*>::iterator it1;
     unsigned int poolID = getPoolID(poolList);
     list<simtime_t>* arrivalTimes = poolArrivalTimes[poolList];
     list<simtime_t>::iterator it;
     for (it = arrivalTimes->begin(); it != arrivalTimes->end(); ++it) {
         simtime_t holdUpTime = simTime()-*it;
-        emit(totalHoldUpTimeSignal, holdUpTime);
         emit(poolHoldUpTimeSignals[poolID], holdUpTime);
     }
     arrivalTimes->clear();
+    emit(poolSizeSignals[poolID], poolList->size());
 }
 
 unsigned int AccumulationGatewayBuffering::getPoolID(cMessagePointerList* poolList){
