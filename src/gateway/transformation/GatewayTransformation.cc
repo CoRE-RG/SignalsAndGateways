@@ -82,7 +82,7 @@ void GatewayTransformation::readConfigXML(){
                 }
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
-                    qInfo qinfo;// = {xmlDst, vid, pcp};
+                    QInfo qinfo;
                     qinfo.mac = xmlDst;
                     qinfo.vid = vid;
                     qinfo.pcp = pcp;
@@ -149,7 +149,7 @@ list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFram
             transformedMsgs.push_back(ethernetFrame);
         }
     }else if(canToQEthernet.find(canFrame->getCanID()) != canToQEthernet.end()){
-        for(list<qInfo>::iterator it = canToQEthernet[canFrame->getCanID()].begin(); it != canToQEthernet[canFrame->getCanID()].end(); ++it){
+        for(list<QInfo>::iterator it = canToQEthernet[canFrame->getCanID()].begin(); it != canToQEthernet[canFrame->getCanID()].end(); ++it){
             EthernetIIFrameWithQTag* qFrame = transformCanToQEthernet(canFrame);
             qFrame->setDest(inet::MACAddress((*it).mac.c_str()));
             qFrame->setVID((*it).vid);
@@ -178,7 +178,7 @@ list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFram
 list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMessage){
     list<cMessage*> transformedMsgs;
     map<string, list<CanDataFrame*> > beTargetMap;
-    map<qInfo, list<CanDataFrame*> > qTargetMap;
+    map<string, pair<QInfo, list< CanDataFrame*> > > qTargetMap;
     map<uint16_t, list<CanDataFrame*> > rcTargetMap;
     map<uint16_t, list<CanDataFrame*> > ttTargetMap;
     cMessagePointerList pool = poolMessage->getPool();
@@ -191,8 +191,9 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
             }
         }
         if(canToQEthernet.find(canFrame->getCanID()) != canToQEthernet.end()){
-            for(list<qInfo>::iterator it2 = canToQEthernet[canFrame->getCanID()].begin(); it2 != canToQEthernet[canFrame->getCanID()].end(); ++it2){
-                qTargetMap[*it2].push_back(canFrame->dup());
+            for(list<QInfo>::iterator it2 = canToQEthernet[canFrame->getCanID()].begin(); it2 != canToQEthernet[canFrame->getCanID()].end(); ++it2){
+                qTargetMap[(*it2).mac].first = (*it2);
+                qTargetMap[(*it2).mac].second.push_back(canFrame->dup());
             }
         }
         if(canToRCEthernet.find(canFrame->getCanID()) != canToRCEthernet.end()){
@@ -216,11 +217,11 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
         ethernetFrame->setName(messageName.data());
         transformedMsgs.push_back(ethernetFrame);
     }
-    for(map<qInfo, list<CanDataFrame*> >::iterator it = qTargetMap.begin(); it != qTargetMap.end(); ++it){
-        EthernetIIFrameWithQTag* qFrame = transformCanToQEthernet(it->second);
-        qFrame->setDest(inet::MACAddress(it->first.mac.c_str()));
-        qFrame->setVID(it->first.vid);
-        qFrame->setPcp(it->first.pcp);
+    for(map<string, pair<QInfo, list<CanDataFrame*> > >::iterator it = qTargetMap.begin(); it != qTargetMap.end(); ++it){
+        EthernetIIFrameWithQTag* qFrame = transformCanToQEthernet(it->second.second);
+        qFrame->setDest(inet::MACAddress(it->first.c_str()));
+        qFrame->setVID(it->second.first.vid);
+        qFrame->setPcp(it->second.first.pcp);
         qFrame->setName(messageName.data());
         transformedMsgs.push_back(qFrame);
     }

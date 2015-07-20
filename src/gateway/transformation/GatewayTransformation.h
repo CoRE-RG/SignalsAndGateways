@@ -35,6 +35,11 @@
 
 namespace SignalsAndGateways {
 
+/*
+ *
+ *
+ * @author Philipp Meyer
+ */
 class GatewayTransformation : public cSimpleModule
 {
     private:
@@ -42,6 +47,7 @@ class GatewayTransformation : public cSimpleModule
          * @brief Size of the CRC field in a CAN frame.
          */
         static const int CANCRCBITLENGTH;
+
     private:
         /**
          * @brief Holds all CAN IDs this node forwards.
@@ -58,12 +64,13 @@ class GatewayTransformation : public cSimpleModule
         /**
          * @brief Holds the information to which IEEE802.1Q ethernet destination CAN frames with the corresponding ID should be forwarded.
          */
-        struct qInfo{
-            std::string mac;
-            uint16_t vid;
-            uint8_t pcp;
+        class QInfo{
+            public:
+                std::string mac;
+                uint16_t vid;
+                uint8_t pcp;
         };
-        std::map<unsigned int, std::list<qInfo> > canToQEthernet;
+        std::map<unsigned int, std::list<QInfo> > canToQEthernet;
         /**
          * @brief Holds the information from which destination IEEE802.1Q ethernet frames should be forwarded to CAN.
          */
