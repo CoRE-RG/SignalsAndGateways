@@ -53,7 +53,7 @@ It follows the tag <pool> which represents a set of messages that are grouped to
 >
 
 <!ELEMENT routing				((route)+)>
-<!ELEMENT route					((canframe)+ | (ethernetframe)+ | (ctframe)+ | (ttframe)+)>
+<!ELEMENT route					((canframe)+ | (ethernetframe)+ | (ethernetqframe)+ | (ctframe)+ | (ttframe)+)>
 <!ATTLIST route
 	source		CDATA	#REQUIRED
 	destination CDATA	#REQUIRED
@@ -65,6 +65,12 @@ It follows the tag <pool> which represents a set of messages that are grouped to
 <!ELEMENT ethernetframe	((canframe)*)>
 <!ATTLIST ethernetframe
 	dst			CDATA	#REQUIRED
+>
+<!ELEMENT ethernetqframe	((canframe)*)>
+<!ATTLIST ethernetqframe
+	dst			CDATA	#REQUIRED
+	vid	        CDATA   #IMPLIED
+	pcp         CDATA   #IMPLIED
 >
 <!ELEMENT rcframe		((canframe)*)>
 <!ATTLIST rcframe
@@ -86,7 +92,7 @@ It follows the tag <pool> which represents a set of messages that are grouped to
 	canId		CDATA	#REQUIRED
 >
 
-<!ELEMENT transformation		((canframe)+ | (ethernetframe)+ | (ctframe)+ | (ttframe)+)>
+<!ELEMENT transformation		((canframe)+ | (ethernetframe)+ | (ethernetqframe)+ | (ctframe)+ | (ttframe)+)>
 <!ATTLIST transformation
 	destination	CDATA				#REQUIRED
 	type		(toEthernet|toCan)	#REQUIRED
