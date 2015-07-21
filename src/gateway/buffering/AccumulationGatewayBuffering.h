@@ -71,12 +71,7 @@ class AccumulationGatewayBuffering : public cSimpleModule
     /**
      * @brief Simsignal for the pool size.
      */
-    simsignal_t poolSizeSignal;
-
-    /**
-     * @brief Simsignal for the hold up time.
-     */
-    simsignal_t totalHoldUpTimeSignal;
+    std::vector<simsignal_t> poolSizeSignals;
 
     /**
      * @brief Signals that are emitted when a pool is forwarded to the next module.
@@ -116,7 +111,7 @@ class AccumulationGatewayBuffering : public cSimpleModule
     /**
      * @brief Emits the arrival times of the messages which are forwarded to the transformation module.
      */
-    void emitArrivalTimes(cMessagePointerList* poolList);
+    void emitSignals(cMessagePointerList* poolList);
 
     /**
      * @brief Returns the id of a pool.

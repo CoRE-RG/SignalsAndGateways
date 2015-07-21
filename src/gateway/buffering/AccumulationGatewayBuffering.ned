@@ -23,13 +23,12 @@ simple AccumulationGatewayBuffering like IGatewayBuffering
     parameters:
     	xml configXML;
     	
-    	@signal[poolSizeSignal](type=unsigned long);
-    	@statistic[poolMessageSize](title="pool size"; source=poolSizeSignal; record=count,sum,min,max, "vector(last)"; interpolationmode=linear);
-    	
-    	@signal[totalHoldUpTimeSignal](type=simtime_t);
-    	@statistic[totalHoldUpTime](source=totalHoldUpTimeSignal;record=mean,min,max,vector?);
+    	@signal[pool*MessageSize](type=unsigned long);
+    	//Statistic about the poolMessage size which are forwarded to the next module
+    	@statisticTemplate[poolMessageSize](title="pool size ($name)"; record=count,sum,mean,min,max, "vector(last)"; interpolationmode=linear);
     	
     	@signal[pool*HoldUpTime](type=simtime_t);
+    	//Statistic about the time each frame within a pool was hold back.
     	@statisticTemplate[poolHoldUpTime](title="Pool-Hold-Up-Time ($name)"; record=mean,max,min,vector; interpolationmode=sample-hold);
     gates:
         input in;

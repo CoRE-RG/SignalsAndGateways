@@ -59,7 +59,6 @@ module GatewayBase
             @display("p=200,100,c,130;i=block/subqueue");
             configXML = default(defaultConfigXML);
         }
-        //modules that dispatches the FieldSequenceMessage to the right TimeTriggeredBuffer
     connections:
         for i=0..numPorts-1 {
             lowerLayerIn[i] --> router.in[i];
