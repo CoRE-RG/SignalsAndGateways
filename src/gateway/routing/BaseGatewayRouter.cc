@@ -17,9 +17,12 @@
 
 #include <algorithm>
 
+//CoRE4INET
+#include "CoRE4INET_CTFrame.h"
+//Auto-generated messages
 #include "CanDataFrame_m.h"
 #include "AVBFrame_m.h"
-#include "CoRE4INET_CTFrame.h"
+#include "EtherFrameWithQTag_m.h"
 
 using namespace std;
 using namespace FiCo4OMNeT;
@@ -33,6 +36,7 @@ const std::string BaseGatewayRouter::CANPREFIX = "can_";
 const std::string BaseGatewayRouter::AVBPREFIX = "avb_";
 const std::string BaseGatewayRouter::TTEPREFIX = "tte_";
 const std::string BaseGatewayRouter::ETHPREFIX = "eth_";
+const std::string BaseGatewayRouter::VIDPREFIX = "vid_";
 
 void BaseGatewayRouter::initialize()
 {
@@ -52,6 +56,12 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
             destinationGateIndices = getDestinationGateIndices(ctFrame->getArrivalGate()->getIndex(), TTEPREFIX + to_string(ctFrame->getCtID()));
         }else if(inet::EthernetIIFrame* ethernetFrame = dynamic_cast<inet::EthernetIIFrame*>(msg)){
             destinationGateIndices = getDestinationGateIndices(ethernetFrame->getArrivalGate()->getIndex(), ETHPREFIX + ethernetFrame->getDest().str());
+            if(EthernetIIFrameWithQTag* ethernetQFrame = dynamic_cast<EthernetIIFrameWithQTag*>(msg)){
+                if(ethernetQFrame->getVID() > 0 && ethernetQFrame->getVID() < 4096){
+                    vector<int> destinationGateIndicesWithVID = getDestinationGateIndices(ethernetQFrame->getArrivalGate()->getIndex(), ETHPREFIX + ethernetQFrame->getDest().str() + VIDPREFIX + to_string(ethernetQFrame->getVID()));
+                    destinationGateIndices.insert(destinationGateIndices.end(), destinationGateIndicesWithVID.begin(), destinationGateIndicesWithVID.end());
+                }
+            }
         }
         if (destinationGateIndices.empty()) {
             emit(droppedFramesSignal,static_cast<unsigned long>(1));
@@ -96,6 +106,10 @@ void BaseGatewayRouter::readConfigXML(){
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("dst");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
+                    int xmlVid = atoi(xmlRouteMessages[j]->getAttribute("vid"));
+                    if(xmlVid > 0 && xmlVid < 4096){
+                        messageID = messageID + VIDPREFIX + to_string(xmlVid);
+                    }
                     routing[source][destination].push_back(ETHPREFIX + messageID);
                 }
             }

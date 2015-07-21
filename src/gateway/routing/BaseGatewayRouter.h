@@ -25,6 +25,11 @@
 
 namespace SignalsAndGateways {
 
+/*
+ *
+ *
+ * @author Philipp Meyer
+ */
 class BaseGatewayRouter : public cSimpleModule
 {
     private:
@@ -32,6 +37,8 @@ class BaseGatewayRouter : public cSimpleModule
         static const std::string AVBPREFIX;
         static const std::string TTEPREFIX;
         static const std::string ETHPREFIX;
+        static const std::string VIDPREFIX;
+
     private:
         std::map<int, std::map<int, std::list<std::string> > > routing;
 
@@ -39,12 +46,14 @@ class BaseGatewayRouter : public cSimpleModule
          * @brief Simsignal for the number of dropped frames.
          */
         simsignal_t droppedFramesSignal;
+
     protected:
         /**
          * @brief Initialization of the module.
          */
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
+
     private:
         /**
          * @brief Gateway configuration using information from assigned XML file.
