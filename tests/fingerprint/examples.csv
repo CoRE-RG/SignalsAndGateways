@@ -3,3 +3,4 @@
 /examples/majorNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              5ae2-e2cb
 /examples/smallNetwork/,      		                              -f omnetpp.ini -c General -r 0,                        1s,              875f-e54d
 /examples/smallNetwork/,      		                              -f omnetpp.ini -c WithCT  -r 0,                        1s,              6912-9650
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c WithQ   -r 0,                        1s,              6938-1618
