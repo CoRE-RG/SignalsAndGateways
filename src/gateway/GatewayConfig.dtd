@@ -81,7 +81,7 @@ It follows the tag <pool> which represents a set of messages that are grouped to
 	ctId		CDATA	#REQUIRED
 >
 
-<!ELEMENT buffering				((pool)+)>
+<!ELEMENT buffering				((pool)*)>
 <!ELEMENT pool					((holdup)+)>
 <!ELEMENT holdup				((canframe)+)>
 <!ATTLIST holdup
