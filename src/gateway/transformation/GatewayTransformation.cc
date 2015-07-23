@@ -74,22 +74,28 @@ void GatewayTransformation::readConfigXML(){
             cXMLElementList xmlQFrames = xmlTransformation->getChildrenByTagName("ethernetqframe");
             for(cXMLElementList::iterator it = xmlQFrames.begin(); it != xmlQFrames.end(); ++it){
                 string xmlDst = (*it)->getAttribute("dst");
-                int xmlVid = atoi((*it)->getAttribute("vid"));
-                uint16_t vid = 0;
-                if(xmlVid < 4096){
-                    vid = static_cast<uint16_t>(xmlVid);
+                const char* xmlVid = (*it)->getAttribute("vid");
+                int vid = 0;
+                if(xmlVid){
+                    vid = atoi(xmlVid);
+                    if(vid < 1 || vid > 4096){
+                        vid = 0;
+                    }
                 }
-                int xmlPcp = atoi((*it)->getAttribute("pcp"));
-                uint8_t pcp = 0;
-                if(xmlPcp < 8){
-                    pcp = static_cast<uint8_t>(xmlPcp);
+                const char* xmlPcp = (*it)->getAttribute("pcp");
+                int pcp = 0;
+                if(xmlPcp){
+                    pcp = atoi(xmlPcp);
+                    if(pcp < 1 || pcp > 7){
+                        pcp = 0;
+                    }
                 }
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
                     QInfo qinfo;
                     qinfo.mac = xmlDst;
-                    qinfo.vid = vid;
-                    qinfo.pcp = pcp;
+                    qinfo.vid = static_cast<uint16_t>(vid);
+                    qinfo.pcp = static_cast<uint8_t>(pcp);
                     canToQEthernet[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(qinfo);
                 }
             }
