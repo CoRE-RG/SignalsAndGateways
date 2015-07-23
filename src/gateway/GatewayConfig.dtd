@@ -17,6 +17,7 @@ The configuration of the routing module starts with the tag <routing>. From this
 Under each route it’s determine which messages are forwarded. For each route only one type of message can be sent. There are the following options:
 	<canframe canId=““/>
 	<ethernetframe dst=““/>
+	<ethernetqframe dst=““ vid=““/>
 	<rcframe ctId=““/>
 	<ttframe ctId=““/>
 Transformation:
@@ -30,9 +31,15 @@ If the source is a Can network and the destination a best-effort-ethernet the un
 			<canframe canId=“ID can frame“/>
 			…
 	</ethernetframe>
+or with an IEEE802.1Q ethernet frame like this:
+	<ethernetqframe dst=“Ethernet destination address“ vid=“Vlan id (1-4096)“ pcp=“Priority (1-7)“>
+			<canframe canId=“ID can frame“/>
+			…
+	</ethernetqframe>
 RC and TT messages are initiated with the tags <rcframe ctId = ""> or <ttframe ctId = "">.
 If messages are forwarded to Can, the source ethernet frames and their address or ctId are given:
 	<ethernetframe dst=““/>
+	<ethernetqframe dst=““/>
 	<rcframe ctId=““/>
 	<ttframe ctId=““/>
 Buffering:
@@ -81,7 +88,7 @@ It follows the tag <pool> which represents a set of messages that are grouped to
 	ctId		CDATA	#REQUIRED
 >
 
-<!ELEMENT buffering				((pool)+)>
+<!ELEMENT buffering				((pool)*)>
 <!ELEMENT pool					((holdup)+)>
 <!ELEMENT holdup				((canframe)+)>
 <!ATTLIST holdup
