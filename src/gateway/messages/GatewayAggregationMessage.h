@@ -21,7 +21,7 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
         std::list<UnitMessage*> units;
         void copy(const GatewayAggregationMessage& other);
     public:
-        GatewayAggregationMessage(const char *name=NULL, int kind=0) : GatewayAggregationMessage_Base(name,kind)
+        GatewayAggregationMessage(const char *name=NULL, short kind=0) : GatewayAggregationMessage_Base(name,kind)
         {
         }
 

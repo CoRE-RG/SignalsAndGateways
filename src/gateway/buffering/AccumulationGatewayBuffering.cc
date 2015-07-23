@@ -30,8 +30,8 @@ void AccumulationGatewayBuffering::initialize()
     for (size_t i = 0; i < numPools; i++) {
         char strBufHoldUpTime[32];
         char strBufPoolSize[32];
-        snprintf(strBufHoldUpTime, 32, "pool%duHoldUpTime", i);
-        snprintf(strBufPoolSize, 32, "pool%duMessageSize", i);
+        snprintf(strBufHoldUpTime, 32, "pool%zuHoldUpTime", i);
+        snprintf(strBufPoolSize, 32, "pool%zuMessageSize", i);
 
         simsignal_t signalHoldUpTime = registerSignal(strBufHoldUpTime);
         cProperty *statisticTemplateHoldUpTime = getProperties()->get(
