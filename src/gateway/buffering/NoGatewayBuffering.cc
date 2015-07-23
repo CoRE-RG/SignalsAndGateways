@@ -21,7 +21,6 @@ Define_Module(NoGatewayBuffering);
 
 void NoGatewayBuffering::initialize()
 {
-    // TODO - Generated method body
 }
 
 void NoGatewayBuffering::handleMessage(cMessage *msg)

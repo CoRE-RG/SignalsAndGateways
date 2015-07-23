@@ -21,7 +21,6 @@ Define_Module(NoGatewayTransformation);
 
 void NoGatewayTransformation::initialize()
 {
-    // TODO - Generated method body
 }
 
 void NoGatewayTransformation::handleMessage(cMessage *msg)

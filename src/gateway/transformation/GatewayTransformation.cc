@@ -248,7 +248,8 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
 list<cMessage*> GatewayTransformation::transformEthernetFrame(EthernetIIFrame* ethernetFrame){
     list<cMessage*> transformedMsgs;
     if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(ethernetFrame)){
-        //TODO
+        //TODO: AVB Transformation
+        delete avbFrame;
     }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(ethernetFrame)){
         if(find(ctEthernetToCan.begin(), ctEthernetToCan.end(), ctFrame->getCtID()) != ctEthernetToCan.end()){
             list<CanDataFrame*> canFrames = transformEthernetToCan(ctFrame);
