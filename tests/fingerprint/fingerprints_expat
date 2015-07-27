@@ -2,5 +2,5 @@
 
 #find ../../examples/ -type f -name *.xml -exec sed -i '' '/^<!DOCTYPE/d' {} +
 find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!DOCTYPE.*$/<!--&-->/g' {} +
-./fingerprints
+./fingerprints "$@"
 find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!--<!DOCTYPE.*-->$/&/g' {} +
