@@ -102,7 +102,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg) {
         unsigned int poolID = getPoolID(poolList);
         emitSignals(poolList);
         char strBuf[32];
-        snprintf(strBuf, 32, "Pool %d", poolID);
+        snprintf(strBuf, 32, "Pool %u", poolID);
         PoolMessage* poolMsg = new PoolMessage(strBuf);
         poolMsg->setPool(*poolList);
         poolList->clear();
@@ -165,7 +165,6 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(
 }
 
 void AccumulationGatewayBuffering::emitSignals(cMessagePointerList* poolList) {
-    map<cMessagePointerList*, cMessage*>::iterator it1;
     unsigned int poolID = getPoolID(poolList);
     list<simtime_t>* arrivalTimes = poolArrivalTimes[poolList];
     list<simtime_t>::iterator it;
