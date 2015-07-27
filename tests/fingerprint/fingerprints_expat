@@ -1,6 +1,14 @@
 #!/bin/bash
 
 #find ../../examples/ -type f -name *.xml -exec sed -i '' '/^<!DOCTYPE/d' {} +
-find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!DOCTYPE.*$/<!--&-->/g' {} +
+if [ "$(uname)" == "Darwin" ]; then
+    find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!DOCTYPE.*$/<!--&-->/g' {} +
+else
+    find ../../examples/ -type f -name *.xml -exec sed -i 's/^<!DOCTYPE.*$/<!--&-->/g' {} +
+fi
 ./fingerprints "$@"
-find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!--<!DOCTYPE.*-->$/&/g' {} +
+if [ "$(uname)" == "Darwin" ]; then
+    find ../../examples/ -type f -name *.xml -exec sed -i '' 's/^<!--<!DOCTYPE.*-->$/&/g' {} +
+else
+    find ../../examples/ -type f -name *.xml -exec sed -i 's/^<!DOCTYPE.*$/<!--&-->/g' {} +
+fi
