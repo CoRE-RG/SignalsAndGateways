@@ -34,6 +34,11 @@ namespace SignalsAndGateways {
  */
 class AccumulationGatewayBuffering : public cSimpleModule
 {
+public:
+    /**
+     * @brief Destructor
+     */
+    ~AccumulationGatewayBuffering();
   protected:
     /**
      * @brief Initialization of the module.
