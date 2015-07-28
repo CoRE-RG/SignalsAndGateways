@@ -33,7 +33,7 @@ const int GatewayTransformation::CANCRCBITLENGTH = 16;
 
 void GatewayTransformation::initialize()
 {
-    readConfigXML();
+    //readConfigXML();
 }
 
 void GatewayTransformation::handleMessage(cMessage *msg)

@@ -32,7 +32,7 @@ AccumulationGatewayBuffering::~AccumulationGatewayBuffering() {
 }
 
 void AccumulationGatewayBuffering::initialize() {
-    readConfigXML();
+    //readConfigXML();
 
     size_t numPools = scheduledHoldUpTimes.size();
     for (size_t i = 0; i < numPools; i++) {

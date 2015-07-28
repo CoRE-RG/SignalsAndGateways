@@ -41,7 +41,7 @@ const std::string BaseGatewayRouter::VIDPREFIX = "vid_";
 void BaseGatewayRouter::initialize()
 {
     droppedFramesSignal = registerSignal("droppedFramesSignal");
-    readConfigXML();
+    //readConfigXML();
 }
 
 void BaseGatewayRouter::handleMessage(cMessage *msg)
