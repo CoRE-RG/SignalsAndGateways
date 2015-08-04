@@ -18,18 +18,24 @@ package signalsandgateways.gateway.buffering;
 //
 // This module buffers incoming frames and groups incoming frames corresponding to the xml configuration. 
 //
+// @see ~IGatewayBuffering
+//
+// @author Stefan Buschmann
+//
 simple AccumulationGatewayBuffering like IGatewayBuffering
 {
-    parameters:
-    	xml configXML;
-    	
+    parameters:    	
     	@signal[pool*MessageSize](type=unsigned long);
-    	//Statistic about the poolMessage size which are forwarded to the next module
-    	@statisticTemplate[poolMessageSize](title="pool size ($name)"; record=count,sum,mean,min,max, "vector(last)"; interpolationmode=linear);
-    	
     	@signal[pool*HoldUpTime](type=simtime_t);
+    	
+    	//Statistic about the poolMessage size which are forwarded to the next module
+    	@statisticTemplate[poolMessageSize](title="pool size ($name)"; record=count,sum,mean,min,max, "vector(last)"; interpolationmode=linear); 	
     	//Statistic about the time each frame within a pool was hold back.
     	@statisticTemplate[poolHoldUpTime](title="Pool-Hold-Up-Time ($name)"; record=mean,max,min,vector; interpolationmode=sample-hold);
+    	
+    	//Path of the gateway configuration xml file
+    	xml configXML;
+    	
     gates:
         input in;
         output out;

@@ -23,23 +23,38 @@ import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 //
 // Basic gateway which forwards messages from the source to the desired destination.
 //
+// @see ~IGatewayRouter, ~IGatewayTransformation, ~IGatewayBuffering
+//
+// @author Till Steinbach, Stefan Buschmann, Philipp Meyer
+//
 module GatewayBase
 {
     parameters:
         @display("i=device/hub");
+        
+        //Number of gateway ports
         int numPorts;
+        //Path of the gateway configuration xml file
         xml configXML = default(xmldoc("GatewayConfig.xml"));
+        //The path in configXML is the default path for the router, buffering and transform module
         xml defaultConfigXML = configXML;
+        //Static delay of the router module
         double routingDelay @unit(s) = default(0s);
+        //Static delay of the buffering module
         double bufferingDelay @unit(s) = default(0s);
+        //Static delay of the tranform module
         double transformDelay @unit(s) = default(0s);
+        
     gates:
         input lowerLayerIn[numPorts];
         output lowerLayerOut[numPorts];
+        
     types:
+        // Channel represents the processing delay of the router, buffering and tranform module
         channel ProcessingDelay extends ned.DelayChannel
         {
         }   
+        
     submodules:
         //module that handles the routing data
         router: <default("BaseGatewayRouter")> like IGatewayRouter {
@@ -49,16 +64,19 @@ module GatewayBase
                 in[numPorts];
                 out[numPorts];
         }
+            
         //module that performs the transformations in all directions
         transform[numPorts]: <default("NoGatewayTransformation")> like IGatewayTransformation {
             @display("p=338,100,c,130;i=block/segm");
             configXML = default(defaultConfigXML);
-        }
+        }          
+         
         //module that coordinates the preBuffer behaivior
         buffering[numPorts]: <default("NoGatewayBuffering")> like IGatewayBuffering {
             @display("p=200,100,c,130;i=block/subqueue");
             configXML = default(defaultConfigXML);
         }
+            
     connections:
         for i=0..numPorts-1 {
             lowerLayerIn[i] --> router.in[i];

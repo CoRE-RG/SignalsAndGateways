@@ -16,12 +16,19 @@
 package signalsandgateways.gateway.transformation;
 
 //
-// This module receives single frames or pool messages from the buffering module. Corresponding to the xml configuration all frames are processed and forwarded to the right destination.
+// This module receives single frames or pool messages from the buffering module. 
+// Corresponding to the xml configuration all frames are processed and forwarded to the right destination.
+//
+// @see ~IGatewayTransformation
+//
+// @author Philipp Meyer
 //
 simple GatewayTransformation like IGatewayTransformation
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in;
         output out;

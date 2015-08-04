@@ -18,10 +18,14 @@ package signalsandgateways.gateway.transformation;
 //
 // A transformation module with no functionallity besides forwarding incoming frames.
 //
+// @author Till Steinbach
+//
 simple NoGatewayTransformation like IGatewayTransformation
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in;
         output out;

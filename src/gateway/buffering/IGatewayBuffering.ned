@@ -18,10 +18,16 @@ package signalsandgateways.gateway.buffering;
 //
 // Interface for the buffering module.
 //
+// @see ~AccumulationGatewayBuffering
+//
+// @author Till Steinbach
+//
 moduleinterface IGatewayBuffering
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in;
         output out;

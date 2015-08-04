@@ -17,10 +17,12 @@ package signalsandgateways;
 
 import signalsandgateways.gateway.GatewayBase;
 import signalsandgateways.applications.ethernet.EthernetGatewayHost;
-import signalsandgateways.applications.can_flexray.CanGatewayNode;
+import signalsandgateways.applications.can.CanGatewayNode;
 
 //
 // Interconnection between bus- and network-interfaces and the gateway functionality
+//
+// @see ~CanGatewayNode, ~EthernetGatewayHost, ~GatewayBase
 //
 // @author Sebastian Mueller
 //
@@ -28,27 +30,35 @@ module BusEthernetGateway
 {
     parameters:
         @display("i=device/router");
+        
+        //Number of CAN bus ports
         int countOfCanBusses = default(1);
+        //Number of Ethernet ports
         int countOfEthernetPorts = default(1);
+        
     gates:
         //ethernet connection
         inout ethg[countOfEthernetPorts];
         //bus connection
         inout cang[countOfCanBusses];
+        
     submodules:
         //bus module
         can[countOfCanBusses]: CanGatewayNode {
             @display("p=369,100,c,130");
         }
+        
         //ethernet module
         tte[countOfEthernetPorts]: EthernetGatewayHost {
             @display("p=74,100,c,130");
         }
+        
         //gateway module
         gateway: GatewayBase {
             @display("p=224,100");
             numPorts = countOfCanBusses + countOfEthernetPorts;
         }
+        
     connections:
         for i=0..countOfCanBusses-1 {
             can[i].upperLayerOut --> gateway.lowerLayerIn++;

@@ -13,20 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-namespace SignalsAndGateways;
+#include "CanSourceGatewayApp.h"
+#include "CanDataFrame_m.h"
 
-//
-// This packet holds all Unit Messages which are going to be sent within an ethernet frame.
-// 
-// @see ~UnitMessage
-//
-// @author Philipp Meyer
-//
-packet GatewayAggregationMessage {
-    @customize(true);
-    uint8_t units;
-    uint8_t sequence_number;
-    uint8_t fragments;
-    uint8_t fragment_number;
-    byteLength = 4;
+using namespace FiCo4OMNeT;
+
+namespace SignalsAndGateways {
+
+Define_Module(CanSourceGatewayApp);
+
+void CanSourceGatewayApp::handleMessage(cMessage *msg)
+{
+    if(msg->arrivedOn("in")){
+        //quick & dirty for new statistics
+        CanDataFrame* df = dynamic_cast<CanDataFrame*> (msg);
+        df->setTimestamp(simTime());
+        df->setMessageSource(SOURCE_GW);
+        send(df, "out");
+    } else {
+        delete msg;
+    }
+
+}
+
 }

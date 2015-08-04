@@ -21,10 +21,11 @@ typedef std::list<cMessage*> cMessagePointerList;
 
 class noncobject cMessagePointerList;
 
-
 //
 // This frame is transmitted from the buffering module to the transformation module.
 // In this packet all CAN frames which should be transfered within a single Ethernet frame.
+//
+// @author Stefan Buschmann
 //
 packet PoolMessage {
     cMessagePointerList pool;

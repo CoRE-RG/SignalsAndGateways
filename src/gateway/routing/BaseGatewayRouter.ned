@@ -18,14 +18,21 @@ package signalsandgateways.gateway.routing;
 //
 // This module decides to which destinations incoming frames will be forwarded.
 //
+// @see ~IGatewayRouter
+//
+// @author Philipp Meyer
+//
 simple BaseGatewayRouter like IGatewayRouter
 {
-    parameters:
-        xml configXML;
-        
+    parameters:    
         @signal[droppedFramesSignal](type=unsigned long);
+        
         //Statistic about the number of dropped frames.
     	@statistic[dropped](title="dropped frames"; source=droppedFramesSignal; record=count; interpolationmode=none);
+    	
+    	//Path of the gateway configuration xml file
+    	xml configXML;
+    	
     gates:
         input in[];
         output out[];

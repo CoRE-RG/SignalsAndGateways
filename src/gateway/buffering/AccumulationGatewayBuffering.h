@@ -16,13 +16,17 @@
 #ifndef __SIGNALSANDGATEWAYS_ACCUMULATIONGATEWAYBUFFERING_H_
 #define __SIGNALSANDGATEWAYS_ACCUMULATIONGATEWAYBUFFERING_H_
 
-#include <omnetpp.h>
+//Std
 #include <string>
 #include <map>
-#include "CanDataFrame_m.h"
+//OMNeT++
+#include <omnetpp.h>
+//Inet auto-generated messages
 #include "EtherFrame_m.h"
+//FiCo4OMNeT auto-generated messages
+#include "CanDataFrame_m.h"
+//SignalsAndGateways auto-generated messages
 #include "PoolMessage_m.h"
-
 
 namespace SignalsAndGateways {
 
@@ -31,6 +35,7 @@ namespace SignalsAndGateways {
  *
  * According to the XML files incoming can frames are grouped. Every frame has a specific hold up time and as soon as the timer of a frame reaches zero the whole group is forwarded to the transformation module.
  *
+ * @author Stefan Buschmann
  */
 class AccumulationGatewayBuffering : public cSimpleModule
 {
@@ -39,11 +44,13 @@ public:
      * @brief Destructor
      */
     ~AccumulationGatewayBuffering();
-  protected:
+
+protected:
     /**
      * @brief Initialization of the module.
      */
     virtual void initialize();
+
     /**
      * @brief Self messages represent the end of a pool-hold-up time. Messages from the routing module are processed.
      *
@@ -51,23 +58,27 @@ public:
      */
     virtual void handleMessage(cMessage *msg);
 
-  private:
+private:
     /**
      * @brief This map holds pointer to the lists which contain all messages which are currently in the pool. The canIDs serve as the keys.
      */
     std::map<unsigned int,cMessagePointerList*> poolMap;
+
     /**
      * @brief This map holds the maximum hold up time for the given canID.
      */
     std::map<unsigned int,simtime_t> holdUpTimes;
+
     /**
      * @brief This map holds the hold up time events for every pool.
      */
     std::map<cMessagePointerList*,cMessage*> scheduledHoldUpTimes;
+
     /**
      * @brief This maps holds the scheduled times for all pools of the gateway.
      */
     std::map<cMessage*,simtime_t> scheduledTimes;
+
     /**
      * @brief This map holds the arrival times of the messages which are currently buffered.
      */

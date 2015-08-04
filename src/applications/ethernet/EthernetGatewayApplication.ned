@@ -15,19 +15,25 @@
 
 package signalsandgateways.applications.ethernet;
 
-import  core4inet.applications.base.IApplication;
+import signalsandgateways.applications.ethernet.IEthernetGatewayApplication;
+
+import core4inet.applications.AS6802.CTApplicationBase;
 
 //
-// Interface for ethernet node in the gateway.
+// Represents the application base for the Ethernet node in the gateway.
 //
-// @see ~IApplication
+// @see ~CTApplicationBase, ~IEthernetGatewayApplication
 //
 // @author Sebastian Mueller
 //
-moduleinterface IEthernetGatewayApplication extends IApplication
+simple EthernetGatewayApplication extends CTApplicationBase like IEthernetGatewayApplication
 {
+    @class(EthernetGatewayApplication);
+    
     gates:
-        //Connection to the gateway functionality
+        //Connection to the gateway    
         output upperLayerOut @labels(EtherFrame);
-    	input upperLayerIn @labels(EtherFrame);   	
+        input upperLayerIn @labels(EtherFrame);
+        //Input gate for the incoming best-effort messages
+        input in @directIn @labels(EtherFrame);
 }

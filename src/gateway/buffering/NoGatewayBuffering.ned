@@ -18,10 +18,16 @@ package signalsandgateways.gateway.buffering;
 //
 // A buffering module with no functionallity besides forwarding incoming frames to the next module.
 //
+// @see ~IGatewayBuffering
+//
+// @author Till Steinbach
+//
 simple NoGatewayBuffering like IGatewayBuffering
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in;
         output out;

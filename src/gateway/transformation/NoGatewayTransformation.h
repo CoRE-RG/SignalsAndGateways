@@ -16,10 +16,16 @@
 #ifndef __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
 #define __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
 
+//OMNeT++
 #include <omnetpp.h>
 
 namespace SignalsAndGateways {
 
+/*
+ * @brief A transformation module with no functionality besides forwarding incoming frames.
+ *
+ * @author Till Steinbach
+ */
 class NoGatewayTransformation : public cSimpleModule
 {
   protected:
@@ -27,6 +33,7 @@ class NoGatewayTransformation : public cSimpleModule
      * @brief Initialization of the module.
      */
     virtual void initialize();
+
     virtual void handleMessage(cMessage *msg);
 };
 
