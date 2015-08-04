@@ -62,6 +62,8 @@ void EthernetGatewayApplication::handleMessage(cMessage *msg) {
                 sendDirect(ethernetFrame->dup(), (*buf)->gate("in"));
             }
             delete ethernetFrame;
+        }else{
+            delete msg;
         }
     }else{
         delete msg;
