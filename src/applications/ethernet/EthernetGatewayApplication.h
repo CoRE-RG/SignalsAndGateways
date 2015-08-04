@@ -50,7 +50,7 @@ private:
 
 public:
     /**
-     * @biref Constructor
+     * @brief Constructor
      */
     EthernetGatewayApplication();
 
