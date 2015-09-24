@@ -28,7 +28,6 @@ void CanSourceGatewayApp::handleMessage(cMessage *msg)
         //quick & dirty for new statistics
         CanDataFrame* df = dynamic_cast<CanDataFrame*> (msg);
         df->setTimestamp(simTime());
-        df->setMessageSource(SOURCE_GW);
         send(df, "out");
     } else {
         delete msg;
