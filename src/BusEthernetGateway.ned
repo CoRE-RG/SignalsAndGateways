@@ -29,7 +29,7 @@ import signalsandgateways.applications.can.CanGatewayNode;
 module BusEthernetGateway
 {
     parameters:
-        @display("i=device/router");
+        @display("i=block/layer");
         
         //Number of CAN bus ports
         int countOfCanBusses = default(1);
