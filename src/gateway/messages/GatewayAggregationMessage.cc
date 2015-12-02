@@ -46,6 +46,10 @@ UnitMessage* GatewayAggregationMessage::decapUnit(){
     return unit;
 }
 
+list<UnitMessage*> GatewayAggregationMessage::getEncapUnits(){
+    return units;
+}
+
 size_t GatewayAggregationMessage::getUnitCnt(){
     return units.size();
 }

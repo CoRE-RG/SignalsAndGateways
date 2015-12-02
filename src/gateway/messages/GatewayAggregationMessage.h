@@ -89,6 +89,13 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
         virtual UnitMessage* decapUnit();
 
         /**
+         * @brief get encapsulated units
+         *
+         * @return list of UnitMessage pointers
+         */
+        virtual std::list<UnitMessage*> getEncapUnits();
+
+        /**
          * @brief Get number of encapsulated UnitMessages
          *
          * @return number of encapsulated UnitMessages
