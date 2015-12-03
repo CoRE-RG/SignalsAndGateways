@@ -93,7 +93,7 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
          *
          * @return list of UnitMessage pointers
          */
-        virtual std::list<UnitMessage*> getEncapUnits();
+        virtual std::list<UnitMessage*> getEncapUnits() const;
 
         /**
          * @brief Get number of encapsulated UnitMessages
