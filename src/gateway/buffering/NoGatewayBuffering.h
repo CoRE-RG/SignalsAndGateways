@@ -21,6 +21,8 @@
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /**
  * @brief This buffering module forwards incoming frames to the transformation module.
  *

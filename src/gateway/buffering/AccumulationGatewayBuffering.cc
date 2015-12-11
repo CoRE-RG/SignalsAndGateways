@@ -44,14 +44,14 @@ void AccumulationGatewayBuffering::initialize() {
         simsignal_t signalHoldUpTime = registerSignal(strBufHoldUpTime);
         cProperty *statisticTemplateHoldUpTime = getProperties()->get(
                 "statisticTemplate", "poolHoldUpTime");
-        ev.addResultRecorders(this, signalHoldUpTime, strBufHoldUpTime,
+        getEnvir()->addResultRecorders(this, signalHoldUpTime, strBufHoldUpTime,
                 statisticTemplateHoldUpTime);
         poolHoldUpTimeSignals.push_back(signalHoldUpTime);
 
         simsignal_t signalPoolSize = registerSignal(strBufPoolSize);
         cProperty *statisticTemplatePoolSize = getProperties()->get(
                 "statisticTemplate", "poolMessageSize");
-        ev.addResultRecorders(this, signalPoolSize, strBufPoolSize,
+        getEnvir()->addResultRecorders(this, signalPoolSize, strBufPoolSize,
                 statisticTemplatePoolSize);
         poolSizeSignals.push_back(signalPoolSize);
     }
@@ -78,7 +78,7 @@ void AccumulationGatewayBuffering::readConfigXML() {
                             arrivalTimes));
             cXMLElementList xmlHoldUpTimes = xmlPools[i]->getChildren();
             for (size_t j = 0; j < xmlHoldUpTimes.size(); j++) {
-                simtime_t holdUpTime = STR_SIMTIME(
+                simtime_t holdUpTime = SimTime::parse(
                         xmlHoldUpTimes[j]->getAttribute("time"));
                 cXMLElementList xmlPoolMessages =
                         xmlHoldUpTimes[j]->getChildren();

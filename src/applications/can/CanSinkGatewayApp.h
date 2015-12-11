@@ -23,6 +23,8 @@
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /**
  * @brief Source-Application for the CAN-Node
  *

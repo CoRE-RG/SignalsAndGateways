@@ -26,6 +26,8 @@
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /*
  * @brief This module decides to which destinations incoming frames will be forwarded.
  *

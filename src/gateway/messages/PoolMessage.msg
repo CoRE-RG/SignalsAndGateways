@@ -16,7 +16,7 @@
 namespace SignalsAndGateways;
 
 cplusplus {{
-typedef std::list<cMessage*> cMessagePointerList;
+typedef std::list<omnetpp::cMessage*> cMessagePointerList;
 }}
 
 class noncobject cMessagePointerList;
