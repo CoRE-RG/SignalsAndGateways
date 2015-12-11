@@ -18,10 +18,16 @@ package signalsandgateways.gateway.routing;
 //
 // Interface for the routing module.
 //
+// @see ~BaseGatewayRouter
+//
+// @author Till Steinbach
+//
 moduleinterface IGatewayRouter
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in[];
         output out[];

@@ -13,20 +13,16 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-namespace SignalsAndGateways;
+package signalsandgateways.applications.can;
 
 //
-// This packet holds all Unit Messages which are going to be sent within an ethernet frame.
-// 
-// @see ~UnitMessage
+// Interface for gateway applications.
 //
-// @author Philipp Meyer
+// @author Sebastian Mueller
 //
-packet GatewayAggregationMessage {
-    @customize(true);
-    uint8_t units;
-    uint8_t sequence_number;
-    uint8_t fragments;
-    uint8_t fragment_number;
-    byteLength = 4;
+moduleinterface IBusGatewayApplication
+{
+    gates:
+        //Connection to the gateway functionality
+    	inout busInterface;
 }

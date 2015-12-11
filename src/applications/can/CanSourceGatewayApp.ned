@@ -13,20 +13,23 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-namespace SignalsAndGateways;
+package signalsandgateways.applications.can;
+
+import fico4omnet.applications.can.source.CanTrafficSourceAppBase;
 
 //
-// This packet holds all Unit Messages which are going to be sent within an ethernet frame.
-// 
-// @see ~UnitMessage
+// This module receives CanDataFrames from the gateway and forwards it to the CAN-bus.
 //
-// @author Philipp Meyer
+// @see ~CanTrafficSourceAppBase
 //
-packet GatewayAggregationMessage {
-    @customize(true);
-    uint8_t units;
-    uint8_t sequence_number;
-    uint8_t fragments;
-    uint8_t fragment_number;
-    byteLength = 4;
+// @author Sebastian Mueller
+//
+simple CanSourceGatewayApp extends CanTrafficSourceAppBase
+{
+    parameters:
+        @class(CanSourceGatewayApp);
+        
+    gates:
+    	//Connection to the gateway   
+        input in @labels(DataFrame);
 }

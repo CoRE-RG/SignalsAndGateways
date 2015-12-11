@@ -74,22 +74,28 @@ void GatewayTransformation::readConfigXML(){
             cXMLElementList xmlQFrames = xmlTransformation->getChildrenByTagName("ethernetqframe");
             for(cXMLElementList::iterator it = xmlQFrames.begin(); it != xmlQFrames.end(); ++it){
                 string xmlDst = (*it)->getAttribute("dst");
-                int xmlVid = atoi((*it)->getAttribute("vid"));
-                uint16_t vid = 0;
-                if(xmlVid < 4096){
-                    vid = static_cast<uint16_t>(xmlVid);
+                const char* xmlVid = (*it)->getAttribute("vid");
+                int vid = 0;
+                if(xmlVid){
+                    vid = atoi(xmlVid);
+                    if(vid < 1 || vid > 4096){
+                        vid = 0;
+                    }
                 }
-                int xmlPcp = atoi((*it)->getAttribute("pcp"));
-                uint8_t pcp = 0;
-                if(xmlPcp < 8){
-                    pcp = static_cast<uint8_t>(xmlPcp);
+                const char* xmlPcp = (*it)->getAttribute("pcp");
+                int pcp = 0;
+                if(xmlPcp){
+                    pcp = atoi(xmlPcp);
+                    if(pcp < 1 || pcp > 7){
+                        pcp = 0;
+                    }
                 }
                 cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
                 for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
                     QInfo qinfo;
                     qinfo.mac = xmlDst;
-                    qinfo.vid = vid;
-                    qinfo.pcp = pcp;
+                    qinfo.vid = static_cast<uint16_t>(vid);
+                    qinfo.pcp = static_cast<uint8_t>(pcp);
                     canToQEthernet[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(qinfo);
                 }
             }
@@ -141,7 +147,7 @@ void GatewayTransformation::readConfigXML(){
 
 list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFrame* canFrame){
     list<cMessage*> transformedMsgs;
-    std::string messageName = createMessageName("singleFrame");
+    string messageName = createMessageName("singleFrame");
     if(find(canToCan.begin(), canToCan.end(), canFrame->getCanID()) != canToCan.end()){
         transformedMsgs.push_back(canFrame->dup());
     }
@@ -149,7 +155,7 @@ list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFram
         for(list<string>::iterator it = canToBEEthernet[canFrame->getCanID()].begin(); it != canToBEEthernet[canFrame->getCanID()].end(); ++it){
             EthernetIIFrame* ethernetFrame = transformCanToBEEthernet(canFrame);
             ethernetFrame->setDest(MACAddress((*it).c_str()));
-            ethernetFrame->setName(messageName.data());
+            ethernetFrame->setName(messageName.c_str());
             transformedMsgs.push_back(ethernetFrame);
         }
     }else if(canToQEthernet.find(canFrame->getCanID()) != canToQEthernet.end()){
@@ -158,21 +164,21 @@ list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFram
             qFrame->setDest(MACAddress((*it).mac.c_str()));
             qFrame->setVID((*it).vid);
             qFrame->setPcp((*it).pcp);
-            qFrame->setName(messageName.data());
+            qFrame->setName(messageName.c_str());
             transformedMsgs.push_back(qFrame);
         }
     }else if(canToRCEthernet.find(canFrame->getCanID()) != canToRCEthernet.end()){
         for(list<uint16_t>::iterator it = canToRCEthernet[canFrame->getCanID()].begin(); it != canToRCEthernet[canFrame->getCanID()].end(); ++it){
             RCFrame* rcframe = transformCanToRCEthernet(canFrame);
             rcframe->setCtID(*it);
-            rcframe->setName(messageName.data());
+            rcframe->setName(messageName.c_str());
             transformedMsgs.push_back(rcframe);
         }
     }else if(canToTTEthernet.find(canFrame->getCanID()) != canToTTEthernet.end()){
         for(list<uint16_t>::iterator it = canToTTEthernet[canFrame->getCanID()].begin(); it != canToTTEthernet[canFrame->getCanID()].end(); ++it){
             TTFrame* ttframe = transformCanToTTEthernet(canFrame);
             ttframe->setCtID(*it);
-            ttframe->setName(messageName.data());
+            ttframe->setName(messageName.c_str());
             transformedMsgs.push_back(ttframe);
         }
     }
@@ -248,7 +254,8 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
 list<cMessage*> GatewayTransformation::transformEthernetFrame(EthernetIIFrame* ethernetFrame){
     list<cMessage*> transformedMsgs;
     if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(ethernetFrame)){
-        //TODO
+        //TODO: AVB Transformation
+        delete avbFrame;
     }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(ethernetFrame)){
         if(find(ctEthernetToCan.begin(), ctEthernetToCan.end(), ctFrame->getCtID()) != ctEthernetToCan.end()){
             list<CanDataFrame*> canFrames = transformEthernetToCan(ctFrame);
@@ -408,8 +415,8 @@ GatewayAggregationMessage* GatewayTransformation::generateGatewayAggregationMess
     return gatewayAggregationMessage;
 }
 
-std::string GatewayTransformation::createMessageName(const char* additionalInformation){
-    std::string str;
+string GatewayTransformation::createMessageName(const char* additionalInformation){
+    string str;
     str.append(this->getParentModule()->getParentModule()->getName());
     str.append(" - ");
     str.append(additionalInformation);

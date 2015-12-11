@@ -15,7 +15,8 @@
 
 package signalsandgateways.applications.ethernet;
 
-import signalsandgateways.applications.ethernet.AS6802.TTEGatewayApplication;
+import signalsandgateways.applications.ethernet.EthernetGatewayApplication;
+
 import core4inet.nodes.ethernet.avb_AS6802.TTEAVBEtherHost;
 import core4inet.incoming.AS6802.TTIncoming;
 import core4inet.buffer.AS6802.TTQueueBuffer;
@@ -25,39 +26,50 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 //
 // Represents the ethernet node in the ethernet backbone network with connection to the gateway.
 //
+// @see ~TTEAVBEtherHost, ~EthernetGatewayApplication
+//
 // @author Sebastian Mueller
+//
 module EthernetGatewayHost extends TTEAVBEtherHost
 {
     parameters:
+        //@display("bgb=688,409");
+        
         int numberOfTT_Vlinks = default(0);
         int numberOfRC_Vlinks = default(0);
-        //@display("bgb=688,409");
+        
     gates:
         output upperLayerOut;
         input upperLayerIn;
+        
     submodules:
         //Application for the ethernet node in the gateway
-        gatewayApp: TTEGatewayApplication {
+        gatewayApp: EthernetGatewayApplication {
             @display("p=282,37");
         }
+        
         //Vector of output buffers for timetriggered traffic(TT)
         TTvlinks[numberOfTT_Vlinks]: TTQueueBuffer {
             @display("p=561,37,r,70");
         }
+        
         //Vector of input buffers for timetriggered traffic(TT)
         TTvlinks_ctc[numberOfTT_Vlinks]: TTIncoming {
             @display("p=561,154,r,70");
         }
+        
         //Vector of output buffers for rate constrained traffic(RC)
         RCvlinks[numberOfRC_Vlinks]: RCQueueBuffer {
             parameters:
                 @display("p=561,232,r,70");
         }
+        
         //Vector of input buffers for rate constrained traffic(RC)
         RCvlinks_ctc[numberOfRC_Vlinks]: RCIncoming {
             parameters:
                 @display("p=561,349,r,70");
         }
+        
     connections:
         gatewayApp.upperLayerOut --> upperLayerOut;
         gatewayApp.upperLayerIn <-- upperLayerIn;

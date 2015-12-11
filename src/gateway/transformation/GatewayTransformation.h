@@ -16,12 +16,12 @@
 #ifndef __SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
 #define __SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
 
-//std
+//Std
 #include <string>
 #include <map>
 #include <list>
 #include <vector>
-//OMNeTPP
+//OMNeT++
 #include <omnetpp.h>
 //CoRE4INET
 #include "CoRE4INET_CTFrame.h"
@@ -40,7 +40,9 @@
 namespace SignalsAndGateways {
 
 /*
+ * @brief This module receives single frames or pool messages from the buffering module.
  *
+ * Corresponding to the xml configuration all frames are processed and forwarded to the right destination.
  *
  * @author Philipp Meyer
  */
@@ -198,9 +200,13 @@ class GatewayTransformation : public cSimpleModule
         GatewayAggregationMessage* generateGatewayAggregationMessage(std::list<UnitMessage*> units);
 
         /*
+         * @brief Create a message name
          *
+         * @param additionalInformation string with additional message informations
+         *
+         * @return message name string
          */
-        std::string createMessageName(const char* poolMessageName);
+        std::string createMessageName(const char* additionalInformation);
 };
 
 } //namespace

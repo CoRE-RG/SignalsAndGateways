@@ -18,6 +18,8 @@ namespace SignalsAndGateways;
 //
 // This packet holds the original CAN frame.
 //
+// @author Philipp Meyer
+//
 packet UnitMessage {
     uint32_t type;
     uint32_t timestamp;

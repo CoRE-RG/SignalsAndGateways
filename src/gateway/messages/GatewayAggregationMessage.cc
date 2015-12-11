@@ -19,6 +19,8 @@ using namespace std;
 
 namespace SignalsAndGateways {
 
+Register_Class(GatewayAggregationMessage);
+
 void GatewayAggregationMessage::copy(const GatewayAggregationMessage& other){
     for(list<UnitMessage*>::const_iterator it = other.units.begin(); it != other.units.end(); ++it){
         UnitMessage* unit = (*it)->dup();
@@ -42,6 +44,10 @@ UnitMessage* GatewayAggregationMessage::decapUnit(){
         drop(unit);
     }
     return unit;
+}
+
+list<UnitMessage*> GatewayAggregationMessage::getEncapUnits() const{
+    return units;
 }
 
 size_t GatewayAggregationMessage::getUnitCnt(){

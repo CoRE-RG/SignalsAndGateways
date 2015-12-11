@@ -18,10 +18,16 @@ package signalsandgateways.gateway.transformation;
 //
 // Interface for the transformation module.
 //
+// @see ~GatewayTransformation
+//
+// @author Till Steinbach
+//
 moduleinterface IGatewayTransformation
 {
     parameters:
+        //Path of the gateway configuration xml file
         xml configXML;
+        
     gates:
         input in;
         output out;

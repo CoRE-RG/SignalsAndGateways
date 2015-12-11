@@ -106,9 +106,12 @@ void BaseGatewayRouter::readConfigXML(){
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("dst");
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
-                    int xmlVid = atoi(xmlRouteMessages[j]->getAttribute("vid"));
-                    if(xmlVid > 0 && xmlVid < 4096){
-                        messageID = messageID + VIDPREFIX + to_string(xmlVid);
+                    const char* xmlVid = xmlRouteMessages[j]->getAttribute("vid");
+                    if(xmlVid){
+                    int vid = atoi(xmlVid);
+                        if(vid > 0 && vid < 4096){
+                            messageID = messageID + VIDPREFIX + to_string(vid);
+                        }
                     }
                     routing[source][destination].push_back(ETHPREFIX + messageID);
                 }

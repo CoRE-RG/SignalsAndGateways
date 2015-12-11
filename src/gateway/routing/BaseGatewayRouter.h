@@ -16,27 +16,47 @@
 #ifndef __SIGNALSANDGATEWAYS_BASEGATEWAYROUTER_H_
 #define __SIGNALSANDGATEWAYS_BASEGATEWAYROUTER_H_
 
-#include <omnetpp.h>
-
+//Std
 #include <string>
 #include <map>
 #include <list>
 #include <vector>
+//OMNeT++
+#include <omnetpp.h>
 
 namespace SignalsAndGateways {
 
 /*
- *
+ * @brief This module decides to which destinations incoming frames will be forwarded.
  *
  * @author Philipp Meyer
  */
 class BaseGatewayRouter : public cSimpleModule
 {
     private:
+        /**
+         * @brief CAN traffic identification prefix
+         */
         static const std::string CANPREFIX;
+
+        /**
+         * @brief AVB traffic identification prefix
+         */
         static const std::string AVBPREFIX;
+
+        /**
+         * @brief TTE traffic identification prefix
+         */
         static const std::string TTEPREFIX;
+
+        /**
+         * @brief Ethernet best effort traffic identification prefix
+         */
         static const std::string ETHPREFIX;
+
+        /**
+         * @brief IEEE802.1Q traffic identification prefix
+         */
         static const std::string VIDPREFIX;
 
     private:
@@ -52,6 +72,7 @@ class BaseGatewayRouter : public cSimpleModule
          * @brief Initialization of the module.
          */
         virtual void initialize();
+
         virtual void handleMessage(cMessage *msg);
 
     private:

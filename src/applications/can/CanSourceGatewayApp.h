@@ -13,32 +13,36 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
-#define __SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
+#ifndef __SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
+#define __SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
 
 //OMNeT++
 #include <omnetpp.h>
+//FiCo4OMNeT
+#include "FiCo4OMNeT_CanTrafficSourceAppBase.h"
 
 namespace SignalsAndGateways {
 
 /**
- * @brief This buffering module forwards incoming frames to the transformation module.
+ * @brief Source-Application for the CAN-Node
  *
- * This module doesn't have any buffering features. Its only functionality is the forwarding of an incoming frame to the next module.
+ * This module receives CanDataFrames from the gateway and forwards it to the CAN-bus.
  *
- * @author Till Steinbach
+ * @author Sebastian Mueller
  */
-class NoGatewayBuffering : public cSimpleModule
+class CanSourceGatewayApp : public FiCo4OMNeT::CanTrafficSourceAppBase
 {
-protected:
+  protected:
     /**
-     * @brief Initialization of the module.
+     * @brief Handles incoming TransportMessages
+     *
+     * If the incoming message is a CanDataFrame, then the CanDataFrame is forwarded to the CAN-bus.
+     *
+     * @param msg The incoming message
      */
-    virtual void initialize();
-
     virtual void handleMessage(cMessage *msg);
 };
 
-} //namespace
+}
 
 #endif
