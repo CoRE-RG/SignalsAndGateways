@@ -149,7 +149,7 @@ class SmokeTestCase(SimulationTestCase):
         self.args = args
 
     def runTest(self):
-        global core4inetRoot, opp_run, nedPath, cpuTimeLimit
+        global signalsAndGatewayRoot, opp_run, nedPath, cpuTimeLimit
 
         # add paths of other libraries
         os.environ['LD_LIBRARY_PATH'] = inetRoot + os.sep + "src" + ":" + core4inetRoot + os.sep + "src" + ":" +fico4omnetRoot + os.sep + "src"
