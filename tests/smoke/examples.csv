@@ -1,0 +1,5 @@
+# workingdir,                                                     args
+/examples/majorNetwork/,      		                              -f omnetpp.ini -c General -r 0
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c General -r 0
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c WithCT  -r 0
+/examples/smallNetwork/,      		                              -f omnetpp.ini -c WithQ   -r 0
