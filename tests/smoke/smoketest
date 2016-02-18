@@ -34,7 +34,7 @@ fico4omnetRoot = os.path.abspath("../../../FiCo4OMNeT")
 inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
 nedPath = inetRoot + os.sep + "src" + sep + core4inetRoot + os.sep + "src" + sep + fico4omnetRoot + os.sep + "src" + sep + signalsAndGatewayRoot + os.sep + "src"+ sep + signalsAndGatewayRoot + os.sep + "examples" + sep + signalsAndGatewayRoot + os.sep + "tests" + os.sep + "smoke"
-core4inetLib = core4inetRoot + os.sep + "src" + os.sep + "CoRE4INET"
+core4inetLib = core4inetRoot + "/src/CoRE4INET"
 inetLib = inetRoot + "/src/INET"
 signalsAndGatewayLib = signalsAndGatewayRoot + "/src/SignalsAndGateways"
 fico4omnetLib = fico4omnetRoot + "/src/FiCo4OMNeT"
