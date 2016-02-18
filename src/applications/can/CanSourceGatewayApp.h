@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
-#define __SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
+#ifndef SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
+#define SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
 
 //OMNeT++
 #include <omnetpp.h>

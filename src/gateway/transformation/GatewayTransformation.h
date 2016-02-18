@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
-#define __SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
+#ifndef SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
+#define SIGNALSANDGATEWAYS_GATEWAYTRANSFORMATION_H_
 
 //Std
 #include <string>

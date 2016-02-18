@@ -173,7 +173,7 @@ void AccumulationGatewayBuffering::emitSignals(cMessagePointerList* poolList) {
         emit(poolHoldUpTimeSignals[poolID], holdUpTime);
     }
     arrivalTimes->clear();
-    emit(poolSizeSignals[poolID], static_cast<unsigned long> (poolList->size()));
+    emit(poolSizeSignals[poolID], poolList->size());
 }
 
 unsigned int AccumulationGatewayBuffering::getPoolID(
