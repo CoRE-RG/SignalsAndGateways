@@ -191,4 +191,3 @@ unsigned int AccumulationGatewayBuffering::getPoolID(
 }
 
 } //namespace
-

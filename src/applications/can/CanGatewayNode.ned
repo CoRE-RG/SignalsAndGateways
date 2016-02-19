@@ -59,6 +59,7 @@ module CanGatewayNode
         
         bufferOut: CanOutputBuffer {
             @display("p=98,102");
+            MOB = false;
             gates:
                 in[1];
         }

@@ -13,8 +13,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
-#define __SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
+#ifndef SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
+#define SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
 
 //OMNeT++
 #include <omnetpp.h>
