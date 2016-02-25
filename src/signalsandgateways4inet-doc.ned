@@ -28,9 +28,8 @@
 //
 // <h2>Requirements</h2>
 // - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.6)
-// - <a href="http://inet.omnetpp.org/" target="_top">INET-Framework</a> (minimum version 3.0)
-// - <a href="http://core4inet.realmv6.org/trac/" atrget="_top">CoRE4INET</a> 
-// - <a href="http://core4inet.realmv6.org/trac/" atrget="_top">FiCo4OMNeT</a> 
+// - <a href="http://core4inet.core-rg.de/" atrget="_top">CoRE4INET</a> 
+// - <a href="http://core4inet.core-rg.de/" atrget="_top">FiCo4OMNeT</a> 
 //
 // <h2>Introductory material</h2>
 //  - For help with the installation see the <tt><a href="install.html">INSTALL</a></tt> page.
