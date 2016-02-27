@@ -17,3 +17,5 @@
 *.so
 *.dylib
 *.dll
+
+src/Makefile
