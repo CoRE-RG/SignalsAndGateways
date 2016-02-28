@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "NoGatewayBuffering.h"
+#include "./NoGatewayBuffering.h"
 
 namespace SignalsAndGateways {
 

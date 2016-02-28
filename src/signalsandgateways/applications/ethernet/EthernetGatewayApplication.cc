@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "EthernetGatewayApplication.h"
+#include "./EthernetGatewayApplication.h"
 #include "CoRE4INET_Incoming.h"
 #include "AVBFrame_m.h"
 #include "CoRE4INET_CTFrame.h"

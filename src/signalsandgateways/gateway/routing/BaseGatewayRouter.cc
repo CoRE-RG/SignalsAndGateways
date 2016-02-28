@@ -13,14 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "BaseGatewayRouter.h"
+#include "./BaseGatewayRouter.h"
 
 #include <algorithm>
 
 //CoRE4INET
 #include "CoRE4INET_CTFrame.h"
+
 //Auto-generated messages
-#include "CanDataFrame_m.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 #include "AVBFrame_m.h"
 #include "EtherFrameWithQTag_m.h"
 

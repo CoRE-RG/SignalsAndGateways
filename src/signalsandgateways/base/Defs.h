@@ -13,13 +13,13 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#ifndef CORE4INET_DEFS_H
-#define CORE4INET_DEFS_H
+#ifndef SIGNALSANDGATEWAYS_DEFS_H
+#define SIGNALSANDGATEWAYS_DEFS_H
 
 //OMNeT++
 #include "omnetpp.h"
 
-#include "Dependencies.h"
+#include "./Dependencies.h"
 
 /**
  * Definition of SignalsAndGateways version

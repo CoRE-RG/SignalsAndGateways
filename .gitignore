@@ -19,3 +19,5 @@
 *.dll
 
 src/Makefile
+
+src/signalsandgateways/features.h

@@ -16,8 +16,8 @@
 #ifndef SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
 #define SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
 
-//OMNeT++
-#include <omnetpp.h>
+//SignalsAndGateways
+#include "signalsandgateways/base/Defs.h"
 
 namespace SignalsAndGateways {
 

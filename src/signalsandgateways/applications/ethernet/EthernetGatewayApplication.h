@@ -16,10 +16,10 @@
 #ifndef TTEAPPLICATIONBASE_H_
 #define TTEAPPLICATIONBASE_H_
 
-//OMNeT++
-#include <omnetpp.h>
+//SignalsAndGateways
+#include "signalsandgateways/base/Defs.h"
 //CoRE4INET
-#include "CoRE4INET_CTApplicationBase.h"
+#include "core4inet/applications/AS6802/CoRE4INET_CTApplicationBase.h"
 
 namespace SignalsAndGateways {
 

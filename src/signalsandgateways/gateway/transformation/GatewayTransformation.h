@@ -21,8 +21,10 @@
 #include <map>
 #include <list>
 #include <vector>
-//OMNeT++
-#include <omnetpp.h>
+
+//SignalsAndGateways
+#include "signalsandgateways/base/Defs.h"
+
 //CoRE4INET
 #include "CoRE4INET_CTFrame.h"
 //Auto-generated messages
@@ -31,11 +33,11 @@
 #include "RCFrame_m.h"
 #include "TTFrame_m.h"
 //FiCo4OMNeT auto-generated messages
-#include "CanDataFrame_m.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 //SignalsAndGateways auto-generated messages
-#include "PoolMessage_m.h"
-#include "UnitMessage_m.h"
-#include "GatewayAggregationMessage.h"
+#include "signalsandgateways/gateway/messages/PoolMessage_m.h"
+#include "signalsandgateways/gateway/messages/UnitMessage_m.h"
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
 
 namespace SignalsAndGateways {
 

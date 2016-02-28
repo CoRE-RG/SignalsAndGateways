@@ -16,10 +16,10 @@
 #ifndef SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
 #define SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
 
-//OMNeT++
-#include <omnetpp.h>
+//SignalsAndGateways
+#include "signalsandgateways/base/Defs.h"
 //FiCo4OMNeT
-#include "FiCo4OMNeT_CanTrafficSinkAppBase.h"
+#include "fico4omnet/applications/can/sink/CanTrafficSinkAppBase.h"
 
 namespace SignalsAndGateways {
 

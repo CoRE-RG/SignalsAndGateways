@@ -30,12 +30,20 @@
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.544794846" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2046689259" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.936971791" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.219083475" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -67,12 +75,20 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1734414787" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.2037695533" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1224858674" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.739011706" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1662492530" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1217529833" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -90,12 +106,20 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1790147512" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1437201128" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1311994601" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.903082186" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1370331761" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.339756959" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -147,12 +171,20 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1883670124" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.673006879" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.86770136" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.448238711" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1371303545" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -181,12 +213,20 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.189537261" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1847373841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1338862949" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1484831973" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.960144838" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1570594819" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -204,12 +244,20 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.764747661" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.886969575" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.212672571" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1762985110" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1913271077" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.181057321" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

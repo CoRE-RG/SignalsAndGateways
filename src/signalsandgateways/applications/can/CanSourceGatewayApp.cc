@@ -13,8 +13,9 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSourceGatewayApp.h"
-#include "CanDataFrame_m.h"
+#include "./CanSourceGatewayApp.h"
+
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;
 

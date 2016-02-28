@@ -1,13 +1,12 @@
 
 //INET
-#include "INETDefs.h"
-//INET
-#include "CoRE4INET_Defs.h"
+#include "inet/common/INETDefs.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
+//FiCo4OMNeT
+#include "fico4omnet/base/Defs.h"
 
 #include "../features.h"
-#include "inet/features.h"
-#include "core4inet/features.h"
-#include "fico4omnet/features.h"
 
 /**
  * Check for minimal OMNeT++ Version requirements
@@ -26,8 +25,15 @@
 /**
  * Check for minimal CoRE4INET Version requirements
  */
-#if CoRE4INET_VERSION < 0x0100
+#if CORE4INET_VERSION < 0x0100
 #  error At least CoRE4INET version 1.0 required
+#endif
+
+/**
+ * Check for minimal CoRE4INET Version requirements
+ */
+#if FICO4OMNET_VERSION < 0x0100
+#  error At least FICO4OMNET version 1.0 required
 #endif
 
 /**
