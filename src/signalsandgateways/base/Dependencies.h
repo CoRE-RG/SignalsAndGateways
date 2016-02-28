@@ -36,9 +36,12 @@
 #  error At least FICO4OMNET version 1.0 required
 #endif
 
+
 /**
  * Check for feature availability
  */
+
+/* Disable these checks until in inet!
 #ifndef WITH_ETHERNET
 #  error You must enable the Ethernet feature in INET framework
 #endif
@@ -62,3 +65,5 @@
 #ifndef WITH_IEEE8021Q_COMMON
 #  error You must enable the IEEE 802.1Q feature in CoRE4INET
 #endif
+
+*/
