@@ -49,12 +49,8 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1944204094" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.1994732355" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CORE4INET/emf4cpp-0.0.2/lib}&quot;"/>
-								</option>
-								<option id="gnu.cpp.link.option.libs.1313721575" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so"/>
-								</option>
+								<option id="gnu.cpp.link.option.paths.1994732355" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
+								<option id="gnu.cpp.link.option.libs.1313721575" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1720307433" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -136,10 +132,7 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
 				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
-					<externalSetting>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/CORE4INET/emf4cpp-0.0.2/lib"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
-					</externalSetting>
+					<externalSetting/>
 				</externalSettings>
 				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 			</storageModule>
@@ -173,6 +166,9 @@
 									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
 									<listOptionValue builtIn="false" value="WITH_IPORE"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.include.paths.744299446" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="../../src"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.673006879" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.86770136" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
@@ -187,12 +183,8 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1676755630" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.679394934" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CORE4INET/emf4cpp-0.0.2/lib}&quot;"/>
-								</option>
-								<option id="gnu.cpp.link.option.libs.1272544862" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so"/>
-								</option>
+								<option id="gnu.cpp.link.option.paths.679394934" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
+								<option id="gnu.cpp.link.option.libs.1272544862" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1928965246" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -266,17 +258,13 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="simulations"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
 				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
-					<externalSetting>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="libraryPath" name="/CORE4INET/emf4cpp-0.0.2/lib"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="/home/tillsteinbach/workspaces/omnet4.2/CORE4INET/emf4cpp-0.0.2/lib/libemf4cpp-ecore.so" srcPrefixMapping="" srcRootPath=""/>
-					</externalSetting>
+					<externalSetting/>
 				</externalSettings>
 				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
@@ -305,5 +293,9 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
+		<doc-comment-owner id="org.eclipse.cdt.ui.doxygen">
+			<path value=""/>
+		</doc-comment-owner>
+	</storageModule>
 </cproject>
