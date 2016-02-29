@@ -17,7 +17,7 @@
 #define SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
 
 //SignalsAndGateways
-#include "signalsandgateways/base/Defs.h"
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
 namespace SignalsAndGateways {
 

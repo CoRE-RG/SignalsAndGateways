@@ -17,7 +17,7 @@
 #define SIGNALSANDGATEWAYS_CANSOURCEGATEWAYAPP_H_
 
 //SignalsAndGateways
-#include "signalsandgateways/base/Defs.h"
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 //FiCo4OMNeT
 #include "fico4omnet/applications/can/source/CanTrafficSourceAppBase.h"
 

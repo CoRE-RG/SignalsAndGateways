@@ -21,10 +21,10 @@
 #include <map>
 
 //SignalsAndGateways
-#include "signalsandgateways/base/Defs.h"
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
 //Inet auto-generated messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 //FiCo4OMNeT auto-generated messages
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 //SignalsAndGateways auto-generated messages

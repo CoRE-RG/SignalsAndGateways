@@ -4,7 +4,7 @@
 //CoRE4INET
 #include "core4inet/base/CoRE4INET_Defs.h"
 //FiCo4OMNeT
-#include "fico4omnet/base/Defs.h"
+#include "fico4omnet/base/FiCo4OMNeT_Defs.h"
 
 #include "../features.h"
 

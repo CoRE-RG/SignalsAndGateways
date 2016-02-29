@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./NoGatewayTransformation.h"
+#include "signalsandgateways/gateway/transformation/NoGatewayTransformation.h"
 
 namespace SignalsAndGateways {
 

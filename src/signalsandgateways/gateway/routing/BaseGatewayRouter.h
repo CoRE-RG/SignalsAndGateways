@@ -23,7 +23,7 @@
 #include <vector>
 
 //SignalsAndGateways
-#include "signalsandgateways/base/Defs.h"
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
 namespace SignalsAndGateways {
 

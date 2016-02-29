@@ -17,9 +17,9 @@
 #define TTEAPPLICATIONBASE_H_
 
 //SignalsAndGateways
-#include "signalsandgateways/base/Defs.h"
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 //CoRE4INET
-#include "core4inet/applications/AS6802/CoRE4INET_CTApplicationBase.h"
+#include "core4inet/applications/AS6802/CTApplicationBase.h"
 
 namespace SignalsAndGateways {
 

@@ -13,12 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./GatewayTransformation.h"
+#include "signalsandgateways/gateway/transformation/GatewayTransformation.h"
 
 //std
 #include <algorithm>
 //CoRE4INET
-#include "CoRE4INET_Defs.h"
+#include "core4inet/base/CoRE4INET_Defs.h"
 
 using namespace std;
 using namespace inet;

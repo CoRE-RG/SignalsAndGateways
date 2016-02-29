@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./AccumulationGatewayBuffering.h"
+#include "signalsandgateways/gateway/buffering/AccumulationGatewayBuffering.h"
 
 using namespace FiCo4OMNeT;
 using namespace std;

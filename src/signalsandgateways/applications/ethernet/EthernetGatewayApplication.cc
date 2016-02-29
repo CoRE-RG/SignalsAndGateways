@@ -13,13 +13,15 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./EthernetGatewayApplication.h"
-#include "CoRE4INET_Incoming.h"
-#include "AVBFrame_m.h"
-#include "CoRE4INET_CTFrame.h"
-#include "CoRE4INET_CTBuffer.h"
-#include "CoRE4INET_BGBuffer.h"
-#include "TTBufferEmpty_m.h"
+#include "signalsandgateways/applications/ethernet/EthernetGatewayApplication.h"
+
+#include "core4inet/incoming/base/Incoming.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
+#include "core4inet/buffer/AS6802/CTBuffer.h"
+#include "core4inet/buffer/AS6802/TTBufferEmpty_m.h"
+#include "core4inet/buffer/base/BGBuffer.h"
+
 
 using namespace CoRE4INET;
 

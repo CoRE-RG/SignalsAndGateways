@@ -3,9 +3,9 @@
 	<name>SignalsAndGateways</name>
 	<comment></comment>
 	<projects>
+		<project>inet</project>
 		<project>CoRE4INET</project>
 		<project>FiCo4OMNeT</project>
-		<project>inet</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

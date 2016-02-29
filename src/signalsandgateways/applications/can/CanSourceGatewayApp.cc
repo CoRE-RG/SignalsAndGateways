@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "./CanSourceGatewayApp.h"
+#include "signalsandgateways/applications/can/CanSourceGatewayApp.h"
 
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
