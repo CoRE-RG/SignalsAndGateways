@@ -13,53 +13,38 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef TTEAPPLICATIONBASE_H_
-#define TTEAPPLICATIONBASE_H_
+#ifndef SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
+#define SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
 
-//OMNeT++
-#include <omnetpp.h>
-//CoRE4INET
-#include "CoRE4INET_CTApplicationBase.h"
+//SignalsAndGateways
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
+//FiCo4OMNeT
+#include "fico4omnet/applications/can/sink/CanTrafficSinkAppBase.h"
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /**
- * @brief Gateway application for the Ethernet node.
+ * @brief Source-Application for the CAN-Node
  *
- * This module represents the connection between the Ethernet backbone network and the gateway.
+ * This module receives a CanDataFrame and forwards it to the gateway.
  *
  * @author Sebastian Mueller
  */
-class EthernetGatewayApplication: public virtual CoRE4INET::CTApplicationBase {
-
-private:
+class CanSinkGatewayApp : public virtual FiCo4OMNeT::CanTrafficSinkAppBase
+{
+  protected:
     /**
-     * @brief Calls the inherited initialize method.
-     */
-    void initialize();
-
-    /**
-     * @brief Handles incoming messages.
+     * @brief Handles incoming TransportMessages
      *
-     * Messages from the Ethernet network are forwarded to the gateway.
-     * Messages from the gateway are forwarded to the Ethernet network.
+     * If the incoming message is a CanDataFrame, then the CanDataFrame is send to the upper layer gateway.
      *
      * @param msg The incoming message
      */
     void handleMessage(cMessage *msg);
-
-public:
-    /**
-     * @brief Constructor
-     */
-    EthernetGatewayApplication();
-
-    /**
-     * @brief Destructor
-     */
-    virtual ~EthernetGatewayApplication();
 };
 
 }
 
-#endif /* TTEAPPLICATIONBASE_H_ */
+#endif

@@ -153,6 +153,7 @@ class SmokeTestCase(SimulationTestCase):
 
         # add paths of other libraries
         os.environ['LD_LIBRARY_PATH'] = inetRoot + os.sep + "src" + ":" + core4inetRoot + os.sep + "src" + ":" +fico4omnetRoot + os.sep + "src"
+        os.environ['DYLD_LIBRARY_PATH'] = inetRoot + os.sep + "src" + ":" + core4inetRoot + os.sep + "src" + ":" +fico4omnetRoot + os.sep + "src"
         # run the simulation
         workingdir = os.path.normpath(_iif(self.wd.startswith('/'), signalsAndGatewayRoot + "/" + self.wd, self.wd))
         command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + fico4omnetLib + " -l " + signalsAndGatewayLib + " -l " +  inetLib + " -u Cmdenv " + self.args + \

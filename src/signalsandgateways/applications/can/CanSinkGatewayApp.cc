@@ -13,8 +13,10 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "CanSinkGatewayApp.h"
-#include "CanDataFrame_m.h"
+#include "signalsandgateways/applications/can/CanSinkGatewayApp.h"
+
+#include "fico4omnet/buffer/can/CanInputBuffer.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;
 

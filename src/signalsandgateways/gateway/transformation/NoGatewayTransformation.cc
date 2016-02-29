@@ -13,17 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "NoGatewayBuffering.h"
+#include "signalsandgateways/gateway/transformation/NoGatewayTransformation.h"
 
 namespace SignalsAndGateways {
 
-Define_Module(NoGatewayBuffering);
+Define_Module(NoGatewayTransformation);
 
-void NoGatewayBuffering::initialize()
+void NoGatewayTransformation::initialize()
 {
 }
 
-void NoGatewayBuffering::handleMessage(cMessage *msg)
+void NoGatewayTransformation::handleMessage(cMessage *msg)
 {
     send(msg, gate("out"));
 }

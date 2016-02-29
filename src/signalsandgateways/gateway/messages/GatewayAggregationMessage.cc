@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include <GatewayAggregationMessage.h>
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
 
 using namespace std;
 

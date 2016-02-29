@@ -3,44 +3,27 @@
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
+//
 
-#ifndef SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
-#define SIGNALSANDGATEWAYS_NOGATEWAYBUFFERING_H_
+#ifndef SIGNALSANDGATEWAYS_DEFS_H
+#define SIGNALSANDGATEWAYS_DEFS_H
 
 //OMNeT++
-#include <omnetpp.h>
+#include "omnetpp.h"
 
-namespace SignalsAndGateways {
-
-using namespace omnetpp;
+#include "./Dependencies.h"
 
 /**
- * @brief This buffering module forwards incoming frames to the transformation module.
- *
- * This module doesn't have any buffering features. Its only functionality is the forwarding of an incoming frame to the next module.
- *
- * @author Till Steinbach
+ * Definition of SignalsAndGateways version
  */
-class NoGatewayBuffering : public cSimpleModule
-{
-protected:
-    /**
-     * @brief Initialization of the module.
-     */
-    virtual void initialize();
-
-    virtual void handleMessage(cMessage *msg);
-};
-
-} //namespace
+#define SG_VERSION 0x0100
 
 #endif

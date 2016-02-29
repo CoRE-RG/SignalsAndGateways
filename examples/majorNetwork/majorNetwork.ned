@@ -45,7 +45,7 @@ network majorNetwork
             per = 0;
         }
     submodules:
-        Profiler: MessageNumProfiler{}
+        //Profiler: MessageNumProfiler{}
         Antrieb: CanBus {
             @display("i=block/network;p=259,98");
         }

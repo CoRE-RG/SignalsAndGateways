@@ -19,8 +19,8 @@
 //Std
 #include <list>
 //SignalsAndGateways auto-generated messages
-#include "GatewayAggregationMessage_m.h"
-#include "UnitMessage_m.h"
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage_m.h"
+#include "signalsandgateways/gateway/messages/UnitMessage_m.h"
 
 namespace SignalsAndGateways {
 

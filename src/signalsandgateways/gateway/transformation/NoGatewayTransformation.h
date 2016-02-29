@@ -13,38 +13,32 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
-#define SIGNALSANDGATEWAYS_CANSINKGATEWAYAPP_H_
+#ifndef SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
+#define SIGNALSANDGATEWAYS_NOTRANSFORMATION_H_
 
-//OMNeT++
-#include <omnetpp.h>
-//FiCo4OMNeT
-#include "FiCo4OMNeT_CanTrafficSinkAppBase.h"
+//SignalsAndGateways
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
 namespace SignalsAndGateways {
 
 using namespace omnetpp;
 
-/**
- * @brief Source-Application for the CAN-Node
+/*
+ * @brief A transformation module with no functionality besides forwarding incoming frames.
  *
- * This module receives a CanDataFrame and forwards it to the gateway.
- *
- * @author Sebastian Mueller
+ * @author Till Steinbach
  */
-class CanSinkGatewayApp : public virtual FiCo4OMNeT::CanTrafficSinkAppBase
+class NoGatewayTransformation : public cSimpleModule
 {
   protected:
     /**
-     * @brief Handles incoming TransportMessages
-     *
-     * If the incoming message is a CanDataFrame, then the CanDataFrame is send to the upper layer gateway.
-     *
-     * @param msg The incoming message
+     * @brief Initialization of the module.
      */
-    void handleMessage(cMessage *msg);
+    virtual void initialize();
+
+    virtual void handleMessage(cMessage *msg);
 };
 
-}
+} //namespace
 
 #endif

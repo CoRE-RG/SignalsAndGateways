@@ -21,8 +21,9 @@
 #include <map>
 #include <list>
 #include <vector>
-//OMNeT++
-#include <omnetpp.h>
+
+//SignalsAndGateways
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
 namespace SignalsAndGateways {
 

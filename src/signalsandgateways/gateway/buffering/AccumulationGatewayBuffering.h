@@ -19,14 +19,16 @@
 //Std
 #include <string>
 #include <map>
-//OMNeT++
-#include <omnetpp.h>
+
+//SignalsAndGateways
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
+
 //Inet auto-generated messages
-#include "EtherFrame_m.h"
+#include "inet/linklayer/ethernet/EtherFrame_m.h"
 //FiCo4OMNeT auto-generated messages
-#include "CanDataFrame_m.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 //SignalsAndGateways auto-generated messages
-#include "PoolMessage_m.h"
+#include "signalsandgateways/gateway/messages/PoolMessage_m.h"
 
 namespace SignalsAndGateways {
 

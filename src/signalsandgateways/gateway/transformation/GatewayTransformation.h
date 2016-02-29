@@ -21,21 +21,23 @@
 #include <map>
 #include <list>
 #include <vector>
-//OMNeT++
-#include <omnetpp.h>
+
+//SignalsAndGateways
+#include "signalsandgateways/base/SignalsAndGateways_Defs.h"
+
 //CoRE4INET
-#include "CoRE4INET_CTFrame.h"
+#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
 //Auto-generated messages
-#include "EtherFrameWithQTag_m.h"
-#include "AVBFrame_m.h"
-#include "RCFrame_m.h"
-#include "TTFrame_m.h"
+#include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+#include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/RCFrame_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/TTFrame_m.h"
 //FiCo4OMNeT auto-generated messages
-#include "CanDataFrame_m.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 //SignalsAndGateways auto-generated messages
-#include "PoolMessage_m.h"
-#include "UnitMessage_m.h"
-#include "GatewayAggregationMessage.h"
+#include "signalsandgateways/gateway/messages/PoolMessage_m.h"
+#include "signalsandgateways/gateway/messages/UnitMessage_m.h"
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
 
 namespace SignalsAndGateways {
 
