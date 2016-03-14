@@ -1,8 +1,3 @@
-if [ -a $(INET_PROJ) ];
-then
-	$(error "Cannot find inet_featuretool")
-fi
-
 INET_ETHERNET_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled Ethernet; echo $$?)
 ifneq ($(INET_ETHERNET_ENABLED),0)
     $(error "INETs Ethernet feature is required, but not enabled. See INSTALL file for details.")
