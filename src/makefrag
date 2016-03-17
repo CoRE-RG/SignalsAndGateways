@@ -6,6 +6,8 @@
 # WARNINGS_ERROR=1
 # for -Werror
 
+include dependencies_makefrag
+
 CFLAGS += -std=c++11
 # For compatibility (4.6 to 5.0)
 CFLAGS += -DAUTOIMPORT_NAMESPACE

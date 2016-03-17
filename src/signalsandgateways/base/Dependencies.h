@@ -18,8 +18,8 @@
 /**
  * Check for minimal INET Version requirements
  */
-#if INET_VERSION < 0x0301
-#  error At least INET version 3.1 required
+#if INET_VERSION < 0x0302
+#  error At least INET version 3.2 required
 #endif
 
 /**
