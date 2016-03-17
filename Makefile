@@ -9,9 +9,9 @@ cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=debug clean
 	rm -f src/Makefile src/signalsandgateways/features.h
 
-INET_PROJ=../../inet
-CORE4INET_PROJ=../../CoRE4INET
-FICO4OMNET_PROJ=../../FiCo4OMNeT
+INET_PROJ?=../../inet
+CORE4INET_PROJ?=../../CoRE4INET
+FICO4OMNET_PROJ?=../../FiCo4OMNeT
 MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -DINET_IMPORT -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET -lINET -lFiCo4OMNeT -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ)
 
 makefiles: src/signalsandgateways/features.h makefiles-so
