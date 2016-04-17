@@ -40,7 +40,7 @@
 // There are several bugfixes and improvements; see the <tt><a href="whatsnew.html">WHATSNEW</a></tt> file.
 //
 // <h2>Requirements</h2>
-// - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 4.6)
+// - <a href="http://omnetpp.org/" target="_top">OMNeT++</a> (minimum version 5.0)
 // - <a href="http://core4inet.core-rg.de/" atrget="_top">CoRE4INET</a> 
 // - <a href="http://core4inet.core-rg.de/" atrget="_top">FiCo4OMNeT</a> 
 //
