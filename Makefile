@@ -37,7 +37,7 @@ checkmakefiles:
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
 src/signalsandgateways/features.h: $(wildcard .oppfeaturestate) .oppfeatures
-	@./signalsandgateways_featuretool defines >src/signalsandgateways/features.h
+	@opp_featuretool defines >src/signalsandgateways/features.h
 
 doxy:
 	doxygen doxy.cfg
