@@ -1,24 +1,24 @@
-INET_ETHERNET_ENABLED := $(shell cd $(INET_PROJ); ./inet_featuretool -q isenabled Ethernet; echo $$?)
+INET_ETHERNET_ENABLED := $(shell cd $(INET_PROJ); opp_featuretool -q isenabled Ethernet; echo $$?)
 ifneq ($(INET_ETHERNET_ENABLED),0)
     $(error "INETs Ethernet feature is required, but not enabled. See INSTALL file for details.")
 endif
-FICO4OMNET_CAN_ENABLED := $(shell cd $(FICO4OMNET_PROJ); ./fico4omnet_featuretool -q isenabled CAN_common; echo $$?)
+FICO4OMNET_CAN_ENABLED := $(shell cd $(FICO4OMNET_PROJ); opp_featuretool -q isenabled CAN_common; echo $$?)
 ifneq ($(FICO4OMNET_CAN_ENABLED),0)
     $(error "FiCo4OMNETs CAN_common feature is required, but not enabled. See INSTALL file for details.")
 endif
-FICO4OMNET_FR_ENABLED := $(shell cd $(FICO4OMNET_PROJ); ./fico4omnet_featuretool -q isenabled FR_common; echo $$?)
+FICO4OMNET_FR_ENABLED := $(shell cd $(FICO4OMNET_PROJ); opp_featuretool -q isenabled FR_common; echo $$?)
 ifneq ($(FICO4OMNET_FR_ENABLED),0)
     $(error "FiCo4OMNETs FR_common feature is required, but not enabled. See INSTALL file for details.")
 endif
-CORE4INET_AVB_ENABLED := $(shell cd $(CORE4INET_PROJ); ./core4inet_featuretool -q isenabled AVB_common; echo $$?)
+CORE4INET_AVB_ENABLED := $(shell cd $(CORE4INET_PROJ); opp_featuretool -q isenabled AVB_common; echo $$?)
 ifneq ($(CORE4INET_AVB_ENABLED),0)
     $(error "CoRE4INETs AVB_common feature is required, but not enabled. See INSTALL file for details.")
 endif
-CORE4INET_AS6802_ENABLED := $(shell cd $(CORE4INET_PROJ); ./core4inet_featuretool -q isenabled AS6802_common; echo $$?)
+CORE4INET_AS6802_ENABLED := $(shell cd $(CORE4INET_PROJ); opp_featuretool -q isenabled AS6802_common; echo $$?)
 ifneq ($(CORE4INET_AS6802_ENABLED),0)
     $(error "CoRE4INETs AS6802_common feature is required, but not enabled. See INSTALL file for details.")
 endif
-CORE4INET_8021Q_ENABLED := $(shell cd $(CORE4INET_PROJ); ./core4inet_featuretool -q isenabled IEEE8021Q_common; echo $$?)
+CORE4INET_8021Q_ENABLED := $(shell cd $(CORE4INET_PROJ); opp_featuretool -q isenabled IEEE8021Q_common; echo $$?)
 ifneq ($(CORE4INET_8021Q_ENABLED),0)
     $(error "CoRE4INETs IEEE8021Q_common feature is required, but not enabled. See INSTALL file for details.")
 endif
