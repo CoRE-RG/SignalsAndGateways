@@ -1,0 +1,67 @@
+types sntypes{
+	message MSG extends std.MAX_CANMSG{
+			sender canNode1;
+			receivers canNode2;
+		}
+}
+
+settings{
+	tteScheduling false;
+}
+
+network smallNetwork {
+	inline ini{
+		**.vl_*.size = 10
+	}
+	devices {
+		canLink canbus1 extends std.CANBUS_500KBIT;
+		canLink canbus2 extends std.CANBUS_500KBIT;
+		
+		switch switch1 extends std.ETH_SWITCH;
+		gateway gateway1;
+		gateway gateway2;
+		
+		node canNode1;
+		node canNode2;
+	}
+	
+	connections{
+		segment backbone {
+			gateway1 <--> {new std.ETH_100MBIT} <--> switch1;
+			gateway2 <--> {new std.ETH_100MBIT} <--> switch1;
+		}
+		segment canbus {
+			gateway1 <--> canbus1;
+			canNode1 <--> canbus1;
+			gateway2 <--> canbus2;
+			canNode2 <--> canbus2;
+		}
+	}
+	
+	communication{
+		message canmsg1 extends sntypes.MSG{
+			period 10ms;
+			mapping {
+				canbus : can{id 1;};
+				backbone : be;
+			}
+		}
+		
+		message canmsg2 extends sntypes.MSG{
+			period 15ms;
+			mapping {
+				canbus : can{id 2;};
+				backbone : be;
+			}
+		}
+		
+		message canmsg3 extends sntypes.MSG{
+			period 20ms;
+			mapping {
+				canbus : can{id 3;};
+				backbone : be;
+			}
+		}
+	}
+	
+}
