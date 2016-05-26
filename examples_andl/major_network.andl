@@ -1,0 +1,196 @@
+settings {
+	tteScheduling true;
+}
+
+network major_network {
+	devices {
+		canLink canbus1 extends std.CANBUS_500KBIT;
+		canLink canbus2 extends std.CANBUS_500KBIT;
+		canLink canbus3_1 extends std.CANBUS_500KBIT;
+		canLink canbus3_2 extends std.CANBUS_500KBIT;
+		canLink canbus4_1 extends std.CANBUS_500KBIT;
+		canLink canbus4_2 extends std.CANBUS_500KBIT;
+		switch switch1 extends std.ETH_SWITCH;
+		gateway gateway1;
+		gateway gateway2;
+		gateway gateway3;
+		node can1_node1;
+		node can1_node2;
+		node can1_node3;
+		node can2_node1;
+		node can2_node2;
+		node can2_node3;
+		node can3_node1;
+		node can3_node2;
+		node can3_node3;
+		node can3_node4;
+		node can3_node5;
+		node can3_node6;
+		node can4_node1;
+		node can4_node2;
+		node can4_node3;
+		node can4_node4;
+		node can4_node5;
+		node can4_node6;
+	}
+
+
+	connections {
+		segment backbone {
+			gateway1 <--> { new std.ETH_100MBIT } <--> switch1;
+			gateway2 <--> { new std.ETH_100MBIT } <--> switch1;
+			gateway3 <--> { new std.ETH_100MBIT } <--> switch1;
+		}
+		segment canbus {
+			gateway1 <--> canbus1;
+			can1_node1 <--> canbus1;
+			can1_node2 <--> canbus1;
+			can1_node3 <--> canbus1;
+			gateway2 <--> canbus2;
+			can2_node1 <--> canbus2;
+			can2_node2 <--> canbus2;
+			can2_node3 <--> canbus2;
+			gateway2 <--> canbus3_1;
+			can3_node1 <--> canbus3_1;
+			can3_node2 <--> canbus3_1;
+			can3_node3 <--> canbus3_1;
+			gateway3 <--> canbus3_2;
+			can3_node4 <--> canbus3_2;
+			can3_node5 <--> canbus3_2;
+			can3_node6 <--> canbus3_2;
+			gateway3 <--> canbus4_1;
+			can4_node1 <--> canbus4_1;
+			can4_node2 <--> canbus4_1;
+			can4_node3 <--> canbus4_1;
+			gateway3 <--> canbus4_2;
+			can4_node4 <--> canbus4_2;
+			can4_node5 <--> canbus4_2;
+			can4_node6 <--> canbus4_2;
+		}
+	}
+
+
+	communication {
+		message id2 extends std.MAX_CANMSG {
+			sender can1_node1;
+			receivers can2_node1;
+			period 120ms;
+			mapping {
+				canbus : can{id 2;};
+				gateway1;
+				backbone : tt{ctID 33;};
+				gateway2;
+			}
+		}
+		message id12 extends std.MAX_CANMSG {
+			sender can3_node1;
+			receivers can3_node4;
+			period 20ms;
+			mapping {
+				canbus : can{id 12;};
+				gateway2;
+				backbone : tt{ctID 20;};
+				gateway3;
+			}
+		}
+		message id13 extends std.MAX_CANMSG {
+			sender can4_node2;
+			receivers can4_node4;
+			period 40ms;
+			mapping {
+				canbus : can{id 13;};
+				gateway3;
+			}
+		}
+		message id24 extends std.MAX_CANMSG {
+			sender can4_node4;
+			receivers can4_node1;
+			period 60ms;
+			mapping {
+				canbus : can{id 24;};
+				gateway3;
+			}
+		}
+		message id32 extends std.MAX_CANMSG {
+			sender can3_node4;
+			receivers can3_node1;
+			period 30ms;
+			mapping {
+				canbus : can{id 32;};
+				gateway2;
+				backbone : tt{ctID 300;};
+				gateway3;
+			}
+		}
+		message id100 extends std.MAX_CANMSG {
+			sender can1_node2;
+			receivers can1_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 100;};
+			}
+		}
+		message id101 extends std.MAX_CANMSG {
+			sender can1_node3;
+			receivers can1_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 101;};
+			}
+		}
+		message id200 extends std.MAX_CANMSG {
+			sender can2_node2;
+			receivers can1_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 200;};
+				gateway2;
+				backbone : rc{ctID 400;};
+				gateway1;
+			}
+		}
+		message id201 extends std.MAX_CANMSG {
+			sender can2_node3;
+			receivers can1_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 201;};
+				gateway2;
+				backbone : rc{ctID 401;};
+				gateway1;
+			}
+		}
+		message id300 extends std.MAX_CANMSG {
+			sender can3_node2;
+			receivers can3_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 300;};
+			}
+		}
+		message id301 extends std.MAX_CANMSG {
+			sender can3_node3;
+			receivers can3_node1;
+			period 100ms;
+			mapping {
+				canbus : can{id 301;};
+			}
+		}
+		message id700 extends std.MAX_CANMSG {
+			sender can4_node5;
+			receivers can4_node4;
+			period 100ms;
+			mapping {
+				canbus : can{id 700;};
+			}
+		}
+		message id701 extends std.MAX_CANMSG {
+			sender can4_node6;
+			receivers can4_node4;
+			period 100ms;
+			mapping {
+				canbus : can{id 701;};
+			}
+		}
+	}
+}
