@@ -30,7 +30,7 @@
 #endif
 
 /**
- * Check for minimal CoRE4INET Version requirements
+ * Check for minimal FiCo4OMNeT Version requirements
  */
 #if FICO4OMNET_VERSION < 0x0100
 #  error At least FICO4OMNET version 1.0 required

@@ -1,3 +1,28 @@
+#Try to detect INET if variable is not set
+ifndef INET_PROJ
+    ifneq ($(wildcard ../inet),)
+        INET_PROJ=../../inet
+    else
+        $(error "Cannot find INET framework in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+    endif
+endif
+#Try to detect CoRE4INET if variable is not set
+ifndef CORE4INET_PROJ
+    ifneq ($(wildcard ../CoRE4INET),)
+        CORE4INET_PROJ=../../CoRE4INET
+    else
+        $(error "Cannot find CoRE4INET framework in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+    endif
+endif
+#Try to detect FiCo4OMNeT if variable is not set
+ifndef FICO4OMNET_PROJ
+    ifneq ($(wildcard ../FiCo4OMNeT),)
+        FICO4OMNET_PROJ=../../FiCo4OMNeT
+    else
+        $(error "Cannot find FiCo4OMNeT in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+    endif
+endif
+
 all: checkmakefiles src/signalsandgateways/features.h 
 	cd src && $(MAKE)
 
@@ -9,9 +34,6 @@ cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=debug clean
 	rm -f src/Makefile src/signalsandgateways/features.h
 
-INET_PROJ?=../../inet
-CORE4INET_PROJ?=../../CoRE4INET
-FICO4OMNET_PROJ?=../../FiCo4OMNeT
 MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET -lINET -lFiCo4OMNeT -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ)
 
 makefiles: src/signalsandgateways/features.h makefiles-so
