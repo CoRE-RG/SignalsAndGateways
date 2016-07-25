@@ -43,6 +43,8 @@ network smallNetwork {
 			period 10ms;
 			mapping {
 				canbus : can{id 1;};
+				gateway1;
+				gateway2;
 				backbone : be;
 			}
 		}
@@ -51,6 +53,8 @@ network smallNetwork {
 			period 15ms;
 			mapping {
 				canbus : can{id 2;};
+				gateway1;
+				gateway2;
 				backbone : be;
 			}
 		}
@@ -59,6 +63,8 @@ network smallNetwork {
 			period 20ms;
 			mapping {
 				canbus : can{id 3;};
+				gateway1;
+				gateway2;
 				backbone : be;
 			}
 		}
