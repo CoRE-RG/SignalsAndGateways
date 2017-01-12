@@ -86,7 +86,7 @@ private:
     /**
      * @brief This map holds the arrival times of the messages which are currently buffered.
      */
-    std::map<cMessagePointerList*,std::list<simtime_t>*> poolArrivalTimes;
+    std::map<cMessagePointerList*,std::list<simtime_t>> poolArrivalTimes;
 
     /**
      * @brief Simsignal for the pool size.

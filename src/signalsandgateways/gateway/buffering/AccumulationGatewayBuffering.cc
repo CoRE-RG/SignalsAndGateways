@@ -72,10 +72,9 @@ void AccumulationGatewayBuffering::readConfigXML() {
                             holdUpTimeEvent));
             scheduledTimes.insert(
                     pair<cMessage*, simtime_t>(holdUpTimeEvent, 0));
-            list<simtime_t>* arrivalTimes = new list<simtime_t>();
             poolArrivalTimes.insert(
-                    pair<cMessagePointerList*, list<simtime_t>*>(poolList,
-                            arrivalTimes));
+                    pair<cMessagePointerList*, list<simtime_t>>(poolList,
+                            list<simtime_t>()));
             cXMLElementList xmlHoldUpTimes = xmlPools[i]->getChildren();
             for (size_t j = 0; j < xmlHoldUpTimes.size(); j++) {
                 simtime_t holdUpTime = SimTime::parse(
@@ -123,7 +122,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg) {
                 scheduledTimes[poolHoldUpTimeEvent] = eventTime;
             }
             poolList->push_back(dataFrame);
-            poolArrivalTimes[poolList]->push_back(simTime());
+            poolArrivalTimes[poolList].push_back(simTime());
         } else {
             send(msg, gate("out"));
         }
@@ -166,13 +165,12 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(
 
 void AccumulationGatewayBuffering::emitSignals(cMessagePointerList* poolList) {
     unsigned int poolID = getPoolID(poolList);
-    list<simtime_t>* arrivalTimes = poolArrivalTimes[poolList];
     list<simtime_t>::iterator it;
-    for (it = arrivalTimes->begin(); it != arrivalTimes->end(); ++it) {
+    for (it = poolArrivalTimes[poolList].begin(); it != poolArrivalTimes[poolList].end(); ++it) {
         simtime_t holdUpTime = simTime() - *it;
         emit(poolHoldUpTimeSignals[poolID], holdUpTime);
     }
-    arrivalTimes->clear();
+    poolArrivalTimes[poolList].clear();
     emit(poolSizeSignals[poolID], poolList->size());
 }
 
