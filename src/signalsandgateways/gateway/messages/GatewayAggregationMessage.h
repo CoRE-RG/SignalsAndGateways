@@ -40,7 +40,7 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
         /**
          * @brief Constructor
          *
-         * @param name message name
+         * @param newName message name
          * @param kind message type
          */
         GatewayAggregationMessage(const char *newName=NULL, short kind=0) : GatewayAggregationMessage_Base(newName,kind)
