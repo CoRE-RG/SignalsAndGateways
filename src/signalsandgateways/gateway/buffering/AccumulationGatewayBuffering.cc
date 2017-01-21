@@ -23,8 +23,8 @@ namespace SignalsAndGateways {
 Define_Module(AccumulationGatewayBuffering);
 
 AccumulationGatewayBuffering::~AccumulationGatewayBuffering() {
-    for (map<cMessage*, simtime_t>::iterator it = scheduledTimes.begin(); it != scheduledTimes.end();
-            ++it) {
+    for (map<cMessage*, simtime_t>::iterator it = scheduledTimes.begin();
+            it != scheduledTimes.end(); ++it) {
         if (it->first) {
             cancelAndDelete(it->first);
         }
@@ -164,14 +164,17 @@ simtime_t AccumulationGatewayBuffering::getCurrentPoolHoldUpTime(
 }
 
 void AccumulationGatewayBuffering::emitSignals(cMessagePointerList* poolList) {
-    unsigned int poolID = getPoolID(poolList);
-    list<simtime_t>::iterator it;
-    for (it = poolArrivalTimes[poolList].begin(); it != poolArrivalTimes[poolList].end(); ++it) {
-        simtime_t holdUpTime = simTime() - *it;
-        emit(poolHoldUpTimeSignals[poolID], holdUpTime);
+    if (simTime() > getSimulation()->getWarmupPeriod()) {
+        unsigned int poolID = getPoolID(poolList);
+        list<simtime_t>::iterator it;
+        for (it = poolArrivalTimes[poolList].begin();
+                it != poolArrivalTimes[poolList].end(); ++it) {
+            simtime_t holdUpTime = simTime() - *it;
+            emit(poolHoldUpTimeSignals[poolID], holdUpTime);
+        }
+        poolArrivalTimes[poolList].clear();
+        emit(poolSizeSignals[poolID], poolList->size());
     }
-    poolArrivalTimes[poolList].clear();
-    emit(poolSizeSignals[poolID], poolList->size());
 }
 
 unsigned int AccumulationGatewayBuffering::getPoolID(
