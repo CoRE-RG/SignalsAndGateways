@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/EXTENDED_WARNINGS/delimiter=\:
-environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/EXTENDED_WARNINGS/operation=append
-environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/EXTENDED_WARNINGS/value=1
+environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/EXTENDED_WARNINGS/operation=replace
+environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/EXTENDED_WARNINGS/value=0
 environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/append=true
 environment/project/org.omnetpp.cdt.gnu.config.debug.1966195400/appendContributed=true

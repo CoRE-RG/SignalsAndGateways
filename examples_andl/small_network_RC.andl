@@ -10,8 +10,10 @@ settings{
 }
 
 network smallNetworkRc {
-	inline ini{
+	inline ini {
+```
 		**.vl_*.size = 10
+```
 	}
 	devices {
 		canLink canbus1 extends std.CANBUS_500KBIT;
