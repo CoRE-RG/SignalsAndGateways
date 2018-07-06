@@ -21,3 +21,7 @@
 src/Makefile
 
 src/signalsandgateways/features.h
+simulations/examples_andl/major_network/
+simulations/examples_andl/major_network_pools/
+simulations/examples_andl/small_network/
+simulations/examples_andl/small_network_RC/

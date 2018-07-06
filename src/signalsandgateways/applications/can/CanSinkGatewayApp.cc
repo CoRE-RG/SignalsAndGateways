@@ -13,7 +13,12 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "signalsandgateways/applications/can/CanSinkGatewayApp.h"
+#include "CanSinkGatewayApp.h"
+
+#include <omnetpp/cmessage.h>
+#include <omnetpp/cobjectfactory.h>
+#include <omnetpp/csimplemodule.h>
+#include <omnetpp/regmacros.h>
 
 #include "fico4omnet/buffer/can/CanInputBuffer.h"
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"

@@ -13,12 +13,26 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "signalsandgateways/gateway/transformation/GatewayTransformation.h"
+#include "GatewayTransformation.h"
 
-//std
+#include <omnetpp/cmodule.h>
+#include <omnetpp/cnamedobject.h>
+#include <omnetpp/cobjectfactory.h>
+#include <omnetpp/cpacket.h>
+#include <omnetpp/cpar.h>
+#include <omnetpp/csimplemodule.h>
+#include <omnetpp/cxmlelement.h>
+#include <omnetpp/regmacros.h>
 #include <algorithm>
-//CoRE4INET
+#include <cstdint>
+#include <cstdlib>
+#include <iterator>
+#include <utility>
+
 #include "core4inet/base/CoRE4INET_Defs.h"
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
+#include "inet/linklayer/common/MACAddress.h"
+#include "inet/linklayer/ethernet/Ethernet.h"
 
 using namespace std;
 using namespace inet;
@@ -294,7 +308,7 @@ EthernetIIFrame* GatewayTransformation::transformCanToBEEthernet(FiCo4OMNeT::Can
 EthernetIIFrame* GatewayTransformation::transformCanToBEEthernet(list<CanDataFrame*> canFrames){
     list<UnitMessage*> units;
     for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
-        units.push_back(generateUnitMessage(dynamic_cast<CanDataFrame*>(*it)));
+        units.push_back(generateUnitMessage(*it));
     }
     GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
     EthernetIIFrame* ethernetFrame = new EthernetIIFrame();
@@ -316,7 +330,7 @@ EthernetIIFrameWithQTag* GatewayTransformation::transformCanToQEthernet(CanDataF
 EthernetIIFrameWithQTag* GatewayTransformation::transformCanToQEthernet(list<CanDataFrame*> canFrames){
     list<UnitMessage*> units;
     for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
-        units.push_back(generateUnitMessage(dynamic_cast<CanDataFrame*>(*it)));
+        units.push_back(generateUnitMessage(*it));
     }
     GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
     EthernetIIFrameWithQTag* qFrame = new EthernetIIFrameWithQTag();
@@ -338,7 +352,7 @@ RCFrame* GatewayTransformation::transformCanToRCEthernet(CanDataFrame* canFrame)
 RCFrame* GatewayTransformation::transformCanToRCEthernet(list<CanDataFrame*> canFrames){
     list<UnitMessage*> units;
     for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
-        units.push_back(generateUnitMessage(dynamic_cast<CanDataFrame*>(*it)));
+        units.push_back(generateUnitMessage(*it));
     }
     GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
     RCFrame* rcFrame = new RCFrame();
@@ -360,7 +374,7 @@ TTFrame* GatewayTransformation::transformCanToTTEthernet(CanDataFrame* canFrame)
 TTFrame* GatewayTransformation::transformCanToTTEthernet(list<CanDataFrame*> canFrames){
     list<UnitMessage*> units;
     for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
-        units.push_back(generateUnitMessage(dynamic_cast<CanDataFrame*>(*it)));
+        units.push_back(generateUnitMessage(*it));
     }
     GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
     TTFrame* ttFrame = new TTFrame();

@@ -13,17 +13,25 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#include "signalsandgateways/gateway/routing/BaseGatewayRouter.h"
+#include "BaseGatewayRouter.h"
 
+#include <crtdefs.h>
+#include <omnetpp/cgate.h>
+#include <omnetpp/cmessage.h>
+#include <omnetpp/cnamedobject.h>
+#include <omnetpp/cobjectfactory.h>
+#include <omnetpp/cpar.h>
+#include <omnetpp/csimplemodule.h>
+#include <omnetpp/cxmlelement.h>
+#include <omnetpp/regmacros.h>
 #include <algorithm>
+#include <cstdlib>
 
-//CoRE4INET
-#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
-
-//Auto-generated messages
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 #include "core4inet/linklayer/ethernet/avb/AVBFrame_m.h"
 #include "core4inet/linklayer/ethernet/base/EtherFrameWithQTag_m.h"
+#include "core4inet/linklayer/ethernet/AS6802/CTFrame.h"
+#include "inet/linklayer/common/MACAddress.h"
 
 using namespace std;
 using namespace FiCo4OMNeT;
