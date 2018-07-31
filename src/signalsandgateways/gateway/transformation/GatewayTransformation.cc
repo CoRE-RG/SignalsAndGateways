@@ -155,6 +155,20 @@ void GatewayTransformation::readConfigXML(){
                 uint16_t xmlCTID = static_cast<uint16_t>(atoi((*it)->getAttribute("ctId")));
                 ctEthernetToCan.push_back(xmlCTID);
             }
+            cXMLElementList xmlAVBFrames = xmlTransformation->getChildrenByTagName("avbframe");
+            for(cXMLElementList::iterator it = xmlAVBFrames.begin(); it != xmlAVBFrames.end(); ++it){
+                uint16_t xmlStreamId = static_cast<uint16_t>(atoi((*it)->getAttribute("streamId")));
+                avbEthernetToCan.push_back(xmlStreamId);
+            }
+        }else if(type.compare("toMisc") == 0){
+            cXMLElementList xmlRawData = xmlTransformation->getChildrenByTagName("rawdata");
+            for(cXMLElementList::iterator it = xmlRawData.begin(); it != xmlRawData.end(); ++it){
+                uint16_t xmlId = static_cast<uint16_t>(atoi((*it)->getAttribute("id")));
+                cXMLElementList xmlCanFrames = (*it)->getChildrenByTagName("canframe");
+                for(cXMLElementList::iterator it2 = xmlCanFrames.begin(); it2 != xmlCanFrames.end(); ++it2){
+                    canToRawData[static_cast<unsigned int>(atoi((*it2)->getAttribute("canId")))].push_back(xmlId);
+                }
+            }
         }
     }
 }
@@ -195,6 +209,12 @@ list<cMessage*> GatewayTransformation::transformCanFrame(FiCo4OMNeT::CanDataFram
             ttframe->setName(messageName.c_str());
             transformedMsgs.push_back(ttframe);
         }
+    }else if(canToRawData.find(canFrame->getCanID()) != canToRawData.end()){
+        for(list<uint16_t>::iterator it = canToRawData[canFrame->getCanID()].begin(); it != canToRawData[canFrame->getCanID()].end(); ++it){
+            GatewayAggregationMessage* rawdata = transformCanToRawData(canFrame);
+            rawdata->setName(messageName.append(to_string(*it)).c_str());
+            transformedMsgs.push_back(rawdata);
+        }
     }
     return transformedMsgs;
 }
@@ -205,6 +225,7 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
     map<string, pair<QInfo, list< CanDataFrame*> > > qTargetMap;
     map<uint16_t, list<CanDataFrame*> > rcTargetMap;
     map<uint16_t, list<CanDataFrame*> > ttTargetMap;
+    map<uint16_t, list<CanDataFrame*> > rawTargetMap;
     cMessagePointerList pool = poolMessage->getPool();
     for(cMessagePointerList::iterator it = pool.begin(); it != pool.end(); ++it){
         CanDataFrame* canFrame= dynamic_cast<CanDataFrame*>(*it);
@@ -229,6 +250,11 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
         if(canToTTEthernet.find(canFrame->getCanID()) != canToTTEthernet.end()){
             for(list<uint16_t>::iterator it2 = canToTTEthernet[canFrame->getCanID()].begin(); it2 != canToTTEthernet[canFrame->getCanID()].end(); ++it2){
                 ttTargetMap[*it2].push_back(canFrame->dup());
+            }
+        }
+        if(canToRawData.find(canFrame->getCanID()) != canToRawData.end()){
+            for(list<uint16_t>::iterator it2 = canToRawData[canFrame->getCanID()].begin(); it2 != canToRawData[canFrame->getCanID()].end(); ++it2){
+                rawTargetMap[*it2].push_back(canFrame->dup());
             }
         }
         delete canFrame;
@@ -262,14 +288,23 @@ list<cMessage*> GatewayTransformation::transformPoolMessage(PoolMessage* poolMes
         ttFrame->setName(messageName.data());
         transformedMsgs.push_back(ttFrame);
     }
+    for(map<uint16_t, list<CanDataFrame*> >::iterator it = rawTargetMap.begin(); it != rawTargetMap.end(); ++it){
+        GatewayAggregationMessage* rawData = transformCanToRawData(it->second);
+        rawData->setName(messageName.append(to_string(it->first)).data());
+        transformedMsgs.push_back(rawData);
+    }
     return transformedMsgs;
 }
 
 list<cMessage*> GatewayTransformation::transformEthernetFrame(EthernetIIFrame* ethernetFrame){
     list<cMessage*> transformedMsgs;
     if(AVBFrame* avbFrame = dynamic_cast<AVBFrame*>(ethernetFrame)){
-        //TODO: AVB Transformation
-        delete avbFrame;
+        if(find(avbEthernetToCan.begin(), avbEthernetToCan.end(), avbFrame->getStreamID()) != avbEthernetToCan.end()){
+            list<CanDataFrame*> canFrames = transformEthernetToCan(avbFrame);
+            for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
+                transformedMsgs.push_back(dynamic_cast<cMessage*>(*it));
+            }
+        }
     }else if(CTFrame* ctFrame = dynamic_cast<CTFrame*>(ethernetFrame)){
         if(find(ctEthernetToCan.begin(), ctEthernetToCan.end(), ctFrame->getCtID()) != ctEthernetToCan.end()){
             list<CanDataFrame*> canFrames = transformEthernetToCan(ctFrame);
@@ -381,6 +416,22 @@ TTFrame* GatewayTransformation::transformCanToTTEthernet(list<CanDataFrame*> can
     ttFrame->encapsulate(gatewayAggregationMessage);
     setEthernetFrameSize(ttFrame);
     return ttFrame;
+}
+
+GatewayAggregationMessage* GatewayTransformation::transformCanToRawData(CanDataFrame* canFrame){
+    list<UnitMessage*> units;
+    units.push_back(generateUnitMessage(canFrame->dup()));
+    GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
+    return gatewayAggregationMessage;
+}
+
+GatewayAggregationMessage* GatewayTransformation::transformCanToRawData(list<CanDataFrame*> canFrames){
+    list<UnitMessage*> units;
+    for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
+        units.push_back(generateUnitMessage(*it));
+    }
+    GatewayAggregationMessage* gatewayAggregationMessage = generateGatewayAggregationMessage(units);
+    return gatewayAggregationMessage;
 }
 
 list<CanDataFrame*> GatewayTransformation::transformEthernetToCan(EthernetIIFrame* ethernetFrame){

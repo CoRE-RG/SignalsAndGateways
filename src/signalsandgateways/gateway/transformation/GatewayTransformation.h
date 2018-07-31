@@ -98,10 +98,16 @@ class GatewayTransformation : public cSimpleModule
          */
         std::map<unsigned int, std::list<uint16_t> > canToTTEthernet;
 
+        /** @brief Holds the information to which Raw destination CAN frames with the corresponding ID should be forwarded.
+         */
+        std::map<unsigned int, std::list<uint16_t> > canToRawData;
+
         /**
          * @brief Holds the information which frames with the corresponding CT IDs should be forwarded to CAN.
          */
         std::list<uint16_t> ctEthernetToCan;
+
+        std::list<uint16_t> avbEthernetToCan; //TODO use correct size of stream IDs
 
     protected:
         /**
@@ -171,6 +177,16 @@ class GatewayTransformation : public cSimpleModule
          * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a TT ethernet frame.
          */
         CoRE4INET::TTFrame* transformCanToTTEthernet(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
+
+        /**
+         * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a TT ethernet frame.
+         */
+        GatewayAggregationMessage* transformCanToRawData(FiCo4OMNeT::CanDataFrame* canFrame);
+
+        /**
+         * @brief Add several CAN frames into a GatewayAggregationMessage into and encapsulate it in a TT ethernet frame.
+         */
+        GatewayAggregationMessage* transformCanToRawData(std::list<FiCo4OMNeT::CanDataFrame*> canFrames);
 
         //transformCanToAVBEthernet...
 
