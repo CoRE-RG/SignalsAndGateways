@@ -15,12 +15,9 @@
 
 #include "CanSinkGatewayApp.h"
 
-#include <omnetpp/cmessage.h>
-#include <omnetpp/cobjectfactory.h>
-#include <omnetpp/csimplemodule.h>
-#include <omnetpp/regmacros.h>
-
+//FiCo4OMNeT
 #include "fico4omnet/buffer/can/CanInputBuffer.h"
+//Auto-generated messages
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;

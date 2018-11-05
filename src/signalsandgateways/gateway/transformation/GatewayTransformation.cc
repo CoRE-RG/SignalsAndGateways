@@ -15,24 +15,21 @@
 
 #include "GatewayTransformation.h"
 
-#include <omnetpp/cmodule.h>
-#include <omnetpp/cnamedobject.h>
-#include <omnetpp/cobjectfactory.h>
-#include <omnetpp/cpacket.h>
-#include <omnetpp/cpar.h>
-#include <omnetpp/csimplemodule.h>
-#include <omnetpp/cxmlelement.h>
-#include <omnetpp/regmacros.h>
+//std
 #include <algorithm>
 #include <cstdint>
 #include <cstdlib>
 #include <iterator>
 #include <utility>
-
-#include "core4inet/base/CoRE4INET_Defs.h"
-#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
+//INET
 #include "inet/linklayer/common/MACAddress.h"
 #include "inet/linklayer/ethernet/Ethernet.h"
+//CoRE4INET
+#include "core4inet/base/CoRE4INET_Defs.h"
+//FiCo4OMNeT
+//Auto-generated messages
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
+
 
 using namespace std;
 using namespace inet;

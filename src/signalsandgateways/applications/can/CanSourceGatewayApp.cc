@@ -15,12 +15,8 @@
 
 #include "CanSourceGatewayApp.h"
 
-#include <omnetpp/cmessage.h>
-#include <omnetpp/cobjectfactory.h>
-#include <omnetpp/csimplemodule.h>
-#include <omnetpp/csimulation.h>
-#include <omnetpp/regmacros.h>
-
+//FiCo4OMNeT
+//Auto-generated messages
 #include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
 using namespace FiCo4OMNeT;
