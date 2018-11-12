@@ -36,22 +36,20 @@ void AccumulationGatewayBuffering::initialize() {
 
     size_t numPools = scheduledHoldUpTimes.size();
     for (size_t i = 0; i < numPools; i++) {
-        char strBufHoldUpTime[32];
-        char strBufPoolSize[32];
-        snprintf(strBufHoldUpTime, 32, "pool%zuHoldUpTime", i);
-        snprintf(strBufPoolSize, 32, "pool%zuMessageSize", i);
+        string strBufHoldUpTime = "pool" + to_string(i) + "HoldUpTime";
+        string strBufPoolSize = "pool" + to_string(i) + "MessageSize";
 
-        simsignal_t signalHoldUpTime = registerSignal(strBufHoldUpTime);
+        simsignal_t signalHoldUpTime = registerSignal(strBufHoldUpTime.c_str());
         cProperty *statisticTemplateHoldUpTime = getProperties()->get(
                 "statisticTemplate", "poolHoldUpTime");
-        getEnvir()->addResultRecorders(this, signalHoldUpTime, strBufHoldUpTime,
+        getEnvir()->addResultRecorders(this, signalHoldUpTime, strBufHoldUpTime.c_str(),
                 statisticTemplateHoldUpTime);
         poolHoldUpTimeSignals.push_back(signalHoldUpTime);
 
-        simsignal_t signalPoolSize = registerSignal(strBufPoolSize);
+        simsignal_t signalPoolSize = registerSignal(strBufPoolSize.c_str());
         cProperty *statisticTemplatePoolSize = getProperties()->get(
                 "statisticTemplate", "poolMessageSize");
-        getEnvir()->addResultRecorders(this, signalPoolSize, strBufPoolSize,
+        getEnvir()->addResultRecorders(this, signalPoolSize, strBufPoolSize.c_str(),
                 statisticTemplatePoolSize);
         poolSizeSignals.push_back(signalPoolSize);
     }
@@ -100,9 +98,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg) {
         cMessagePointerList* poolList = getPoolList(msg);
         unsigned int poolID = getPoolID(poolList);
         emitSignals(poolList);
-        char strBuf[32];
-        snprintf(strBuf, 32, "Pool %u", poolID);
-        PoolMessage* poolMsg = new PoolMessage(strBuf);
+        PoolMessage* poolMsg = new PoolMessage(("Pool " + to_string(poolID)).c_str());
         poolMsg->setPool(*poolList);
         poolList->clear();
         send(poolMsg, gate("out"));
@@ -110,7 +106,7 @@ void AccumulationGatewayBuffering::handleMessage(cMessage *msg) {
         unsigned int canID = dataFrame->getCanID();
         cMessagePointerList* poolList;
         poolList = getPoolList(canID);
-        if (poolList != NULL) {
+        if (poolList != nullptr) {
             cMessage* poolHoldUpTimeEvent = getPoolHoldUpTimeEvent(poolList);
             simtime_t IDHoldUpTime = getIDHoldUpTime(canID);
             if (poolList->empty()

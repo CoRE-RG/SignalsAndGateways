@@ -44,7 +44,7 @@ void EthernetGatewayApplication::initialize(){
 void EthernetGatewayApplication::handleMessage(cMessage *msg) {
     CTApplicationBase::handleMessage(msg);
 
-    if(dynamic_cast<TTBufferEmpty*>(msg) != 0){
+    if(dynamic_cast<TTBufferEmpty*>(msg) != nullptr){
         delete msg;
     }else if(msg->arrivedOn("TTin") || msg->arrivedOn("RCin") || msg->arrivedOn("in")){
         send(msg, "upperLayerOut");

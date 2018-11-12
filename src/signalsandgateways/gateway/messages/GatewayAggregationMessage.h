@@ -32,7 +32,7 @@ namespace SignalsAndGateways {
 class GatewayAggregationMessage : public GatewayAggregationMessage_Base
 {
     private:
-        std::list<UnitMessage*> units;
+        std::list<UnitMessage*> unitList;
 
         void copy(const GatewayAggregationMessage& other);
 
@@ -43,7 +43,7 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
          * @param newName message name
          * @param kind message type
          */
-        GatewayAggregationMessage(const char *newName=NULL, short kind=0) : GatewayAggregationMessage_Base(newName,kind)
+        GatewayAggregationMessage(const char *newName=nullptr, short kind=0) : GatewayAggregationMessage_Base(newName,kind)
         {
         }
 

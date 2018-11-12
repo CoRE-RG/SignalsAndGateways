@@ -22,36 +22,36 @@ namespace SignalsAndGateways {
 Register_Class(GatewayAggregationMessage);
 
 void GatewayAggregationMessage::copy(const GatewayAggregationMessage& other){
-    for(list<UnitMessage*>::const_iterator it = other.units.begin(); it != other.units.end(); ++it){
+    for(list<UnitMessage*>::const_iterator it = other.unitList.begin(); it != other.unitList.end(); ++it){
         UnitMessage* unit = (*it)->dup();
         take(unit);
-        this->units.push_back(unit);
+        this->unitList.push_back(unit);
     }
 }
 
 void GatewayAggregationMessage::encapUnit(UnitMessage* unit){
     take(unit);
     setByteLength(getByteLength() + unit->getByteLength());
-    units.push_back(unit);
+    unitList.push_back(unit);
 }
 
 UnitMessage* GatewayAggregationMessage::decapUnit(){
-    UnitMessage* unit = NULL;
-    if(units.size() > 0){
-        unit = units.front();
+    UnitMessage* unit = nullptr;
+    if(unitList.size() > 0){
+        unit = unitList.front();
         setByteLength(getByteLength() - unit->getByteLength());
-        units.pop_front();
+        unitList.pop_front();
         drop(unit);
     }
     return unit;
 }
 
 list<UnitMessage*> GatewayAggregationMessage::getEncapUnits() const{
-    return units;
+    return unitList;
 }
 
 size_t GatewayAggregationMessage::getUnitCnt(){
-    return units.size();
+    return unitList.size();
 }
 
 } // namespace
