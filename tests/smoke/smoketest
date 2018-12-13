@@ -156,7 +156,7 @@ class SmokeTestCase(SimulationTestCase):
         os.environ['DYLD_LIBRARY_PATH'] = inetRoot + os.sep + "src" + ":" + core4inetRoot + os.sep + "src" + ":" +fico4omnetRoot + os.sep + "src"
         # run the simulation
         workingdir = os.path.normpath(_iif(self.wd.startswith('/'), signalsAndGatewayRoot + "/" + self.wd, self.wd))
-        command = opp_run + " -n " + nedPath + " -l " + core4inetLib + " -l " + fico4omnetLib + " -l " + signalsAndGatewayLib + " -l " +  inetLib + " -u Cmdenv " + self.args + \
+        command = opp_run + " -n " + nedPath + " -l " +  inetLib + " -l " + core4inetLib + " -l " + fico4omnetLib + " -l " + signalsAndGatewayLib + " -u Cmdenv " + self.args + \
             " --cpu-time-limit=" + cpuTimeLimit + \
             " --vector-recording=false --scalar-recording=false"
         
