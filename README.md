@@ -2,33 +2,27 @@
 
 ## Continuous Integration
 
-The build state of the master branch is monitored for Windows 10, OS X and Linux:
+The build state of the master branch is monitored:
 * Building:
-<a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways"></a>
+<a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways"></a>
 * Tests:
-<a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways_tests/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways_tests"></a>
+<a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests"></a>
 
 <table>
   <tr>
     <th></th>
-    <th>OS X (x86_64)</th>
-    <th>Linux (x86_64)</th>
-    <th>Linux (i386)</th>
-    <th>Windows 10 (x86_64)</th>
+    <th>Ubuntu 18.04</th>
+    <th>Windows 10</th>
   </tr>
   <tr>
     <td>Building</td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways/Nodes=mobi10/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways/Nodes=mobi10"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways/Nodes=inet163/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways/Nodes=inet163"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways/Nodes=inet162/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways/Nodes=inet162"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways/Nodes=inet161/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways/Nodes=inet161"></a></td>
+    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Ubuntu_18.04"></a></td>
+    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Windows_10"></a></td>
   </tr>
   <tr>
     <td>Tests</td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways_tests/Nodes=mobi10/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways_tests/Nodes=mobi10"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways_tests/Nodes=inet163/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways_tests/Nodes=inet163"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways_tests/Nodes=inet162/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways_tests/Nodes=inet162"></a></td>
-    <td><a href="https://jenkins.inet.haw-hamburg.de/job/SignalsAndGateways_Jobs/job/SignalsAndGateways_tests/Nodes=inet161/lastBuild/"><img src="https://jenkins.inet.haw-hamburg.de/buildStatus/icon?job=SignalsAndGateways_Jobs/SignalsAndGateways_tests/Nodes=inet161"></a></td>
+    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Ubuntu_18.04"></a></td>
+    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Windows_10"></a></td>
   </tr>
 </table>
 
