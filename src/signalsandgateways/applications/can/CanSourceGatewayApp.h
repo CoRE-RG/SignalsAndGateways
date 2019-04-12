@@ -34,6 +34,11 @@ using namespace omnetpp;
  */
 class CanSourceGatewayApp : public FiCo4OMNeT::CanTrafficSourceAppBase
 {
+  public:
+    /**
+     * @brief Destructor of CanSourceGatewayApp
+     */
+    virtual ~CanSourceGatewayApp();
   protected:
     /**
      * @brief Handles incoming TransportMessages

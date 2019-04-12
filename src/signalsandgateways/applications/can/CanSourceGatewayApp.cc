@@ -25,6 +25,11 @@ namespace SignalsAndGateways {
 
 Define_Module(CanSourceGatewayApp);
 
+CanSourceGatewayApp::~CanSourceGatewayApp()
+{
+    outgoingDataFrames.clear();
+}
+
 void CanSourceGatewayApp::handleMessage(cMessage *msg)
 {
     if(msg->arrivedOn("in")){

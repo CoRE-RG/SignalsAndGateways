@@ -23,7 +23,7 @@ namespace SignalsAndGateways {
 
 using namespace omnetpp;
 
-/*
+/**
  * @brief A transformation module with no functionality besides forwarding incoming frames.
  *
  * @author Till Steinbach
