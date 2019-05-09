@@ -32,11 +32,11 @@ namespace SignalsAndGateways {
  */
 class EthernetGatewayApplication: public virtual CoRE4INET::CTApplicationBase {
 
-private:
+protected:
     /**
      * @brief Calls the inherited initialize method.
      */
-    void initialize();
+    virtual void initialize();
 
     /**
      * @brief Handles incoming messages.
@@ -46,7 +46,7 @@ private:
      *
      * @param msg The incoming message
      */
-    void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg);
 
 public:
     /**
@@ -58,6 +58,21 @@ public:
      * @brief Destructor
      */
     virtual ~EthernetGatewayApplication();
+
+    /**
+     * @brief Register a Gate to receive messages of a certain CAN ID as RAW GatewayAggregationMessage.
+     *
+     * @param canID         The can ID to receive
+     * @param deliveryGate  The cGate to which messages should be delivered
+     */
+    virtual void registerForCANID(unsigned int canID, cGate* deliveryGate);
+
+
+private:
+    /**
+     * Map for delivery gates for each can id
+     */
+    std::unordered_map<unsigned int, std::vector<cGate*>> _canIdSubMap;
 };
 
 }

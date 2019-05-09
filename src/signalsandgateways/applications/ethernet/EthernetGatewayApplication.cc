@@ -22,8 +22,15 @@
 #include "core4inet/buffer/AS6802/TTBufferEmpty_m.h"
 #include "core4inet/buffer/base/BGBuffer.h"
 
+//SignalsAndGateways
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
+
+//FiCo4OMNeT
+//Auto-generated messages
+#include "fico4omnet/linklayer/can/messages/CanDataFrame_m.h"
 
 using namespace CoRE4INET;
+using namespace FiCo4OMNeT;
 
 namespace SignalsAndGateways {
 
@@ -64,12 +71,34 @@ void EthernetGatewayApplication::handleMessage(cMessage *msg) {
                 sendDirect(ethernetFrame->dup(), (*buf)->gate("in"));
             }
             delete ethernetFrame;
+        }else if(GatewayAggregationMessage* gwAggrFrame = dynamic_cast<GatewayAggregationMessage*>(msg)){
+            //seperate the can messages
+            while(UnitMessage* unitMessage = gwAggrFrame->decapUnit()){
+                //is this a can message?
+                if(CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(unitMessage->getEncapsulatedPacket())){
+                    std::vector<cGate*> gates = _canIdSubMap[canFrame->getCanID()];
+                    //check which gates are subscribed
+                    for(std::vector<cGate*>::iterator gate = gates.begin(); gate != gates.end(); ++gate){
+                        //deliver message to subscriber
+                        GatewayAggregationMessage* deliver = new GatewayAggregationMessage();
+                        deliver->encapUnit(unitMessage->dup());
+                        sendDirect(deliver, *gate);
+                    }
+                }
+                delete unitMessage;
+            }
+            delete msg;
         }else{
             delete msg;
         }
     }else{
         delete msg;
     }
+}
+
+void EthernetGatewayApplication::registerForCANID(unsigned int canID,
+        cGate* deliveryGate) {
+    _canIdSubMap[canID].push_back(deliveryGate);
 }
 
 }
