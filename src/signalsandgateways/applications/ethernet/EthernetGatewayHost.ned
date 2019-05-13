@@ -30,7 +30,7 @@ import core4inet.buffer.AS6802.RCQueueBuffer;
 //
 // @author Sebastian Mueller
 //
-module EthernetGatewayHost extends TTEAVBEtherHost
+module EthernetGatewayHost extends TTEAVBEtherHost like IEthernetGatewayHost
 {
     parameters:
         //@display("bgb=688,409");

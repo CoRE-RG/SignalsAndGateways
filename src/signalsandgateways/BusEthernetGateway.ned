@@ -16,7 +16,7 @@
 package signalsandgateways;
 
 import signalsandgateways.gateway.GatewayBase;
-import signalsandgateways.applications.ethernet.EthernetGatewayHost;
+import signalsandgateways.applications.ethernet.IEthernetGatewayHost;
 import signalsandgateways.applications.can.CanGatewayNode;
 
 //
@@ -49,7 +49,7 @@ module BusEthernetGateway
         }
         
         //ethernet module
-        tte[countOfEthernetPorts]: EthernetGatewayHost {
+        tte[countOfEthernetPorts]: <default("EthernetGatewayHost")> like IEthernetGatewayHost {
             @display("p=74,100,c,130");
         }
         
