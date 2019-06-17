@@ -98,16 +98,22 @@ class GatewayTransformation : public cSimpleModule
          */
         std::map<unsigned int, std::list<uint16_t> > canToTTEthernet;
 
-        /** @brief Holds the information to which Raw destination CAN frames with the corresponding ID should be forwarded.
-         */
-        std::map<unsigned int, std::list<uint16_t> > canToRawData;
-
         /**
          * @brief Holds the information which frames with the corresponding CT IDs should be forwarded to CAN.
          */
         std::list<uint16_t> ctEthernetToCan;
 
         std::list<uint16_t> avbEthernetToCan; //TODO use correct size of stream IDs
+
+        /**
+         * @brief Holds the information which CAN frames should be forwarded to which RAW frames with the corresponding ID.
+         */
+        std::map<unsigned int, std::list<uint16_t> > canToRawData;
+
+        /**
+         * @brief Holds the information to which CAN destination RAW frames with the corresponding ID should be forwarded.
+         */
+        std::list<unsigned int> rawDataToCan;
 
     protected:
         /**
@@ -137,6 +143,11 @@ class GatewayTransformation : public cSimpleModule
          * @brief Transform CAN frames from an ethernet frame.
          */
         std::list<cMessage*> transformEthernetFrame(inet::EthernetIIFrame* ethernetFrame);
+
+        /**
+         * @brief Transform CAN frames from an ethernet frame.
+         */
+        std::list<cMessage*> transformRawDataFrame(GatewayAggregationMessage* rawDataFrame);
 
         /**
          * @brief Add a single CAN frame into a GatewayAggregationMessage into and encapsulate it in a best effort ethernet frame.
@@ -194,6 +205,11 @@ class GatewayTransformation : public cSimpleModule
          * @brief Decapsulate the GatewayAggregationMessage from the ethernetFrame and extract all CAN frames from it.
          */
         std::list<FiCo4OMNeT::CanDataFrame*> transformEthernetToCan(inet::EthernetIIFrame* ethernetFrame);
+
+        /**
+         * @brief Decapsulate the GatewayAggregationMessage from the ethernetFrame and extract all CAN frames from it.
+         */
+        std::list<FiCo4OMNeT::CanDataFrame*> transformRawDataToCan(GatewayAggregationMessage* rawDataFrame);
 
         //transformEthernetToFlexRay...
 

@@ -17,7 +17,7 @@
 
 #include <algorithm>
 #include <cstdlib>
-
+#include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
 //INET
 #include "inet/linklayer/common/MACAddress.h"
 //CoRE4INET
@@ -42,6 +42,7 @@ const std::string BaseGatewayRouter::AVBPREFIX = "avb_";
 const std::string BaseGatewayRouter::TTEPREFIX = "tte_";
 const std::string BaseGatewayRouter::ETHPREFIX = "eth_";
 const std::string BaseGatewayRouter::VIDPREFIX = "vid_";
+const std::string BaseGatewayRouter::RAWPREFIX = "raw_";
 
 void BaseGatewayRouter::initialize()
 {
@@ -67,6 +68,15 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
                     destinationGateIndices.insert(destinationGateIndices.end(), destinationGateIndicesWithVID.begin(), destinationGateIndicesWithVID.end());
                 }
             }
+        }else if(GatewayAggregationMessage* rawFrame = dynamic_cast<GatewayAggregationMessage*>(msg)){
+            if(rawFrame->getUnitCnt() != 1){
+                std::string err = "Received RAW Frame with " + std::to_string(rawFrame->getUnitCnt()) + " Units. This is not yet supported.";
+                throw cRuntimeError(err.c_str());
+            }
+            if(CanDataFrame* rawCanFrame = dynamic_cast<CanDataFrame*>(rawFrame->getEncapUnits().front()->getEncapsulatedPacket())){
+                destinationGateIndices = getDestinationGateIndices(rawFrame->getArrivalGate()->getIndex(), RAWPREFIX + to_string(rawCanFrame->getCanID()));
+            }
+
         }
         if (destinationGateIndices.empty()) {
             emit(droppedFramesSignal,static_cast<unsigned long>(1));
@@ -107,6 +117,11 @@ void BaseGatewayRouter::readConfigXML(){
                 if(xmlMessageId){
                     string messageID = xmlMessageId;
                     routing[source][destination].push_back(TTEPREFIX + messageID);
+                }
+                xmlMessageId = xmlRouteMessages[j]->getAttribute("id");
+                if(xmlMessageId){
+                    string messageID = xmlMessageId;
+                    routing[source][destination].push_back(RAWPREFIX + messageID);
                 }
                 xmlMessageId = xmlRouteMessages[j]->getAttribute("dst");
                 if(xmlMessageId){

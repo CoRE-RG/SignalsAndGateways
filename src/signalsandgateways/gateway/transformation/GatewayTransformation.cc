@@ -57,6 +57,8 @@ void GatewayTransformation::handleMessage(cMessage *msg)
             transformedMsgs = transformPoolMessage(poolMessage);
         }else if(EthernetIIFrame* ethernetFrame = dynamic_cast<EthernetIIFrame*>(msg)){
             transformedMsgs = transformEthernetFrame(ethernetFrame);
+        }else if(GatewayAggregationMessage* rawDataFrame = dynamic_cast<GatewayAggregationMessage*>(msg)){
+            transformedMsgs = transformRawDataFrame(rawDataFrame);
         }
         for(list<cMessage*>::iterator it = transformedMsgs.begin(); it != transformedMsgs.end(); ++it){
             send((*it), "out");
@@ -161,6 +163,11 @@ void GatewayTransformation::readConfigXML(){
                     for(cXMLElementList::iterator it = xmlAVBFrames.begin(); it != xmlAVBFrames.end(); ++it){
                         uint16_t xmlStreamId = static_cast<uint16_t>(atoi((*it)->getAttribute("streamId")));
                         avbEthernetToCan.push_back(xmlStreamId);
+                    }
+                    cXMLElementList xmlRawData = xmlTransformation->getChildrenByTagName("rawdata");
+                    for(cXMLElementList::iterator it = xmlRawData.begin(); it != xmlRawData.end(); ++it){
+                        unsigned int xmlId = static_cast<unsigned int>(atoi((*it)->getAttribute("id")));
+                        rawDataToCan.push_back(xmlId);
                     }
                 }else if(type.compare("toMisc") == 0){
                     cXMLElementList xmlRawData = xmlTransformation->getChildrenByTagName("rawdata");
@@ -344,6 +351,25 @@ list<cMessage*> GatewayTransformation::transformEthernetFrame(EthernetIIFrame* e
     return transformedMsgs;
 }
 
+std::list<cMessage*> GatewayTransformation::transformRawDataFrame(GatewayAggregationMessage* rawDataFrame) {
+    list<cMessage*> transformedMsgs;
+    if(rawDataFrame){
+        if(rawDataFrame->getUnitCnt() != 1){
+            std::string err = "Received RAW Frame with " + std::to_string(rawDataFrame->getUnitCnt()) + " Units. This is not yet supported.";
+            throw cRuntimeError(err.c_str());
+        }
+        if(CanDataFrame* rawCanFrame = dynamic_cast<CanDataFrame*>(rawDataFrame->getEncapUnits().front()->getEncapsulatedPacket())){
+            if(find(rawDataToCan.begin(), rawDataToCan.end(), rawCanFrame->getCanID()) != rawDataToCan.end()){
+                list<CanDataFrame*> canFrames = transformRawDataToCan(rawDataFrame);
+                for(list<CanDataFrame*>::iterator it = canFrames.begin(); it != canFrames.end(); ++it){
+                    transformedMsgs.push_back(dynamic_cast<cMessage*>(*it));
+                }
+            }
+        }
+    }
+    return transformedMsgs;
+}
+
 EthernetIIFrame* GatewayTransformation::transformCanToBEEthernet(FiCo4OMNeT::CanDataFrame* canFrame){
     list<UnitMessage*> units;
     units.push_back(generateUnitMessage(canFrame->dup()));
@@ -459,6 +485,19 @@ list<CanDataFrame*> GatewayTransformation::transformEthernetToCan(EthernetIIFram
             delete unitMessage;
         }
         delete gatewayAggregationMessage;
+    }
+    return canFrames;
+}
+
+std::list<FiCo4OMNeT::CanDataFrame*> GatewayTransformation::transformRawDataToCan(GatewayAggregationMessage* rawDataFrame) {
+    list<CanDataFrame*> canFrames;
+    if(rawDataFrame){
+        while(UnitMessage* unitMessage = rawDataFrame->decapUnit()){
+            CanDataFrame* canFrame = dynamic_cast<CanDataFrame*>(unitMessage->decapsulate());
+            canFrame->setBitLength(canFrame->getBitLength() + CANCRCBITLENGTH);
+            canFrames.push_back(canFrame);
+            delete unitMessage;
+        }
     }
     return canFrames;
 }

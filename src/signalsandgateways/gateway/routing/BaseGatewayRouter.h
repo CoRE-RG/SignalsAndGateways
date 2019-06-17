@@ -62,6 +62,11 @@ class BaseGatewayRouter : public cSimpleModule
          */
         static const std::string VIDPREFIX;
 
+        /**
+         * @brief RAW Data as GatewayAggregationMessage identification prefix
+         */
+        static const std::string RAWPREFIX;
+
     private:
         std::map<int, std::map<int, std::list<std::string> > > routing;
 
