@@ -3,7 +3,7 @@ INSTALLATION INSTRUCTIONS
 
 PREREQUISITES
 
-You should have a working OMNeT++ installation, version 5.4.1 with CoRE4INET and FiCo4OMNeT installed.
+You should have a working OMNeT++ installation, version 5.1.1 with CoRE4INET and FiCo4OMNeT installed.
 
 General
 -------
