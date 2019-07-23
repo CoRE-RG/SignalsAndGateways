@@ -30,17 +30,16 @@ import unittest
 from distutils import spawn
 from StringIO import StringIO
 
-core4inetRoot = os.path.abspath("../../../CoRE4INET")
 signalsAndGatewayRoot = os.path.abspath("../..")
+core4inetRoot = os.path.abspath("../../../CoRE4INET")
 fico4omnetRoot = os.path.abspath("../../../FiCo4OMNeT")
-#TODO: Make test read paths from somewhere else
 inetRoot = os.path.abspath("../../../inet")
 sep = ";" if sys.platform == 'win32' else ':'
 nedPath = inetRoot + "/src" + sep + core4inetRoot + "/src" + sep + fico4omnetRoot + "/src" + sep + signalsAndGatewayRoot + "/src"+ sep + signalsAndGatewayRoot + "/examples"
-core4inetLib = core4inetRoot + "/src/CoRE4INET"
-inetLib = inetRoot + "/src/INET"
 signalsAndGatewayLib = signalsAndGatewayRoot + "/src/SignalsAndGateways"
+core4inetLib = core4inetRoot + "/src/CoRE4INET"
 fico4omnetLib = fico4omnetRoot + "/src/FiCo4OMNeT"
+inetLib = inetRoot + "/src/INET"
 executable = "opp_run"
 cpuTimeLimit = "30s"
 logFile = "test.out"
@@ -341,7 +340,7 @@ class FingerprintTestCase(SimulationTestCase):
             # note: fingerprint mismatch is technically NOT an error in 4.2 or before! (exitcode==0)
             self.storeExitcodeCallback(result.exitcode)
             if result.exitcode != 0:
-                raise Exception("runtime error:" + result.errormsg)
+                raise Exception("runtime error(" + result.exitcode + "):" + result.errormsg)
             elif result.cpuTimeLimitReached:
                 raise Exception("cpu time limit exceeded")
             elif result.simulatedTime == 0 and self.simtimelimit != '0s':
