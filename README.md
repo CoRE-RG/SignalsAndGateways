@@ -6,11 +6,11 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 
 
 ## Quick Start
-1. Download OMNeT++ 5.1.1
-    * [https://omnetpp.org/download/old](https://omnetpp.org/download/old)
+1. Download OMNeT++ 5.5.1
+    * [https://omnetpp.org/download/](https://omnetpp.org/download/)
 2. Install OMNeT++
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
-3. Get INET framework 3.5.0
+3. Get INET framework 3.6.6
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
 4. Install CoRE plugins (optional)
     * OMNEST/OMNeT++ -> Help -> Install New Software...
