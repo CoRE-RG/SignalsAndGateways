@@ -5,6 +5,10 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 <img src="/doc/images/signalsandgateways.png" alt="SignalsAndGateways Environment" width="75%">
 
 
+## News
+* Update dependencies to OMNeT++ 5.5.1 and INET 3.6.6
+
+
 ## Quick Start
 1. Download OMNeT++ 5.5.1
     * [https://omnetpp.org/download/](https://omnetpp.org/download/)
@@ -28,9 +32,9 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 
 The build state of the master branch is monitored:
 * Building:
-<a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways"></a>
+<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways"></p>
 * Tests:
-<a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests"></a>
+<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests"></p>
 
 <table>
   <tr>
@@ -40,13 +44,13 @@ The build state of the master branch is monitored:
   </tr>
   <tr>
     <td>Building</td>
-    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Ubuntu_18.04"></a></td>
-    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Windows_10"></a></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Ubuntu_18.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways/Nodes=Windows_10"></td>
   </tr>
   <tr>
     <td>Tests</td>
-    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/Nodes=Ubuntu_18.04/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Ubuntu_18.04"></a></td>
-    <td><a href="https://jenkins.core-rg.de/job/SignalsAndGateways/job/SignalsAndGateways_tests/Nodes=Windows_10/lastBuild/"><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Windows_10"></a></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Ubuntu_18.04"></td>
+    <td><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests/Nodes=Windows_10"></td>
   </tr>
 </table>
 
