@@ -6,7 +6,7 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 
 
 ## News
-* Update dependencies to OMNeT++ 5.5.1 and INET 3.6.6
+* Switch to OMNeT++ 5.5.1 and INET 3.6.6
 
 
 ## Quick Start
