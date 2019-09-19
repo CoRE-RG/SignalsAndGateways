@@ -32,9 +32,9 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 
 The build state of the master branch is monitored:
 * Building:
-<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways"></p>
+<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways"></a>
 * Tests:
-<p><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests"></p>
+<a><img src="https://jenkins.core-rg.de/buildStatus/icon?job=SignalsAndGateways/SignalsAndGateways_tests"></a>
 
 <table>
   <tr>
