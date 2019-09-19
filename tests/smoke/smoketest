@@ -40,7 +40,6 @@ inetLib = inetRoot + "/src/INET"
 signalsAndGatewayLib = signalsAndGatewayRoot + "/src/SignalsAndGateways"
 fico4omnetLib = fico4omnetRoot + "/src/FiCo4OMNeT"
 opp_run = "opp_run"
-
 cpuTimeLimit = "3s"
 logFile = "test.out"
 
