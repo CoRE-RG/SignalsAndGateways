@@ -317,7 +317,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
                                 								
-                                <option id="gnu.cpp.compiler.option.preprocessor.def.1883670124" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1883670124" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
@@ -331,9 +331,9 @@
                                     								
                                 </option>
                                 								
-                                <option id="gnu.cpp.compiler.option.include.paths.744299446" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.744299446" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
-                                    <listOptionValue builtIn="false" value="../../src"/>
+                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/src}&quot;"/>
                                     								
                                 </option>
                                 								
@@ -343,7 +343,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.86770136" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
                                 								
-                                <option id="gnu.c.compiler.option.preprocessor.def.symbols.448238711" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.448238711" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
@@ -399,7 +399,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.189537261" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
                                 								
-                                <option id="gnu.cpp.compiler.option.preprocessor.def.1847373841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1847373841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
@@ -419,7 +419,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1484831973" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
                                 								
-                                <option id="gnu.c.compiler.option.preprocessor.def.symbols.960144838" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.960144838" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
@@ -461,7 +461,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.764747661" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
                                 								
-                                <option id="gnu.cpp.compiler.option.preprocessor.def.886969575" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.886969575" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
@@ -481,7 +481,7 @@
                             							
                             <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1762985110" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
                                 								
-                                <option id="gnu.c.compiler.option.preprocessor.def.symbols.1913271077" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1913271077" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
                                     									
                                     <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
                                     									
