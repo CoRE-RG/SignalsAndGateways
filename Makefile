@@ -11,7 +11,7 @@ ifndef CORE4INET_PROJ
     ifneq ($(wildcard ../CoRE4INET),)
         CORE4INET_PROJ=../../CoRE4INET
     else
-        $(error "Cannot find CoRE4INET framework in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+        $(error "Cannot find CoRE4INET framework in the usual location. You have to set the PATH to CoRE4INET in the CORE4INET_PROJ variable")
     endif
 endif
 #Try to detect FiCo4OMNeT if variable is not set
@@ -19,7 +19,7 @@ ifndef FICO4OMNET_PROJ
     ifneq ($(wildcard ../FiCo4OMNeT),)
         FICO4OMNET_PROJ=../../FiCo4OMNeT
     else
-        $(error "Cannot find FiCo4OMNeT in the usual location. You have to set the PATH to INET in the INET_PROJ variable")
+        $(error "Cannot find FiCo4OMNeT in the usual location. You have to set the PATH to FiCo4OMNeT in the FICO4OMNET_PROJ variable")
     endif
 endif
 
@@ -40,7 +40,7 @@ else
     DBG_SUFFIX=
 endif
 
-MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET$(DBG_SUFFIX) -lINET$(DBG_SUFFIX) -lFiCo4OMNeT$(DBG_SUFFIX) -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ)
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ) -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET$(DBG_SUFFIX) -lINET$(DBG_SUFFIX) -lFiCo4OMNeT$(DBG_SUFFIX) 
 
 makefiles: src/signalsandgateways/features.h makefiles-so
 
