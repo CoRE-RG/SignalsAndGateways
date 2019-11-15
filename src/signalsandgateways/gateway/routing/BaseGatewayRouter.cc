@@ -47,7 +47,21 @@ const std::string BaseGatewayRouter::RAWPREFIX = "raw_";
 void BaseGatewayRouter::initialize()
 {
     droppedFramesSignal = registerSignal("droppedFramesSignal");
+
+    handleParameterChange(nullptr);
     readConfigXML();
+}
+
+void BaseGatewayRouter::handleParameterChange(const char* parname) {
+
+    if (!parname || !strcmp(parname, "gatewayID"))
+    {
+        this->gatewayID = par("gatewayID").stringValue();
+        if(this->gatewayID.empty() || !strcmp(this->gatewayID.c_str(), "auto")){
+            //auto create id!
+            this->gatewayID = this->getParentModule()->getParentModule()->getName();
+        }
+    }
 }
 
 void BaseGatewayRouter::handleMessage(cMessage *msg)
@@ -92,7 +106,7 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
 
 void BaseGatewayRouter::readConfigXML(){
     cXMLElement* xmlDoc = par("configXML").xmlValue();
-    string gatewayName = this->getParentModule()->getParentModule()->getName();
+    string gatewayName = this->gatewayID;
     string xpath = "/config/gateway[@id='" + gatewayName + "']/routing";
     cXMLElement* xmlRouting = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
     if(xmlRouting){
@@ -152,3 +166,4 @@ vector<int> BaseGatewayRouter::getDestinationGateIndices(int sourceIndex, string
 }
 
 } //namespace
+

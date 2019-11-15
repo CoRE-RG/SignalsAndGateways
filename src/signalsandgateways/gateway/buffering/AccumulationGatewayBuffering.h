@@ -39,7 +39,7 @@ using namespace omnetpp;
  *
  * According to the XML files incoming can frames are grouped. Every frame has a specific hold up time and as soon as the timer of a frame reaches zero the whole group is forwarded to the transformation module.
  *
- * @author Stefan Buschmann
+ * @author Stefan Buschmann, Timo Haeckel
  */
 class AccumulationGatewayBuffering : public cSimpleModule
 {
@@ -54,6 +54,8 @@ protected:
      * @brief Initialization of the module.
      */
     virtual void initialize();
+
+    virtual void handleParameterChange(const char *parname) override;
 
     /**
      * @brief Self messages represent the end of a pool-hold-up time. Messages from the routing module are processed.
@@ -97,6 +99,11 @@ private:
      * @brief Signals that are emitted when a pool is forwarded to the next module.
      */
     std::vector<simsignal_t> poolHoldUpTimeSignals;
+
+    /**
+     * @brief Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+     */
+    std::string gatewayID;
 
     /**
      * @brief Gateway configuration using information from assigned XML file.

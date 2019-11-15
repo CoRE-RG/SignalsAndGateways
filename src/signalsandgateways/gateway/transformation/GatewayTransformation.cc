@@ -44,7 +44,20 @@ const int GatewayTransformation::CANCRCBITLENGTH = 16;
 
 void GatewayTransformation::initialize()
 {
+    handleParameterChange(nullptr);
     readConfigXML();
+}
+
+void GatewayTransformation::handleParameterChange(const char* parname) {
+
+    if (!parname || !strcmp(parname, "gatewayID"))
+    {
+        this->gatewayID = par("gatewayID").stringValue();
+        if(this->gatewayID.empty() || !strcmp(this->gatewayID.c_str(), "auto")){
+            //auto create id!
+            this->gatewayID = this->getParentModule()->getParentModule()->getName();
+        }
+    }
 }
 
 void GatewayTransformation::handleMessage(cMessage *msg)
@@ -70,7 +83,7 @@ void GatewayTransformation::handleMessage(cMessage *msg)
 void GatewayTransformation::readConfigXML(){
     //    string xpath = "/config/gateway[@id='" + gatewayName + "']/transformation[@destination='" + thisGateNo + "']";
     cXMLElement* xmlDoc = par("configXML").xmlValue();
-    string gatewayName = this->getParentModule()->getParentModule()->getName();
+    string gatewayName = this->gatewayID;
     string thisGateNo = to_string(this->getIndex());
     string xpath = "/config/gateway[@id='" + gatewayName + "']";
     cXMLElement* xmlGateway = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
@@ -537,7 +550,7 @@ GatewayAggregationMessage* GatewayTransformation::generateGatewayAggregationMess
 
 string GatewayTransformation::createMessageName(const char* additionalInformation){
     string str;
-    str.append(this->getParentModule()->getParentModule()->getName());
+    str.append(gatewayID);
     str.append(" - ");
     str.append(additionalInformation);
     return str;

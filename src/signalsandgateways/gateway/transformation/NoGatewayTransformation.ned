@@ -18,13 +18,16 @@ package signalsandgateways.gateway.transformation;
 //
 // A transformation module with no functionallity besides forwarding incoming frames.
 //
-// @author Till Steinbach
+// @author Till Steinbach, Timo Haeckel
 //
 simple NoGatewayTransformation like IGatewayTransformation
 {
     parameters:
         //Path of the gateway configuration xml file
         xml configXML;
+        
+        //Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+        string gatewayID = default("auto");
         
     gates:
         input in;

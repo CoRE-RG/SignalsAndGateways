@@ -20,7 +20,7 @@ package signalsandgateways.gateway.buffering;
 //
 // @see ~IGatewayBuffering
 //
-// @author Stefan Buschmann
+// @author Stefan Buschmann, Timo Haeckel
 //
 simple AccumulationGatewayBuffering like IGatewayBuffering
 {
@@ -35,6 +35,9 @@ simple AccumulationGatewayBuffering like IGatewayBuffering
     	
     	//Path of the gateway configuration xml file
     	xml configXML;
+        
+        //Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+        string gatewayID = default("auto");
     	
     gates:
         input in;

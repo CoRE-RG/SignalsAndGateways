@@ -32,7 +32,7 @@ using namespace omnetpp;
 /**
  * @brief This module decides to which destinations incoming frames will be forwarded.
  *
- * @author Philipp Meyer
+ * @author Philipp Meyer, Timo Haeckel
  */
 class BaseGatewayRouter : public cSimpleModule
 {
@@ -75,11 +75,18 @@ class BaseGatewayRouter : public cSimpleModule
          */
         simsignal_t droppedFramesSignal;
 
+        /**
+         * @brief Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+         */
+        std::string gatewayID;
+
     protected:
         /**
          * @brief Initialization of the module.
          */
         virtual void initialize();
+
+        virtual void handleParameterChange(const char *parname) override;
 
         virtual void handleMessage(cMessage *msg);
 

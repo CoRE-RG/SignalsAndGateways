@@ -20,13 +20,16 @@ package signalsandgateways.gateway.transformation;
 //
 // @see ~GatewayTransformation
 //
-// @author Till Steinbach
+// @author Till Steinbach, Timo Haeckel
 //
 moduleinterface IGatewayTransformation
 {
     parameters:
         //Path of the gateway configuration xml file
         xml configXML;
+        
+        //Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+        string gatewayID;
         
     gates:
         input in;

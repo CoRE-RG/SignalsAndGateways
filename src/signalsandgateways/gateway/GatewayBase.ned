@@ -25,7 +25,7 @@ import signalsandgateways.gateway.buffering.AccumulationGatewayBuffering;
 //
 // @see ~IGatewayRouter, ~IGatewayTransformation, ~IGatewayBuffering
 //
-// @author Till Steinbach, Stefan Buschmann, Philipp Meyer
+// @author Till Steinbach, Stefan Buschmann, Philipp Meyer, Timo Haeckel
 //
 module GatewayBase
 {
@@ -44,6 +44,10 @@ module GatewayBase
         double bufferingDelay @unit(s) = default(0s);
         //Static delay of the tranform module
         double transformDelay @unit(s) = default(0s);
+        
+        //Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+        string gatewayID = default("auto");
+        *.gatewayID = gatewayID;
         
     gates:
         input lowerLayerIn[numPorts];

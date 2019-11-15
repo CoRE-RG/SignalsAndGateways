@@ -46,7 +46,7 @@ namespace SignalsAndGateways {
  *
  * Corresponding to the xml configuration all frames are processed and forwarded to the right destination.
  *
- * @author Philipp Meyer
+ * @author Philipp Meyer, Timo Haeckel
  */
 class GatewayTransformation : public cSimpleModule
 {
@@ -115,11 +115,18 @@ class GatewayTransformation : public cSimpleModule
          */
         std::list<unsigned int> rawDataToCan;
 
+        /**
+         * @brief Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
+         */
+        std::string gatewayID;
+
     protected:
         /**
          * @brief Initialization of the module.
          */
         virtual void initialize();
+
+        virtual void handleParameterChange(const char *parname) override;
 
         virtual void handleMessage(cMessage *msg);
 

@@ -32,6 +32,7 @@ AccumulationGatewayBuffering::~AccumulationGatewayBuffering() {
 }
 
 void AccumulationGatewayBuffering::initialize() {
+    handleParameterChange(nullptr);
     readConfigXML();
 
     size_t numPools = scheduledHoldUpTimes.size();
@@ -55,9 +56,21 @@ void AccumulationGatewayBuffering::initialize() {
     }
 }
 
+void AccumulationGatewayBuffering::handleParameterChange(const char* parname) {
+
+    if (!parname || !strcmp(parname, "gatewayID"))
+    {
+        this->gatewayID = par("gatewayID").stringValue();
+        if(this->gatewayID.empty() || !strcmp(this->gatewayID.c_str(), "auto")){
+            //auto create id!
+            this->gatewayID = this->getParentModule()->getParentModule()->getName();
+        }
+    }
+}
+
 void AccumulationGatewayBuffering::readConfigXML() {
     cXMLElement* xmlDoc = par("configXML").xmlValue();
-    string gatewayName = this->getParentModule()->getParentModule()->getName();
+    string gatewayName = this->gatewayID;
     string xpath = "/config/gateway[@id='" + gatewayName + "']/buffering";
     cXMLElement* xmlBuffering = xmlDoc->getElementByPath(xpath.c_str(), xmlDoc);
     if (xmlBuffering) {
