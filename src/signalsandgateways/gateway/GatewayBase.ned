@@ -35,7 +35,7 @@ module GatewayBase
         //Number of gateway ports
         int numPorts;
         //Path of the gateway configuration xml file
-        xml configXML = default(xmldoc("GatewayConfig.xml"));
+        xml configXML;
         //The path in configXML is the default path for the router, buffering and transform module
         xml defaultConfigXML = configXML;
         //Static delay of the router module
