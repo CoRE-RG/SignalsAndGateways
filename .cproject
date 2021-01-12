@@ -1,594 +1,298 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
-    	
-    <storageModule moduleId="org.eclipse.cdt.core.settings">
-        		
-        <cconfiguration id="org.omnetpp.cdt.gnu.config.debug.1966195400">
-            			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.debug.1966195400" moduleId="org.eclipse.cdt.core.settings" name="gcc-debug">
-                				
-                <externalSettings>
-                    					
-                    <externalSetting/>
-                    				
-                </externalSettings>
-                				
-                <extensions>
-                    					
-                    <extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    				
-                </extensions>
-                			
-            </storageModule>
-            			
-            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                				
-                <configuration artifactName="${ProjName}" buildProperties="" description="" id="org.omnetpp.cdt.gnu.config.debug.1966195400" name="gcc-debug" parent="org.omnetpp.cdt.gnu.config.debug">
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400." name="/" resourcePath="">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.436869047" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform.677597473" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <builder id="org.omnetpp.cdt.gnu.builder.debug.1807124280" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="OMNeT++ Make Builder (opp_makemake)" superClass="org.omnetpp.cdt.gnu.builder.debug"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.765051259" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.655679965" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                                    									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/src}&quot;"/>
-                                    								
-                                </option>
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.544794846" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2046689259" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.936971791" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <option id="gnu.c.compiler.option.include.paths.102897943" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false"/>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.219083475" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.1944204094" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-                                								
-                                <option id="gnu.cpp.link.option.paths.1994732355" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
-                                								
-                                <option id="gnu.cpp.link.option.libs.1313721575" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1720307433" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
-                                    									
-                                    <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-                                    									
-                                    <additionalInput kind="additionalinput" paths="$(LIBS)"/>
-                                    								
-                                </inputType>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.1202811611" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-                                								
-                                <option id="gnu.both.asm.option.include.paths.1115995798" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1659409375" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.2041663495" name="/" resourcePath="src">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.1764794141" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.1305301488" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.765051259"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1734414787" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.2037695533" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1224858674" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.739011706" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1662492530" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1217529833" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.1405698253" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1944204094"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.115533263" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.861782139" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1202811611">
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1314560489" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.1339964866" name="/" resourcePath="simulations">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.1753205406" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.503499476" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.765051259"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1790147512" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1437201128" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1311994601" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.903082186" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1370331761" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.339756959" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.298946574" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1944204094"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.2016477495" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.522873054" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1202811611">
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.174907148" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <sourceEntries>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
-                        					
-                    </sourceEntries>
-                    				
-                </configuration>
-                			
-            </storageModule>
-            			
-            <storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-                				
-                <externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                				
-                <externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                				
-                <externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                			
-            </storageModule>
-            		
-        </cconfiguration>
-        		
-        <cconfiguration id="org.omnetpp.cdt.gnu.config.release.691127320">
-            			
-            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.release.691127320" moduleId="org.eclipse.cdt.core.settings" name="gcc-release">
-                				
-                <externalSettings/>
-                				
-                <extensions>
-                    					
-                    <extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    					
-                    <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-                    				
-                </extensions>
-                			
-            </storageModule>
-            			
-            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                				
-                <configuration artifactName="${ProjName}" buildProperties="" description="" id="org.omnetpp.cdt.gnu.config.release.691127320" name="gcc-release" parent="org.omnetpp.cdt.gnu.config.release">
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320." name="/" resourcePath="">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.release.708385733" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform.853634642" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <builder id="org.omnetpp.cdt.gnu.builder.release.2041681512" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="OMNeT++ Make Builder (opp_makemake)" superClass="org.omnetpp.cdt.gnu.builder.release"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.1898196510" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1883670124" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.744299446" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                                    									
-                                    <listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/src}&quot;"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.673006879" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.86770136" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.448238711" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1371303545" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.1676755630" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-                                								
-                                <option id="gnu.cpp.link.option.paths.679394934" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
-                                								
-                                <option id="gnu.cpp.link.option.libs.1272544862" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1928965246" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
-                                    									
-                                    <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-                                    									
-                                    <additionalInput kind="additionalinput" paths="$(LIBS)"/>
-                                    								
-                                </inputType>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.1406029975" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.861949454" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320.1243292770" name="/" resourcePath="src">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.release.774797728" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release" unusedChildren="">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.1629837105" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1898196510"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.189537261" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1847373841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1338862949" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1484831973" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.960144838" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1570594819" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.927260788" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1676755630"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1550542024" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.637518931" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1406029975">
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1379484637" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320.484380545" name="/" resourcePath="simulations">
-                        						
-                        <toolChain id="org.omnetpp.cdt.gnu.toolchain.release.466507311" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release" unusedChildren="">
-                            							
-                            <targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.archiver.base.630009734" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1898196510"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.764747661" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.886969575" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.212672571" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1762985110" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
-                                								
-                                <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1913271077" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="WITH_IPORE"/>
-                                    								
-                                </option>
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.181057321" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-                                							
-                            </tool>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.c.linker.base.928945709" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1676755630"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1216988172" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578"/>
-                            							
-                            <tool id="cdt.managedbuild.tool.gnu.assembler.base.268874527" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1406029975">
-                                								
-                                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1845777976" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                                							
-                            </tool>
-                            						
-                        </toolChain>
-                        					
-                    </folderInfo>
-                    					
-                    <sourceEntries>
-                        						
-                        <entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
-                        					
-                    </sourceEntries>
-                    				
-                </configuration>
-                			
-            </storageModule>
-            			
-            <storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-                				
-                <externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                				
-                <externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                				
-                <externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
-                			
-            </storageModule>
-            		
-        </cconfiguration>
-        	
-    </storageModule>
-    	
-    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-        		
-        <project id="SignalsAndGateways.org.omnetpp.cdt.omnetppProjectType.1630686540" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
-        	
-    </storageModule>
-    	
-    <storageModule moduleId="scannerConfiguration">
-        		
-        <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-        		
-        <scannerConfigBuildInfo instanceId="org.omnetpp.cdt.gnu.config.debug.1966195400">
-            			
-            <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.omnetpp.cdt.OmnetppGCCPerProjectProfile"/>
-            		
-        </scannerConfigBuildInfo>
-        		
-        <scannerConfigBuildInfo instanceId="org.omnetpp.cdt.gnu.config.release.691127320">
-            			
-            <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.omnetpp.cdt.OmnetppGCCPerProjectProfile"/>
-            		
-        </scannerConfigBuildInfo>
-        	
-    </storageModule>
-    	
-    <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-    	
-    <storageModule moduleId="refreshScope" versionNumber="2">
-        		
-        <configuration configurationName="gcc-release">
-            			
-            <resource resourceType="PROJECT" workspacePath="/SignalsAndGateways"/>
-            		
-        </configuration>
-        		
-        <configuration configurationName="gcc-debug">
-            			
-            <resource resourceType="PROJECT" workspacePath="/SignalsAndGateways"/>
-            		
-        </configuration>
-        	
-    </storageModule>
-    	
-    <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-    	
-    <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
-        		
-        <doc-comment-owner id="org.eclipse.cdt.ui.doxygen">
-            			
-            <path value=""/>
-            		
-        </doc-comment-owner>
-        	
-    </storageModule>
-    
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="org.omnetpp.cdt.gnu.config.debug.1966195400">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.debug.1966195400" moduleId="org.eclipse.cdt.core.settings" name="gcc-debug">
+				<externalSettings>
+					<externalSetting/>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildProperties="" description="" id="org.omnetpp.cdt.gnu.config.debug.1966195400" name="gcc-debug" parent="org.omnetpp.cdt.gnu.config.debug">
+					<folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400." name="/" resourcePath="">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.436869047" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform.677597473" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<builder id="org.omnetpp.cdt.gnu.builder.debug.1807124280" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="OMNeT++ Make Builder (opp_makemake)" parallelBuildOn="true" parallelizationNumber="optimal" superClass="org.omnetpp.cdt.gnu.builder.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.765051259" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.655679965" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/src}&quot;"/>
+								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.544794846" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2046689259" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.936971791" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.102897943" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.219083475" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1944204094" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
+								<option id="gnu.cpp.link.option.paths.1994732355" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
+								<option id="gnu.cpp.link.option.libs.1313721575" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1720307433" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1202811611" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<option id="gnu.both.asm.option.include.paths.1115995798" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1659409375" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.2041663495" name="/" resourcePath="src">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.1764794141" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1305301488" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.765051259"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1734414787" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.2037695533" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1224858674" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.739011706" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1662492530" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1217529833" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1405698253" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1944204094"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.115533263" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.861782139" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1202811611">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1314560489" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="org.omnetpp.cdt.gnu.config.debug.1966195400.1339964866" name="/" resourcePath="simulations">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.debug.1753205406" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.debug" unusedChildren="">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.503499476" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.765051259"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1790147512" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.326144974">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1437201128" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1311994601" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.903082186" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.2064003784">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1370331761" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.339756959" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.298946574" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1944204094"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.2016477495" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1153367968"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.522873054" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1202811611">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.174907148" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
+		</cconfiguration>
+		<cconfiguration id="org.omnetpp.cdt.gnu.config.release.691127320">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="org.omnetpp.cdt.gnu.config.release.691127320" moduleId="org.eclipse.cdt.core.settings" name="gcc-release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.MachO64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildProperties="" description="" id="org.omnetpp.cdt.gnu.config.release.691127320" name="gcc-release" parent="org.omnetpp.cdt.gnu.config.release">
+					<folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320." name="/" resourcePath="">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.release.708385733" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform.853634642" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<builder id="org.omnetpp.cdt.gnu.builder.release.2041681512" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="OMNeT++ Make Builder (opp_makemake)" parallelBuildOn="true" parallelizationNumber="optimal" superClass="org.omnetpp.cdt.gnu.builder.release"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1898196510" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1883670124" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.744299446" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SignalsAndGateways/src}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.673006879" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.86770136" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.448238711" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1371303545" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1676755630" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
+								<option id="gnu.cpp.link.option.paths.679394934" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
+								<option id="gnu.cpp.link.option.libs.1272544862" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1928965246" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1406029975" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.861949454" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320.1243292770" name="/" resourcePath="src">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.release.774797728" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release" unusedChildren="">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1629837105" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1898196510"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.189537261" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1847373841" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1338862949" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1484831973" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.960144838" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1570594819" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.927260788" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1676755630"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1550542024" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.637518931" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1406029975">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1379484637" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="org.omnetpp.cdt.gnu.config.release.691127320.484380545" name="/" resourcePath="simulations">
+						<toolChain id="org.omnetpp.cdt.gnu.toolchain.release.466507311" name="GCC for OMNeT++" superClass="org.omnetpp.cdt.gnu.toolchain.release" unusedChildren="">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF;org.eclipse.cdt.core.MachO64;org.eclipse.cdt.core.PE" id="org.omnetpp.cdt.targetPlatform" isAbstract="false" name="Windows, Linux, Mac" osList="win32,linux,macosx" superClass="org.omnetpp.cdt.targetPlatform"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.630009734" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1898196510"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.764747661" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.929838138">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.886969575" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.212672571" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1762985110" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.86770136">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.preprocessor.def.symbols.1913271077" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="WITH_SIGNALSANDGATEWAYS_SERIALIZER"/>
+									<listOptionValue builtIn="false" value="WITH_AVB_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_AS6802_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IEEE8021Q_COMMON"/>
+									<listOptionValue builtIn="false" value="WITH_IPORE"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.181057321" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.928945709" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.1676755630"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1216988172" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.1802788578"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.268874527" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.1406029975">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1845777976" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="CoRE4INET;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="FiCo4OMNeT;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="inet;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="SignalsAndGateways.org.omnetpp.cdt.omnetppProjectType.1630686540" name="OMNeT++ Simulation" projectType="org.omnetpp.cdt.omnetppProjectType"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="org.omnetpp.cdt.gnu.config.debug.1966195400">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.omnetpp.cdt.OmnetppGCCPerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.omnetpp.cdt.gnu.config.release.691127320">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.omnetpp.cdt.OmnetppGCCPerProjectProfile"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="gcc-release">
+			<resource resourceType="PROJECT" workspacePath="/SignalsAndGateways"/>
+		</configuration>
+		<configuration configurationName="gcc-debug">
+			<resource resourceType="PROJECT" workspacePath="/SignalsAndGateways"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
+		<doc-comment-owner id="org.eclipse.cdt.ui.doxygen">
+			<path value=""/>
+		</doc-comment-owner>
+	</storageModule>
 </cproject>
