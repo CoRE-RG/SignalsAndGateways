@@ -1,12 +1,5 @@
-# USAGE:
-# Set Environment Variables:
-# EXTENDED_WARNINGS=1
-# for stricter warnings and
-#
-# WARNINGS_ERROR=1
-# for -Werror
+.DEFAULT_GOAL := all
 
-MSGCOPTS += --msg4
 
 #check for existing INET-Framework
 ifeq ("$(wildcard $(INET_PROJ)/src/inet/common/INETDefs.h)","")
@@ -27,37 +20,58 @@ ifeq ("$(wildcard $(FICO4OMNET_PROJ)/src/fico4omnet/base/FiCo4OMNeT_Defs.h)","")
     FICO4OMNET_PROJ path must be an absolute path, or a path relative to SignalAndGateways src directory")
 endif
 
+
 include dependencies_makefrag
 
-CFLAGS += -std=c++11
+
+CFLAGS += -std=c++14
+MSGCOPTS += --msg4
+
+
+# Workaround for https://github.com/msys2/MINGW-packages/issues/6855
+#ifeq ($(PLATFORM),win32.x86_64)
+#	LDFLAGS += -Wl,-Xlink=-force:multiple
+#endif
+
+
 # For compatibility (4.6 to 5.0)
 CFLAGS += -DAUTOIMPORT_NAMESPACE
 
+
 UNAME_S := $(shell uname -s)
 
-#Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
+# Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
 ifeq ($(UNAME_S),Darwin)
 	CC = clang
 	CXX = clang++
 	SHLIB_LD = clang++ -shared -fPIC
 endif
 
-#Special Flags for OS X
+# Special Flags for OS X
 ifeq ($(UNAME_S),Darwin)
-    LDFLAGS += -headerpad_max_install_names 
+    LDFLAGS += -headerpad_max_install_names
 endif
 
-#detect 64/32bit
+
+# detect 64/32bit
 LBITS := $(shell getconf LONG_BIT)
 CFLAGS += -DLONG_BIT=$(LBITS)
 
-#Warnings generate errors
+
+# USAGE:
+# Set Environment Variables:
+# EXTENDED_WARNINGS=1
+# for stricter warnings and
+#
+# WARNINGS_ERROR=1
+# for -Werror
+
+# Warnings generate errors
 ifdef WARNINGS_ERROR
 	CFLAGS += -Werror
 endif
 
-
-#Stricter warnings in clang and gcc:
+# Stricter warnings in clang and gcc:
 ifeq ($(CC),clang)
 	#clang
 	ifdef EXTENDED_WARNINGS
@@ -80,6 +94,7 @@ else ifeq ($(CC),gcc)
     CFLAGS += -Wno-error=shadow
 endif
 
+
 # add -isystem for referenced projects (-I will be ignored for those also provided with -Isystem)
 RELPRJDOTS = $(subst o,,$(subst o ,/,$(patsubst %,..o,$(subst /, ,$(PROJECTRELATIVE_PATH)))))
 ifneq (,$(findstring MSYS,$(shell uname -s)))
@@ -91,3 +106,13 @@ else
 endif
 
 COPTS += $(SYSINCLUDES) -isystem $(OMNETPP_INCL_DIR)
+
+
+# dump out the actual compiler and linker command line for easier debugging
+ifneq ($(MAKECMDGOALS),clean)
+$(info *** COMPILING with:)
+$(info $(CXX) -c $(CXXFLAGS) $(COPTS))
+$(info *** LINKING with:)
+$(info $(SHLIB_LD) -o $O/$(TARGET) $(AS_NEEDED_OFF) $(WHOLE_ARCHIVE_ON) $(LIBS) $(WHOLE_ARCHIVE_OFF) $(OMNETPP_LIBS) $(LDFLAGS))
+$(info Building...)
+endif
