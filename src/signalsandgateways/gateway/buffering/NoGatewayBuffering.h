@@ -19,9 +19,9 @@
 //SignalsAndGateways
 #include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
-namespace SignalsAndGateways {
-
 using namespace omnetpp;
+
+namespace SignalsAndGateways {
 
 /**
  * @brief This buffering module forwards incoming frames to the transformation module.

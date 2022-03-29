@@ -25,9 +25,9 @@
 //SignalsAndGateways
 #include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
-namespace SignalsAndGateways {
-
 using namespace omnetpp;
+
+namespace SignalsAndGateways {
 
 /**
  * @brief This module decides to which destinations incoming frames will be forwarded.

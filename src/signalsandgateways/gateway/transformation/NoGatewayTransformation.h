@@ -19,9 +19,9 @@
 //SignalsAndGateways
 #include "signalsandgateways/base/SignalsAndGateways_Defs.h"
 
-namespace SignalsAndGateways {
-
 using namespace omnetpp;
+
+namespace SignalsAndGateways {
 
 /**
  * @brief A transformation module with no functionality besides forwarding incoming frames.

@@ -21,9 +21,9 @@
 //FiCo4OMNeT
 #include "fico4omnet/applications/can/source/CanTrafficSourceAppBase.h"
 
-namespace SignalsAndGateways {
-
 using namespace omnetpp;
+
+namespace SignalsAndGateways {
 
 /**
  * @brief Source-Application for the CAN-Node
