@@ -17,9 +17,9 @@
 #define SIGNALSANDGATEWAYS_DEFS_H
 
 //OMNeT++
-#include "omnetpp.h"
+#include <omnetpp.h>
 
-#include "./Dependencies.h"
+#include "Dependencies.h"
 
 /**
  * Definition of SignalsAndGateways version

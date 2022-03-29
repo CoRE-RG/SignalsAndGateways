@@ -39,9 +39,9 @@
 #include "signalsandgateways/gateway/messages/UnitMessage_m.h"
 #include "signalsandgateways/gateway/messages/GatewayAggregationMessage.h"
 
-using namespace omnetpp;
-
 namespace SignalsAndGateways {
+
+using namespace omnetpp;
 
 /**
  * @brief This module receives single frames or pool messages from the buffering module.

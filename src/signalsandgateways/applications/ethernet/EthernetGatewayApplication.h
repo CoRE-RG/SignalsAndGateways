@@ -21,9 +21,9 @@
 //CoRE4INET
 #include "core4inet/applications/AS6802/CTApplicationBase.h"
 
-using namespace omnetpp;
-
 namespace SignalsAndGateways {
+
+using namespace omnetpp;
 
 /**
  * @brief Gateway application for the Ethernet node.

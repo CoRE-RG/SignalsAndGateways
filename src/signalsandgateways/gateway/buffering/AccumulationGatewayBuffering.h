@@ -30,9 +30,9 @@
 //SignalsAndGateways auto-generated messages
 #include "signalsandgateways/gateway/messages/PoolMessage_m.h"
 
-using namespace omnetpp;
-
 namespace SignalsAndGateways {
+
+using namespace omnetpp;
 
 /**
  * @brief This buffering module accumulates incoming can frames according to the configuration in the XML files.

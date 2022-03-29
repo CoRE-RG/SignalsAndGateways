@@ -21,9 +21,9 @@
 //FiCo4OMNeT
 #include "fico4omnet/applications/can/sink/CanTrafficSinkAppBase.h"
 
-using namespace omnetpp;
-
 namespace SignalsAndGateways {
+
+using namespace omnetpp;
 
 /**
  * @brief Source-Application for the CAN-Node

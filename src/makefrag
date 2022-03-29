@@ -28,16 +28,6 @@ CFLAGS += -std=c++14
 MSGC += -I.
 
 
-# Workaround for https://github.com/msys2/MINGW-packages/issues/6855
-ifneq (,$(findstring win32,$(PLATFORM)))
-	LDFLAGS += -Wl,-Xlink=-force:multiple
-endif
-
-
-# For compatibility (4.6 to 5.0)
-CFLAGS += -DAUTOIMPORT_NAMESPACE
-
-
 UNAME_S := $(shell uname -s)
 
 # Currently forcing clang interface on OS X! Otherwise OMNeT++ will use gcc wrapper of clang
@@ -62,7 +52,6 @@ CFLAGS += -DLONG_BIT=$(LBITS)
 # Set Environment Variables:
 # EXTENDED_WARNINGS=1
 # for stricter warnings and
-#
 # WARNINGS_ERROR=1
 # for -Werror
 
@@ -78,10 +67,10 @@ ifeq ($(CC),clang)
     CFLAGS += -Wall -Wunused -Wextra -Weverything
     endif
     CFLAGS += -Wno-padded -Wno-global-constructors -Wno-exit-time-destructors
-    CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas -Wno-unknown-warning-option
+    CFLAGS += -Wno-c++98-compat-pedantic -Wno-unknown-pragmas
     CFLAGS += -Wno-error=unused-parameter -Wno-error=header-hygiene -Wno-error=documentation -Wno-error=c++98-compat-pedantic
     CFLAGS += -Wno-error=shadow -Wno-error=missing-noreturn -Wno-error=unreachable-code -Wno-error=unreachable-code-return -Wno-error=old-style-cast
-    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command -Wno-error=reserved-id-macro
+    CFLAGS += -Wno-error=conversion -Wno-error=unreachable-code-break -Wno-error=documentation-unknown-command -Wno-error=reserved-id-macro -Wno-error=unknown-warning-option
 else ifeq ($(CC),gcc)
 	#gcc
 	ifdef EXTENDED_WARNINGS
