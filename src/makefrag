@@ -25,13 +25,13 @@ include dependencies_makefrag
 
 
 CFLAGS += -std=c++14
-MSGCOPTS += --msg4
+MSGC += -I.
 
 
 # Workaround for https://github.com/msys2/MINGW-packages/issues/6855
-#ifeq ($(PLATFORM),win32.x86_64)
-#	LDFLAGS += -Wl,-Xlink=-force:multiple
-#endif
+ifneq (,$(findstring win32,$(PLATFORM)))
+	LDFLAGS += -Wl,-Xlink=-force:multiple
+endif
 
 
 # For compatibility (4.6 to 5.0)

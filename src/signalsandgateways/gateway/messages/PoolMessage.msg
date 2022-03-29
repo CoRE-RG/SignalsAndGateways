@@ -19,7 +19,11 @@ cplusplus {{
 typedef std::list<omnetpp::cMessage*> cMessagePointerList;
 }}
 
-class noncobject cMessagePointerList;
+class cMessagePointerList {
+    @existingClass;
+    @opaque;
+    @descriptor(false);
+}
 
 //
 // This frame is transmitted from the buffering module to the transformation module.

@@ -41,6 +41,8 @@
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /**
  * @brief This module receives single frames or pool messages from the buffering module.
  *

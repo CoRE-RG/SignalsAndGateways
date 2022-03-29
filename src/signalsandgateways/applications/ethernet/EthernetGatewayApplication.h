@@ -23,6 +23,8 @@
 
 namespace SignalsAndGateways {
 
+using namespace omnetpp;
+
 /**
  * @brief Gateway application for the Ethernet node.
  *
