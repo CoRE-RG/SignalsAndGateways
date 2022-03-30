@@ -24,7 +24,7 @@ import signalsandgateways.applications.can.CanGatewayNode;
 //
 // @see ~CanGatewayNode, ~EthernetGatewayHost, ~GatewayBase
 //
-// @author Sebastian Mueller, Timo Haeckel
+// @author Sebastian Mueller, Timo Haeckel, Philipp Meyer
 //
 module BusEthernetGateway
 {
@@ -34,11 +34,9 @@ module BusEthernetGateway
         //Number of CAN bus ports
         int countOfCanBusses = default(1);
         //Number of Ethernet ports
-        int countOfEthernetPorts = default(1);
-        
+        int countOfEthernetPorts = default(1);   
         //Gateway ID in gateway config file. If auto or empty the gateway module name will be used.
         string gatewayID = default("auto");
-        *.gatewayID = gatewayID;
         
     gates:
         //ethernet connection
@@ -60,7 +58,8 @@ module BusEthernetGateway
         //gateway module
         gateway: GatewayBase {
             @display("p=224,100");
-            numPorts = countOfCanBusses + countOfEthernetPorts;
+            gatewayID = parent.gatewayID;
+            numPorts = parent.countOfCanBusses + parent.countOfEthernetPorts;  
         }
         
     connections:
