@@ -38,7 +38,7 @@ protected:
     /**
      * @brief Calls the inherited initialize method.
      */
-    virtual void initialize();
+    virtual void initialize() override;
 
     /**
      * @brief Handles incoming messages.
@@ -48,7 +48,7 @@ protected:
      *
      * @param msg The incoming message
      */
-    virtual void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg) override;
 
 public:
     /**
@@ -59,7 +59,7 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~EthernetGatewayApplication();
+    virtual ~EthernetGatewayApplication() override;
 
     /**
      * @brief Register a Gate to receive messages of a certain CAN ID as RAW GatewayAggregationMessage.

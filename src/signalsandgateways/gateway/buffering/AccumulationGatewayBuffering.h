@@ -41,19 +41,19 @@ using namespace omnetpp;
  *
  * @author Stefan Buschmann, Timo Haeckel
  */
-class AccumulationGatewayBuffering : public cSimpleModule
+class AccumulationGatewayBuffering : public virtual cSimpleModule
 {
 public:
     /**
      * @brief Destructor
      */
-    ~AccumulationGatewayBuffering();
+    virtual ~AccumulationGatewayBuffering() override;
 
 protected:
     /**
      * @brief Initialization of the module.
      */
-    virtual void initialize();
+    virtual void initialize() override;
 
     virtual void handleParameterChange(const char *parname) override;
 
@@ -62,7 +62,7 @@ protected:
      *
      * @param msg Message from the routing module or self message from a pool.
      */
-    virtual void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg) override;
 
 private:
     /**

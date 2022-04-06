@@ -369,7 +369,7 @@ std::list<cMessage*> GatewayTransformation::transformRawDataFrame(GatewayAggrega
     if(rawDataFrame){
         if(rawDataFrame->getUnitCnt() != 1){
             std::string err = "Received RAW Frame with " + std::to_string(rawDataFrame->getUnitCnt()) + " Units. This is not yet supported.";
-            throw cRuntimeError(err.c_str());
+            throw cRuntimeError("%s", err.c_str());
         }
         if(CanDataFrame* rawCanFrame = dynamic_cast<CanDataFrame*>(rawDataFrame->getEncapUnits().front()->getEncapsulatedPacket())){
             if(find(rawDataToCan.begin(), rawDataToCan.end(), rawCanFrame->getCanID()) != rawDataToCan.end()){

@@ -69,7 +69,7 @@ class GatewayAggregationMessage : public GatewayAggregationMessage_Base
         /**
          * @brief GatewayAggregationMessage duplication
          */
-        virtual GatewayAggregationMessage *dup() const
+        virtual GatewayAggregationMessage *dup() const override
         {
             return new GatewayAggregationMessage(*this);
         }

@@ -85,7 +85,7 @@ void BaseGatewayRouter::handleMessage(cMessage *msg)
         }else if(GatewayAggregationMessage* rawFrame = dynamic_cast<GatewayAggregationMessage*>(msg)){
             if(rawFrame->getUnitCnt() != 1){
                 std::string err = "Received RAW Frame with " + std::to_string(rawFrame->getUnitCnt()) + " Units. This is not yet supported.";
-                throw cRuntimeError(err.c_str());
+                throw cRuntimeError("%s", err.c_str());
             }
             if(CanDataFrame* rawCanFrame = dynamic_cast<CanDataFrame*>(rawFrame->getEncapUnits().front()->getEncapsulatedPacket())){
                 destinationGateIndices = getDestinationGateIndices(rawFrame->getArrivalGate()->getIndex(), RAWPREFIX + to_string(rawCanFrame->getCanID()));
