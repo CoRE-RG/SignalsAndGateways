@@ -34,9 +34,9 @@ class NoGatewayTransformation : public cSimpleModule
     /**
      * @brief Initialization of the module.
      */
-    virtual void initialize();
+    virtual void initialize() override;
 
-    virtual void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg) override;
 };
 
 } //namespace

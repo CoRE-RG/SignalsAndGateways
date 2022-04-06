@@ -42,7 +42,7 @@ class CanSinkGatewayApp : public virtual FiCo4OMNeT::CanTrafficSinkAppBase
      *
      * @param msg The incoming message
      */
-    void handleMessage(cMessage *msg);
+    void handleMessage(cMessage *msg) override;
 };
 
 }

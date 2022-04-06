@@ -38,7 +38,7 @@ class CanSourceGatewayApp : public FiCo4OMNeT::CanTrafficSourceAppBase
     /**
      * @brief Destructor of CanSourceGatewayApp
      */
-    virtual ~CanSourceGatewayApp();
+    virtual ~CanSourceGatewayApp() override;
   protected:
     /**
      * @brief Handles incoming TransportMessages
@@ -47,7 +47,7 @@ class CanSourceGatewayApp : public FiCo4OMNeT::CanTrafficSourceAppBase
      *
      * @param msg The incoming message
      */
-    virtual void handleMessage(cMessage *msg);
+    virtual void handleMessage(cMessage *msg) override;
 };
 
 }
