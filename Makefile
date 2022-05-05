@@ -23,7 +23,9 @@ ifndef FICO4OMNET_PROJ
     endif
 endif
 
-all: checkmakefiles src/signalsandgateways/features.h 
+FEATURES_H = src/signalsandgateways/features.h
+
+all: checkmakefiles $(FEATURES_H)
 	cd src && $(MAKE)
 
 clean: checkmakefiles
@@ -32,7 +34,7 @@ clean: checkmakefiles
 cleanall: checkmakefiles
 	cd src && $(MAKE) MODE=release clean
 	cd src && $(MAKE) MODE=debug clean
-	rm -f src/Makefile src/signalsandgateways/features.h
+	rm -f src/Makefile $(FEATURES_H)
 
 ifeq ($(MODE), debug)
     DBG_SUFFIX=_dbg
@@ -40,17 +42,17 @@ else
     DBG_SUFFIX=
 endif
 
-MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ) -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET$(DBG_SUFFIX) -lINET$(DBG_SUFFIX) -lFiCo4OMNeT$(DBG_SUFFIX) 
+MAKEMAKE_OPTIONS := -f --deep --no-deep-includes -O out -KINET_PROJ=$(INET_PROJ) -KCORE4INET_PROJ=$(CORE4INET_PROJ) -KFICO4OMNET_PROJ=$(FICO4OMNET_PROJ) -I. -I$(INET_PROJ)/src/ -I$(CORE4INET_PROJ)/src/ -I$(FICO4OMNET_PROJ)/src/ -L$(INET_PROJ)/src -L$(CORE4INET_PROJ)/src -L$(FICO4OMNET_PROJ)/src -lCoRE4INET$(DBG_SUFFIX) -lINET$(DBG_SUFFIX) -lFiCo4OMNeT$(DBG_SUFFIX)
 
-makefiles: src/signalsandgateways/features.h makefiles-so
+makefiles: makefiles-so
 
-makefiles-so:
+makefiles-so: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-so $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
-makefiles-lib:
+makefiles-lib: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake --make-lib $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
-makefiles-exe:
+makefiles-exe: $(FEATURES_H)
 	@FEATURE_OPTIONS=$$(opp_featuretool options -f -l -c) && cd src && opp_makemake $(MAKEMAKE_OPTIONS) $$FEATURE_OPTIONS
 
 checkmakefiles:
@@ -64,8 +66,8 @@ checkmakefiles:
 	fi
 
 # generate an include file that contains all the WITH_FEATURE macros according to the current enablement of features
-src/signalsandgateways/features.h: $(wildcard .oppfeaturestate) .oppfeatures
-	@opp_featuretool defines >src/signalsandgateways/features.h
+$(FEATURES_H): $(wildcard .oppfeaturestate) .oppfeatures
+	@opp_featuretool defines >$(FEATURES_H)
 
-doxy:
+doc:
 	doxygen doxy.cfg
