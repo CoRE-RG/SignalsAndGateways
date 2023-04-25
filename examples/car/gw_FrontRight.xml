@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<gateway id="gw_FrontRight">
+		<routing>
+			<route source="0" destination="2">
+				<canframe canId="117"/>
+				<canframe canId="121"/>
+				<canframe canId="334"/>
+				<canframe canId="336"/>
+				<canframe canId="393"/>
+				<canframe canId="401"/>
+				<canframe canId="403"/>
+			</route>
+			<route source="1" destination="2">
+				<canframe canId="22"/>
+				<canframe canId="37"/>
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+				<canframe canId="45"/>
+				<canframe canId="46"/>
+				<canframe canId="51"/>
+				<canframe canId="56"/>
+				<canframe canId="125"/>
+				<canframe canId="284"/>
+				<canframe canId="291"/>
+				<canframe canId="328"/>
+				<canframe canId="481"/>
+				<canframe canId="487"/>
+				<canframe canId="1231"/>
+			</route>
+			<route source="2" destination="0">
+				<ethernetqframe dst="97-74-FC-A1-A5-25" vid="0" pcp="6"/>
+			</route>
+			<route source="2" destination="1">
+				<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="6"/>
+				<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="1"/>
+				<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="0"/>
+				<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="3"/>
+			</route>
+		</routing>
+		<buffering>
+		</buffering>
+		<transformation destination="2" type="toEthernet">
+			<ethernetqframe dst="5B-E0-22-20-C0-9F" vid="0" pcp="6">
+				<canframe canId="117"/>
+				<canframe canId="121"/>
+				<canframe canId="393"/>
+				<canframe canId="401"/>
+				<canframe canId="403"/>
+			</ethernetqframe>
+			<ethernetqframe dst="5B-E0-22-20-C0-9F" vid="0" pcp="1">
+				<canframe canId="334"/>
+			</ethernetqframe>
+			<ethernetqframe dst="5B-E0-22-20-C0-9F" vid="0" pcp="3">
+				<canframe canId="336"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-E3-23-ED-BA-D3" vid="0" pcp="6">
+				<canframe canId="22"/>
+				<canframe canId="37"/>
+			</ethernetqframe>
+			<ethernetqframe dst="87-7A-32-4C-C2-03" vid="0" pcp="6">
+				<canframe canId="22"/>
+				<canframe canId="37"/>
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="6">
+				<canframe canId="22"/>
+				<canframe canId="37"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="6">
+				<canframe canId="37"/>
+			</ethernetqframe>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="6">
+				<canframe canId="37"/>
+			</ethernetqframe>
+			<ethernetqframe dst="1F-D3-5D-12-65-12" vid="0" pcp="6">
+				<canframe canId="37"/>
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="87-7A-32-4C-C2-03" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+				<canframe canId="1231"/>
+			</ethernetqframe>
+			<ethernetqframe dst="37-68-0C-DB-8C-02" vid="0" pcp="1">
+				<canframe canId="43"/>
+			</ethernetqframe>
+			<ethernetqframe dst="EB-BD-C5-95-F2-70" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="97-19-6B-33-17-D3" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="C3-15-63-A4-C7-B6" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-E3-23-ED-BA-D3" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="1F-D3-5D-12-65-12" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="1">
+				<canframe canId="43"/>
+				<canframe canId="44"/>
+				<canframe canId="284"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-75-59-83-B8-C2" vid="0" pcp="1">
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="CB-50-BA-F0-A7-93" vid="0" pcp="1">
+				<canframe canId="44"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="1">
+				<canframe canId="44"/>
+				<canframe canId="284"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="0">
+				<canframe canId="45"/>
+				<canframe canId="46"/>
+				<canframe canId="51"/>
+				<canframe canId="56"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="0">
+				<canframe canId="45"/>
+				<canframe canId="46"/>
+				<canframe canId="51"/>
+				<canframe canId="56"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="0">
+				<canframe canId="45"/>
+				<canframe canId="46"/>
+			</ethernetqframe>
+			<ethernetqframe dst="1F-D3-5D-12-65-12" vid="0" pcp="0">
+				<canframe canId="45"/>
+				<canframe canId="46"/>
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="87-7A-32-4C-C2-03" vid="0" pcp="0">
+				<canframe canId="46"/>
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="0">
+				<canframe canId="46"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="EB-BD-C5-95-F2-70" vid="0" pcp="0">
+				<canframe canId="46"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-E3-23-ED-BA-D3" vid="0" pcp="0">
+				<canframe canId="46"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="C3-15-63-A4-C7-B6" vid="0" pcp="0">
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="CB-50-BA-F0-A7-93" vid="0" pcp="0">
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="0">
+				<canframe canId="51"/>
+				<canframe canId="481"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-75-59-83-B8-C2" vid="0" pcp="0">
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="97-19-6B-33-17-D3" vid="0" pcp="0">
+				<canframe canId="51"/>
+				<canframe canId="487"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="3">
+				<canframe canId="125"/>
+				<canframe canId="328"/>
+			</ethernetqframe>
+			<ethernetqframe dst="C3-15-63-A4-C7-B6" vid="0" pcp="3">
+				<canframe canId="125"/>
+			</ethernetqframe>
+			<ethernetqframe dst="1F-D3-5D-12-65-12" vid="0" pcp="3">
+				<canframe canId="125"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="6">
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-75-59-83-B8-C2" vid="0" pcp="6">
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="CB-50-BA-F0-A7-93" vid="0" pcp="6">
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="6">
+				<canframe canId="291"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-E3-23-ED-BA-D3" vid="0" pcp="3">
+				<canframe canId="328"/>
+			</ethernetqframe>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="3">
+				<canframe canId="328"/>
+			</ethernetqframe>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="3">
+				<canframe canId="328"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="0">
+				<canframe canId="487"/>
+			</ethernetqframe>
+		</transformation>
+		<transformation destination="0" type="toCan">
+			<ethernetqframe dst="97-74-FC-A1-A5-25" vid="0" pcp="6"/>
+		</transformation>
+		<transformation destination="1" type="toCan">
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="6"/>
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="1"/>
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="0"/>
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="3"/>
+		</transformation>
+	</gateway>
+
+</config>

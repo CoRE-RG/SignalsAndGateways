@@ -5,8 +5,10 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 <img src="/doc/images/signalsandgateways.png" alt="SignalsAndGateways Environment" width="75%">
 
 
-## News
-* Switch to OMNeT++ 5.5.1 and INET 3.6.6
+## Remarks
+* This branch is for sharing the macro-benchmarking network of the paper "Network Anomaly Detection in Cars: A Case for Time-Sensitive Stream Filtering and Policing"
+* Additional prerequisites: CoRE4INET and FiCo4OMNeT branch "paper/network_anomaly_detection_in_cars"
+* Network is located in [examples/car/](/examples/car)
 
 
 ## Features

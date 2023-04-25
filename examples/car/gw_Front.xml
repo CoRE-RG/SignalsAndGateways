@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<gateway id="gw_Front">
+		<routing>
+			<route source="2" destination="3">
+				<canframe canId="72"/>
+			</route>
+			<route source="1" destination="3">
+				<canframe canId="52"/>
+				<canframe canId="59"/>
+				<canframe canId="66"/>
+				<canframe canId="283"/>
+				<canframe canId="295"/>
+			</route>
+			<route source="0" destination="3">
+				<canframe canId="35"/>
+				<canframe canId="1251"/>
+			</route>
+			<route source="3" destination="1">
+				<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="1"/>
+				<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="6"/>
+				<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="0"/>
+				<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="3"/>
+			</route>
+			<route source="3" destination="2">
+				<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="1"/>
+				<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="6"/>
+				<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="0"/>
+				<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="3"/>
+			</route>
+			<route source="3" destination="0">
+				<ethernetqframe dst="FB-C3-59-8E-F9-55" vid="0" pcp="1"/>
+				<ethernetqframe dst="FB-C3-59-8E-F9-55" vid="0" pcp="0"/>
+			</route>
+		</routing>
+		<buffering>
+		</buffering>
+		<transformation destination="3" type="toEthernet">
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="0">
+				<canframe canId="72"/>
+				<canframe canId="52"/>
+				<canframe canId="66"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="0">
+				<canframe canId="52"/>
+			</ethernetqframe>
+			<ethernetqframe dst="EB-BD-C5-95-F2-70" vid="0" pcp="0">
+				<canframe canId="52"/>
+			</ethernetqframe>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="0">
+				<canframe canId="52"/>
+				<canframe canId="66"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="1">
+				<canframe canId="59"/>
+				<canframe canId="1251"/>
+			</ethernetqframe>
+			<ethernetqframe dst="8F-75-59-83-B8-C2" vid="0" pcp="1">
+				<canframe canId="283"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="1">
+				<canframe canId="283"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="1">
+				<canframe canId="283"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="6">
+				<canframe canId="295"/>
+			</ethernetqframe>
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="6">
+				<canframe canId="35"/>
+			</ethernetqframe>
+		</transformation>
+		<transformation destination="1" type="toCan">
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="1"/>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="6"/>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="0"/>
+			<ethernetqframe dst="A3-2C-60-9D-A1-01" vid="0" pcp="3"/>
+		</transformation>
+		<transformation destination="2" type="toCan">
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="1"/>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="6"/>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="0"/>
+			<ethernetqframe dst="B7-7C-A5-C2-1C-26" vid="0" pcp="3"/>
+		</transformation>
+		<transformation destination="0" type="toCan">
+			<ethernetqframe dst="FB-C3-59-8E-F9-55" vid="0" pcp="1"/>
+			<ethernetqframe dst="FB-C3-59-8E-F9-55" vid="0" pcp="0"/>
+		</transformation>
+	</gateway>
+
+</config>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<gateway id="gw_RearLeft">
+		<routing>
+			<route source="1" destination="2">
+				<canframe canId="490"/>
+				<canframe canId="1246"/>
+			</route>
+			<route source="0" destination="2">
+				<canframe canId="48"/>
+				<canframe canId="331"/>
+			</route>
+			<route source="2" destination="0">
+				<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="1"/>
+				<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="6"/>
+				<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="0"/>
+				<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="3"/>
+			</route>
+			<route source="2" destination="1">
+				<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="6"/>
+				<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="1"/>
+				<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="0"/>
+				<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="3"/>
+			</route>
+		</routing>
+		<buffering>
+		</buffering>
+		<transformation destination="2" type="toEthernet">
+			<ethernetqframe dst="9F-1D-CA-BC-41-9E" vid="0" pcp="0">
+				<canframe canId="490"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="0">
+				<canframe canId="490"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="0">
+				<canframe canId="490"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="1">
+				<canframe canId="1246"/>
+			</ethernetqframe>
+			<ethernetqframe dst="97-19-6B-33-17-D3" vid="0" pcp="1">
+				<canframe canId="1246"/>
+			</ethernetqframe>
+			<ethernetqframe dst="2F-A9-20-03-43-BD" vid="0" pcp="1">
+				<canframe canId="1246"/>
+			</ethernetqframe>
+			<ethernetqframe dst="BB-40-BE-52-1B-68" vid="0" pcp="0">
+				<canframe canId="48"/>
+			</ethernetqframe>
+			<ethernetqframe dst="57-69-91-FD-0B-8D" vid="0" pcp="3">
+				<canframe canId="331"/>
+			</ethernetqframe>
+		</transformation>
+		<transformation destination="0" type="toCan">
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="1"/>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="6"/>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="0"/>
+			<ethernetqframe dst="23-8B-D3-46-82-55" vid="0" pcp="3"/>
+		</transformation>
+		<transformation destination="1" type="toCan">
+			<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="6"/>
+			<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="1"/>
+			<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="0"/>
+			<ethernetqframe dst="3F-D5-1C-68-2B-72" vid="0" pcp="3"/>
+		</transformation>
+	</gateway>
+
+</config>

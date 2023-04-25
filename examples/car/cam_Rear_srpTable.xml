@@ -1,0 +1,10 @@
+<srpTable>
+    <talkerTable vlan_id="0">
+    	<talkerEntry stream_id="2" srClass="A" address="AB-AA-00-00-00-02" module="RecBarToZones_TSN.cam_Rear.app[0]" framesize="200" intervalFrames="1" pcp="5"/>       
+    </talkerTable>
+    <listenerTable vlan_id="0">
+        <listeners stream_id="2">
+            <listenerEntry  module="RecBarToZones_TSN.cam_Rear.phy[0]"/>
+        </listeners>
+    </listenerTable>
+</srpTable>

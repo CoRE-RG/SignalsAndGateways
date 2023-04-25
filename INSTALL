@@ -3,7 +3,7 @@ INSTALLATION INSTRUCTIONS
 
 PREREQUISITES
 
-You should have a working OMNeT++ installation, version 5.5.1 with CoRE4INET and FiCo4OMNeT installed.
+You should have a working OMNeT++ installation, version 5.5.1 with INET[v3.6.6], CoRE4INET[paper/network_anomaly_detection_in_cars] and FiCo4OMNeT[paper/network_anomaly_detection_in_cars] installed.
 
 General
 -------
