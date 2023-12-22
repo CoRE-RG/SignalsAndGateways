@@ -7,6 +7,7 @@
 *.elog
 *.tkenvrc
 *.tkenvlog
+*.qtenvrc
 *.out
 *.csv.UPDATED
 
@@ -17,6 +18,8 @@
 *.so
 *.dylib
 *.dll
+*.dll.a
+*.def
 
 src/Makefile
 
