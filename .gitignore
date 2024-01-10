@@ -8,7 +8,9 @@
 *.tkenvrc
 *.tkenvlog
 *.qtenvrc
+*.cmdenv-log
 *.out
+*.csv.FAILED
 *.csv.UPDATED
 
 /doc/doxy/
