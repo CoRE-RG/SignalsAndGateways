@@ -1,0 +1,6 @@
+/results
+/test.out
+/*.csv.UPDATED
+/*.csv.FAILED
+/*.csv.ERROR
+/*.elog
