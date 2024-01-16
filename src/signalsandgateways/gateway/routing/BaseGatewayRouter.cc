@@ -46,10 +46,10 @@ const std::string BaseGatewayRouter::RAWPREFIX = "raw_";
 
 void BaseGatewayRouter::initialize()
 {
-    droppedFramesSignal = registerSignal("droppedFramesSignal");
-
     handleParameterChange(nullptr);
     readConfigXML();
+
+    droppedFramesSignal = registerSignal("droppedFramesSignal");
 }
 
 void BaseGatewayRouter::handleParameterChange(const char* parname) {

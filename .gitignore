@@ -1,3 +1,4 @@
+.settings/
 /out
 *_m.*
 *.vci
@@ -7,7 +8,10 @@
 *.elog
 *.tkenvrc
 *.tkenvlog
+*.qtenvrc
+*.cmdenv-log
 *.out
+*.csv.FAILED
 *.csv.UPDATED
 
 /doc/doxy/
@@ -17,6 +21,8 @@
 *.so
 *.dylib
 *.dll
+*.dll.a
+*.def
 
 src/Makefile
 
@@ -25,3 +31,5 @@ simulations/examples_andl/major_network/
 simulations/examples_andl/major_network_pools/
 simulations/examples_andl/small_network/
 simulations/examples_andl/small_network_RC/
+
+.nedexclusions
