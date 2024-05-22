@@ -1,22 +1,22 @@
 <srpTable>
     <talkerTable vlan_id="0">
-    	<talkerEntry stream_id="1" srClass="A" address="AB-AA-00-00-00-01" module="RecBarToZones_TSN.fusi.phy[0]" framesize="110" intervalFrames="1" pcp="5"/>
-    	<talkerEntry stream_id="2" srClass="A" address="AB-AA-00-00-00-02" module="RecBarToZones_TSN.fusi.phy[0]" framesize="110" intervalFrames="1" pcp="5"/>
-    	<talkerEntry stream_id="3" srClass="A" address="AB-AA-00-00-00-03" module="RecBarToZones_TSN.fusi.phy[0]" framesize="50" intervalFrames="1" pcp="5"/>
-    	<talkerEntry stream_id="4" srClass="A" address="AB-AA-00-00-00-04" module="RecBarToZones_TSN.fusi.phy[0]" framesize="50" intervalFrames="1" pcp="5"/>         
+    	<talkerEntry stream_id="1" srClass="A" address="AB-AA-00-00-00-01" module="car.fusi.phy[0]" framesize="110" intervalFrames="1" pcp="5"/>
+    	<talkerEntry stream_id="2" srClass="A" address="AB-AA-00-00-00-02" module="car.fusi.phy[0]" framesize="110" intervalFrames="1" pcp="5"/>
+    	<talkerEntry stream_id="3" srClass="A" address="AB-AA-00-00-00-03" module="car.fusi.phy[0]" framesize="50" intervalFrames="1" pcp="5"/>
+    	<talkerEntry stream_id="4" srClass="A" address="AB-AA-00-00-00-04" module="car.fusi.phy[0]" framesize="50" intervalFrames="1" pcp="5"/>         
     </talkerTable>
     <listenerTable vlan_id="0">
         <listeners stream_id="1">
-            <listenerEntry  module="RecBarToZones_TSN.fusi.app[1]"/>
+            <listenerEntry  module="car.fusi.app[1]"/>
         </listeners>
         <listeners stream_id="2">
-            <listenerEntry  module="RecBarToZones_TSN.fusi.app[2]"/>
+            <listenerEntry  module="car.fusi.app[2]"/>
         </listeners>
         <listeners stream_id="3">
-            <listenerEntry  module="RecBarToZones_TSN.fusi.app[4]"/>
+            <listenerEntry  module="car.fusi.app[4]"/>
         </listeners>
         <listeners stream_id="4">
-            <listenerEntry  module="RecBarToZones_TSN.fusi.app[6]"/>
+            <listenerEntry  module="car.fusi.app[6]"/>
         </listeners>
     </listenerTable>
 </srpTable>

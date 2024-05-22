@@ -1,10 +1,10 @@
 <srpTable>
     <talkerTable vlan_id="0">
-    	<talkerEntry stream_id="4" srClass="A" address="AB-AA-00-00-00-04" module="RecBarToZones_TSN.lid_FrontRight.app[0]" framesize="50" intervalFrames="1" pcp="5"/>       
+    	<talkerEntry stream_id="4" srClass="A" address="AB-AA-00-00-00-04" module="car.lid_FrontRight.app[0]" framesize="50" intervalFrames="1" pcp="5"/>       
     </talkerTable>
     <listenerTable vlan_id="0">
         <listeners stream_id="4">
-            <listenerEntry  module="RecBarToZones_TSN.lid_FrontRight.phy[0]"/>
+            <listenerEntry  module="car.lid_FrontRight.phy[0]"/>
         </listeners>
     </listenerTable>
 </srpTable>
