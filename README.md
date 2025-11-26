@@ -5,10 +5,6 @@ SignalsAndGateways using [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), [INE
 <img src="/doc/images/signalsandgateways.png" alt="SignalsAndGateways Environment" width="75%">
 
 
-## News
-* Updated dependencies to OMNeT++ 6.0.2 and INET 3.8.3
-
-
 ## Features
 At the current state it is possible to exchange data between CAN, Ethernet, TTEthernet and IEEE 802.1Q.
 A gateway provides the possibility to select or implement different strategies how incoming frames should be handled. For example it is possible to transmit several CAN-frames within a single Ethernet-frame while important messages are transmitted alone to provide a fast transmission.
@@ -28,7 +24,7 @@ Philipp Meyer, Franz Korf, Till Steinbach, Thomas C. Schmidt, Simulation of Mixe
 2. Install OMNeT++
     * [https://doc.omnetpp.org/omnetpp/InstallGuide.pdf](https://doc.omnetpp.org/omnetpp/InstallGuide.pdf)
     * Disable the feature 'visualization' and all dependent features (causes build issues)
-3. Get INET framework 3.8.3
+3. Get INET framework 3.8.5
     * [https://inet.omnetpp.org/Download.html](https://inet.omnetpp.org/Download.html)
 4. Get CoRE frameworks
     * GitHub: Clone [FiCo4OMNeT](https://github.com/CoRE-RG/FiCo4OMNeT), [CoRE4INET](https://github.com/CoRE-RG/CoRE4INET), and this repository and import them in OMNEST/OMNeT++
